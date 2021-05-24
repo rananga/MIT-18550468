@@ -1,0 +1,59 @@
+﻿@model SMS.Areas.Student.Models.StudSublingsVM
+
+@{ Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml"); }
+
+@using (Html.BeginForm())
+{
+    <br />
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SubID)
+        @Html.HiddenFor(model => model.SudID)
+        @Html.HiddenFor(model => model.Initials)
+        @Html.HiddenFor(model => model.LName)
+
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.IndexNo, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DetailsViewFor(model => model.IndexNo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudWithInit, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DetailsViewFor(model => model.StudWithInit)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DetailsViewFor(model => model.FullName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DetailsViewFor(model => model.Relationship)
+            </div>
+        </div>
+
+        <hr />
+        <div class="pull-right">
+            <p>
+                <div class="btn-toolbar">
+                    <input type="button" value="Cancel" class="btn btn-default" style="min-width:75px" />
+                </div>
+            </p>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

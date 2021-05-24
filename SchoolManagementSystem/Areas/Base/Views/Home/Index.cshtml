@@ -1,0 +1,126 @@
+﻿@using SMS.Areas.Base.Controllers
+
+@section styles {
+    <style type="text/css">
+        .listeffect {
+            -moz-transition: all .3s ease-in-out;
+            -webkit-transition: all .3s ease-in-out;
+            -o-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+
+        .ul {
+            overflow-y: scroll;
+        }
+
+        .listeffect:hover {
+            transform: scale(1.01);
+        }
+
+        a:link, a:visited {
+            color: black;
+            text-decoration: none;
+        }
+
+        .tile:hover {
+            border: 4px solid black;
+        }
+
+            .tile:hover > div {
+                opacity: 0.8;
+            }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .lead {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #212529;
+            text-align: left;
+        }
+
+        header {
+          
+            padding: 25px 0 20px;
+          
+            
+            top: 5px;
+            z-index: 1030;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+    </style>
+
+}
+
+@{
+    var idx = 0;
+}
+    <body>
+
+        @{
+            var Day = DateTime.Now.Day;
+            var Month = DateTime.Now.Month;
+            if (Day <= 10 && Month <= 1)
+            {
+                <p align="center">
+                    <img src="~/Content/Images/NewYear2018.png" />
+                </p>
+                @*</marquee>*@
+                <canvas id="canvas">ttt</canvas>
+                <link href="~/Content/FireWork.css" rel="stylesheet" />
+                <script src="~/Scripts/FireWorks.js"></script>
+            }
+
+        }
+
+        <header style="background-color: #e9ecef!important;color: #fff!important;border-radius: .3rem">
+            <div sstyle="text-align: center!important;">
+                <h1 style="color: #212529;text-align: left;">Sri Sambodhi Maha Vihara - English Dhamma School</h1>
+                <p class="lead">Academic Management System</p>
+            </div>
+        </header>
+
+        <div class="container tiles-container" style="padding-top:30px">
+            @foreach (var tile in (List<HomeController.TileData>)ViewBag.Tiles)
+            {
+                idx++;
+                <div class="col-md-2 col-sm-4 col-xs-12" style="padding:0;min-width:220px" data-id="@idx">
+                    <div class="tile" data-url="@tile.DataURL" title='@(tile.LandingURL.IsBlank() ? "" :  "Click To View")'>
+                        <div class="@tile.ColorClass" style="width:100%;height:100%;border: 4px solid transparent;">
+                            @if (!tile.LandingURL.IsBlank())
+                            {
+                                @Html.Raw("<a class='' href='" + tile.LandingURL + "'" + (tile.OpenInNewTab ? " data-in-new-tab='1'" : "") + ">")
+                            }
+
+                            <div class="tileLabelNo">0</div>
+                            <i class="tileIcon" style="background-image: url('@tile.IconURL'); "></i>
+
+                            <div style="margin-left: 10px;margin-right:10px;text-align:center;">
+                                <span class="tileLabel">@tile.Text</span>
+                            </div>
+
+                            @if (!tile.LandingURL.IsBlank())
+                            {
+                                @Html.Raw("</a>")
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+     
+    </body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/notification")
+
+}
+
+

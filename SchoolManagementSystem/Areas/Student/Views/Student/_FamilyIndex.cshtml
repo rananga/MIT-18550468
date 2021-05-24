@@ -1,0 +1,108 @@
+﻿@model IEnumerable<SMS.Areas.Student.Models.StudFamilyVM>
+
+<hr />
+<h3>Student Parents Details</h3>
+
+<table class="mGrid">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Relationship)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Occupation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkingAdd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OfficeTel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactMob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactHome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NICNo)
+            </th>
+            @{
+                if (ViewBag.IsToEdit)
+                {
+                    <th class="btn-1">
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus' style='color:white'></span>", "Add", "FamilyCreate", routeValues: new { studID = ViewBag.StudID }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-primary pull-right btn-xs", data_title = "Add Student Parents Details", data_popup_width = "1000" })
+                    </th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Relationship)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Occupation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkingAdd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfficeTel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactMob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactHome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NICNo)
+            </td>
+            @{
+                if (ViewBag.IsToEdit)
+                {
+                    <td class="btn-3">
+                        <div class="btn-toolbar pull-right">
+                            @using (Html.BeginForm("FamilyDelete", "Student", new { id = item.StudFID }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-pencil' style='color:black'></span>", "Edit", "FamilyEdit", routeValues: new { id = item.StudFID }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-warning btn-xs", data_title = "Edit Student Parents Details" })
+                                @Html.ConfirmSubmitButton("<span class='glyphicon glyphicon-trash'></span>", "Are you sure you want to delete?", "Confirm Student Parent deletion", "<span class='glyphicon glyphicon-trash'></span> Delete", new { data_popup_delete = "", @class = "btn btn-danger btn-xs" })
+                            }
+                        </div>
+                    </td>
+                }
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+
+@if (ViewBag.IsToEdit)
+{
+    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
+}
+
+

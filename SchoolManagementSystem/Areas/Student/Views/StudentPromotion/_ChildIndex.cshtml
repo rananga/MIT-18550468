@@ -1,0 +1,134 @@
+﻿@model IEnumerable<SMS.Areas.Student.Models.ClassStudentVM>
+
+<hr />
+<h3>Students List</h3>
+
+<table class="mGrid" id="classStudentTbl">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IndexNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsMonitor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCurrentMonitor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PeriodEndDate)
+            </th>
+            @{
+                if (ViewBag.IsToEdit)
+                {
+                    <th class="btn-1">
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus' style='color:white'></span>", "Add", "ChildCreate", routeValues: new { classID = ViewBag.ClassID }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-primary pull-right btn-xs", data_title = "Add Students" })
+                    </th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr data-pid="@item.ClStudID" id="@item.ClStudID">
+            <td id="studID">
+                @Html.DisplayFor(modelItem => item.IndexNo)
+                @Html.HiddenFor(modelItem => item.StudID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+            <td id="isMonitor" style="text-align:center">
+                @if (ViewBag.IsToEdit)
+                {
+                    <input type="checkbox" class="form-check-box" readonly="readonly" @(item.IsMonitor == true ? "checked='checked'" : "" ) />
+                    if (item.IsMonitor == true)
+                    {
+                        @Html.Hidden("IsMonitor", 1)
+                    }
+                    else
+                    {
+                        @Html.Hidden("IsMonitor", 0)
+                    }
+                }
+                else
+                {
+                    @Html.DetailsViewFor(model => item.IsMonitor)
+                }
+            </td>
+            <td id="isCurMonitor" style="text-align:center">
+                @if (ViewBag.IsToEdit)
+                {
+                    <input type="checkbox" class="form-check-box" @(item.IsCurrentMonitor == true ? "checked='checked'" : "" ) />
+                    if (item.IsCurrentMonitor == true)
+                    {
+                        @Html.Hidden("IsCurrentMonitor", 1)
+                    }
+                    else
+                    {
+                        @Html.Hidden("IsCurrentMonitor", 0)
+                    }
+                }
+                else
+                {
+                    @Html.DetailsViewFor(model => item.IsCurrentMonitor)
+                }
+            </td>
+            <td id="perStart" style="text-align:center">
+                @if (ViewBag.IsToEdit)
+                {
+                    <input id ="@item.PeriodStartDate" type="text" class="form-control datepicker" style = "width:150px" value="@item.PeriodStartDate.ToDateString("yyyy-MM-dd")"/>
+
+                }
+                else
+                {
+                    @Html.EditorFor(model => item.PeriodStartDate, new { htmlAttributes = new { @class = "form-control DspAsLabel", style = "width:150px", @readonly = "readonly" } })
+                }
+            </td>
+            <td id="perEnd" style="text-align:center">
+                @if (ViewBag.IsToEdit)
+                {
+                    <input id="@item.PeriodEndDate" type="text" class="form-control datepicker" style="width:150px" value="@item.PeriodEndDate.ToDateString("yyyy-MM-dd")"/>
+                }
+                else
+                {
+                    @Html.EditorFor(model => item.PeriodEndDate, new { htmlAttributes = new { @class = "form-control DspAsLabel", style = "width:150px", @readonly = "readonly" } })
+                }
+            </td>
+
+                @{
+                    if (ViewBag.IsToEdit)
+                    {
+                        <td class="btn-3">
+                            <div class="btn-toolbar pull-right">
+                                @using (Html.BeginForm("ChildDelete", "StudentPromotion", new { id = item.ClStudID }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ConfirmSubmitButton("<span class='glyphicon glyphicon-trash'></span>", "Are you sure you want to delete?", "Confirm Student deletion", "<span class='glyphicon glyphicon-trash'></span> Delete", new { data_popup_delete = "", @class = "btn btn-danger btn-xs" })
+                                }
+                            </div>
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (ViewBag.IsToEdit)
+{
+    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/student/studentpromotion")
+}
+

@@ -1,0 +1,69 @@
+﻿@model SMS.Common.BaseViewModel<SMS.Areas.Student.Models.EventParticipationsVM>
+
+@{
+    ViewBag.Title = "Event Participation";
+    var grid = Model.GetGrid();
+}
+
+@{
+    var srchOpts = new List<SelectListItem>();
+    srchOpts.Add(new SelectListItem { Text = "Student", Value = "StudentName" });
+    srchOpts.Add(new SelectListItem { Text = "Event Date", Value = "Date" });
+    srchOpts.Add(new SelectListItem { Text = "Event Desciption", Value = "EventDesc" });
+    srchOpts.Add(new SelectListItem { Text = "Teacher in-Charge", Value = "TeacherName" });
+}
+
+<p>
+    @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary", style = "min-width:75px" })
+</p>
+
+@using (Html.BeginForm("Index", null, FormMethod.Get))
+{
+    <div class="form-horizontal row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.Label("Search By", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownList("FilterBy", new SelectList(srchOpts, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Filter, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Search" name="Search" class="btn btn-default" />
+        </div>
+    </div>
+    <hr />
+
+    <div id="content">
+        @grid.GetHtml(
+        tableStyle: "mGrid no-foot",
+        mode: WebGridPagerModes.All,
+        columns: grid.Columns(
+            grid.Column(null, null, format: (item) => Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open' style='color:black'></span>", "View Details", "Details", routeValues: new { id = item.EPID }, htmlAttributes: new { @class = "btn btn-warning btn-xs" }), style: "btn-1"),
+            grid.SortColumn(columnName: "StudentName", header: "Student"),
+            grid.SortColumn(columnName: "Date", header: "Event Date", format: (item) => item.Date.ToString("yyyy-MM-dd")),
+            grid.SortColumn(columnName: "EventDesc", header: "Event Description"), 
+             grid.SortColumn(null, header: "Prize Winner", format: (item) =>
+                {
+                    if (item.IsWinner == true)
+                    {
+                        return Html.Raw("Yes");
+                    }
+                    else
+                    { return Html.Raw("No"); }
+                }),
+            grid.SortColumn(columnName: "WinningDetails", header: "Winner Details"),
+            grid.SortColumn(columnName: "TeacherName", header: "Teacher in-Charge")))
+
+        <div id="content-footer">
+            @grid.PagerList(WebGridPagerModes.All, Model.PageSize, Model.TotalRecords)
+        </div>
+    </div>
+}

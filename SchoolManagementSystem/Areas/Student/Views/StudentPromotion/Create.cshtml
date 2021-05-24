@@ -1,0 +1,71 @@
+﻿@model SMS.Areas.Student.Models.PromotionClassVM
+@{
+    ViewBag.Title = "Create Student Promotion";
+}
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+
+    <p>
+        <input type="submit" value="Save" class="btn btn-primary" style="min-width:75px" onclick="PostData();" />
+    </p>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.PeriodStartDate)
+    @Html.HiddenFor(model => model.ClassDesc)
+    @Html.HiddenFor(model => model.Grade)
+    @Html.HiddenFor(model => model.ClassListJson)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PeriodID, "Period Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.PopUpSelectorFor(model => model.PeriodID, "Base", "Data", "GetPeriods", new { @class = "form-control" }, "Please select a Period", dspFormat: "{1}", hiddenIndices: "0", dataParas: new { inReverseOn = true })
+            @Html.ValidationMessageFor(model => model.PeriodID, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(model => model.PeriodEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.PeriodEndDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ClassID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.PopUpSelectorFor(model => model.ClassID, "Base", "Data", "GetClasses", new { @class = "form-control" }, "Please select a Class", dspFormat: "{1} - {2}", hiddenIndices: "0")
+            @Html.ValidationMessageFor(model => model.ClassID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TeacherID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.PopUpSelectorFor(model => model.TeacherID, "Base", "Data", "GetTeacher", new { @class = "form-control" }, "Please select a Teacher", dspFormat: "{1}", hiddenIndices: "0")
+            @Html.ValidationMessageFor(model => model.TeacherID, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(model => model.NoOfStud, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.NoOfStud, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.NoOfStud, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+</div>
+}
+
+
+@{ var rvals = new { id = Model.ClassID, istoEdit = true, isCreate =true, classListJson = Model.ClassListJson }; }
+
+<div id="ChildContent" data-url="@Html.ActionUrl("ChildIndex")">
+    @{ Html.RenderAction("ChildIndex", rvals); }
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/student/studentpromotion")
+
+}
+

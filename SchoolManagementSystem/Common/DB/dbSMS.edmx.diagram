@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d4050735a844468dabdeac78b664d93f" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="dbSMS.Menu" Width="1.5" PointX="17.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSMS.Role" Width="1.5" PointX="17.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSMS.RoleTile" Width="1.5" PointX="17.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSMS.UserRole" Width="1.5" PointX="19.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSMS.User" Width="1.5" PointX="19.25" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="dbSMS.FK_MenuMenu" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSMS.FK_RoleRoleTiles" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSMS.FK_RoleUserRole" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSMS.FK_UserUserRole" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSMS.RoleMenuAccesses" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbSMS.Student" Width="1.75" PointX="2.625" PointY="0.75" />
+        <EntityTypeShape EntityType="dbSMS.StudSubling" Width="1.5" PointX="4.75" PointY="0.875" />
+        <AssociationConnector Association="dbSMS.StudentStudSubling" />
+        <AssociationConnector Association="dbSMS.StudentStudSubling1" />
+        <EntityTypeShape EntityType="dbSMS.StudFamily" Width="1.5" PointX="4.75" PointY="4.375" />
+        <AssociationConnector Association="dbSMS.StudentStudFamily" />
+        <EntityTypeShape EntityType="dbSMS.Class" Width="1.5" PointX="10.875" PointY="0.75" />
+        <EntityTypeShape EntityType="dbSMS.ClassTeacher" Width="1.5" PointX="6.625" PointY="6.875" />
+        <AssociationConnector Association="dbSMS.ClassClassTeacher" />
+        <EntityTypeShape EntityType="dbSMS.ClassStudent" Width="1.5" PointX="10.875" PointY="4.625" />
+        <EntityTypeShape EntityType="dbSMS.PeriodSetup" Width="1.5" PointX="8.625" PointY="0.75" />
+        <AssociationConnector Association="dbSMS.PeriodSetupClassTeacher" />
+        <AssociationConnector Association="dbSMS.StudentClassStudent" />
+        <EntityTypeShape EntityType="dbSMS.Teacher" Width="1.875" PointX="6.5" PointY="0.75" />
+        <AssociationConnector Association="dbSMS.TeacherClassTeacher" />
+        <EntityTypeShape EntityType="dbSMS.ClubMember" Width="1.5" PointX="12.875" PointY="5.75" />
+        <EntityTypeShape EntityType="dbSMS.Club" Width="1.5" PointX="8.75" PointY="4.625" />
+        <AssociationConnector Association="dbSMS.ClubClubMember" />
+        <AssociationConnector Association="dbSMS.StudentClubMember" />
+        <EntityTypeShape EntityType="dbSMS.EventParticipation" Width="1.5" PointX="15" PointY="6" />
+        <AssociationConnector Association="dbSMS.StudentEventParticipation" />
+        <AssociationConnector Association="dbSMS.TeacherEventParticipation" />
+        <EntityTypeShape EntityType="dbSMS.PromotionClass" Width="1.5" PointX="12.875" PointY="0.75" />
+        <AssociationConnector Association="dbSMS.ClassPromotionClass" />
+        <AssociationConnector Association="dbSMS.PeriodSetupPromotionClass" />
+        <AssociationConnector Association="dbSMS.PromotionClassClassStudent" />
+        <AssociationConnector Association="dbSMS.TeacherPromotionClass" />
+        <EntityTypeShape EntityType="dbSMS.Prefect" Width="1.5" PointX="15" PointY="0.875" />
+        <AssociationConnector Association="dbSMS.StudentPrefect" />
+        <AssociationConnector Association="dbSMS.PromotionClassPrefect" />
+        <EntityTypeShape EntityType="dbSMS.LeavingCertificate" Width="1.5" PointX="8.75" PointY="8.625" />
+        <AssociationConnector Association="dbSMS.StudentLeavingCertificate" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

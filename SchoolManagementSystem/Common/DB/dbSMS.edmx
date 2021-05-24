@@ -1,0 +1,1898 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbSMS.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="dbSMSStoreContainer">
+    <EntitySet Name="Menus" EntityType="dbSMS.Store.Menus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="dbSMS.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RoleTiles" EntityType="dbSMS.Store.RoleTiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRoles" EntityType="dbSMS.Store.UserRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="dbSMS.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Students" EntityType="dbSMS.Store.Students" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StudSublings" EntityType="dbSMS.Store.StudSublings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StudFamilies" EntityType="dbSMS.Store.StudFamilies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Classes" EntityType="dbSMS.Store.Classes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClassTeachers" EntityType="dbSMS.Store.ClassTeachers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClassStudents" EntityType="dbSMS.Store.ClassStudents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PeriodSetups" EntityType="dbSMS.Store.PeriodSetups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Teachers" EntityType="dbSMS.Store.Teachers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClubMembers" EntityType="dbSMS.Store.ClubMembers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Clubs" EntityType="dbSMS.Store.Clubs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EventParticipations" EntityType="dbSMS.Store.EventParticipations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PromotionClasses" EntityType="dbSMS.Store.PromotionClasses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Prefects" EntityType="dbSMS.Store.Prefects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LeavingCertificates" EntityType="dbSMS.Store.LeavingCertificates" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RoleMenuAccesses" EntityType="dbSMS.Store.RoleMenuAccesses" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_MenuMenu" Association="dbSMS.Store.FK_MenuMenu">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="Menus1" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleRoleTiles" Association="dbSMS.Store.FK_RoleRoleTiles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="RoleTiles" EntitySet="RoleTiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleUserRole" Association="dbSMS.Store.FK_RoleUserRole">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserUserRole" Association="dbSMS.Store.FK_UserUserRole">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleMenuAccesses_Menus" Association="dbSMS.Store.FK_RoleMenuAccesses_Menus">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="RoleMenuAccesses" EntitySet="RoleMenuAccesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleMenuAccesses_Roles" Association="dbSMS.Store.FK_RoleMenuAccesses_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="RoleMenuAccesses" EntitySet="RoleMenuAccesses" />
+    </AssociationSet>
+    <AssociationSet Name="StudentStudSubling" Association="dbSMS.Store.StudentStudSubling">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudSubling" EntitySet="StudSublings" />
+    </AssociationSet>
+    <AssociationSet Name="StudentStudSubling1" Association="dbSMS.Store.StudentStudSubling1">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudSubling" EntitySet="StudSublings" />
+    </AssociationSet>
+    <AssociationSet Name="StudentStudFamily" Association="dbSMS.Store.StudentStudFamily">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudFamily" EntitySet="StudFamilies" />
+    </AssociationSet>
+    <AssociationSet Name="ClassClassTeacher" Association="dbSMS.Store.ClassClassTeacher">
+      <End Role="Class" EntitySet="Classes" />
+      <End Role="ClassTeacher" EntitySet="ClassTeachers" />
+    </AssociationSet>
+    <AssociationSet Name="PeriodSetupClassTeacher" Association="dbSMS.Store.PeriodSetupClassTeacher">
+      <End Role="PeriodSetup" EntitySet="PeriodSetups" />
+      <End Role="ClassTeacher" EntitySet="ClassTeachers" />
+    </AssociationSet>
+    <AssociationSet Name="StudentClassStudent" Association="dbSMS.Store.StudentClassStudent">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="ClassStudent" EntitySet="ClassStudents" />
+    </AssociationSet>
+    <AssociationSet Name="TeacherClassTeacher" Association="dbSMS.Store.TeacherClassTeacher">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="ClassTeacher" EntitySet="ClassTeachers" />
+    </AssociationSet>
+    <AssociationSet Name="ClubClubMember" Association="dbSMS.Store.ClubClubMember">
+      <End Role="Club" EntitySet="Clubs" />
+      <End Role="ClubMember" EntitySet="ClubMembers" />
+    </AssociationSet>
+    <AssociationSet Name="StudentClubMember" Association="dbSMS.Store.StudentClubMember">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="ClubMember" EntitySet="ClubMembers" />
+    </AssociationSet>
+    <AssociationSet Name="StudentEventParticipation" Association="dbSMS.Store.StudentEventParticipation">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="EventParticipation" EntitySet="EventParticipations" />
+    </AssociationSet>
+    <AssociationSet Name="TeacherEventParticipation" Association="dbSMS.Store.TeacherEventParticipation">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="EventParticipation" EntitySet="EventParticipations" />
+    </AssociationSet>
+    <AssociationSet Name="ClassPromotionClass" Association="dbSMS.Store.ClassPromotionClass">
+      <End Role="Class" EntitySet="Classes" />
+      <End Role="PromotionClass" EntitySet="PromotionClasses" />
+    </AssociationSet>
+    <AssociationSet Name="PeriodSetupPromotionClass" Association="dbSMS.Store.PeriodSetupPromotionClass">
+      <End Role="PeriodSetup" EntitySet="PeriodSetups" />
+      <End Role="PromotionClass" EntitySet="PromotionClasses" />
+    </AssociationSet>
+    <AssociationSet Name="PromotionClassClassStudent" Association="dbSMS.Store.PromotionClassClassStudent">
+      <End Role="PromotionClass" EntitySet="PromotionClasses" />
+      <End Role="ClassStudent" EntitySet="ClassStudents" />
+    </AssociationSet>
+    <AssociationSet Name="TeacherPromotionClass" Association="dbSMS.Store.TeacherPromotionClass">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="PromotionClass" EntitySet="PromotionClasses" />
+    </AssociationSet>
+    <AssociationSet Name="StudentPrefect" Association="dbSMS.Store.StudentPrefect">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Prefect" EntitySet="Prefects" />
+    </AssociationSet>
+    <AssociationSet Name="PromotionClassPrefect" Association="dbSMS.Store.PromotionClassPrefect">
+      <End Role="PromotionClass" EntitySet="PromotionClasses" />
+      <End Role="Prefect" EntitySet="Prefects" />
+    </AssociationSet>
+    <AssociationSet Name="StudentLeavingCertificate" Association="dbSMS.Store.StudentLeavingCertificate">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="LeavingCertificate" EntitySet="LeavingCertificates" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Menus">
+    <Key>
+      <PropertyRef Name="MenuID" />
+    </Key>
+    <Property Name="MenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentMenuID" Type="int" Nullable="true" />
+    <Property Name="DisplaySeq" Type="int" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Area" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Controller" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Action" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="RoleTiles">
+    <Key>
+      <PropertyRef Name="RoleTileID" />
+    </Key>
+    <Property Name="RoleTileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TileID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="true" />
+    <Property Name="NavUserName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CallCenterUserName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="StudID" />
+    </Key>
+    <Property Name="StudID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IndexNo" Type="int" Nullable="false" />
+    <Property Name="Title" Type="int" Nullable="false" />
+    <Property Name="Gender" Type="int" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Initials" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="School" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SchoolAddress" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LastDhammaSchool" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LDhammaSchoolAdd" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EngSpeaking" Type="int" Nullable="false" />
+    <Property Name="EngWriting" Type="int" Nullable="false" />
+    <Property Name="EngReading" Type="int" Nullable="false" />
+    <Property Name="EmergencyConName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmergencyContactTel" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SpecialAttention" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="ImagePath" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DOB" Type="datetime" Nullable="true" />
+    <Property Name="LastDhammaGrade" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="InactiveReason" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsLeavingIssued" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudSublings">
+    <Key>
+      <PropertyRef Name="SubID" />
+    </Key>
+    <Property Name="SubID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SudID" Type="int" Nullable="false" />
+    <Property Name="SublingStudID" Type="int" Nullable="false" />
+    <Property Name="Relationship" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="StudFamilies">
+    <Key>
+      <PropertyRef Name="StudFID" />
+    </Key>
+    <Property Name="StudFID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Relationship" Type="int" Nullable="false" />
+    <Property Name="Occupation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WorkingAdd" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OfficeTel" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ContactMob" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactHome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="NICNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Title" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Grade" Type="int" Nullable="false" />
+    <Property Name="ClassDesc" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="ClassTeachers">
+    <Key>
+      <PropertyRef Name="ClTeachID" />
+    </Key>
+    <Property Name="ClTeachID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+    <Property Name="PeriodID" Type="int" Nullable="false" />
+    <Property Name="PeriodStartDate" Type="datetime" Nullable="true" />
+    <Property Name="PeriodEndDate" Type="datetime" Nullable="true" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="ClassStudents">
+    <Key>
+      <PropertyRef Name="ClStudID" />
+    </Key>
+    <Property Name="ClStudID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PrClID" Type="int" Nullable="false" />
+    <Property Name="StudID" Type="int" Nullable="false" />
+    <Property Name="PeriodStartDate" Type="datetime" Nullable="true" />
+    <Property Name="PeriodEndDate" Type="datetime" Nullable="true" />
+    <Property Name="IsMonitor" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="IsCurrentMonitor" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PeriodSetups">
+    <Key>
+      <PropertyRef Name="PeriodID" />
+    </Key>
+    <Property Name="PeriodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PeriodStartDate" Type="datetime" Nullable="false" />
+    <Property Name="PeriodEndDate" Type="datetime" Nullable="false" />
+    <Property Name="IsPeriodComplete" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="TeachID" />
+    </Key>
+    <Property Name="TeachID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="int" Nullable="false" />
+    <Property Name="Gender" Type="int" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Initials" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="NICNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TelHome" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ImmeContactNo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ImmeContactName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="InactiveReason" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="ClubMembers">
+    <Key>
+      <PropertyRef Name="CMID" />
+    </Key>
+    <Property Name="CMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CID" Type="int" Nullable="false" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="MemberDate" Type="datetime" Nullable="false" />
+    <Property Name="MembershipType" Type="int" Nullable="false" />
+    <Property Name="CommiteeMemberType" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clubs">
+    <Key>
+      <PropertyRef Name="CID" />
+    </Key>
+    <Property Name="CID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="EventParticipations">
+    <Key>
+      <PropertyRef Name="EPID" />
+    </Key>
+    <Property Name="EPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="EventDesc" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsWinner" Type="bit" Nullable="false" />
+    <Property Name="WinningDetails" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TeacherInCharge" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="PromotionClasses">
+    <Key>
+      <PropertyRef Name="PrClID" />
+    </Key>
+    <Property Name="PrClID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+    <Property Name="PeriodID" Type="int" Nullable="false" />
+    <Property Name="MonitorStudID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MonitorStud2ID" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="Prefects">
+    <Key>
+      <PropertyRef Name="PreID" />
+    </Key>
+    <Property Name="PreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudID" Type="int" Nullable="false" />
+    <Property Name="PrefClassID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
+    <Property Name="IsHP" Type="bit" Nullable="false" />
+    <Property Name="IsDHP" Type="bit" Nullable="false" />
+    <Property Name="Responsibilty" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsPromoted" Type="bit" Nullable="false" />
+    <Property Name="PromotedDate" Type="datetime" Nullable="true" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="InactiveDate" Type="datetime" Nullable="true" />
+    <Property Name="InactiveReason" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="LeavingCertificates">
+    <Key>
+      <PropertyRef Name="LeavCertID" />
+    </Key>
+    <Property Name="LeavCertID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudID" Type="int" Nullable="false" />
+    <Property Name="DateLeaving" Type="datetime" Nullable="false" />
+    <Property Name="Reason" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Conduct" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="true" />
+    <Property Name="RowVersion" Type="binary" StoreGeneratedPattern="Computed" Nullable="false" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="RoleMenuAccesses">
+    <Key>
+      <PropertyRef Name="Menus_MenuID" />
+      <PropertyRef Name="Roles_RoleID" />
+    </Key>
+    <Property Name="Menus_MenuID" Type="int" Nullable="false" />
+    <Property Name="Roles_RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_MenuMenu">
+    <End Role="Menus" Type="dbSMS.Store.Menus" Multiplicity="0..1" />
+    <End Role="Menus1" Type="dbSMS.Store.Menus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="MenuID" />
+      </Principal>
+      <Dependent Role="Menus1">
+        <PropertyRef Name="ParentMenuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleRoleTiles">
+    <End Role="Roles" Type="dbSMS.Store.Roles" Multiplicity="1" />
+    <End Role="RoleTiles" Type="dbSMS.Store.RoleTiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="RoleTiles">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleUserRole">
+    <End Role="Roles" Type="dbSMS.Store.Roles" Multiplicity="1" />
+    <End Role="UserRoles" Type="dbSMS.Store.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserUserRole">
+    <End Role="Users" Type="dbSMS.Store.Users" Multiplicity="1" />
+    <End Role="UserRoles" Type="dbSMS.Store.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentStudSubling">
+    <End Role="Student" Type="dbSMS.Store.Students" Multiplicity="1" />
+    <End Role="StudSubling" Type="dbSMS.Store.StudSublings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudID" />
+      </Principal>
+      <Dependent Role="StudSubling">
+        <PropertyRef Name="SudID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentStudSubling1">
+    <End Role="Student" Type="dbSMS.Store.Students" Multiplicity="1" />
+    <End Role="StudSubling" Type="dbSMS.Store.StudSublings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudID" />
+      </Principal>
+      <Dependent Role="StudSubling">
+        <PropertyRef Name="SublingStudID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentStudFamily">
+    <End Role="Student" Type="dbSMS.Store.Students" Multiplicity="1" />
+    <End Role="StudFamily" Type="dbSMS.Store.StudFamilies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudID" />
+      </Principal>
+      <Dependent Role="StudFamily">
+        <PropertyRef Name="StudID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClassClassTeacher">
+    <End Role="Class" Type="dbSMS.Store.Classes" Multiplicity="1" />
+    <End Role="ClassTeacher" Type="dbSMS.Store.ClassTeachers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="ClassTeacher">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PeriodSetupClassTeacher">
+    <End Role="PeriodSetup" Type="dbSMS.Store.PeriodSetups" Multiplicity="1" />
+    <End Role="ClassTeacher" Type="dbSMS.Store.ClassTeachers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PeriodSetup">
+        <PropertyRef Name="PeriodID" />
+      </Principal>
+      <Dependent Role="ClassTeacher">
+        <PropertyRef Name="PeriodID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentClassStudent">
+    <End Role="Student" Type="dbSMS.Store.Students" Multiplicity="1" />
+    <End Role="ClassStudent" Type="dbSMS.Store.ClassStudents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudID" />
+      </Principal>
+      <Dependent Role="ClassStudent">
+        <PropertyRef Name="StudID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TeacherClassTeacher">
+    <End Role="Teacher" Type="dbSMS.Store.Teachers" Multiplicity="1" />
+    <End Role="ClassTeacher" Type="dbSMS.Store.ClassTeachers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeachID" />
+      </Principal>
+      <Dependent Role="ClassTeacher">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClubClubMember">
+    <End Role="Club" Type="dbSMS.Store.Clubs" Multiplicity="1" />
+    <End Role="ClubMember" Type="dbSMS.Store.ClubMembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Club">
+        <PropertyRef Name="CID" />
+      </Principal>
+      <Dependent Role="ClubMember">
+        <PropertyRef Name="CID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentClubMember">
+    <End Role="Student" Type="dbSMS.Store.Students" Multiplicity="1" />
+    <End Role="ClubMember" Type="dbSMS.Store.ClubMembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudID" />
+      </Principal>
+      <Dependent Role="ClubMember">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentEventParticipation">
+    <End Role="Student" Type="dbSMS.Store.Students" Multiplicity="1" />
+    <End Role="EventParticipation" Type="dbSMS.Store.EventParticipations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudID" />
+      </Principal>
+      <Dependent Role="EventParticipation">
+        <PropertyRef Name="StudID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TeacherEventParticipation">
+    <End Role="Teacher" Type="dbSMS.Store.Teachers" Multiplicity="1" />
+    <End Role="EventParticipation" Type="dbSMS.Store.EventParticipations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeachID" />
+      </Principal>
+      <Dependent Role="EventParticipation">
+        <PropertyRef Name="TeacherInCharge" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClassPromotionClass">
+    <End Role="Class" Type="dbSMS.Store.Classes" Multiplicity="1" />
+    <End Role="PromotionClass" Type="dbSMS.Store.PromotionClasses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="PromotionClass">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PeriodSetupPromotionClass">
+    <End Role="PeriodSetup" Type="dbSMS.Store.PeriodSetups" Multiplicity="1" />
+    <End Role="PromotionClass" Type="dbSMS.Store.PromotionClasses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PeriodSetup">
+        <PropertyRef Name="PeriodID" />
+      </Principal>
+      <Dependent Role="PromotionClass">
+        <PropertyRef Name="PeriodID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PromotionClassClassStudent">
+    <End Role="PromotionClass" Type="dbSMS.Store.PromotionClasses" Multiplicity="1" />
+    <End Role="ClassStudent" Type="dbSMS.Store.ClassStudents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PromotionClass">
+        <PropertyRef Name="PrClID" />
+      </Principal>
+      <Dependent Role="ClassStudent">
+        <PropertyRef Name="PrClID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TeacherPromotionClass">
+    <End Role="Teacher" Type="dbSMS.Store.Teachers" Multiplicity="1" />
+    <End Role="PromotionClass" Type="dbSMS.Store.PromotionClasses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeachID" />
+      </Principal>
+      <Dependent Role="PromotionClass">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentPrefect">
+    <End Role="Student" Type="dbSMS.Store.Students" Multiplicity="1" />
+    <End Role="Prefect" Type="dbSMS.Store.Prefects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudID" />
+      </Principal>
+      <Dependent Role="Prefect">
+        <PropertyRef Name="StudID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PromotionClassPrefect">
+    <End Role="PromotionClass" Type="dbSMS.Store.PromotionClasses" Multiplicity="1" />
+    <End Role="Prefect" Type="dbSMS.Store.Prefects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PromotionClass">
+        <PropertyRef Name="PrClID" />
+      </Principal>
+      <Dependent Role="Prefect">
+        <PropertyRef Name="PrefClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StudentLeavingCertificate">
+    <End Role="Student" Type="dbSMS.Store.Students" Multiplicity="1" />
+    <End Role="LeavingCertificate" Type="dbSMS.Store.LeavingCertificates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudID" />
+      </Principal>
+      <Dependent Role="LeavingCertificate">
+        <PropertyRef Name="StudID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleMenuAccesses_Menus">
+    <End Role="Menus" Type="dbSMS.Store.Menus" Multiplicity="1" />
+    <End Role="RoleMenuAccesses" Type="dbSMS.Store.RoleMenuAccesses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="MenuID" />
+      </Principal>
+      <Dependent Role="RoleMenuAccesses">
+        <PropertyRef Name="Menus_MenuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleMenuAccesses_Roles">
+    <End Role="RoleMenuAccesses" Type="dbSMS.Store.RoleMenuAccesses" Multiplicity="*" />
+    <End Role="Roles" Type="dbSMS.Store.Roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="RoleMenuAccesses">
+        <PropertyRef Name="Roles_RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbSMS" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuID" />
+          </Key>
+          <Property Name="MenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentMenuID" Type="Int32" />
+          <Property Name="DisplaySeq" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Area" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Controller" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Menus1" Relationship="Self.FK_MenuMenu" FromRole="Menus" ToRole="Menus1" />
+          <NavigationProperty Name="Menu1" Relationship="Self.FK_MenuMenu" FromRole="Menus1" ToRole="Menus" />
+          <NavigationProperty Name="Roles" Relationship="Self.RoleMenuAccesses" FromRole="Menus" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="RoleTiles" Relationship="Self.FK_RoleRoleTiles" FromRole="Roles" ToRole="RoleTiles" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_RoleUserRole" FromRole="Roles" ToRole="UserRoles" />
+          <NavigationProperty Name="Menus" Relationship="Self.RoleMenuAccesses" FromRole="Roles" ToRole="Menus" />
+        </EntityType>
+        <EntityType Name="RoleTile">
+          <Key>
+            <PropertyRef Name="RoleTileID" />
+          </Key>
+          <Property Name="RoleTileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TileID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_RoleRoleTiles" FromRole="RoleTiles" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleID" />
+          </Key>
+          <Property Name="UserRoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_RoleUserRole" FromRole="UserRoles" ToRole="Roles" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserUserRole" FromRole="UserRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="NavUserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CallCenterUserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="dbSMS.ActiveState" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserUserRole" FromRole="Users" ToRole="UserRoles" />
+        </EntityType>
+        <Association Name="FK_MenuMenu">
+          <End Role="Menus" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menus1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menus">
+              <PropertyRef Name="MenuID" />
+            </Principal>
+            <Dependent Role="Menus1">
+              <PropertyRef Name="ParentMenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleRoleTiles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="RoleTiles" Type="Self.RoleTile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="RoleTiles">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleUserRole">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserUserRole">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRoles" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleMenuAccesses">
+          <End Role="Menus" Type="Self.Menu" Multiplicity="*" />
+          <End Role="Roles" Type="Self.Role" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="dbSMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="RoleTiles" EntityType="Self.RoleTile" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_MenuMenu" Association="Self.FK_MenuMenu">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Menus1" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleRoleTiles" Association="Self.FK_RoleRoleTiles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RoleTiles" EntitySet="RoleTiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleUserRole" Association="Self.FK_RoleUserRole">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserUserRole" Association="Self.FK_UserUserRole">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="RoleMenuAccesses" Association="Self.RoleMenuAccesses">
+            <End Role="Menus" EntitySet="Menus" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <EntitySet Name="Students" EntityType="dbSMS.Student" />
+          <EntitySet Name="StudSublings" EntityType="dbSMS.StudSubling" />
+          <AssociationSet Name="StudentStudSubling" Association="dbSMS.StudentStudSubling">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudSubling" EntitySet="StudSublings" />
+          </AssociationSet>
+          <AssociationSet Name="StudentStudSubling1" Association="dbSMS.StudentStudSubling1">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudSubling" EntitySet="StudSublings" />
+          </AssociationSet>
+          <EntitySet Name="StudFamilies" EntityType="dbSMS.StudFamily" />
+          <AssociationSet Name="StudentStudFamily" Association="dbSMS.StudentStudFamily">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudFamily" EntitySet="StudFamilies" />
+          </AssociationSet>
+          <EntitySet Name="Classes" EntityType="dbSMS.Class" />
+          <EntitySet Name="ClassTeachers" EntityType="dbSMS.ClassTeacher" />
+          <AssociationSet Name="ClassClassTeacher" Association="dbSMS.ClassClassTeacher">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="ClassTeacher" EntitySet="ClassTeachers" />
+          </AssociationSet>
+          <EntitySet Name="ClassStudents" EntityType="dbSMS.ClassStudent" />
+          <EntitySet Name="PeriodSetups" EntityType="dbSMS.PeriodSetup" />
+          <AssociationSet Name="PeriodSetupClassTeacher" Association="dbSMS.PeriodSetupClassTeacher">
+            <End Role="PeriodSetup" EntitySet="PeriodSetups" />
+            <End Role="ClassTeacher" EntitySet="ClassTeachers" />
+          </AssociationSet>
+          <AssociationSet Name="StudentClassStudent" Association="dbSMS.StudentClassStudent">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="ClassStudent" EntitySet="ClassStudents" />
+          </AssociationSet>
+          <EntitySet Name="Teachers" EntityType="dbSMS.Teacher" />
+          <AssociationSet Name="TeacherClassTeacher" Association="dbSMS.TeacherClassTeacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="ClassTeacher" EntitySet="ClassTeachers" />
+          </AssociationSet>
+          <EntitySet Name="ClubMembers" EntityType="dbSMS.ClubMember" />
+          <EntitySet Name="Clubs" EntityType="dbSMS.Club" />
+          <AssociationSet Name="ClubClubMember" Association="dbSMS.ClubClubMember">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="ClubMember" EntitySet="ClubMembers" />
+          </AssociationSet>
+          <AssociationSet Name="StudentClubMember" Association="dbSMS.StudentClubMember">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="ClubMember" EntitySet="ClubMembers" />
+          </AssociationSet>
+          <EntitySet Name="EventParticipations" EntityType="dbSMS.EventParticipation" />
+          <AssociationSet Name="StudentEventParticipation" Association="dbSMS.StudentEventParticipation">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="EventParticipation" EntitySet="EventParticipations" />
+          </AssociationSet>
+          <AssociationSet Name="TeacherEventParticipation" Association="dbSMS.TeacherEventParticipation">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="EventParticipation" EntitySet="EventParticipations" />
+          </AssociationSet>
+          <EntitySet Name="PromotionClasses" EntityType="dbSMS.PromotionClass" />
+          <AssociationSet Name="ClassPromotionClass" Association="dbSMS.ClassPromotionClass">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="PromotionClass" EntitySet="PromotionClasses" />
+          </AssociationSet>
+          <AssociationSet Name="PeriodSetupPromotionClass" Association="dbSMS.PeriodSetupPromotionClass">
+            <End Role="PeriodSetup" EntitySet="PeriodSetups" />
+            <End Role="PromotionClass" EntitySet="PromotionClasses" />
+          </AssociationSet>
+          <AssociationSet Name="PromotionClassClassStudent" Association="dbSMS.PromotionClassClassStudent">
+            <End Role="PromotionClass" EntitySet="PromotionClasses" />
+            <End Role="ClassStudent" EntitySet="ClassStudents" />
+          </AssociationSet>
+          <AssociationSet Name="TeacherPromotionClass" Association="dbSMS.TeacherPromotionClass">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="PromotionClass" EntitySet="PromotionClasses" />
+          </AssociationSet>
+          <EntitySet Name="Prefects" EntityType="dbSMS.Prefect" />
+          <AssociationSet Name="StudentPrefect" Association="dbSMS.StudentPrefect">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Prefect" EntitySet="Prefects" />
+          </AssociationSet>
+          <AssociationSet Name="PromotionClassPrefect" Association="dbSMS.PromotionClassPrefect">
+            <End Role="PromotionClass" EntitySet="PromotionClasses" />
+            <End Role="Prefect" EntitySet="Prefects" />
+          </AssociationSet>
+          <EntitySet Name="LeavingCertificates" EntityType="dbSMS.LeavingCertificate" />
+          <AssociationSet Name="StudentLeavingCertificate" Association="dbSMS.StudentLeavingCertificate">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="LeavingCertificate" EntitySet="LeavingCertificates" />
+          </AssociationSet>
+        </EntityContainer>
+        <EnumType Name="ActiveState" a:ExternalTypeName="SMS.Common.ActiveState" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudID" />
+          </Key>
+          <Property Name="StudID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IndexNo" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="dbSMS.TitleStud" Nullable="false" />
+          <Property Name="Gender" Type="dbSMS.Gender" Nullable="false" />
+          <Property Name="FullName" Type="String" Nullable="false" />
+          <Property Name="Initials" Type="String" Nullable="false" />
+          <Property Name="LName" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="School" Type="String" Nullable="false" />
+          <Property Name="SchoolAddress" Type="String" Nullable="true" />
+          <Property Name="LastDhammaSchool" Type="String" Nullable="true" />
+          <Property Name="LDhammaSchoolAdd" Type="String" Nullable="true" />
+          <Property Name="EngSpeaking" Type="dbSMS.Fluency" Nullable="false" />
+          <Property Name="EngWriting" Type="dbSMS.Fluency" Nullable="false" />
+          <Property Name="EngReading" Type="dbSMS.Fluency" Nullable="false" />
+          <Property Name="EmergencyConName" Type="String" Nullable="false" />
+          <Property Name="EmergencyContactTel" Type="String" Nullable="false" />
+          <Property Name="SpecialAttention" Type="String" Nullable="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="StudSublings" Relationship="dbSMS.StudentStudSubling" FromRole="Student" ToRole="StudSubling" />
+          <NavigationProperty Name="StudSublings1" Relationship="dbSMS.StudentStudSubling1" FromRole="Student" ToRole="StudSubling" />
+          <NavigationProperty Name="StudFamilies" Relationship="dbSMS.StudentStudFamily" FromRole="Student" ToRole="StudFamily" />
+          <NavigationProperty Name="ClassStudents" Relationship="dbSMS.StudentClassStudent" FromRole="Student" ToRole="ClassStudent" />
+          <Property Name="ImagePath" Type="String" Nullable="true" />
+          <Property Name="DOB" Type="DateTime" Nullable="true" />
+          <Property Name="LastDhammaGrade" Type="String" Nullable="true" />
+          <NavigationProperty Name="ClubMembers" Relationship="dbSMS.StudentClubMember" FromRole="Student" ToRole="ClubMember" />
+          <NavigationProperty Name="EventParticipations" Relationship="dbSMS.StudentEventParticipation" FromRole="Student" ToRole="EventParticipation" />
+          <Property Name="Status" Type="dbSMS.StudStatus" Nullable="false" />
+          <NavigationProperty Name="Prefects" Relationship="dbSMS.StudentPrefect" FromRole="Student" ToRole="Prefect" />
+          <Property Name="InactiveReason" Type="String" Nullable="true" />
+          <Property Name="IsLeavingIssued" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LeavingCertificates" Relationship="dbSMS.StudentLeavingCertificate" FromRole="Student" ToRole="LeavingCertificate" />
+        </EntityType>
+        <EnumType Name="Title" a:ExternalTypeName="SMS.Common.Title" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="Gender" a:ExternalTypeName="SMS.Common.Gender" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="Fluency" a:ExternalTypeName="SMS.Common.Fluency" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EntityType Name="StudSubling">
+          <Key>
+            <PropertyRef Name="SubID" />
+          </Key>
+          <Property Name="SubID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SudID" Type="Int32" Nullable="false" />
+          <Property Name="SublingStudID" Type="Int32" Nullable="false" />
+          <Property Name="Relationship" Type="dbSMS.SibRelationship" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="Student" Relationship="dbSMS.StudentStudSubling" FromRole="StudSubling" ToRole="Student" />
+          <NavigationProperty Name="StudentRelation" Relationship="dbSMS.StudentStudSubling1" FromRole="StudSubling" ToRole="Student" />
+        </EntityType>
+        <EnumType Name="Relationship" a:ExternalTypeName="SMS.Common.Relationship" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <Association Name="StudentStudSubling">
+          <End Type="dbSMS.Student" Role="Student" Multiplicity="1" />
+          <End Type="dbSMS.StudSubling" Role="StudSubling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudID" />
+            </Principal>
+            <Dependent Role="StudSubling">
+              <PropertyRef Name="SudID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StudentStudSubling1">
+          <End Type="dbSMS.Student" Role="Student" Multiplicity="1" />
+          <End Type="dbSMS.StudSubling" Role="StudSubling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudID" />
+            </Principal>
+            <Dependent Role="StudSubling">
+              <PropertyRef Name="SublingStudID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StudFamily">
+          <Key>
+            <PropertyRef Name="StudFID" />
+          </Key>
+          <Property Name="StudFID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Relationship" Type="dbSMS.Relationship" Nullable="false" />
+          <Property Name="Occupation" Type="String" Nullable="false" />
+          <Property Name="WorkingAdd" Type="String" Nullable="false" />
+          <Property Name="OfficeTel" Type="String" Nullable="true" />
+          <Property Name="ContactMob" Type="String" Nullable="false" />
+          <Property Name="ContactHome" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="true" />
+          <Property Name="NICNo" Type="String" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="Student" Relationship="dbSMS.StudentStudFamily" FromRole="StudFamily" ToRole="Student" />
+          <Property Name="Title" Type="dbSMS.TitleTeacher" Nullable="false" />
+        </EntityType>
+        <Association Name="StudentStudFamily">
+          <End Type="dbSMS.Student" Role="Student" Multiplicity="1" />
+          <End Type="dbSMS.StudFamily" Role="StudFamily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudID" />
+            </Principal>
+            <Dependent Role="StudFamily">
+              <PropertyRef Name="StudID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Grade" Type="dbSMS.StudGrade" Nullable="false" />
+          <Property Name="ClassDesc" Type="String" Nullable="false" />
+          <Property Name="Status" Type="dbSMS.ActiveState" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="ClassTeachers" Relationship="dbSMS.ClassClassTeacher" FromRole="Class" ToRole="ClassTeacher" />
+          <NavigationProperty Name="PromotionClasses" Relationship="dbSMS.ClassPromotionClass" FromRole="Class" ToRole="PromotionClass" />
+        </EntityType>
+        <EnumType Name="StudGrade" a:ExternalTypeName="SMS.Common.StudGrade" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EntityType Name="ClassTeacher">
+          <Key>
+            <PropertyRef Name="ClTeachID" />
+          </Key>
+          <Property Name="ClTeachID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="TeacherID" Type="Int32" Nullable="false" />
+          <Property Name="PeriodID" Type="Int32" Nullable="false" />
+          <Property Name="PeriodStartDate" Type="DateTime" Nullable="true" />
+          <Property Name="PeriodEndDate" Type="DateTime" Nullable="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="Class" Relationship="dbSMS.ClassClassTeacher" FromRole="ClassTeacher" ToRole="Class" />
+          <NavigationProperty Name="PeriodSetup" Relationship="dbSMS.PeriodSetupClassTeacher" FromRole="ClassTeacher" ToRole="PeriodSetup" />
+          <NavigationProperty Name="Teacher" Relationship="dbSMS.TeacherClassTeacher" FromRole="ClassTeacher" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="ClassClassTeacher">
+          <End Type="dbSMS.Class" Role="Class" Multiplicity="1" />
+          <End Type="dbSMS.ClassTeacher" Role="ClassTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="ClassTeacher">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClassStudent">
+          <Key>
+            <PropertyRef Name="ClStudID" />
+          </Key>
+          <Property Name="ClStudID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrClID" Type="Int32" Nullable="false" />
+          <Property Name="StudID" Type="Int32" Nullable="false" />
+          <Property Name="PeriodStartDate" Type="DateTime" Nullable="true" />
+          <Property Name="PeriodEndDate" Type="DateTime" Nullable="true" />
+          <Property Name="IsMonitor" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="Student" Relationship="dbSMS.StudentClassStudent" FromRole="ClassStudent" ToRole="Student" />
+          <NavigationProperty Name="PromotionClass" Relationship="dbSMS.PromotionClassClassStudent" FromRole="ClassStudent" ToRole="PromotionClass" />
+          <Property Name="Status" Type="dbSMS.StudStatus" Nullable="false" />
+          <Property Name="IsCurrentMonitor" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PeriodSetup">
+          <Key>
+            <PropertyRef Name="PeriodID" />
+          </Key>
+          <Property Name="PeriodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PeriodStartDate" Type="DateTime" Nullable="false" />
+          <Property Name="PeriodEndDate" Type="DateTime" Nullable="false" />
+          <Property Name="IsPeriodComplete" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="ClassTeachers" Relationship="dbSMS.PeriodSetupClassTeacher" FromRole="PeriodSetup" ToRole="ClassTeacher" />
+          <NavigationProperty Name="PromotionClasses" Relationship="dbSMS.PeriodSetupPromotionClass" FromRole="PeriodSetup" ToRole="PromotionClass" />
+        </EntityType>
+        <Association Name="PeriodSetupClassTeacher">
+          <End Type="dbSMS.PeriodSetup" Role="PeriodSetup" Multiplicity="1" />
+          <End Type="dbSMS.ClassTeacher" Role="ClassTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PeriodSetup">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="ClassTeacher">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StudentClassStudent">
+          <End Type="dbSMS.Student" Role="Student" Multiplicity="1" />
+          <End Type="dbSMS.ClassStudent" Role="ClassStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudID" />
+            </Principal>
+            <Dependent Role="ClassStudent">
+              <PropertyRef Name="StudID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="TeachID" />
+          </Key>
+          <Property Name="TeachID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="dbSMS.TitleTeacher" Nullable="false" />
+          <Property Name="Gender" Type="dbSMS.Gender" Nullable="false" />
+          <Property Name="FullName" Type="String" Nullable="false" />
+          <Property Name="Initials" Type="String" Nullable="false" />
+          <Property Name="LName" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="ContactNo" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="true" />
+          <Property Name="NICNo" Type="String" Nullable="false" />
+          <Property Name="TelHome" Type="String" Nullable="true" />
+          <Property Name="ImmeContactNo" Type="String" Nullable="true" />
+          <Property Name="ImmeContactName" Type="String" Nullable="true" />
+          <Property Name="Status" Type="dbSMS.TeacherStatus" Nullable="false" />
+          <Property Name="InactiveReason" Type="String" Nullable="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="ClassTeachers" Relationship="dbSMS.TeacherClassTeacher" FromRole="Teacher" ToRole="ClassTeacher" />
+          <NavigationProperty Name="EventParticipations" Relationship="dbSMS.TeacherEventParticipation" FromRole="Teacher" ToRole="EventParticipation" />
+          <NavigationProperty Name="PromotionClasses" Relationship="dbSMS.TeacherPromotionClass" FromRole="Teacher" ToRole="PromotionClass" />
+        </EntityType>
+        <Association Name="TeacherClassTeacher">
+          <End Type="dbSMS.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="dbSMS.ClassTeacher" Role="ClassTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeachID" />
+            </Principal>
+            <Dependent Role="ClassTeacher">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="PaidType" a:ExternalTypeName="SMS.Common.PaidType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="DonationType" a:ExternalTypeName="SMS.Common.DonationType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="PrefectType" a:ExternalTypeName="SMS.Common.PrefectType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EntityType Name="ClubMember">
+          <Key>
+            <PropertyRef Name="CMID" />
+          </Key>
+          <Property Name="CMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="MemberDate" Type="DateTime" Nullable="false" />
+          <Property Name="MembershipType" Type="dbSMS.MembershipType" Nullable="false" />
+          <Property Name="CommiteeMemberType" Type="dbSMS.CommitteeMemberType" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Club" Relationship="dbSMS.ClubClubMember" FromRole="ClubMember" ToRole="Club" />
+          <NavigationProperty Name="Student" Relationship="dbSMS.StudentClubMember" FromRole="ClubMember" ToRole="Student" />
+          <Property Name="Status" Type="dbSMS.ActiveState" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="CID" />
+          </Key>
+          <Property Name="CID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="Status" Type="dbSMS.ActiveState" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="ClubMembers" Relationship="dbSMS.ClubClubMember" FromRole="Club" ToRole="ClubMember" />
+        </EntityType>
+        <Association Name="ClubClubMember">
+          <End Type="dbSMS.Club" Role="Club" Multiplicity="1" />
+          <End Type="dbSMS.ClubMember" Role="ClubMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="CID" />
+            </Principal>
+            <Dependent Role="ClubMember">
+              <PropertyRef Name="CID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StudentClubMember">
+          <End Type="dbSMS.Student" Role="Student" Multiplicity="1" />
+          <End Type="dbSMS.ClubMember" Role="ClubMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudID" />
+            </Principal>
+            <Dependent Role="ClubMember">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="MembershipType" a:ExternalTypeName="SMS.Common.MembershipType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="CommitteeMemberType" a:ExternalTypeName="SMS.Common.CommitteeMemberType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EntityType Name="EventParticipation">
+          <Key>
+            <PropertyRef Name="EPID" />
+          </Key>
+          <Property Name="EPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="EventDesc" Type="String" Nullable="false" />
+          <Property Name="IsWinner" Type="Boolean" Nullable="false" />
+          <Property Name="WinningDetails" Type="String" Nullable="true" />
+          <Property Name="TeacherInCharge" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Student" Relationship="dbSMS.StudentEventParticipation" FromRole="EventParticipation" ToRole="Student" />
+          <NavigationProperty Name="Teacher" Relationship="dbSMS.TeacherEventParticipation" FromRole="EventParticipation" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="StudentEventParticipation">
+          <End Type="dbSMS.Student" Role="Student" Multiplicity="1" />
+          <End Type="dbSMS.EventParticipation" Role="EventParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudID" />
+            </Principal>
+            <Dependent Role="EventParticipation">
+              <PropertyRef Name="StudID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TeacherEventParticipation">
+          <End Type="dbSMS.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="dbSMS.EventParticipation" Role="EventParticipation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeachID" />
+            </Principal>
+            <Dependent Role="EventParticipation">
+              <PropertyRef Name="TeacherInCharge" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PromotionClass">
+          <Key>
+            <PropertyRef Name="PrClID" />
+          </Key>
+          <Property Name="PrClID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="PeriodID" Type="Int32" Nullable="false" />
+          <Property Name="MonitorStudID" Type="String" Nullable="false" />
+          <Property Name="MonitorStud2ID" Type="String" Nullable="true" />
+          <Property Name="TeacherID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="Class" Relationship="dbSMS.ClassPromotionClass" FromRole="PromotionClass" ToRole="Class" />
+          <NavigationProperty Name="PeriodSetup" Relationship="dbSMS.PeriodSetupPromotionClass" FromRole="PromotionClass" ToRole="PeriodSetup" />
+          <NavigationProperty Name="ClassStudents" Relationship="dbSMS.PromotionClassClassStudent" FromRole="PromotionClass" ToRole="ClassStudent" />
+          <NavigationProperty Name="Teacher" Relationship="dbSMS.TeacherPromotionClass" FromRole="PromotionClass" ToRole="Teacher" />
+          <NavigationProperty Name="Prefects" Relationship="dbSMS.PromotionClassPrefect" FromRole="PromotionClass" ToRole="Prefect" />
+        </EntityType>
+        <Association Name="ClassPromotionClass">
+          <End Type="dbSMS.Class" Role="Class" Multiplicity="1" />
+          <End Type="dbSMS.PromotionClass" Role="PromotionClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="PromotionClass">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PeriodSetupPromotionClass">
+          <End Type="dbSMS.PeriodSetup" Role="PeriodSetup" Multiplicity="1" />
+          <End Type="dbSMS.PromotionClass" Role="PromotionClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PeriodSetup">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="PromotionClass">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PromotionClassClassStudent">
+          <End Type="dbSMS.PromotionClass" Role="PromotionClass" Multiplicity="1" />
+          <End Type="dbSMS.ClassStudent" Role="ClassStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromotionClass">
+              <PropertyRef Name="PrClID" />
+            </Principal>
+            <Dependent Role="ClassStudent">
+              <PropertyRef Name="PrClID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TeacherPromotionClass">
+          <End Type="dbSMS.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="dbSMS.PromotionClass" Role="PromotionClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeachID" />
+            </Principal>
+            <Dependent Role="PromotionClass">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="TitleTeacher" a:ExternalTypeName="SMS.Common.TitleTeacher" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="TeacherStatus" a:ExternalTypeName="SMS.Common.TeacherStatus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="StudStatus" a:ExternalTypeName="SMS.Common.StudStatus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="TitleStud" a:ExternalTypeName="SMS.Common.TitleStud" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="SibRelationship" a:ExternalTypeName="SMS.Common.SibRelationship" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="ExamStatus" a:ExternalTypeName="SMS.Common.ExamStatus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="ExamRepeatType" a:ExternalTypeName="SMS.Common.ExamRepeatType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="AttendanceType" a:ExternalTypeName="SMS.Common.AttendanceType" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EntityType Name="Prefect">
+          <Key>
+            <PropertyRef Name="PreID" />
+          </Key>
+          <Property Name="PreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudID" Type="Int32" Nullable="false" />
+          <Property Name="PrefClassID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="dbSMS.PrefectType" Nullable="false" />
+          <Property Name="EffectiveDate" Type="DateTime" Nullable="false" />
+          <Property Name="IsHP" Type="Boolean" Nullable="false" />
+          <Property Name="IsDHP" Type="Boolean" Nullable="false" />
+          <Property Name="Responsibilty" Type="String" Nullable="true" />
+          <Property Name="IsPromoted" Type="Boolean" Nullable="false" />
+          <Property Name="PromotedDate" Type="DateTime" Nullable="true" />
+          <Property Name="Status" Type="dbSMS.ActiveState" Nullable="false" />
+          <Property Name="InactiveDate" Type="DateTime" Nullable="true" />
+          <Property Name="InactiveReason" Type="String" Nullable="true" />
+          <NavigationProperty Name="Student" Relationship="dbSMS.StudentPrefect" FromRole="Prefect" ToRole="Student" />
+          <NavigationProperty Name="PromotionClass" Relationship="dbSMS.PromotionClassPrefect" FromRole="Prefect" ToRole="PromotionClass" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+        </EntityType>
+        <Association Name="StudentPrefect">
+          <End Type="dbSMS.Student" Role="Student" Multiplicity="1" />
+          <End Type="dbSMS.Prefect" Role="Prefect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudID" />
+            </Principal>
+            <Dependent Role="Prefect">
+              <PropertyRef Name="StudID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PromotionClassPrefect">
+          <End Type="dbSMS.PromotionClass" Role="PromotionClass" Multiplicity="1" />
+          <End Type="dbSMS.Prefect" Role="Prefect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromotionClass">
+              <PropertyRef Name="PrClID" />
+            </Principal>
+            <Dependent Role="Prefect">
+              <PropertyRef Name="PrefClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LeavingCertificate">
+          <Key>
+            <PropertyRef Name="LeavCertID" />
+          </Key>
+          <Property Name="LeavCertID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudID" Type="Int32" Nullable="false" />
+          <Property Name="DateLeaving" Type="DateTime" Nullable="false" />
+          <Property Name="Reason" Type="String" Nullable="true" />
+          <Property Name="Conduct" Type="dbSMS.Conduct" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="Student" Relationship="dbSMS.StudentLeavingCertificate" FromRole="LeavingCertificate" ToRole="Student" />
+        </EntityType>
+        <Association Name="StudentLeavingCertificate">
+          <End Type="dbSMS.Student" Role="Student" Multiplicity="1" />
+          <End Type="dbSMS.LeavingCertificate" Role="LeavingCertificate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudID" />
+            </Principal>
+            <Dependent Role="LeavingCertificate">
+              <PropertyRef Name="StudID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="Conduct" a:ExternalTypeName="SMS.Common.Conduct" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EnumType Name="ExamGrade" a:ExternalTypeName="SMS.Common.ExamGrade" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbSMSStoreContainer" CdmEntityContainer="dbSMSEntities">
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.Menu)">
+        <MappingFragment StoreEntitySet="Menus">
+          <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+          <ScalarProperty Name="ParentMenuID" ColumnName="ParentMenuID" />
+          <ScalarProperty Name="DisplaySeq" ColumnName="DisplaySeq" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.Role)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleTiles">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.RoleTile)">
+        <MappingFragment StoreEntitySet="RoleTiles">
+          <ScalarProperty Name="RoleTileID" ColumnName="RoleTileID" />
+          <ScalarProperty Name="TileID" ColumnName="TileID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.UserRole)">
+        <MappingFragment StoreEntitySet="UserRoles">
+          <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="NavUserName" ColumnName="NavUserName" />
+          <ScalarProperty Name="CallCenterUserName" ColumnName="CallCenterUserName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.Student)">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="StudID" ColumnName="StudID" />
+          <ScalarProperty Name="IndexNo" ColumnName="IndexNo" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Initials" ColumnName="Initials" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="School" ColumnName="School" />
+          <ScalarProperty Name="SchoolAddress" ColumnName="SchoolAddress" />
+          <ScalarProperty Name="LastDhammaSchool" ColumnName="LastDhammaSchool" />
+          <ScalarProperty Name="LDhammaSchoolAdd" ColumnName="LDhammaSchoolAdd" />
+          <ScalarProperty Name="EngSpeaking" ColumnName="EngSpeaking" />
+          <ScalarProperty Name="EngWriting" ColumnName="EngWriting" />
+          <ScalarProperty Name="EngReading" ColumnName="EngReading" />
+          <ScalarProperty Name="EmergencyConName" ColumnName="EmergencyConName" />
+          <ScalarProperty Name="EmergencyContactTel" ColumnName="EmergencyContactTel" />
+          <ScalarProperty Name="SpecialAttention" ColumnName="SpecialAttention" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="LastDhammaGrade" ColumnName="LastDhammaGrade" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="InactiveReason" ColumnName="InactiveReason" />
+          <ScalarProperty Name="IsLeavingIssued" ColumnName="IsLeavingIssued" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudSublings">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.StudSubling)">
+        <MappingFragment StoreEntitySet="StudSublings">
+          <ScalarProperty Name="SubID" ColumnName="SubID" />
+          <ScalarProperty Name="SudID" ColumnName="SudID" />
+          <ScalarProperty Name="SublingStudID" ColumnName="SublingStudID" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudFamilies">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.StudFamily)">
+        <MappingFragment StoreEntitySet="StudFamilies">
+          <ScalarProperty Name="StudFID" ColumnName="StudFID" />
+          <ScalarProperty Name="StudID" ColumnName="StudID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+          <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+          <ScalarProperty Name="WorkingAdd" ColumnName="WorkingAdd" />
+          <ScalarProperty Name="OfficeTel" ColumnName="OfficeTel" />
+          <ScalarProperty Name="ContactMob" ColumnName="ContactMob" />
+          <ScalarProperty Name="ContactHome" ColumnName="ContactHome" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="NICNo" ColumnName="NICNo" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Classes">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.Class)">
+        <MappingFragment StoreEntitySet="Classes">
+          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="ClassDesc" ColumnName="ClassDesc" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassTeachers">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.ClassTeacher)">
+        <MappingFragment StoreEntitySet="ClassTeachers">
+          <ScalarProperty Name="ClTeachID" ColumnName="ClTeachID" />
+          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+          <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+          <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+          <ScalarProperty Name="PeriodStartDate" ColumnName="PeriodStartDate" />
+          <ScalarProperty Name="PeriodEndDate" ColumnName="PeriodEndDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassStudents">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.ClassStudent)">
+        <MappingFragment StoreEntitySet="ClassStudents">
+          <ScalarProperty Name="ClStudID" ColumnName="ClStudID" />
+          <ScalarProperty Name="PrClID" ColumnName="PrClID" />
+          <ScalarProperty Name="StudID" ColumnName="StudID" />
+          <ScalarProperty Name="PeriodStartDate" ColumnName="PeriodStartDate" />
+          <ScalarProperty Name="PeriodEndDate" ColumnName="PeriodEndDate" />
+          <ScalarProperty Name="IsMonitor" ColumnName="IsMonitor" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsCurrentMonitor" ColumnName="IsCurrentMonitor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PeriodSetups">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.PeriodSetup)">
+        <MappingFragment StoreEntitySet="PeriodSetups">
+          <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+          <ScalarProperty Name="PeriodStartDate" ColumnName="PeriodStartDate" />
+          <ScalarProperty Name="PeriodEndDate" ColumnName="PeriodEndDate" />
+          <ScalarProperty Name="IsPeriodComplete" ColumnName="IsPeriodComplete" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teachers">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.Teacher)">
+        <MappingFragment StoreEntitySet="Teachers">
+          <ScalarProperty Name="TeachID" ColumnName="TeachID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Initials" ColumnName="Initials" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="NICNo" ColumnName="NICNo" />
+          <ScalarProperty Name="TelHome" ColumnName="TelHome" />
+          <ScalarProperty Name="ImmeContactNo" ColumnName="ImmeContactNo" />
+          <ScalarProperty Name="ImmeContactName" ColumnName="ImmeContactName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="InactiveReason" ColumnName="InactiveReason" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClubMembers">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.ClubMember)">
+        <MappingFragment StoreEntitySet="ClubMembers">
+          <ScalarProperty Name="CMID" ColumnName="CMID" />
+          <ScalarProperty Name="CID" ColumnName="CID" />
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="MemberDate" ColumnName="MemberDate" />
+          <ScalarProperty Name="MembershipType" ColumnName="MembershipType" />
+          <ScalarProperty Name="CommiteeMemberType" ColumnName="CommiteeMemberType" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clubs">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.Club)">
+        <MappingFragment StoreEntitySet="Clubs">
+          <ScalarProperty Name="CID" ColumnName="CID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventParticipations">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.EventParticipation)">
+        <MappingFragment StoreEntitySet="EventParticipations">
+          <ScalarProperty Name="EPID" ColumnName="EPID" />
+          <ScalarProperty Name="StudID" ColumnName="StudID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="EventDesc" ColumnName="EventDesc" />
+          <ScalarProperty Name="IsWinner" ColumnName="IsWinner" />
+          <ScalarProperty Name="WinningDetails" ColumnName="WinningDetails" />
+          <ScalarProperty Name="TeacherInCharge" ColumnName="TeacherInCharge" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PromotionClasses">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.PromotionClass)">
+        <MappingFragment StoreEntitySet="PromotionClasses">
+          <ScalarProperty Name="PrClID" ColumnName="PrClID" />
+          <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+          <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+          <ScalarProperty Name="MonitorStudID" ColumnName="MonitorStudID" />
+          <ScalarProperty Name="MonitorStud2ID" ColumnName="MonitorStud2ID" />
+          <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prefects">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.Prefect)">
+        <MappingFragment StoreEntitySet="Prefects">
+          <ScalarProperty Name="PreID" ColumnName="PreID" />
+          <ScalarProperty Name="StudID" ColumnName="StudID" />
+          <ScalarProperty Name="PrefClassID" ColumnName="PrefClassID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+          <ScalarProperty Name="IsHP" ColumnName="IsHP" />
+          <ScalarProperty Name="IsDHP" ColumnName="IsDHP" />
+          <ScalarProperty Name="Responsibilty" ColumnName="Responsibilty" />
+          <ScalarProperty Name="IsPromoted" ColumnName="IsPromoted" />
+          <ScalarProperty Name="PromotedDate" ColumnName="PromotedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="InactiveDate" ColumnName="InactiveDate" />
+          <ScalarProperty Name="InactiveReason" ColumnName="InactiveReason" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeavingCertificates">
+      <EntityTypeMapping TypeName="IsTypeOf(dbSMS.LeavingCertificate)">
+        <MappingFragment StoreEntitySet="LeavingCertificates">
+          <ScalarProperty Name="LeavCertID" ColumnName="LeavCertID" />
+          <ScalarProperty Name="StudID" ColumnName="StudID" />
+          <ScalarProperty Name="DateLeaving" ColumnName="DateLeaving" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Conduct" ColumnName="Conduct" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RoleMenuAccesses" TypeName="dbSMS.RoleMenuAccesses" StoreEntitySet="RoleMenuAccesses">
+      <EndProperty Name="Menus">
+        <ScalarProperty Name="MenuID" ColumnName="Menus_MenuID" />
+      </EndProperty>
+      <EndProperty Name="Roles">
+        <ScalarProperty Name="RoleID" ColumnName="Roles_RoleID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

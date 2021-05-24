@@ -1,0 +1,66 @@
+﻿@model SMS.Areas.Student.Models.ClassStudentVM
+
+@{
+    ViewBag.Title = "Class Registration Details";
+}
+
+<div>
+    <hr />
+    @using (Html.BeginForm(null, ""))
+    {
+        @Html.HiddenFor(model => model.ClStudID)
+        @Html.HiddenFor(model => model.RowVersion)
+        @Html.AntiForgeryToken()
+        <p>
+            <div class="btn-toolbar">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ClStudID, iSToEdit = true }, new { @class = "btn btn-primary", style = "min-width:75px" })
+                @Html.ActionLink("Donation", "CreateInvoice", new { id = Model.StudID }, new { @class = "btn btn-success", style = "min-width:75px" })
+            </div>
+        </p>
+    }
+    <br />
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.IndexNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.IndexNo)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudentName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.StudentName)
+            </div>
+            @Html.LabelFor(model => model.School, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.School)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PeriodFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.PeriodFrom)
+            </div>
+            @Html.LabelFor(model => model.PeriodTo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.PeriodTo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ClassGrade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.ClassGrade)
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

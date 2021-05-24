@@ -1,0 +1,46 @@
+﻿@model SMS.Areas.Student.Models.ClassStudentVM
+
+@{ Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml"); }
+
+@using (Html.BeginForm())
+{
+    <br />
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ClStudID)
+        @Html.HiddenFor(model => model.IndexNo)
+        @Html.HiddenFor(model => model.StudentName)
+        @Html.HiddenFor(model => model.IsMonitor)
+        @Html.HiddenFor(model => model.ClassListJson)
+        @Html.HiddenFor(model => model.PrClID)
+        @Html.HiddenFor(model => model.TeachID)
+        @Html.HiddenFor(model => model.Status)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudID, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.PopUpSelectorFor(model => model.StudID, "Base", "Data", "GetClassStudents", new { @class = "form-control" }, "Please select a Student", dspFormat: "{2}", hiddenIndices: "0,1", dataParas: new { classID = Model.ClassID, isLowerGrade = true, periodID = ViewBag.PeriodID })
+                @Html.ValidationMessageFor(model => model.StudID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+        <div class="pull-right">
+            <p>
+                <div class="btn-toolbar">
+                    <input type="submit" value="Save" class="btn btn-primary" style="min-width:75px" />
+                    <input type="button" value="Cancel" class="btn btn-default" style="min-width:75px" />
+                </div>
+            </p>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/student/studentpromotion")
+}
+
+

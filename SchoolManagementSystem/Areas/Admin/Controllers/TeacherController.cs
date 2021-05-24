@@ -1,0 +1,164 @@
+﻿using SMS.Areas.Admin.Models;
+using SMS.Areas.Base.Controllers;
+using SMS.Common;
+using SMS.Common.DB;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+
+namespace SMS.Areas.Admin.Controllers
+{
+    public class TeacherController : BaseController    
+    {
+        public ActionResult Index(BaseViewModel<TeacherVM> vm)
+    {
+        vm.SetList(db.Teachers.AsQueryable(), "LName");
+        return View(vm);
+    }
+
+    public ActionResult Details(int? id)
+    {
+        if (id == null)
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+        Teacher teacher = db.Teachers.Find(id);
+        if (teacher == null)
+        {
+            return HttpNotFound();
+        }
+        return View(new TeacherVM(teacher));
+    }
+
+    public ActionResult Create()
+    {
+        var teacher = new TeacherVM() { Status = TeacherStatus.Active };
+        return View(teacher);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Create([Bind(Include = "TeachID,Title,Gender,FullName,Initials,LName,Address,ContactNo,Email,NICNo,Status,InactiveReason,TelHome,ImmeContactNo,ImmeContactName")] TeacherVM teacher)
+    {
+        try
+        {
+            var existingTeacher = db.Teachers.Where(e => e.NICNo == teacher.NICNo).FirstOrDefault();
+
+            if (existingTeacher != null)
+            { ModelState.AddModelError("NICNo", "Teacher Name Already Exist"); }
+
+            if (ModelState.IsValid)
+            {
+                teacher.CreatedBy = this.GetCurrUser();
+                    teacher.CreatedDate = DateTime.Now;
+                db.Teachers.Add(teacher.GetEntity());
+                db.SaveChanges();
+
+                AddAlert(SMS.Common.AlertStyles.success, "Teacher Information Created Successfully.");
+                return RedirectToAction("Index");
+            }
+        }
+        catch (DbEntityValidationException dbEx)
+        { this.ShowEntityErrors(dbEx); }
+        catch (Exception ex)
+        { AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message); }
+
+        return View(teacher);
+    }
+
+    public ActionResult Edit(int? id)
+    {
+        if (id == null)
+        {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+        Teacher teacher = db.Teachers.Find(id);
+        if (teacher == null)
+        {
+            return HttpNotFound();
+        }
+        return View(new TeacherVM(teacher));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult Edit([Bind(Include = "TeachID,Title,Gender,FullName,Initials,LName,Address,ContactNo,Email,NICNo,Status,InactiveReason,RowVersion,TelHome,ImmeContactNo,ImmeContactName")] TeacherVM teacher)
+    {
+        byte[] curRowVersion = null;
+        try
+        {
+            var existingTeacher = db.Teachers.Where(e => e.NICNo == teacher.NICNo && e.TeachID != teacher.TeachID).FirstOrDefault();
+
+            if (existingTeacher != null)
+            { ModelState.AddModelError("NICNo", "Teacher Name Already Exist"); }
+
+            if (ModelState.IsValid)
+            {
+                var obj = db.Teachers.Find(teacher.TeachID);
+                if (obj == null)
+                { throw new DbUpdateConcurrencyException(); }
+
+                curRowVersion = obj.RowVersion;
+                var modObj = teacher.GetEntity();
+                modObj.CopyContent(obj, "Title,Gender,FullName,Initials,LName,Address,ContactNo,Email,NICNo,Status,InactiveReason,TelHome,ImmeContactNo,ImmeContactName");
+
+                obj.ModifiedBy = this.GetCurrUser();
+                obj.ModifiedDate = DateTime.Now;
+
+                db.Entry(obj).OriginalValues["RowVersion"] = teacher.RowVersion;
+                db.SaveChanges();
+
+                AddAlert(SMS.Common.AlertStyles.success, "Teacher Modified Successfully.");
+                return RedirectToAction("Index");
+            }
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            this.ShowConcurrencyErrors(ex);
+            teacher.RowVersion = curRowVersion;
+        }
+        catch (DbEntityValidationException dbEx)
+        { this.ShowEntityErrors(dbEx); }
+        catch (Exception ex)
+        { AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message); }
+
+        return View(teacher);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public ActionResult DeleteConfirmed(TeacherVM teacher)
+    {
+        try
+        {
+            var obj = db.Teachers.Find(teacher.TeachID);
+            if (obj == null)
+            { throw new DbUpdateConcurrencyException(""); }
+            db.Detach(obj);
+
+            db.Entry(teacher.GetEntity()).State = EntityState.Deleted;
+            db.SaveChanges();
+
+            AddAlert(SMS.Common.AlertStyles.success, "Teacher Deleted Successfully.");
+            return RedirectToAction("Index");
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            this.ShowConcurrencyErrors(ex, true);
+            if (ex.Message == "")
+            { return RedirectToAction("Index"); }
+        }
+        catch (Exception ex)
+        {
+            AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message);
+        }
+        return RedirectToAction("Details", new { id = teacher.TeachID });
+    }
+}
+}

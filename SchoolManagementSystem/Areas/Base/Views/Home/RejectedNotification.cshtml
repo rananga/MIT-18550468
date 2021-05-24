@@ -1,0 +1,332 @@
+﻿@using SMS.Areas.Base.Controllers
+
+@{
+    ViewBag.Title = "Rejected Notifications";
+}
+
+<div>
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a data-toggle="tab" href="#leave">Leaves</a></li>
+        <li><a data-toggle="tab" href="#lecHr">Lecture Hours</a></li>
+        <li><a data-toggle="tab" href="#budget">Budgets</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="leave" class="tab-pane fade in active">
+            <br />
+            <h4> <u>Short Leave Notifications :</u></h4>
+            <table class="mGrid">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Short Leave Date
+                        </th>
+                        <th>
+                            Time From
+                        </th>
+                        <th>
+                            Time To
+                        </th>
+                        <th>
+                            Reason
+                        </th>
+                        <th>
+                            Leave Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.shortLeaves)
+                    {
+                        <tr>
+                            <td>
+                                <a href=" ../../Hr/EmployeeShortLeave/Details/@item.SLID"><span class='glyphicon glyphicon-eye-open btn btn-warning btn-xs' style='color:black'></span></a>
+                            </td>
+                            <td>
+                                @item.Date.ToString("yyyy-MM-dd")
+                            </td>
+                            <td>
+                                @item.TimeFrom
+                            </td>
+                            <td>
+                                @item.TimeTo
+                            </td>
+                            <td>
+                                @item.Reason
+                            </td>
+                            <td>
+                                @item.LeaveStatus
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <br />
+            <h4> <u>Duty Leave Notifications :</u></h4>
+            <table class="mGrid">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Departure Date
+                        </th>
+                        <th>
+                            Departure Time
+                        </th>
+                        <th>
+                            Duty Place Desc
+                        </th>
+                        <th>
+                            Transport Mode
+                        </th>
+                        <th>
+                            Leave Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.dutyLeaves)
+                    {
+                        <tr>
+                            <td>
+                                <a href=" ../../Hr/EmployeeDutyLeaves/Details/@item.DutyLeaveID"><span class='glyphicon glyphicon-eye-open btn btn-warning btn-xs' style='color:black'></span></a>
+                            </td>
+                            <td>
+                                @item.DepartureDate.ToString("yyyy-MM-dd")
+                            </td>
+                            <td>
+                                @item.DepartureTime
+                            </td>
+                            <td>
+                                @item.DutyPlaceDesc
+                            </td>
+                            <td>
+                                @item.TransportMode
+                            </td>
+                            <td>
+                                @item.LeaveStatus
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            <h4> <u>Leave Notifications :</u></h4>
+            <table class="mGrid">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Leave From Date
+                        </th>
+                        <th>
+                            Leave To Date
+                        </th>
+                        <th>
+                            No of Leave Days
+                        </th>
+                        <th>
+                            Leave Type
+                        </th>           
+                        <th>
+                            Address on Leave
+                        </th>
+                        <th>
+                            Leave Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.EmployeeLeaves)
+                    {
+                        <tr>
+                            <td>
+                                <a href=" ../../Hr/EmployeeLeaves/Details/@item.ELeaveID"><span class='glyphicon glyphicon-eye-open btn btn-warning btn-xs' style='color:black'></span></a>
+                            </td>
+                            <td>
+                                @item.LeaveFromDate.ToString("yyyy-MM-dd")
+                            </td>
+                            <td>
+                                @item.LeaveToDate.ToString("yyyy-MM-dd")
+                            </td>
+                            <td>
+                                @item.NoOfLeaveDays
+                            </td>
+                            <th>
+                                @item.LeaveType
+                            </th> 
+                            <td>
+                                @item.AddressonLeave
+                            </td>
+                            <td>
+                                @item.LeaveStatus
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            <h4> <u>Contract Leave Notifications :</u></h4>
+            <table class="mGrid">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Leave From Date
+                        </th>
+                        <th>
+                            Leave To Date
+                        </th>
+                        <th>
+                            No of Leave Days
+                        </th>
+                        <th>
+                            Leave Type
+                        </th>
+                        <th>
+                            Address on Leave
+                        </th>
+                        <th>
+                            Leave Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.EmployeeContractLeaves)
+                    {
+                        <tr>
+                            <td>
+                                <a href=" ../../Hr/ContractEmpLeaves/Details/@item.ConEmpLeaveID"><span class='glyphicon glyphicon-eye-open btn btn-warning btn-xs' style='color:black'></span></a>
+                            </td>
+                            <td>
+                                @item.LeaveFromDate.ToString("yyyy-MM-dd")
+                            </td>
+                            <td>
+                                @item.LeaveToDate.ToString("yyyy-MM-dd")
+                            </td>
+                            <td>
+                                @item.NoOfLeaveDays
+                            </td>
+                            <th>
+                                @item.LeaveType
+                            </th>
+                            <td>
+                                @item.AddressonLeave
+                            </td>
+                            <td>
+                                @item.LeaveStatus
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="lecHr" class="tab-pane fade">
+            <br />
+            <table class="mGrid">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Lecture Date
+                        </th>
+                        <th>
+                            Lec Start Time
+                        </th>
+                        <th>
+                            Lec End Time
+                        </th>
+                        <th>
+                            Batch Code
+                        </th>
+                        <th>
+                            Lecturer Name
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.LecHrsList)
+                    {
+                        <tr>
+                            <td>
+                                <a href="../../Program/BatchLectures/RejectedDetails/@item.LecPanelID"><span class='glyphicon glyphicon-eye-open btn btn-warning btn-xs' style='color:black'></span></a>
+                            </td>
+                            <td>
+                                @item.LectureDate.ToString("yyyy-MM-dd")
+                            </td>
+                            <td>
+                                @item.LecStartTime
+                            </td>
+                            <td>
+                                @item.LecEndTime
+                            </td>
+                            <td>
+                                @item.BatchCode
+                            </td>
+                            <td>
+                                @item.LecturerName
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="budget" class="tab-pane fade">
+            <br />
+            <table class="mGrid">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Batch Code
+                        </th>
+                        <th>
+                            Branch
+                        </th>
+                        <th>
+                            Department
+                        </th>
+                        <th>
+                            Course Name
+                        </th>
+                        <th>
+                            Budget Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.BudgetsList)
+                    {
+                        <tr>
+                            <td>
+                                <a href=" ../../Program/Budgets/Details/@item.BudgetID"><span class='glyphicon glyphicon-eye-open btn btn-warning btn-xs' style='color:black'></span></a>
+                            </td>
+                            <td>
+                                @item.BatchCode
+                            </td>
+                            <td>
+                                @item.BranchDesc
+                            </td>
+                            <td>
+                                @item.DepartmentDesc
+                            </td>
+                            <td>
+                                @item.CourseName
+                            </td>
+                            <td>
+                                @item.BudgetStatus
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/notification")
+}

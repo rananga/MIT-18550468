@@ -1,0 +1,86 @@
+﻿@model IEnumerable<SMS.Areas.Student.Models.PrefectVM>
+
+<hr />
+
+@{
+    if (ViewBag.IsSenior)
+    {
+        <h3>Senior Prefect Guild</h3>
+    }
+    else if (ViewBag.isJunior)
+    {
+        <h3>Junior Prefect Guild</h3>
+    }
+    else if (ViewBag.isPending)
+    {
+        <h3>Pending Prefect Guild</h3>
+    }
+}
+
+
+<table class="mGrid" id="prefStudentTbl">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IndexNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassGrade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Responsibilty)
+            </th>
+            @{
+                if (ViewBag.IsSenior)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsHP)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsDHP)
+                    </th>
+                }
+            }
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-pid="@item.PreID">
+                <td id="studID">
+                    @Html.DisplayFor(modelItem => item.IndexNo)
+                    @Html.HiddenFor(modelItem => item.StudID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassGrade)
+                    @Html.HiddenFor(modelItem => item.PrefClassID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Responsibilty)
+                </td>
+                @{
+                    if (ViewBag.IsSenior)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsHP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsDHP)
+                        </td>
+                    }
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

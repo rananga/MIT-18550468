@@ -1,0 +1,43 @@
+﻿@model SMS.Areas.Admin.Models.PeriodSetupVM
+@{
+    ViewBag.Title = "Edit Academic Period Setup";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+
+        <p>
+            <input type="submit" value="Save" class="btn btn-primary" style="min-width:75px" />
+        </p>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.PeriodID)
+        @Html.HiddenFor(model => model.RowVersion)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PeriodStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.PeriodStartDate, new { htmlAttributes = new { @class = "form-control", type = "JQ-date" } })
+                @Html.ValidationMessageFor(model => model.PeriodStartDate, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.PeriodEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.PeriodEndDate, new { htmlAttributes = new { @class = "form-control", type = "JQ-date" } })
+                @Html.ValidationMessageFor(model => model.PeriodEndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
