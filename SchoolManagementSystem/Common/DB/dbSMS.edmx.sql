@@ -181,7 +181,7 @@ CREATE TABLE [dbo].[Roles] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -194,7 +194,7 @@ CREATE TABLE [dbo].[RoleTiles] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -219,7 +219,7 @@ CREATE TABLE [dbo].[Users] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -247,7 +247,7 @@ CREATE TABLE [dbo].[Students] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL,
+    [RowVersion] rowversion  NOT NULL,
     [ImagePath] nvarchar(max)  NULL,
     [DOB] datetime  NULL,
     [LastDhammaGrade] nvarchar(max)  NULL,
@@ -267,7 +267,7 @@ CREATE TABLE [dbo].[StudSublings] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -288,7 +288,7 @@ CREATE TABLE [dbo].[StudFamilies] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL,
+    [RowVersion] rowversion  NOT NULL,
     [Title] int  NOT NULL
 );
 GO
@@ -303,7 +303,7 @@ CREATE TABLE [dbo].[Classes] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -319,7 +319,7 @@ CREATE TABLE [dbo].[ClassTeachers] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -335,7 +335,7 @@ CREATE TABLE [dbo].[ClassStudents] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL,
+    [RowVersion] rowversion  NOT NULL,
     [Status] int  NOT NULL,
     [IsCurrentMonitor] bit  NOT NULL
 );
@@ -351,7 +351,7 @@ CREATE TABLE [dbo].[PeriodSetups] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -376,7 +376,7 @@ CREATE TABLE [dbo].[Teachers] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -392,7 +392,7 @@ CREATE TABLE [dbo].[ClubMembers] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL,
+    [RowVersion] rowversion  NOT NULL,
     [Status] int  NOT NULL
 );
 GO
@@ -407,7 +407,7 @@ CREATE TABLE [dbo].[Clubs] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -424,7 +424,7 @@ CREATE TABLE [dbo].[EventParticipations] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -440,7 +440,7 @@ CREATE TABLE [dbo].[PromotionClasses] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -463,7 +463,7 @@ CREATE TABLE [dbo].[Prefects] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
@@ -478,14 +478,14 @@ CREATE TABLE [dbo].[LeavingCertificates] (
     [CreatedDate] datetime  NOT NULL,
     [ModifiedBy] nvarchar(max)  NULL,
     [ModifiedDate] datetime  NULL,
-    [RowVersion] binary(8)  NOT NULL
+    [RowVersion] rowversion  NOT NULL
 );
 GO
 
 -- Creating table 'RoleMenuAccesses'
 CREATE TABLE [dbo].[RoleMenuAccesses] (
-    [Menus_MenuID] int  NOT NULL,
-    [Roles_RoleID] int  NOT NULL
+    [MenuID] int  NOT NULL,
+    [RoleID] int  NOT NULL
 );
 GO
 
@@ -607,10 +607,10 @@ ADD CONSTRAINT [PK_LeavingCertificates]
     PRIMARY KEY CLUSTERED ([LeavCertID] ASC);
 GO
 
--- Creating primary key on [Menus_MenuID], [Roles_RoleID] in table 'RoleMenuAccesses'
+-- Creating primary key on [MenuID], [RoleID] in table 'RoleMenuAccesses'
 ALTER TABLE [dbo].[RoleMenuAccesses]
 ADD CONSTRAINT [PK_RoleMenuAccesses]
-    PRIMARY KEY CLUSTERED ([Menus_MenuID], [Roles_RoleID] ASC);
+    PRIMARY KEY CLUSTERED ([MenuID], [RoleID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -677,19 +677,19 @@ ON [dbo].[UserRoles]
     ([UserID]);
 GO
 
--- Creating foreign key on [Menus_MenuID] in table 'RoleMenuAccesses'
+-- Creating foreign key on [MenuID] in table 'RoleMenuAccesses'
 ALTER TABLE [dbo].[RoleMenuAccesses]
 ADD CONSTRAINT [FK_RoleMenuAccesses_Menus]
-    FOREIGN KEY ([Menus_MenuID])
+    FOREIGN KEY ([MenuID])
     REFERENCES [dbo].[Menus]
         ([MenuID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Roles_RoleID] in table 'RoleMenuAccesses'
+-- Creating foreign key on [RoleID] in table 'RoleMenuAccesses'
 ALTER TABLE [dbo].[RoleMenuAccesses]
 ADD CONSTRAINT [FK_RoleMenuAccesses_Roles]
-    FOREIGN KEY ([Roles_RoleID])
+    FOREIGN KEY ([RoleID])
     REFERENCES [dbo].[Roles]
         ([RoleID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -698,7 +698,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_RoleMenuAccesses_Roles'
 CREATE INDEX [IX_FK_RoleMenuAccesses_Roles]
 ON [dbo].[RoleMenuAccesses]
-    ([Roles_RoleID]);
+    ([RoleID]);
 GO
 
 -- Creating foreign key on [SudID] in table 'StudSublings'

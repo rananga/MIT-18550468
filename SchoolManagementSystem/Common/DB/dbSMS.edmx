@@ -448,11 +448,11 @@
   </EntityType>
   <EntityType Name="RoleMenuAccesses">
     <Key>
-      <PropertyRef Name="Menus_MenuID" />
-      <PropertyRef Name="Roles_RoleID" />
+      <PropertyRef Name="MenuID" />
+      <PropertyRef Name="RoleID" />
     </Key>
-    <Property Name="Menus_MenuID" Type="int" Nullable="false" />
-    <Property Name="Roles_RoleID" Type="int" Nullable="false" />
+    <Property Name="MenuID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_MenuMenu">
     <End Role="Menus" Type="dbSMS.Store.Menus" Multiplicity="0..1" />
@@ -726,7 +726,7 @@
         <PropertyRef Name="MenuID" />
       </Principal>
       <Dependent Role="RoleMenuAccesses">
-        <PropertyRef Name="Menus_MenuID" />
+        <PropertyRef Name="MenuID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -738,7 +738,7 @@
         <PropertyRef Name="RoleID" />
       </Principal>
       <Dependent Role="RoleMenuAccesses">
-        <PropertyRef Name="Roles_RoleID" />
+        <PropertyRef Name="RoleID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1867,10 +1867,10 @@
     </EntitySetMapping>
     <AssociationSetMapping Name="RoleMenuAccesses" TypeName="dbSMS.RoleMenuAccesses" StoreEntitySet="RoleMenuAccesses">
       <EndProperty Name="Menus">
-        <ScalarProperty Name="MenuID" ColumnName="Menus_MenuID" />
+        <ScalarProperty Name="MenuID" ColumnName="MenuID" />
       </EndProperty>
       <EndProperty Name="Roles">
-        <ScalarProperty Name="RoleID" ColumnName="Roles_RoleID" />
+        <ScalarProperty Name="RoleID" ColumnName="RoleID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

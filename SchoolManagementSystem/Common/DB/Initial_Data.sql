@@ -1,10 +1,6 @@
 ﻿USE [dbSMS];
 GO
 
-SET IDENTITY_INSERT [dbo].[Parameters] ON
-INSERT INTO [dbo].[Parameters] ([ParameterID], [ParameterCode], [ParameterValue]) VALUES (1, N'DG_EmployeeID', N'1')
-SET IDENTITY_INSERT [dbo].[Parameters] OFF
-
 SET IDENTITY_INSERT [dbo].[Roles] ON
 INSERT INTO [dbo].[Roles] ([RoleID], [Code], [Name], [CreatedBy], [CreatedDate], [ModifiedBy], [ModifiedDate]) VALUES (1, N'Admin', N'Administrator', N'ERANDI_PC\erandi', N'2015-01-01 00:00:00', NULL, NULL)
 INSERT INTO [dbo].[Roles] ([RoleID], [Code], [Name], [CreatedBy], [CreatedDate], [ModifiedBy], [ModifiedDate]) VALUES (2, N'AdminUser', N'Admin Department User', N'ERANDI_PC\erandi', N'2015-01-01 00:00:00', NULL, NULL)
