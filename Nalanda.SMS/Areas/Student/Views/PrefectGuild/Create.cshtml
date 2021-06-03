@@ -1,0 +1,109 @@
+﻿@model Nalanda.SMS.Areas.Student.Models.PrefectVM
+@{
+    ViewBag.Title = "Create Prefect";
+}
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+
+    <p>
+        <input type="submit" value="Save" class="btn btn-primary" style="min-width:75px" onclick="PostData()" />
+    </p>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.PrefClassID)
+    @Html.HiddenFor(model => model.PrefGuildJson)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StudID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.PopUpSelectorFor(model => model.StudID, "Base", "Data", "GetStudents", new { @class = "form-control" }, "Please select a Student", dspFormat: "{2}", hiddenIndices: "0")
+            @Html.ValidationMessageFor(model => model.StudID, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(model => model.ClassGrade, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.ClassGrade, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.ClassGrade, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EnumEditorFor(model => model.Type, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(model => model.EffectiveDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.EffectiveDate, new { htmlAttributes = new { @class = "form-control", type = "JQ-date" } })
+            @Html.ValidationMessageFor(model => model.EffectiveDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsHP, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.IsHP, new { htmlAttributes = new { @class = "form-checkbox" } })
+            @Html.ValidationMessageFor(model => model.IsHP, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(model => model.IsDHP, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.IsDHP, new { htmlAttributes = new { @class = "form-checkbox" } })
+            @Html.ValidationMessageFor(model => model.IsDHP, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Responsibilty, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.Responsibilty, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Responsibilty, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsPromoted, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.IsPromoted, new { htmlAttributes = new { @class = "form-checkbox" } })
+            @Html.ValidationMessageFor(model => model.IsPromoted, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(model => model.PromotedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.PromotedDate, new { htmlAttributes = new { @class = "form-control", type = "JQ-date" } })
+            @Html.ValidationMessageFor(model => model.PromotedDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EnumEditorFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+        </div>
+        @Html.LabelFor(model => model.InactiveReason, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.InactiveReason, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.InactiveReason, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.InactiveDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.InactiveDate, new { htmlAttributes = new { @class = "form-control", type = "JQ-date" } })
+            @Html.ValidationMessageFor(model => model.InactiveDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/student/prefectguild")
+
+}
+

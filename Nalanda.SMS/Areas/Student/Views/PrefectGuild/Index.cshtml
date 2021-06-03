@@ -1,0 +1,59 @@
+﻿@model Nalanda.SMS.Common.BaseViewModel<SMS.Areas.Student.Models.PrefectVM>
+
+@{
+    ViewBag.Title = "Prefect Guild";
+    var grid = Model.GetGrid();
+}
+
+@{
+    var srchOpts = new List<SelectListItem>();
+    srchOpts.Add(new SelectListItem { Text = "Student", Value = "StudentName" });
+    srchOpts.Add(new SelectListItem { Text = "Effective Date", Value = "EffectiveDate" });
+    srchOpts.Add(new SelectListItem { Text = "Admission No", Value = "IndexNo" });
+}
+
+<p>
+    @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary", style = "min-width:75px" })
+</p>
+
+@using (Html.BeginForm("Index", null, FormMethod.Get))
+{
+    <div class="form-horizontal row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.Label("Search By", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownList("FilterBy", new SelectList(srchOpts, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Filter, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Search" name="Search" class="btn btn-default" />
+        </div>
+    </div>
+    <hr />
+
+    <div id="content">
+        @grid.GetHtml(
+        tableStyle: "mGrid no-foot",
+        mode: WebGridPagerModes.All,
+        columns: grid.Columns(
+            grid.Column(null, null, format: (item) => Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open' style='color:black'></span>", "View Details", "Details", routeValues: new { id = item.PreID }, htmlAttributes: new { @class = "btn btn-warning btn-xs" }), style: "btn-1"),
+            grid.SortColumn(columnName: "IndexNo", header: "Admission No"),
+            grid.SortColumn(columnName: "StudentName", header: "Student"),
+            grid.SortColumn(columnName: "Type", header: "Prefect Type", format: (item) => ((SMS.Common.PrefectType)item.Type).ToEnumChar()),
+            grid.SortColumn(columnName: "EffectiveDate", header: "Effective Date", format: (item) => ((DateTime)item.EffectiveDate).ToString("yyyy-MM-dd")),
+            grid.SortColumn(columnName: "Status", header: "Status", format: (item) => ((SMS.Common.ActiveState)item.Status).ToEnumChar())))
+
+        <div id="content-footer">
+            @grid.PagerList(WebGridPagerModes.All, Model.PageSize, Model.TotalRecords)
+        </div>
+    </div>
+}

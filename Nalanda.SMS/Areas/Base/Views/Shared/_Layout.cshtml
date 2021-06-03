@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - AMS</title>
+    @{
+        var currentArea = ViewContext.RouteData.DataTokens["area"];
+        if (currentArea != null)
+        { currentArea += "/"; }
+    }
+
+    <link href=@Url.Content("~/Content/themes/base/all.css") rel="stylesheet" />
+    @Styles.Render("~/Content/jqueryuitimepicker")
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/custom")
+    @RenderSection("styles", required: false)
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+
+    <script type="text/javascript">
+        var AppRoot = "@Url.Content("~/")";
+
+        $(function () {
+            $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
+                // Avoid following the href location when clicking
+                event.preventDefault();
+                // Avoid having the menu to close when clicking
+                event.stopPropagation();
+
+                $(this).parentsUntil('.dropdown.open').find('.open').removeClass('open');
+
+                // Re-add .open to parent sub-menu item
+                $(this).parentsUntil('.dropdown.open', 'li.dropdown, li.dropdown-submenu').addClass('open');
+            });
+
+            $("li[role='menuitem']").click(function (e) {
+                $(this).parentsUntil('.dropdown.open').find('.open').removeClass('open');
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <div id="dspProgress" style="display:none">
+        <div id="dspProgressBackgroundFilter">
+        </div>
+        <div id="dspProgressMessage">
+            <img height="100" width="100" />
+        </div>
+    </div>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:maroon;color:silver;font-weight:bold">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Home", "Index", "Home", new { area = "Base" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                @Html.Partial("~/Areas/Base/Views/Shared/_PartialMenu.cshtml")
+                @Html.Partial("~/Areas/Base/Views/Shared/_SignInPartial.cshtml")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <h2>@ViewBag.Title</h2>
+        @{ Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml", new ViewDataDictionary { { "OnTop", true } }); }
+        @RenderBody()
+        @{ Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml", new ViewDataDictionary { { "OnTop", false } }); }
+        <hr />
+        <footer>
+            <p style="color:maroon;font-weight:bold">© Nalanda college, colombo 10</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/custom")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

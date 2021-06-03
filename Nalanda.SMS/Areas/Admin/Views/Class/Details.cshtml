@@ -1,0 +1,46 @@
+﻿@model Nalanda.SMS.Areas.Admin.Models.ClassVM
+
+@{
+    ViewBag.Title = "Class Information Details";
+}
+
+<div>
+    <hr />
+    @using (Html.BeginForm("Delete", "Class"))
+    {
+        @Html.HiddenFor(model => model.ClassId)
+        @Html.HiddenFor(model => model.RowVersion)
+        @Html.AntiForgeryToken()
+        <p>
+            <div class="btn-toolbar">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ClassId }, new { @class = "btn btn-primary", style = "min-width:75px" })
+                @Html.ConfirmSubmitButton("Delete", "Are you sure you want to delete?", "Confirm class deletion",
+                 "<span class='glyphicon glyphicon-trash'></span> Delete", new { @class = "btn btn-danger", style = "min-width:75px" })
+            </div>
+        </p>
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DetailsViewFor(model => model.Grade)
+                </div>
+                @Html.LabelFor(model => model.ClassDesc, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DetailsViewFor(model => model.ClassDesc)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DetailsViewFor(model => model.Status)
+                </div>
+            </div>
+            <br />
+        </div>
+    }
+
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

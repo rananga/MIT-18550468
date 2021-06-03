@@ -1,0 +1,97 @@
+﻿@model Nalanda.SMS.Areas.Student.Models.PrefectVM
+
+@{
+    ViewBag.Title = "Prefect Details";
+}
+
+<div>
+    <hr />
+    @using (Html.BeginForm("Delete", "PrefectGuild"))
+    {
+        @Html.HiddenFor(model => model.PreID)
+        @Html.HiddenFor(model => model.PrefClassID)
+        @Html.HiddenFor(model => model.StudID)
+        @Html.HiddenFor(model => model.RowVersion)
+        @Html.AntiForgeryToken()
+
+        <p>
+            <div class="btn-toolbar">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.PreID }, new { @class = "btn btn-primary", style = "min-width:75px" })
+            </div>
+        </p>
+    }
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudentName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.StudentName)
+            </div>
+            @Html.LabelFor(model => model.ClassGrade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.ClassGrade)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.Type)
+            </div>
+            @Html.LabelFor(model => model.EffectiveDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.EffectiveDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsHP, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.IsHP)
+            </div>
+            @Html.LabelFor(model => model.IsDHP, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.IsDHP)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Responsibilty, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.Responsibilty)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsPromoted, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.IsPromoted)
+            </div>
+            @Html.LabelFor(model => model.PromotedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.PromotedDate)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.Status)
+            </div>
+            @Html.LabelFor(model => model.InactiveReason, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.InactiveReason)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.InactiveDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.InactiveDate)
+            </div>
+        </div>
+
+        <br />
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
