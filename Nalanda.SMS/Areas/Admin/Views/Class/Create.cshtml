@@ -1,7 +1,7 @@
 ﻿@model Nalanda.SMS.Areas.Admin.Models.ClassVM
 
 @{
-    ViewBag.Title = "Create Class Information";
+    ViewBag.Title = "Create Class";
 }
 
 @using (Html.BeginForm())
@@ -14,27 +14,48 @@
             <input type="submit" value="Save" class="btn btn-primary" style="min-width:75px" />
         </p>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Grade, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EnumEditorFor(model => model.Grade, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Grade, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
             </div>
-            @Html.LabelFor(model => model.ClassDesc, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.GradeId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EnumEditorFor(model => model.ClassDesc, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ClassDesc, "", new { @class = "text-danger" })
+                @Html.PopUpSelectorFor(model => model.GradeId, "Base", "Data", "GetGrades", new { @class = "form-control" }, "Please select a Grade", null, dspFormat: "{1}", hiddenIndices: "0")
+                @Html.ValidationMessageFor(model => model.GradeId, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EnumEditorFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.TeacherId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.PopUpSelectorFor(model => model.TeacherId, "Base", "Data", "GetTeachers", new { @class = "form-control" }, "Please select a Teacher", null, dspFormat: "{1}", hiddenIndices: "0")
+                @Html.ValidationMessageFor(model => model.TeacherId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Medium, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EnumEditorFor(model => model.Medium, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Medium, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
 }
+
+<div class="ChildContent">
+    @{ Html.RenderAction("ChildIndex", new { id = Model.Id, isToEdit = true }); }
+</div>
+
+<div class="ChildContent">
+    @{ Html.RenderAction("StudentIndex", new { id = Model.Id, isToEdit = true }); }
+</div>
 
 <br />
 <div>

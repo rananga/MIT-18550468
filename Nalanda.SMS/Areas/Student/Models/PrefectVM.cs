@@ -15,7 +15,7 @@ namespace Nalanda.SMS.Areas.Student.Models
             mappings = new ObjMappings<Prefect, PrefectVM>();
 
             mappings.Add(x => x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname, x => x.StudentName);
-            mappings.Add(x => "Grade " + x.PromotionClass.Class.Grade + " - " + x.PromotionClass.Class.ClassDesc, x => x.ClassGrade);
+            mappings.Add(x => "Grade " + x.PromotionClass.Class.Grade + " - " + x.PromotionClass.Class.Name, x => x.ClassGrade);
             mappings.Add(x => x.Student.IndexNo, x => x.IndexNo);
         }
 

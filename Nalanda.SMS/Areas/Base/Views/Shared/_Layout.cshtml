@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - AMS</title>
+    <title>@(ViewBag.Title == null ? "Nalanda College" : ViewBag.Title)</title>
     @{
         var currentArea = ViewContext.RouteData.DataTokens["area"];
         if (currentArea != null)
@@ -50,7 +50,7 @@
         <div id="dspProgressBackgroundFilter">
         </div>
         <div id="dspProgressMessage">
-            <img height="100" width="100" />
+            <img height="100" width="100" src="~/Content/Images/Progress-01.png" />
         </div>
     </div>
     <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:maroon;color:silver;font-weight:bold">

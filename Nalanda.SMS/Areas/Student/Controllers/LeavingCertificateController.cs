@@ -158,7 +158,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                     DateLeaving = x.DateLeaving.ToString("dd-MM-yyyy"),
                     x.Reason,
                     Conduct = x.Conduct.ToEnumChar(),
-                    LastClassAttend = x.Student.ClassStudents.Select(y => y.PromotionClass.Class.Grade.ToEnumChar()).LastOrDefault()
+                    //LastClassAttend = x.Student.ClassStudents.Select(y => y.PromotionClass.Class.Grade.ToEnumChar()).LastOrDefault()
                 }).ToList();
 
  

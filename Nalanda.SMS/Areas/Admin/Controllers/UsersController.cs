@@ -60,7 +60,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,UserName,Password,EmployeeID,Status,NavUserName,CallCenterUserName,DetailsList,BranchID,DepartmentID")] UserVM user)
+        public ActionResult Create(UserVM user)
         {
             try
             {
@@ -121,7 +121,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChildCreate([Bind(Include = "UserRoleID,UserID,RoleID,RoleName")] UserRoleVM userRole)
+        public ActionResult ChildCreate(UserRoleVM userRole)
         {
             UserVM obj;
             try
@@ -168,7 +168,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,UserName,Password,EmployeeID,Status,RowVersion,NavUserName,CallCenterUserName,BranchID,DepartmentID")] UserVM user)
+        public ActionResult Edit(UserVM user)
         {
             byte[] curRowVersion = null;
             try
@@ -177,7 +177,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
                 {
                     var sUser = (UserVM)Session[sskCrtdObj];
 
-                    var obj = db.Users.Find(user.UserId);
+                    var obj = db.Users.Find(user.Id);
                     if (obj == null)
                     { throw new DbUpdateConcurrencyException(); }
 
@@ -229,7 +229,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
         {
             try
             {
-                var obj = db.Users.Find(user.UserId);
+                var obj = db.Users.Find(user.Id);
                 if (obj == null)
                 { throw new DbUpdateConcurrencyException(""); }
                 db.Detach(obj);
@@ -254,7 +254,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
             {
                 AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message);
             }
-            return RedirectToAction("Details", new { id = user.UserId });
+            return RedirectToAction("Details", new { id = user.Id });
         }
 
         [HttpPost, ActionName("ChildDelete")]
@@ -293,7 +293,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                User user = db.Users.Where(x => x.UserId == id).FirstOrDefault();
+                User user = db.Users.Where(x => x.Id == id).FirstOrDefault();
                 if (user == null)
                 {
                     return HttpNotFound();
@@ -302,7 +302,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
             }
 
             ViewBag.IsToEdit = isToEdit;
-            ViewBag.UserID = obj.UserId;
+            ViewBag.UserID = obj.Id;
             return PartialView("_ChildIndex", obj.DetailsList.OrderBy(x => x.RoleName));
         }
 

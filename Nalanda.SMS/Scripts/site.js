@@ -236,17 +236,18 @@ function AlertIt(msg) {
         modal: true,
         autoOpen: false,
         open: function (event, ui) {
-            var closeBtn = $('.ui-dialog-titlebar-close', dlg.parent().parent());
+            var dlgParent = dlg.closest('.ui-dialog');
+            var closeBtn = $('.ui-dialog-titlebar-close', dlgParent);
             closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
             dlg_z_index++;
-            $(".ui-dialog", dlg.parent().parent()).css("z-index", dlg_z_index.toString());
+            dlgParent.css("z-index", dlg_z_index.toString());
             dlg.dialog("option", "position", { my: "center", at: "center", of: window });
 
             $("body").css({
                 overflow: 'hidden'
             });
-            $(".ui-dialog", dlg.parent().parent()).find(".ui-widget-header").css("background", "#e5e5e5");
-            $(".ui-dialog", dlg.parent().parent()).find(".ui-widget-header").css("color", "black");
+            $(".ui-dialog", dlg.parent().parent()).find(".ui-widget-header").css("background", "#e9e9e9");
+            $(".ui-dialog", dlg.parent().parent()).find(".ui-widget-header").css("color", "#333333");
 
             dlgOnResize(dlg, 300);
             window.addEventListener("resize", winResFunc);
@@ -258,18 +259,18 @@ function AlertIt(msg) {
     });
 
     dlg.html(
-                '<div class="modal-body" style="width:auto">' +
-                    '<div class="form-horizontal">' +
-                        '<div class="row-fluid">' +
-                            '<div class="control-group">' +
-                                '<label>' + msg + '</label>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>' +
-                '<div style="padding-top:10px;text-align:right;border-top: 1px solid #e5e5e5;">' +
-                    '<input type="button" class="btn btn-default" style="min-width:75px" value="Ok" />' +
-                '</div>');
+        '<div class="modal-body" style="width:auto">' +
+        '<div class="form-horizontal">' +
+        '<div class="row-fluid">' +
+        '<div class="control-group">' +
+        '<label>' + msg + '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div style="padding-top:10px;text-align:right;border-top: 1px solid #e5e5e5;">' +
+        '<input type="button" class="btn btn-outline-secondary" style="min-width:75px" value="Ok" />' +
+        '</div>');
 
     $('input[type="button"][value="Ok"]', dlg).click(function () {
         closeDialogModal(dlg);
@@ -311,17 +312,18 @@ function ConfirmIt(msg, title, posButText, negButText, showCancel, funcSuccess, 
         modal: true,
         autoOpen: false,
         open: function (event, ui) {
-            var closeBtn = $('.ui-dialog-titlebar-close', dlg.parent().parent());
+            var dlgParent = dlg.closest('.ui-dialog');
+            var closeBtn = $('.ui-dialog-titlebar-close', dlgParent);
             closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
             dlg_z_index++;
-            $(".ui-dialog", dlg.parent().parent()).css("z-index", dlg_z_index.toString());
+            dlgParent.css("z-index", dlg_z_index.toString());
             dlg.dialog("option", "position", { my: "center", at: "center", of: window });
 
             $("body").css({
                 overflow: 'hidden'
             });
-            $(".ui-dialog", dlg.parent().parent()).find(".ui-widget-header").css("background", "#e5e5e5");
-            $(".ui-dialog", dlg.parent().parent()).find(".ui-widget-header").css("color", "white");
+            $(".ui-dialog", dlg.parent().parent()).find(".ui-widget-header").css("background", "#e9e9e9");
+            $(".ui-dialog", dlg.parent().parent()).find(".ui-widget-header").css("color", "#333333");
 
             dlgOnResize(dlg, 300);
             window.addEventListener("resize", winResFunc);
@@ -343,20 +345,20 @@ function ConfirmIt(msg, title, posButText, negButText, showCancel, funcSuccess, 
     });
 
     dlg.html(
-                '<div class="modal-body" style="width:auto">' +
-                    '<div class="form-horizontal">' +
-                        '<div class="row-fluid">' +
-                            '<div class="control-group">' +
-                                '<label>' + msg + '</label>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="btn-toolbar" style="padding-top:10px;text-align:center;border-top: 1px solid #e5e5e5;">' +
-                    '<input id="' + dlgId + '_btnPositive" type="button" class="btn btn-primary" style="min-width:75px" value="' + posButText + '" />' +
-                    (hideNegBut ? '' : '<input id="' + dlgId + '_btnNegative" type="button" class="btn btn-default" style="min-width:75px" value="' + negButText + '" />') +
-                    (showCancel ? '<input id="' + dlgId + '_btnCancel" type="button" class="btn btn-default" style="min-width:75px" value="Cancel" />' : '') +
-                '</div>');
+        '<div class="modal-body" style="width:auto">' +
+        '<div class="form-horizontal">' +
+        '<div class="row-fluid">' +
+        '<div class="control-group">' +
+        '<label>' + msg + '</label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="d-grid gap-2 d-md-block" style="padding-top:10px;text-align:center;border-top: 1px solid #e5e5e5;">' +
+        '<input id="' + dlgId + '_btnPositive" type="button" class="btn btn-primary" style="min-width:75px" value="' + posButText + '" />' +
+        (hideNegBut ? '' : '<input id="' + dlgId + '_btnNegative" type="button" class="btn btn-default" style="min-width:75px" value="' + negButText + '" />') +
+        (showCancel ? '<input id="' + dlgId + '_btnCancel" type="button" class="btn btn-secondary" style="min-width:75px" value="Cancel" />' : '') +
+        '</div>');
 
     $('#' + dlgId + '_btnPositive', dlg).click(function () {
         dlg.data("is-pos", 1);
@@ -398,7 +400,7 @@ function GetDialogObj(obj) {
 
 $(document).ready(function () {
     SetProgressPosition();
-    DocReadyFunc();
+    PopupDocReadyFunc();
 });
 
 function DocReadyFunc() {
@@ -455,10 +457,11 @@ function DocReadyFunc() {
             modal: true,
             autoOpen: false,
             open: function (event, ui) {
-                var closeBtn = $('.ui-dialog-titlebar-close');
+                var dlgParent = dlg.closest('.ui-dialog');
+                var closeBtn = $('.ui-dialog-titlebar-close', dlgParent);
                 closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
                 dlg_z_index++;
-                $(".ui-dialog").css("z-index", dlg_z_index.toString());
+                dlgParent.css("z-index", dlg_z_index.toString());
                 dlg.dialog("option", "position", { my: "center", at: "center", of: window });
 
                 $("body").css({
@@ -491,34 +494,46 @@ function DocReadyFunc() {
             if (!btnTxt) { btnTxt = "Yes"; }
 
             var btnClass = $this.data('button-class');
-            if (!btnClass) { btnClass = "btn-danger"; }
+            if (!btnClass) { btnClass = "btn btn-danger"; }
 
             var submitAction = $this.data('submit-action');
             var jsFunction = $this.data('js-function');
 
-            dlg.html(
-                '<div class="modal-body" style="width:auto">' +
+            var contentSelector = $this.data('content-selector');
+
+            if (contentSelector) {
+                var contentObj = $('' + contentSelector);
+                dlg.html(contentObj.html());
+            }
+            else {
+                dlg.html(
+                    '<div class="modal-body" style="width:auto">' +
                     '<div class="form-horizontal">' +
-                        '<div class="row-fluid">' +
-                            '<div class="control-group">' +
-                                '<label>' + msg + '</label>' +
-                            '</div>' +
-                        '</div>' +
+                    '<div class="row-fluid">' +
+                    '<div class="control-group">' +
+                    '<label>' + msg + '</label>' +
                     '</div>' +
-                '</div>' +
-                '<div class="modal-footer">' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="modal-footer">' +
                     '<a href="#" class="btn ' + btnClass + '" style="min-width:100px">' + btnTxt + '</a>' +
-                    '<input type="button" class="btn btn-default" style="min-width:100px" value="Cancel" />' +
-                '</div>');
+                    '<input type="button" class="btn btn-secondary" style="min-width:100px" value="Cancel" />' +
+                    '</div>');
+            }
 
             $('.modal-footer a', dlg).click(function () {
                 if (jsFunction) {
                     closeDialogModal(dlg);
                     window.curSubmitter = $this;
-                    eval(jsFunction);
+                    var fn = window[jsFunction];
+                    if (typeof fn === "function") fn();
                 }
                 else {
                     var frm = $this.closest("form");
+                    if (dlg.find('form').length > 0) {
+                        frm = $(this).closest("form");
+                    }
                     if (submitAction) {
                         var act = frm.attr('action');
                         act = act.substring(0, act.lastIndexOf("/") + 1) + submitAction + (act.indexOf("?") == -1 ? "" : act.substring(act.indexOf("?")));
@@ -552,10 +567,11 @@ function DocReadyFunc() {
             modal: true,
             autoOpen: false,
             open: function (event, ui) {
-                var closeBtn = $('.ui-dialog-titlebar-close');
+                var dlgParent = dlg.closest('.ui-dialog');
+                var closeBtn = $('.ui-dialog-titlebar-close', dlgParent);
                 closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
                 dlg_z_index++;
-                $(".ui-dialog").css("z-index", dlg_z_index.toString());
+                dlgParent.css("z-index", dlg_z_index.toString());
                 dlg.dialog("option", "position", { my: "center", at: "center", of: window });
 
                 $("body").css({
@@ -627,10 +643,11 @@ function DocReadyFunc() {
             modal: true,
             autoOpen: false,
             open: function (event, ui) {
-                var closeBtn = $('.ui-dialog-titlebar-close');
+                var dlgParent = dlg.closest('.ui-dialog');
+                var closeBtn = $('.ui-dialog-titlebar-close', dlgParent);
                 closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
                 dlg_z_index++;
-                $(".ui-dialog").css("z-index", dlg_z_index.toString());
+                dlgParent.css("z-index", dlg_z_index.toString());
                 dlg.dialog("option", "position", { my: "center", at: "center", of: window });
 
                 $("body").css({
@@ -713,6 +730,126 @@ function DocReadyFunc() {
     });
 }
 
+function PopupDocReadyFunc() {
+    DocReadyFunc();
+
+    $("a[data-popup-editor]").each(function () {
+        var $this = $(this);
+        var dlg = GetDialogObj($this);
+
+        function winResFunc() { dlgOnResize(dlg, $this.data("popup-width")); }
+
+        dlg.dialog({
+            height: "auto",
+            show: "clip",
+            modal: true,
+            autoOpen: false,
+            open: function (event, ui) {
+                var closeBtn = $('.ui-dialog-titlebar-close');
+                closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
+                dlg_z_index++;
+                $(".ui-dialog").css("z-index", dlg_z_index.toString());
+                dlg.dialog("option", "position", { my: "center", at: "center", of: window });
+
+                $("body").css({
+                    overflow: 'hidden'
+                });
+
+                $(".ui-widget-overlay").bind('click', function () { dlg.dialog("close"); });
+
+                winResFunc();
+                window.addEventListener("resize", winResFunc);
+            },
+            beforeClose: function (event, ui) {
+                $("body").css({ overflow: 'inherit' });
+                window.removeEventListener("resize", winResFunc);
+            }
+        });
+
+        function bindDlgEvents() {
+            $('input[type="submit"][value="Save"]', dlg).closest("form").submit(function () {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        if (result.success) {
+                            closeDialogModal(dlg);
+                            $this.parents('.ChildContent').load(result.url, function (response, status, xhr) {
+                                if (status == "error") {
+                                    AlertIt("ERROR: " + xhr.status + "-" + xhr.statusText);
+                                }
+                                else { PopupDocReadyFunc(); }
+                            });
+                            PopupDocReadyFunc();
+                            //SetHeaderValues(result.hdrData);
+                        } else {
+                            dlg.html(result);
+                            PopupDocReadyFunc();
+                            bindDlgEvents();
+                        }
+                    }
+                });
+                return false;
+            });
+
+            $('input[type="button"][value="Cancel"]', dlg).click(function () {
+                closeDialogModal(dlg);
+            });
+        }
+
+        $this.off(".ChildPopUp");
+        $this.on("click.ChildPopUp", function (e) {
+            e.preventDefault();
+            dlg.load(this.href, function (response, status, xhr) {
+                if (status == "error") {
+                    AlertIt(xhr.status == 500 ? xhr.statusText : "ERROR: " + xhr.status + "-" + xhr.statusText);
+                }
+                else {
+                    PopupDocReadyFunc();
+                    bindDlgEvents();
+
+                    dlg.dialog("option", "title", $this.data("title"));
+                    dlgOnResize(dlg, $this.data("popup-width"));
+                    dlg.dialog("open");
+                }
+            });
+        });
+    });
+
+    $("button[data-popup-delete]").each(function () {
+        var $this = $(this);
+        var dlg = GetDialogObj($this);
+
+        $this.closest("form").off(".ChildPopUp");
+        $this.closest("form").on("submit.ChildPopUp", function () {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    closeDialogModal(dlg);
+                    if (result.url) {
+                        $this.parents('.ChildContent').load(result.url, function (response, status, xhr) {
+                            if (status == "error") {
+                                AlertIt("ERROR: " + xhr.status + "-" + xhr.statusText);
+                            }
+                            else { PopupDocReadyFunc(); }
+                        });
+                        //SetHeaderValues(result.hdrData);
+                    }
+                    else { AlertIt("ERROR: " + result.msg); }
+                },
+                error: function (data, status, jqXHR) {
+                    if (IsJson(data.responseText)) { AlertIt("ERROR: " + JSON.parse(data.responseText).Message); }
+                    else { AlertIt("ERROR: " + data.statusText); }
+                }
+            });
+            return false;
+        });
+    });
+}
+
 $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
     _title: function (title) {
         if (!this.options.title) {
@@ -756,20 +893,26 @@ function SetProgressPosition() {
     var progImgUrl = AppRoot + "Content/Images/Progress-";
     var timeOut;
     objProg.on('show', function () {
-        set(1);
+        clearTimeout(timeOut);
+        setTimeout(function () {
+            window.timer_on = 1;
+            set(1);
+        }, 350);
     });
     objProg.on('hide', function () {
         clearTimeout(timeOut);
+        window.timer_on = 0;
     });
 
     function set(i) {
         if (i > 4) i = 1;
+        if (window.timer_on === 0) return;
 
         $('img', objProgBody).attr('src', progImgUrl + '0' + i + '.png');
 
         timeOut = setTimeout(function () {
             set(++i);
-        }, 200);
+        }, 300);
     }
 }
 

@@ -34,14 +34,6 @@ namespace Nalanda.SMS.Areas.Base
             });
             lst.Add(new TileData()
             {
-                Text = "Student Donation",
-                LandingURL = Url.Action("Index", "PaymentInvoice", new { area = "Student" }),
-                //DataURL = Url.Action("GetUserDutyLeaveApprovals", "Home", new { area = "Base" }),
-                ColorClass = "tile6",
-                IconURL = Url.Content("~/Content/Images/make-a-donation.png")
-            });
-            lst.Add(new TileData()
-            {
                 Text = "Teacher Management",
                 LandingURL = Url.Action("Index", "Teacher", new { area = "Admin" }),
                 DataURL = Url.Action("GetTeachers", "Home", new { area = "Base" }),
@@ -50,55 +42,55 @@ namespace Nalanda.SMS.Areas.Base
             });
             lst.Add(new TileData()
             {
-                Text = "Event Management",
-                LandingURL = Url.Action("Index", "EventParticipations", new { area = "Student" }),
+                Text = "Class Management",
+                LandingURL = Url.Action("Index", "Class", new { area = "Admin" }),
                 //DataURL = Url.Action("GetUserLeaveApprovals", "Home", new { area = "Base" }),
-                ColorClass = "tile7",
-                IconURL = Url.Content("~/Content/Images/ExamScedule.png")
-            });
-            lst.Add(new TileData()
-            {
-                Text = "Student Attendance Management",
-                LandingURL = Url.Action("Index", "StudAttendance", new { area = "Student" }),
-                //DataURL = Url.Action("GetUserLieuLeaveApprovals", "Home", new { area = "Base" }),
                 ColorClass = "tile5",
-                IconURL = Url.Content("~/Content/Images/check-list.png")
+                IconURL = Url.Content("~/Content/Images/studentProgress.png")
             });
+            //lst.Add(new TileData()
+            //{
+            //    Text = "Student Attendance Management",
+            //    LandingURL = Url.Action("Index", "StudAttendance", new { area = "Student" }),
+            //    //DataURL = Url.Action("GetUserLieuLeaveApprovals", "Home", new { area = "Base" }),
+            //    ColorClass = "tile5",
+            //    IconURL = Url.Content("~/Content/Images/check-list.png")
+            //});
 
-            lst.Add(new TileData()
-            {
-                Text = "Student Promotion",
-                LandingURL = Url.Action("Index", "StudentPromotion", new { area = "Student" }),
-                //DataURL = Url.Action("GetDailyPerformanceDG", "Home", new { area = "Base" }),
-                ColorClass = "tile3",
-                IconURL = Url.Content("~/Content/Images/success.png")
-            });
-            lst.Add(new TileData()
-            {
-                Text = "Student Club Membership",
-                LandingURL = Url.Action("Index", "StudentClubMembership", new { area = "Student" }),
-                //DataURL = Url.Action("GetDailyPerformanceDG", "Home", new { area = "Base" }),
-                ColorClass = "tile1",
-                IconURL = Url.Content("~/Content/Images/restaurant-membership-card-tool.png")
-            });
+            //lst.Add(new TileData()
+            //{
+            //    Text = "Student Promotion",
+            //    LandingURL = Url.Action("Index", "StudentPromotion", new { area = "Student" }),
+            //    //DataURL = Url.Action("GetDailyPerformanceDG", "Home", new { area = "Base" }),
+            //    ColorClass = "tile3",
+            //    IconURL = Url.Content("~/Content/Images/success.png")
+            //});
+            //lst.Add(new TileData()
+            //{
+            //    Text = "Student Club Membership",
+            //    LandingURL = Url.Action("Index", "StudentClubMembership", new { area = "Student" }),
+            //    //DataURL = Url.Action("GetDailyPerformanceDG", "Home", new { area = "Base" }),
+            //    ColorClass = "tile1",
+            //    IconURL = Url.Content("~/Content/Images/restaurant-membership-card-tool.png")
+            //});
 
-            lst.Add(new TileData()
-            {
-                Text = "Intake Summary Report",
-                LandingURL = Url.Action("IntakeSummary", "Reports", new { area = "Admin" }),
-               // DataURL = Url.Action("GetStudentAdmissions", "Home", new { area = "Base" }),
-                ColorClass = "tile4",
-                IconURL = Url.Content("~/Content/Images/interview.png")
-            });
+            //lst.Add(new TileData()
+            //{
+            //    Text = "Intake Summary Report",
+            //    LandingURL = Url.Action("IntakeSummary", "Reports", new { area = "Admin" }),
+            //   // DataURL = Url.Action("GetStudentAdmissions", "Home", new { area = "Base" }),
+            //    ColorClass = "tile4",
+            //    IconURL = Url.Content("~/Content/Images/interview.png")
+            //});
 
-            lst.Add(new TileData()
-            {
-                Text = "Intake Comparison Report",
-                LandingURL = Url.Action("IntakeComparison", "Reports", new { area = "Admin" }),
-                // DataURL = Url.Action("GetStudentAdmissions", "Home", new { area = "Base" }),
-                ColorClass = "tile1",
-                IconURL = Url.Content("~/Content/Images/success.png")
-            });
+            //lst.Add(new TileData()
+            //{
+            //    Text = "Intake Comparison Report",
+            //    LandingURL = Url.Action("IntakeComparison", "Reports", new { area = "Admin" }),
+            //    // DataURL = Url.Action("GetStudentAdmissions", "Home", new { area = "Base" }),
+            //    ColorClass = "tile1",
+            //    IconURL = Url.Content("~/Content/Images/success.png")
+            //});
 
             return lst;
         }
@@ -121,7 +113,7 @@ namespace Nalanda.SMS.Areas.Base
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult SignIn([Bind(Include = "UserName,PassWord,RememberMe")] SignInVM signInVM, string ReturnUrl)
+        public ActionResult SignIn(SignInVM signInVM, string ReturnUrl)
         {
             if (!ModelState.IsValid)
             { return View(signInVM); }
@@ -141,7 +133,7 @@ namespace Nalanda.SMS.Areas.Base
             }
 
             var jser = new JavaScriptSerializer();
-            var lstRoles = db.UserRoles.Include(x => x.Role).Where(x => x.UserId == obj.UserId).Select(x => x.Role.Code).ToList();
+            var lstRoles = db.UserRoles.Include(x => x.Role).Where(x => x.UserId == obj.Id).Select(x => x.Role.Code).ToList();
 
             var authTicket = new FormsAuthenticationTicket(
                 1,
@@ -155,7 +147,7 @@ namespace Nalanda.SMS.Areas.Base
 
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
             Response.Cookies.Add(authCookie);
-            Session[sskCurUsrID] = obj.UserId;
+            Session[sskCurUsrID] = obj.Id;
 
             if (Url.IsLocalUrl(ReturnUrl) && ReturnUrl.Length > 1 && ReturnUrl.StartsWith("/")
                 && !ReturnUrl.StartsWith("//") && !ReturnUrl.StartsWith("/\\"))
@@ -194,7 +186,7 @@ namespace Nalanda.SMS.Areas.Base
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword([Bind(Include = "UserID,PassWord,NewPassword,ConfirmPassword")] SignInVM signInVM)
         {
-            var objUser = db.Users.Find(signInVM.UserId);
+            var objUser = db.Users.Find(signInVM.Id);
 
             if (objUser.Password.Decrypt() != signInVM.Password)
             { ModelState.AddModelError("Password", "Incorrect password."); }
@@ -220,7 +212,7 @@ namespace Nalanda.SMS.Areas.Base
         {
             var studentAdmissions = db.Students.Select(e => new
             {
-                StudentID = e.StudId
+                StudentID = e.Id
             }).ToList();
 
             return Json(new { studentAdmissions, count = studentAdmissions.Count }, JsonRequestBehavior.AllowGet);
@@ -229,7 +221,7 @@ namespace Nalanda.SMS.Areas.Base
         {
             var teachers = db.Teachers.Select(e => new
             {
-                TeacherID = e.TeachId
+                TeacherID = e.Id
             }).ToList();
 
             return Json(new { teachers, count = teachers.Count }, JsonRequestBehavior.AllowGet);

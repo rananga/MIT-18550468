@@ -51,7 +51,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 foreach (var det in classStudents)
                 {
                     var temp = new ClassStudentVM();
-                    temp.StudID = det.StudId;
+                    temp.StudID = det.StudentId;
                     temp.StudentName = det.Student.Title + "." + det.Student.Initials + "." + det.Student.Lname;
                     temp.IndexNo = det.Student.IndexNo;
                     tempList.Add(temp);
@@ -67,26 +67,26 @@ namespace Nalanda.SMS.Areas.Student.Controllers
         public List<ClassStudent>  getLowerGrade(int classID, int periodID)
         {
             List<ClassStudent> classStudents = new List<ClassStudent>(); ;
-            if (classID != 0 && periodID != 0)
-            {
-                var selectClass = db.Classes.Where(x => x.ClassId == classID).FirstOrDefault();
-                var selectPeriod = db.PeriodSetups.Where(x => x.PeriodId == periodID).FirstOrDefault();
-                var currentClsStuds = db.ClassStudents.Where(x => x.PromotionClass.Class.Grade == selectClass.Grade && x.PromotionClass.Class.ClassDesc != selectClass.ClassDesc && x.PromotionClass.PeriodSetup.PeriodStartDate.Year == selectPeriod.PeriodStartDate.Year).ToList();
+            //if (classID != 0 && periodID != 0)
+            //{
+            //    var selectClass = db.Classes.Where(x => x.Id == classID).FirstOrDefault();
+            //    var selectPeriod = db.PeriodSetups.Where(x => x.PeriodId == periodID).FirstOrDefault();
+            //    var currentClsStuds = db.ClassStudents.Where(x => x.PromotionClass.Class.Grade == selectClass.Grade && x.PromotionClass.Class.ClassDesc != selectClass.Name && x.PromotionClass.PeriodSetup.PeriodStartDate.Year == selectPeriod.PeriodStartDate.Year).ToList();
 
-                selectClass.Grade--;
-                var lastYear = selectPeriod.PeriodStartDate.AddYears(-1).Year;
-                classStudents = db.ClassStudents.Where(x => x.Status != StudStatus.Inactive && x.Student.Status != StudStatus.Inactive && x.PromotionClass.Class.Grade == selectClass.Grade && x.PromotionClass.Class.ClassDesc == selectClass.ClassDesc && x.PromotionClass.PeriodSetup.PeriodStartDate.Year == lastYear).ToList();
-                var clsStudTemp = db.ClassStudents.Where(x => x.Status != StudStatus.Inactive && x.Student.Status != StudStatus.Inactive && x.PromotionClass.Class.Grade == selectClass.Grade && x.PromotionClass.Class.ClassDesc == selectClass.ClassDesc && x.PromotionClass.PeriodSetup.PeriodStartDate.Year == lastYear).ToList();
-                foreach (var det in clsStudTemp)
-                {
-                    var exist = currentClsStuds.Where(x => x.StudId == det.StudId).FirstOrDefault();
-                    if (exist != null)
-                    {
-                        var curClasRec = classStudents.Where(x => x.StudId == det.StudId).FirstOrDefault();
-                        classStudents.Remove(curClasRec);
-                    }
-                }
-            }
+            //    selectClass.Grade--;
+            //    var lastYear = selectPeriod.PeriodStartDate.AddYears(-1).Year;
+            //    classStudents = db.ClassStudents.Where(x => x.Status != StudStatus.Inactive && x.Student.Status != StudStatus.Inactive && x.PromotionClass.Class.Grade == selectClass.Grade && x.PromotionClass.Class.ClassDesc == selectClass.Name && x.PromotionClass.PeriodSetup.PeriodStartDate.Year == lastYear).ToList();
+            //    var clsStudTemp = db.ClassStudents.Where(x => x.Status != StudStatus.Inactive && x.Student.Status != StudStatus.Inactive && x.PromotionClass.Class.Grade == selectClass.Grade && x.PromotionClass.Class.ClassDesc == selectClass.Name && x.PromotionClass.PeriodSetup.PeriodStartDate.Year == lastYear).ToList();
+            //    foreach (var det in clsStudTemp)
+            //    {
+            //        var exist = currentClsStuds.Where(x => x.StudId == det.StudId).FirstOrDefault();
+            //        if (exist != null)
+            //        {
+            //            var curClasRec = classStudents.Where(x => x.StudId == det.StudId).FirstOrDefault();
+            //            classStudents.Remove(curClasRec);
+            //        }
+            //    }
+            //}
             return classStudents;
         }
 
@@ -123,16 +123,16 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 foreach (var det in StudList)
                 {
                     var temp = new ClassStudentVM();
-                    temp.ClStudID = det.ClStudId;
-                    temp.StudID = det.StudId;
+                    temp.ClStudID = det.Id;
+                    temp.StudID = det.StudentId;
                     temp.StudentName = det.Student.Title + "." + det.Student.Initials + "." + det.Student.Lname;
                     temp.IndexNo = det.Student.IndexNo;
                     tempList.Add(temp);
                 }
                 classPromVm.ClassStudents = tempList;
                 classPromVm.ClassID = classID.Value;
-                classPromVm.ClassDesc = db.Classes.Find(classID.Value).ClassDesc;
-                classPromVm.Grade = db.Classes.Find(classID.Value).Grade;
+                classPromVm.ClassDesc = db.Classes.Find(classID.Value).Name;
+                //classPromVm.Grade = db.Classes.Find(classID.Value).Grade;
                 classPromVm.NoOfStud = tempList.Count();
                 classPromVm.PeriodID = periodID == null ? 0 : periodID.Value;
                 if (periodID != null)
@@ -206,7 +206,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                         classTeach.PeriodEndDate = promClassVM.PeriodEndDate;
                         classTeach.CreatedBy = this.GetCurrUser();
                         classTeach.CreatedDate = DateTime.Now;
-                        db.ClassTeachers.Add(classTeach.GetEntity());
+                        //db.ClassTeachers.Add(classTeach.GetEntity());
                         db.SaveChanges();
                     }
 
@@ -235,7 +235,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 if (classID == null)
                 { return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
 
-                var clss = db.ClassStudents.Where(x => x.PromotionClass.ClassId == classID).FirstOrDefault();
+                //var clss = db.ClassStudents.Where(x => x.PromotionClass.ClassId == classID).FirstOrDefault();
 
                 classStudentVM.ClassID = classID.Value;
                 classStudentVM.Status = StudStatus.Active;
@@ -265,7 +265,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 if (ModelState.IsValid)
                 {                    
                     classStudent.ClStudID = Math.Min(obj.ClassStudents.Select(x => x.ClStudID).MinOrDefault(), 0) - 1;
-                    classStudent.StudID = db.ClassStudents.Find(classStudent.StudID).StudId;
+                    classStudent.StudID = db.ClassStudents.Find(classStudent.StudID).StudentId;
                     obj.ClassStudents.Add(classStudent);
                     Session[sskCrtdObj] = obj;
                     AddAlert(SMS.Common.AlertStyles.success, "Student added successfully.");
@@ -284,7 +284,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
         public ActionResult GetStudInfo(int studID)
         {
-            var obj = db.Students.Where(x => x.ClassStudents.Where(y => y.ClStudId == studID).Count() != 0).FirstOrDefault();
+            var obj = db.Students.Where(x => x.ClassStudents.Where(y => y.Id == studID).Count() != 0).FirstOrDefault();
 
             var IndexNo = obj.IndexNo;
             var InitName = obj.Title.ToEnumChar() + ". " + obj.Initials + " " + obj.Lname;
@@ -391,7 +391,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
                     db.Entry(obj).OriginalValues["RowVersion"] = promClass.RowVersion;
                     db.ClassStudents.RemoveRange(obj.ClassStudents.Where(x =>
-                        !sessionEvent.ClassStudents.Select(y => y.ClStudID).ToList().Contains(x.ClStudId)));
+                        !sessionEvent.ClassStudents.Select(y => y.ClStudID).ToList().Contains(x.Id)));
 
                     var monitorCount = 0;
                     foreach (var det in sessionEvent.ClassStudents)
@@ -461,8 +461,8 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 entry.State = EntityState.Unchanged;
                 entry.Collection(x => x.ClassStudents).Load();
                 db.ClassStudents.RemoveRange(entry.Entity.ClassStudents);
-                var objTeach = db.ClassTeachers.Where(x => x.ClassId == promClass.ClassID && x.PeriodId == promClass.PeriodID).FirstOrDefault();
-                db.ClassTeachers.Remove(objTeach);
+                //var objTeach = db.ClassTeachers.Where(x => x.ClassId == promClass.ClassID && x.PeriodId == promClass.PeriodID).FirstOrDefault();
+                //db.ClassTeachers.Remove(objTeach);
                 entry.State = EntityState.Deleted;
 
                 db.SaveChanges();

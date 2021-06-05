@@ -83,10 +83,10 @@ namespace Nalanda.SMS.Data
     }
     public enum SibRelationship
     {
-        [Description("Sister")]
-        Sister = 0,
-        [Description("Brother")]
-        Brother = 1,
+        [Description("Elder Brother")]
+        ElderBrother = 0,
+        [Description("Younger Brother")]
+        YoungerBrother = 1,
     }
     public enum StudGrade
     {
@@ -116,6 +116,14 @@ namespace Nalanda.SMS.Data
         Grade12 = 4,
         [Description("Grade 13")]
         Grade13 = 4
+    }
+
+    public enum Medium
+    {
+        [Description("Sinhala")]
+        Sinhala = 0,
+        [Description("English")]
+        English = 1
     }
 
     public enum PrefectType

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
+using System.Linq;
 
 namespace Nalanda.SMS.Areas.Admin.Models
 {
@@ -15,9 +16,10 @@ namespace Nalanda.SMS.Areas.Admin.Models
         public TeacherVM()
         {
             mappings = new ObjMappings<Teacher, TeacherVM>();
+            Subjects = new HashSet<TeacherSubjectVM>();
 
-            mappings.Add(x => x.Title + ". " + x.Initials + " " + x.Lname, x => x.NameWithInit);
-            mappings.Add(x => x.Title + ". " + x.FullName, x => x.NameWithTitle);
+            mappings.Add(x => x.Title + ". " + x.FullName, x => x.TeacherName);
+            mappings.Add(x => x.TeacherSubjects.Select(y=> new TeacherSubjectVM(y)).ToList(), x => x.Subjects);
         }
         public TeacherVM(Teacher obj) : this()
         {
@@ -26,8 +28,8 @@ namespace Nalanda.SMS.Areas.Admin.Models
         public ObjMappings<Teacher, TeacherVM> mappings { get;  set; }
 
         [DisplayName("Teacher Name")]
-        public string NameWithInit { get; set; }
-        [DisplayName("Teacher Name")]
-        public string NameWithTitle { get; set; }    
+        public string TeacherName { get; set; }
+
+        public virtual ICollection<TeacherSubjectVM> Subjects { get; set; }
     }
 }

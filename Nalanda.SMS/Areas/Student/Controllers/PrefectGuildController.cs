@@ -67,7 +67,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
                 if (prefGuildVM.StudID == 0 || prefGuildVM.PrefClassID == 0)
                 { ModelState.AddModelError("StudID", "Student should be selected"); }
-                
+
                 if (prefGuildVM.IsPromoted && prefGuildVM.PromotedDate == null)
                 { ModelState.AddModelError("PromotedDate", "Promoted Date should be selected"); }
 
@@ -84,7 +84,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
                 if (existPrefGuild != null)
                 { ModelState.AddModelError("", "Existing Prefect"); }
-                
+
                 var existActivePref = db.Prefects.Where(x => x.StudId == prefGuildVM.StudID && x.Status == prefGuildVM.Status).FirstOrDefault();
                 if (existActivePref != null)
                 { ModelState.AddModelError("", "Existing Active Prefect"); }
@@ -127,7 +127,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 var lst = new JavaScriptSerializer().Deserialize<List<Dictionary<string, object>>>(dataJson);
 
                 var dct = lst.Where(x => x["id"].ToString() == objVM.StudID.ToString()).FirstOrDefault();
-                
+
                 objVM.InactiveReason = dct["InactiveReason"].ConvertTo<string>();
                 objVM.InactiveDate = dct["InactiveDate"].ConvertTo<DateTime>();
             }
@@ -139,14 +139,14 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
         public ActionResult GetStudClass(int studID)
         {
-            var obj = db.ClassStudents.Where(x => x.StudId == studID).ToList().OrderByDescending(x => x.ClStudId).FirstOrDefault();
+            var obj = db.ClassStudents.Where(x => x.StudentId == studID).ToList().OrderByDescending(x => x.Id).FirstOrDefault();
 
-            var ClassID = obj.PromotionClass.PrClId;
+            //var ClassID = obj.PromotionClass.PrClId;
             var IndexNo = obj.Student.IndexNo;
             var InitName = obj.Student.Title.ToEnumChar() + ". " + obj.Student.Initials + " " + obj.Student.Lname;
-            var ClassGrade = obj.PromotionClass.Class.Grade.ToEnumChar() + " - " + obj.PromotionClass.Class.ClassDesc;
+            //var ClassGrade = obj.PromotionClass.Class.Grade.ToEnumChar() + " - " + obj.PromotionClass.Class.ClassDesc;
 
-            return Json(new { IndexNo, InitName, ClassGrade, ClassID }, JsonRequestBehavior.AllowGet);
+            return Json(new { IndexNo, InitName, ClassGrade = "", ClassID = "" }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Edit(int? id)
@@ -182,7 +182,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
                 if (prefGuild.StudID == 0 || prefGuild.PrefClassID == 0)
                 { ModelState.AddModelError("StudID", "Student should be selected"); }
-                
+
                 if (prefGuild.IsPromoted && prefGuild.PromotedDate == null)
                 { ModelState.AddModelError("PromotedDate", "Promoted Date should be selected"); }
 
@@ -192,11 +192,11 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 if (prefGuild.Status == ActiveState.Inactive && prefGuild.InactiveDate == null)
                 { ModelState.AddModelError("InactiveDate", "Inactive Date should be selected"); }
 
-                var existPrefGuild = db.Prefects.Where(x => x.StudId == prefGuild.StudID && x.PrefClassId == prefGuild.PrefClassID && x.Type == prefGuild.Type 
-                        && x.EffectiveDate == prefGuild.EffectiveDate && x.IsHp == prefGuild.IsHP && x.IsDhp == prefGuild.IsDHP && x.Responsibilty == prefGuild.Responsibilty 
-                        && x.IsPromoted == prefGuild.IsPromoted && x.PromotedDate == prefGuild.PromotedDate && x.Status == prefGuild.Status 
+                var existPrefGuild = db.Prefects.Where(x => x.StudId == prefGuild.StudID && x.PrefClassId == prefGuild.PrefClassID && x.Type == prefGuild.Type
+                        && x.EffectiveDate == prefGuild.EffectiveDate && x.IsHp == prefGuild.IsHP && x.IsDhp == prefGuild.IsDHP && x.Responsibilty == prefGuild.Responsibilty
+                        && x.IsPromoted == prefGuild.IsPromoted && x.PromotedDate == prefGuild.PromotedDate && x.Status == prefGuild.Status
                         && x.InactiveDate == prefGuild.InactiveDate && x.InactiveReason == prefGuild.InactiveReason).FirstOrDefault();
-                                
+
 
                 if (ModelState.IsValid)
                 {
@@ -231,7 +231,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
         }
 
         public ActionResult PrefectDetails()
-        {            
+        {
             List<Prefect> prefGuildList = db.Prefects.Where(x => x.Status == ActiveState.Active).ToList();
             if (prefGuildList == null)
             {
@@ -266,20 +266,20 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             }
             foreach (var det in prefectList)
             {
-                var TempPrefect = new PrefectVM(det);
-                var objTemp = db.ClassStudents.Where(x => x.StudId == det.StudId).ToList().OrderByDescending(x => x.ClStudId).FirstOrDefault();
+                //var TempPrefect = new PrefectVM(det);
+                //var objTemp = db.ClassStudents.Where(x => x.StudentId == det.StudId).ToList().OrderByDescending(x => x.Id).FirstOrDefault();
 
-                TempPrefect.PrefClassID = objTemp.PromotionClass.PrClId;
-                TempPrefect.ClassGrade = objTemp.PromotionClass.Class.Grade.ToEnumChar() + " - " + objTemp.PromotionClass.Class.ClassDesc;
+                //TempPrefect.PrefClassID = objTemp.PromotionClass.PrClId;
+                //TempPrefect.ClassGrade = objTemp.PromotionClass.Class.Grade.ToEnumChar() + " - " + objTemp.PromotionClass.Class.ClassDesc;
 
-                obj.Add(TempPrefect);
+                //obj.Add(TempPrefect);
             }
 
             ViewBag.IsSenior = isSenior;
             ViewBag.isJunior = isJunior;
             ViewBag.isPending = isPending;
 
-                return PartialView("_ChildIndex", obj);
+            return PartialView("_ChildIndex", obj);
         }
 
         public ActionResult PrintCurPrefGuild()
@@ -289,7 +289,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             {
                 AdmissionNo = x.Student.IndexNo,
                 Student = x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname,
-                Class = "Grade " + x.PromotionClass.Class.Grade + " - " + x.PromotionClass.Class.ClassDesc,
+                Class = "Grade " + x.PromotionClass.Class.Grade + " - " + x.PromotionClass.Class.Name,
                 x.Responsibilty,
                 HP = x.IsHp == true ? "Yes" : "-",
                 DHP = x.IsDhp == true ? "Yes" : "-"
@@ -299,7 +299,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             {
                 AdmissionNo = x.Student.IndexNo,
                 Student = x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname,
-                Class = "Grade " + x.PromotionClass.Class.Grade + " - " + x.PromotionClass.Class.ClassDesc,
+                Class = "Grade " + x.PromotionClass.Class.Grade + " - " + x.PromotionClass.Class.Name,
                 x.Responsibilty
             }).ToList();
 
@@ -307,7 +307,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             {
                 AdmissionNo = x.Student.IndexNo,
                 Student = x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname,
-                Class = "Grade " + x.PromotionClass.Class.Grade + " - " + x.PromotionClass.Class.ClassDesc,
+                Class = "Grade " + x.PromotionClass.Class.Grade + " - " + x.PromotionClass.Class.Name,
                 x.Responsibilty
             }).ToList();
 

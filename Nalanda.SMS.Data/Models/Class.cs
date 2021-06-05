@@ -1,34 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
-
 namespace Nalanda.SMS.Data.Models
 {
-    public partial class Class
+    public partial class Class : BaseModel
     {
         public Class()
         {
-            ClassTeachers = new HashSet<ClassTeacher>();
-            PromotionClasses = new HashSet<PromotionClass>();
+            ClassSubjects = new HashSet<ClassSubject>();
+            ClassStudents = new HashSet<ClassStudent>();
         }
 
-        public int ClassId { get; set; }
-        public StudGrade Grade { get; set; }
+        [Required]
+        public int Year { get; set; }
+        [DisplayName("Grade"), Required]
+        public int GradeId { get; set; }
         [DisplayName("Class"), Required]
-        public string ClassDesc { get; set; }
-        public ActiveState Status { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public string ModifiedBy { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public byte[] RowVersion { get; set; }
+        public string Name { get; set; }
+        [DisplayName("Class Teacher"), Required]
+        public int TeacherId { get; set; }
+        public Medium Medium { get; set; }
 
-        public virtual ICollection<ClassTeacher> ClassTeachers { get; set; }
-        public virtual ICollection<PromotionClass> PromotionClasses { get; set; }
+        public virtual Grade Grade { get; set; }
+        public virtual Teacher ClassTeacher { get; set; }
+        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
+        public virtual ICollection<ClassStudent> ClassStudents { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace Nalanda.SMS.Areas.Student.Models
         public byte[] RowVersion { get; set; }
 
         public virtual Class Class { get; set; }
-        public virtual PeriodSetup PeriodSetup { get; set; }
+        //public virtual PeriodSetup PeriodSetup { get; set; }
         public virtual Teacher Teacher { get; set; }
     }
 }

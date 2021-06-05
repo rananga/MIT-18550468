@@ -9,8 +9,8 @@
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.StudFID)
-        @Html.HiddenFor(model => model.StudID)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.StudentId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -73,10 +73,10 @@
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
-            @Html.LabelFor(model => model.NICNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Nicno, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.NICNo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NICNo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Nicno, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nicno, "", new { @class = "text-danger" })
             </div>
         </div>
 

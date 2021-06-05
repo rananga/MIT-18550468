@@ -12,7 +12,7 @@ namespace Nalanda.SMS.Data.Models
         public Role()
         {
             RoleMenuAccesses = new HashSet<RoleMenuAccess>();
-            RoleTiles = new HashSet<RoleTile>();
+            //RoleTiles = new HashSet<RoleTile>();
             UserRoles = new HashSet<UserRole>();
         }
 
@@ -26,7 +26,7 @@ namespace Nalanda.SMS.Data.Models
         public byte[] RowVersion { get; set; }
 
         public virtual ICollection<RoleMenuAccess> RoleMenuAccesses { get; set; }
-        public virtual ICollection<RoleTile> RoleTiles { get; set; }
+        //public virtual ICollection<RoleTile> RoleTiles { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

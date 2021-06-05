@@ -21,24 +21,21 @@ namespace Nalanda.SMS.Data.Migrations
 
             modelBuilder.Entity("Nalanda.SMS.Data.Models.Class", b =>
                 {
-                    b.Property<int>("ClassId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("ClassID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClassDesc")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("Grade")
+                    b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Medium")
                         .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
@@ -47,115 +44,9 @@ namespace Nalanda.SMS.Data.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("ClassId");
-
-                    b.ToTable("Classes");
-                });
-
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClassStudent", b =>
-                {
-                    b.Property<int>("ClStudId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("ClStudID")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<bool>("IsCurrentMonitor")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsMonitor")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("PeriodEndDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("PeriodStartDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("PrClId")
-                        .HasColumnName("PrClID")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudId")
-                        .HasColumnName("StudID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ClStudId");
-
-                    b.HasIndex("PrClId")
-                        .HasName("IX_FK_PromotionClassClassStudent");
-
-                    b.HasIndex("StudId")
-                        .HasName("IX_FK_StudentClassStudent");
-
-                    b.ToTable("ClassStudents");
-                });
-
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClassTeacher", b =>
-                {
-                    b.Property<int>("ClTeachId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("ClTeachID")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ClassId")
-                        .HasColumnName("ClassID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("PeriodEndDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("PeriodId")
-                        .HasColumnName("PeriodID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("PeriodStartDate")
-                        .HasColumnType("datetime");
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
@@ -164,33 +55,188 @@ namespace Nalanda.SMS.Data.Migrations
                         .HasColumnType("rowversion");
 
                     b.Property<int>("TeacherId")
-                        .HasColumnName("TeacherID")
                         .HasColumnType("int");
 
-                    b.HasKey("ClTeachId");
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ClassId")
-                        .HasName("IX_FK_ClassClassTeacher");
+                    b.HasKey("Id");
 
-                    b.HasIndex("PeriodId")
-                        .HasName("IX_FK_PeriodSetupClassTeacher");
+                    b.HasIndex("GradeId");
 
-                    b.HasIndex("TeacherId")
-                        .HasName("IX_FK_TeacherClassTeacher");
+                    b.HasIndex("TeacherId");
 
-                    b.ToTable("ClassTeachers");
+                    b.ToTable("Classes");
                 });
 
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.Club", b =>
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClassStudent", b =>
                 {
-                    b.Property<int>("Cid")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("CID")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("ClassStudents");
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClassStudentSubject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClassStudentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassStudentId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("ClassStudentSubjects");
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClassSubject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("TeacherSubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("TeacherSubjectId");
+
+                    b.ToTable("ClassSubjects");
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.ExtraActivity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExtraActivities");
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.ExtraActivityAcheivement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ActivityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
@@ -215,40 +261,69 @@ namespace Nalanda.SMS.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("Cid");
+                    b.HasIndex("ActivityId");
 
-                    b.ToTable("Clubs");
+                    b.ToTable("ExtraActivityAcheivements");
                 });
 
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClubMember", b =>
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.ExtraActivityPosition", b =>
                 {
-                    b.Property<int>("Cmid")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("CMID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Cid")
-                        .HasColumnName("CID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CommiteeMemberType")
+                    b.Property<int>("ActivityId")
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("MemberDate")
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("MembershipType")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.ToTable("ExtraActivityPositions");
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.Grade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HeadTeacherId")
                         .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
@@ -263,80 +338,90 @@ namespace Nalanda.SMS.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnName("StudentID")
-                        .HasColumnType("int");
+                    b.HasIndex("HeadTeacherId");
 
-                    b.HasKey("Cmid");
+                    b.ToTable("Grades");
 
-                    b.HasIndex("Cid")
-                        .HasName("IX_FK_ClubClubMember");
-
-                    b.HasIndex("StudentId")
-                        .HasName("IX_FK_StudentClubMember");
-
-                    b.ToTable("ClubMembers");
-                });
-
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.EventParticipation", b =>
-                {
-                    b.Property<int>("Epid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("EPID")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("EventDesc")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsWinner")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("StudId")
-                        .HasColumnName("StudID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeacherInCharge")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WinningDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Epid");
-
-                    b.HasIndex("StudId")
-                        .HasName("IX_FK_StudentEventParticipation");
-
-                    b.HasIndex("TeacherInCharge")
-                        .HasName("IX_FK_TeacherEventParticipation");
-
-                    b.ToTable("EventParticipations");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 10
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 11
+                        });
                 });
 
             modelBuilder.Entity("Nalanda.SMS.Data.Models.LeavingCertificate", b =>
@@ -437,6 +522,13 @@ namespace Nalanda.SMS.Data.Migrations
                         new
                         {
                             MenuId = 2,
+                            DisplaySeq = 20,
+                            Text = "Student",
+                            Type = "M"
+                        },
+                        new
+                        {
+                            MenuId = 3,
                             Action = "Index",
                             Area = "Admin",
                             Controller = "Users",
@@ -447,7 +539,7 @@ namespace Nalanda.SMS.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 3,
+                            MenuId = 4,
                             Action = "Index",
                             Area = "Admin",
                             Controller = "UserRoles",
@@ -458,7 +550,7 @@ namespace Nalanda.SMS.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 4,
+                            MenuId = 5,
                             Action = "Index",
                             Area = "Admin",
                             Controller = "Teacher",
@@ -469,7 +561,18 @@ namespace Nalanda.SMS.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 5,
+                            MenuId = 6,
+                            Action = "Index",
+                            Area = "Admin",
+                            Controller = "Subject",
+                            DisplaySeq = 30,
+                            ParentMenuId = 1,
+                            Text = "Subject Maintenance",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 7,
                             DisplaySeq = 40,
                             ParentMenuId = 1,
                             Text = "-",
@@ -477,207 +580,37 @@ namespace Nalanda.SMS.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 6,
+                            MenuId = 8,
+                            Action = "Index",
+                            Area = "Admin",
+                            Controller = "Grade",
+                            DisplaySeq = 50,
+                            ParentMenuId = 1,
+                            Text = "Grade Definition",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 9,
                             Action = "Index",
                             Area = "Admin",
                             Controller = "Class",
-                            DisplaySeq = 50,
+                            DisplaySeq = 60,
                             ParentMenuId = 1,
                             Text = "Class Definition",
                             Type = "I"
                         },
                         new
                         {
-                            MenuId = 7,
+                            MenuId = 11,
                             Action = "Index",
-                            Area = "Admin",
-                            Controller = "Club",
-                            DisplaySeq = 60,
-                            ParentMenuId = 1,
-                            Text = "Club Definition",
+                            Area = "Student",
+                            Controller = "Student",
+                            DisplaySeq = 10,
+                            ParentMenuId = 2,
+                            Text = "Student Admission",
                             Type = "I"
                         });
-                });
-
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.PeriodSetup", b =>
-                {
-                    b.Property<int>("PeriodId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("PeriodID")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<bool>("IsPeriodComplete")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("PeriodEndDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("PeriodStartDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.HasKey("PeriodId");
-
-                    b.ToTable("PeriodSetups");
-                });
-
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.Prefect", b =>
-                {
-                    b.Property<int>("PreId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("PreID")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("EffectiveDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("InactiveDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("InactiveReason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDhp")
-                        .HasColumnName("IsDHP")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsHp")
-                        .HasColumnName("IsHP")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsPromoted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("PrefClassId")
-                        .HasColumnName("PrefClassID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("PromotedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Responsibilty")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudId")
-                        .HasColumnName("StudID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.HasKey("PreId");
-
-                    b.HasIndex("PrefClassId")
-                        .HasName("IX_FK_PromotionClassPrefect");
-
-                    b.HasIndex("StudId")
-                        .HasName("IX_FK_StudentPrefect");
-
-                    b.ToTable("Prefects");
-                });
-
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.PromotionClass", b =>
-                {
-                    b.Property<int>("PrClId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("PrClID")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ClassId")
-                        .HasColumnName("ClassID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("MonitorStud2Id")
-                        .HasColumnName("MonitorStud2ID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MonitorStudId")
-                        .IsRequired()
-                        .HasColumnName("MonitorStudID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PeriodId")
-                        .HasColumnName("PeriodID")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("TeacherId")
-                        .HasColumnName("TeacherID")
-                        .HasColumnType("int");
-
-                    b.HasKey("PrClId");
-
-                    b.HasIndex("ClassId")
-                        .HasName("IX_FK_ClassPromotionClass");
-
-                    b.HasIndex("PeriodId")
-                        .HasName("IX_FK_PeriodSetupPromotionClass");
-
-                    b.HasIndex("TeacherId")
-                        .HasName("IX_FK_TeacherPromotionClass");
-
-                    b.ToTable("PromotionClasses");
                 });
 
             modelBuilder.Entity("Nalanda.SMS.Data.Models.Role", b =>
@@ -725,7 +658,7 @@ namespace Nalanda.SMS.Data.Migrations
                             RoleId = 1,
                             Code = "Admin",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2015, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Administrator"
                         },
                         new
@@ -733,7 +666,7 @@ namespace Nalanda.SMS.Data.Migrations
                             RoleId = 2,
                             Code = "AdminUser",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2015, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Admin Department User"
                         });
                 });
@@ -763,52 +696,9 @@ namespace Nalanda.SMS.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.RoleTile", b =>
-                {
-                    b.Property<int>("RoleTileId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("RoleTileID")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnName("RoleID")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("TileId")
-                        .HasColumnName("TileID")
-                        .HasColumnType("int");
-
-                    b.HasKey("RoleTileId");
-
-                    b.HasIndex("RoleId")
-                        .HasName("IX_FK_RoleRoleTiles");
-
-                    b.ToTable("RoleTiles");
-                });
-
             modelBuilder.Entity("Nalanda.SMS.Data.Models.StudFamily", b =>
                 {
-                    b.Property<int>("StudFid")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("StudFID")
                         .HasColumnType("int")
@@ -863,7 +753,7 @@ namespace Nalanda.SMS.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int>("StudId")
+                    b.Property<int>("StudentId")
                         .HasColumnName("StudID")
                         .HasColumnType("int");
 
@@ -874,9 +764,9 @@ namespace Nalanda.SMS.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("StudFid");
+                    b.HasKey("Id");
 
-                    b.HasIndex("StudId")
+                    b.HasIndex("StudentId")
                         .HasName("IX_FK_StudentStudFamily");
 
                     b.ToTable("StudFamilies");
@@ -884,9 +774,8 @@ namespace Nalanda.SMS.Data.Migrations
 
             modelBuilder.Entity("Nalanda.SMS.Data.Models.StudSibling", b =>
                 {
-                    b.Property<int>("SubId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("SubID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -912,20 +801,18 @@ namespace Nalanda.SMS.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int>("SiblingStudId")
-                        .HasColumnName("SiblingStudID")
+                    b.Property<int>("SiblingStudentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SudId")
-                        .HasColumnName("SudID")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.HasKey("SubId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("SiblingStudId")
+                    b.HasIndex("SiblingStudentId")
                         .HasName("IX_FK_StudentStudSibling1");
 
-                    b.HasIndex("SudId")
+                    b.HasIndex("StudentId")
                         .HasName("IX_FK_StudentStudSibling");
 
                     b.ToTable("StudSiblings");
@@ -933,7 +820,7 @@ namespace Nalanda.SMS.Data.Migrations
 
             modelBuilder.Entity("Nalanda.SMS.Data.Models.Student", b =>
                 {
-                    b.Property<int>("StudId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("StudID")
                         .HasColumnType("int")
@@ -943,6 +830,12 @@ namespace Nalanda.SMS.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("AdmissionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("AdmittedClassId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -951,6 +844,7 @@ namespace Nalanda.SMS.Data.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<DateTime?>("Dob")
+                        .IsRequired()
                         .HasColumnName("DOB")
                         .HasColumnType("datetime");
 
@@ -962,21 +856,9 @@ namespace Nalanda.SMS.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EngReading")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EngSpeaking")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EngWriting")
-                        .HasColumnType("int");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
 
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
@@ -994,20 +876,16 @@ namespace Nalanda.SMS.Data.Migrations
                     b.Property<bool>("IsLeavingIssued")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LastDhammaGrade")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastDhammaSchool")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LdhammaSchoolAdd")
-                        .HasColumnName("LDhammaSchoolAdd")
+                    b.Property<string>("LastGrade")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Lname")
                         .IsRequired()
                         .HasColumnName("LName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Medium")
+                        .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1021,14 +899,7 @@ namespace Nalanda.SMS.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<string>("School")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SchoolAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SpecialAttention")
+                    b.Property<string>("SchoolEmail")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
@@ -1037,16 +908,147 @@ namespace Nalanda.SMS.Data.Migrations
                     b.Property<int>("Title")
                         .HasColumnType("int");
 
-                    b.HasKey("StudId");
+                    b.HasKey("Id");
 
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.StudentExtraActivityAcheivement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AcheivementId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("AwardedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AcheivementId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentExtraActivityAcheivements");
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.StudentExtraActivityPosition", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("PositionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PositionId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentExtraActivityPositions");
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.Subject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("IsBasket")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subjects");
+                });
+
             modelBuilder.Entity("Nalanda.SMS.Data.Models.Teacher", b =>
                 {
-                    b.Property<int>("TeachId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("TeachID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -1059,14 +1061,10 @@ namespace Nalanda.SMS.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -1112,6 +1110,9 @@ namespace Nalanda.SMS.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
+                    b.Property<string>("SchoolEmail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -1121,14 +1122,62 @@ namespace Nalanda.SMS.Data.Migrations
                     b.Property<int>("Title")
                         .HasColumnType("int");
 
-                    b.HasKey("TeachId");
+                    b.HasKey("Id");
 
                     b.ToTable("Teachers");
                 });
 
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.TeacherSubject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Medium")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GradeId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherSubjects");
+                });
+
             modelBuilder.Entity("Nalanda.SMS.Data.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("UserID")
                         .HasColumnType("int")
@@ -1164,16 +1213,16 @@ namespace Nalanda.SMS.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            UserId = 1,
+                            Id = 1,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2015, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "1",
                             Status = 1,
                             UserName = "rananga"
@@ -1215,70 +1264,90 @@ namespace Nalanda.SMS.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClassStudent", b =>
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.Class", b =>
                 {
-                    b.HasOne("Nalanda.SMS.Data.Models.PromotionClass", "PromotionClass")
-                        .WithMany("ClassStudents")
-                        .HasForeignKey("PrClId")
-                        .HasConstraintName("FK_PromotionClassClassStudent")
+                    b.HasOne("Nalanda.SMS.Data.Models.Grade", "Grade")
+                        .WithMany("GradeClasses")
+                        .HasForeignKey("GradeId")
+                        .HasConstraintName("FK_Grade_Class")
                         .IsRequired();
 
-                    b.HasOne("Nalanda.SMS.Data.Models.Student", "Student")
-                        .WithMany("ClassStudents")
-                        .HasForeignKey("StudId")
-                        .HasConstraintName("FK_StudentClassStudent")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClassTeacher", b =>
-                {
-                    b.HasOne("Nalanda.SMS.Data.Models.Class", "Class")
-                        .WithMany("ClassTeachers")
-                        .HasForeignKey("ClassId")
-                        .HasConstraintName("FK_ClassClassTeacher")
-                        .IsRequired();
-
-                    b.HasOne("Nalanda.SMS.Data.Models.PeriodSetup", "Period")
-                        .WithMany("ClassTeachers")
-                        .HasForeignKey("PeriodId")
-                        .HasConstraintName("FK_PeriodSetupClassTeacher")
-                        .IsRequired();
-
-                    b.HasOne("Nalanda.SMS.Data.Models.Teacher", "Teacher")
+                    b.HasOne("Nalanda.SMS.Data.Models.Teacher", "ClassTeacher")
                         .WithMany("ClassTeachers")
                         .HasForeignKey("TeacherId")
-                        .HasConstraintName("FK_TeacherClassTeacher")
+                        .HasConstraintName("FK_Teacher_Class")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClubMember", b =>
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClassStudent", b =>
                 {
-                    b.HasOne("Nalanda.SMS.Data.Models.Club", "Club")
-                        .WithMany("ClubMembers")
-                        .HasForeignKey("Cid")
-                        .HasConstraintName("FK_ClubClubMember")
+                    b.HasOne("Nalanda.SMS.Data.Models.Class", "Class")
+                        .WithMany("ClassStudents")
+                        .HasForeignKey("ClassId")
+                        .HasConstraintName("FK_Class_ClassStudent")
                         .IsRequired();
 
                     b.HasOne("Nalanda.SMS.Data.Models.Student", "Student")
-                        .WithMany("ClubMembers")
+                        .WithMany("ClassStudents")
                         .HasForeignKey("StudentId")
-                        .HasConstraintName("FK_StudentClubMember")
+                        .HasConstraintName("FK_Student_ClassStudent")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.EventParticipation", b =>
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClassStudentSubject", b =>
                 {
-                    b.HasOne("Nalanda.SMS.Data.Models.Student", "Student")
-                        .WithMany("EventParticipations")
-                        .HasForeignKey("StudId")
-                        .HasConstraintName("FK_StudentEventParticipation")
+                    b.HasOne("Nalanda.SMS.Data.Models.ClassStudent", "ClassStudent")
+                        .WithMany("StudentSubjects")
+                        .HasForeignKey("ClassStudentId")
+                        .HasConstraintName("FK_ClassStudent_StudentSubjects")
                         .IsRequired();
 
-                    b.HasOne("Nalanda.SMS.Data.Models.Teacher", "Teacher")
-                        .WithMany("EventParticipations")
-                        .HasForeignKey("TeacherInCharge")
-                        .HasConstraintName("FK_TeacherEventParticipation")
+                    b.HasOne("Nalanda.SMS.Data.Models.Subject", "Subject")
+                        .WithMany("StudentSubjects")
+                        .HasForeignKey("SubjectId")
+                        .HasConstraintName("FK_Subject_StudentSubjects")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.ClassSubject", b =>
+                {
+                    b.HasOne("Nalanda.SMS.Data.Models.Class", "Class")
+                        .WithMany("ClassSubjects")
+                        .HasForeignKey("ClassId")
+                        .HasConstraintName("FK_Class_ClassSubjects")
+                        .IsRequired();
+
+                    b.HasOne("Nalanda.SMS.Data.Models.TeacherSubject", "TeacherSubject")
+                        .WithMany("ClassSubjects")
+                        .HasForeignKey("TeacherSubjectId")
+                        .HasConstraintName("FK_TeacherSubject_ClassSubjects")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.ExtraActivityAcheivement", b =>
+                {
+                    b.HasOne("Nalanda.SMS.Data.Models.ExtraActivity", "Activity")
+                        .WithMany("Acheivements")
+                        .HasForeignKey("ActivityId")
+                        .HasConstraintName("FK_Activity_Acheivements")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.ExtraActivityPosition", b =>
+                {
+                    b.HasOne("Nalanda.SMS.Data.Models.ExtraActivity", "Activity")
+                        .WithMany("Positions")
+                        .HasForeignKey("ActivityId")
+                        .HasConstraintName("FK_Activity_Positions")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.Grade", b =>
+                {
+                    b.HasOne("Nalanda.SMS.Data.Models.Teacher", "HeadTeacher")
+                        .WithMany("HeadingGrades")
+                        .HasForeignKey("HeadTeacherId")
+                        .HasConstraintName("FK_Teacher_GradeHead");
                 });
 
             modelBuilder.Entity("Nalanda.SMS.Data.Models.LeavingCertificate", b =>
@@ -1298,42 +1367,6 @@ namespace Nalanda.SMS.Data.Migrations
                         .HasConstraintName("FK_MenuMenu");
                 });
 
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.Prefect", b =>
-                {
-                    b.HasOne("Nalanda.SMS.Data.Models.PromotionClass", "PromotionClass")
-                        .WithMany("Prefects")
-                        .HasForeignKey("PrefClassId")
-                        .HasConstraintName("FK_PromotionClassPrefect")
-                        .IsRequired();
-
-                    b.HasOne("Nalanda.SMS.Data.Models.Student", "Student")
-                        .WithMany("Prefects")
-                        .HasForeignKey("StudId")
-                        .HasConstraintName("FK_StudentPrefect")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.PromotionClass", b =>
-                {
-                    b.HasOne("Nalanda.SMS.Data.Models.Class", "Class")
-                        .WithMany("PromotionClasses")
-                        .HasForeignKey("ClassId")
-                        .HasConstraintName("FK_ClassPromotionClass")
-                        .IsRequired();
-
-                    b.HasOne("Nalanda.SMS.Data.Models.PeriodSetup", "PeriodSetup")
-                        .WithMany("PromotionClasses")
-                        .HasForeignKey("PeriodId")
-                        .HasConstraintName("FK_PeriodSetupPromotionClass")
-                        .IsRequired();
-
-                    b.HasOne("Nalanda.SMS.Data.Models.Teacher", "Teacher")
-                        .WithMany("PromotionClasses")
-                        .HasForeignKey("TeacherId")
-                        .HasConstraintName("FK_TeacherPromotionClass")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Nalanda.SMS.Data.Models.RoleMenuAccess", b =>
                 {
                     b.HasOne("Nalanda.SMS.Data.Models.Menu", "Menu")
@@ -1349,30 +1382,72 @@ namespace Nalanda.SMS.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nalanda.SMS.Data.Models.RoleTile", b =>
-                {
-                    b.HasOne("Nalanda.SMS.Data.Models.Role", "Role")
-                        .WithMany("RoleTiles")
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("FK_RoleRoleTiles")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Nalanda.SMS.Data.Models.StudFamily", b =>
                 {
-                    b.HasOne("Nalanda.SMS.Data.Models.Student", "Stud")
+                    b.HasOne("Nalanda.SMS.Data.Models.Student", "Student")
                         .WithMany("StudFamilies")
-                        .HasForeignKey("StudId")
+                        .HasForeignKey("StudentId")
                         .HasConstraintName("FK_StudentStudFamily")
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Nalanda.SMS.Data.Models.StudSibling", b =>
                 {
-                    b.HasOne("Nalanda.SMS.Data.Models.Student", "StudentRelation")
+                    b.HasOne("Nalanda.SMS.Data.Models.Student", "SiblingStudent")
                         .WithMany("StudSiblings")
-                        .HasForeignKey("SudId")
-                        .HasConstraintName("FK_StudentStudSibling")
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("FK_Stud_StudSibling")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.StudentExtraActivityAcheivement", b =>
+                {
+                    b.HasOne("Nalanda.SMS.Data.Models.ExtraActivityAcheivement", "Acheivement")
+                        .WithMany("Students")
+                        .HasForeignKey("AcheivementId")
+                        .HasConstraintName("FK_Acheivement_Students")
+                        .IsRequired();
+
+                    b.HasOne("Nalanda.SMS.Data.Models.Student", "Student")
+                        .WithMany("ActivityAcheivements")
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("FK_Student_ActivityAcheivements")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.StudentExtraActivityPosition", b =>
+                {
+                    b.HasOne("Nalanda.SMS.Data.Models.ExtraActivityPosition", "Position")
+                        .WithMany("Students")
+                        .HasForeignKey("PositionId")
+                        .HasConstraintName("FK_Position_Students")
+                        .IsRequired();
+
+                    b.HasOne("Nalanda.SMS.Data.Models.Student", "Student")
+                        .WithMany("ActivityPositions")
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("FK_Student_ActivityPositions")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Nalanda.SMS.Data.Models.TeacherSubject", b =>
+                {
+                    b.HasOne("Nalanda.SMS.Data.Models.Grade", "Grade")
+                        .WithMany("TeacherSubjects")
+                        .HasForeignKey("GradeId")
+                        .HasConstraintName("FK_Grade_TeacherSubjects")
+                        .IsRequired();
+
+                    b.HasOne("Nalanda.SMS.Data.Models.Subject", "Subject")
+                        .WithMany("TeacherSubjects")
+                        .HasForeignKey("SubjectId")
+                        .HasConstraintName("FK_Subject_TeacherSubjects")
+                        .IsRequired();
+
+                    b.HasOne("Nalanda.SMS.Data.Models.Teacher", "Teacher")
+                        .WithMany("TeacherSubjects")
+                        .HasForeignKey("TeacherId")
+                        .HasConstraintName("FK_Teacher_TeacherSubjects")
                         .IsRequired();
                 });
 

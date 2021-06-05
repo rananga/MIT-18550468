@@ -14,7 +14,7 @@
             <input type="submit" value="Save" class="btn btn-primary" style="min-width:75px" />
         </p>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.RowVersion)
 
         <div class="form-group">
@@ -43,7 +43,7 @@
 }
 
 <div id="ChildContent">
-    @{ Html.RenderAction("ChildIndex", new { id = Model.UserId, isToEdit = true }); }
+    @{ Html.RenderAction("ChildIndex", new { id = Model.Id, isToEdit = true }); }
 </div>
 
 <div>

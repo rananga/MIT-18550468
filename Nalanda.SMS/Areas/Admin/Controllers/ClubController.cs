@@ -27,7 +27,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CID,Name,Description,Status,RowVersion")] ClubVM club)
+        public ActionResult Create([Bind(Include = "ClubId,Name,Description,Status,RowVersion")] ClubVM club)
         {
             try
             {
@@ -82,14 +82,14 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CID,Name,Description,Status,RowVersion")] ClubVM club)
+        public ActionResult Edit([Bind(Include = "ClubId,Name,Description,Status,RowVersion")] ClubVM club)
         {
             byte[] curRowVersion = null;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var obj = db.Clubs.Find(club.CID);
+                    var obj = db.Clubs.Find(club.ClubId);
                     if (obj == null)
                     { throw new DbUpdateConcurrencyException(); }
 
@@ -126,7 +126,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
         {
             try
             {
-                var obj = db.Clubs.Find(club.CID);
+                var obj = db.Clubs.Find(club.ClubId);
                 if (obj == null)
                 { throw new DbUpdateConcurrencyException(""); }
                 db.Detach(obj);
@@ -147,7 +147,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
             {
                 AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message);
             }
-            return RedirectToAction("Details", new { id = club.CID });
+            return RedirectToAction("Details", new { id = club.ClubId });
         }
     }
 }

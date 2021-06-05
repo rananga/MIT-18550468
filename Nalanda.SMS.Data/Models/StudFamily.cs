@@ -1,32 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Nalanda.SMS.Data.Models
 {
-    public partial class StudFamily
+    public partial class StudFamily : BaseModel
     {
-        public int StudFid { get; set; }
-        public int StudId { get; set; }
+        public int StudentId { get; set; }
+        public TitleTeacher Title { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public Relationship Relationship { get; set; }
+        [Required]
         public string Occupation { get; set; }
+        [DisplayName("Working Address"), DataType(DataType.MultilineText)]
         public string WorkingAdd { get; set; }
+        [DisplayName("Office Telephone")]
+        [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
         public string OfficeTel { get; set; }
+        [DisplayName("Contact Mobile"), Required]
+        [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
         public string ContactMob { get; set; }
+        [DisplayName("Contact Home")]
+        [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
         public string ContactHome { get; set; }
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
+        [DisplayName("NIC No"), Required]
         public string Nicno { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public string ModifiedBy { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public byte[] RowVersion { get; set; }
-        public int Title { get; set; }
 
-        public virtual Student Stud { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

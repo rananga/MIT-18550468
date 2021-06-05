@@ -15,18 +15,18 @@ namespace Nalanda.SMS.Areas.Student.Models
         {
             StudentList = new List<ClassStudentVM>();
 
-             mappings = new ObjMappings<ClassStudent, ClassStudentVM>();
-            mappings.Add(x => x.Student.Title +". "+ x.Student.Initials +""+ x.Student.Lname, x => x.StudentName);
-            mappings.Add(x => x.PromotionClass.Class.ClassDesc, x => x.ClassName);
-            mappings.Add(x => "Grade " + x.PromotionClass.Class.Grade + " - " + x.PromotionClass.Class.ClassDesc, x => x.ClassGrade);
-            mappings.Add(x => x.PromotionClass.Class.Grade, x => x.Grade);
+            mappings = new ObjMappings<ClassStudent, ClassStudentVM>();
+            mappings.Add(x => x.Student.Title + ". " + x.Student.Initials + "" + x.Student.Lname, x => x.StudentName);
+            //mappings.Add(x => x.PromotionClass.Class.ClassDesc, x => x.ClassName);
+            //mappings.Add(x => "Grade " + x.PromotionClass.Class.Grade + " - " + x.PromotionClass.Class.ClassDesc, x => x.ClassGrade);
+            //mappings.Add(x => x.PromotionClass.Class.Grade, x => x.Grade);
             mappings.Add(x => x.Student.IndexNo, x => x.IndexNo);
-            mappings.Add(x => x.PromotionClass.Class.Grade, x => x.GradeDesc);
-            mappings.Add(x => x.PromotionClass.Class.Grade.ToString()  + " - " + PromotionClass.Class.ClassDesc, x => x.GardeWithClass);
-            mappings.Add(x => x.PromotionClass.PeriodSetup.PeriodStartDate, x => x.PeriodFrom);
-            mappings.Add(x => x.PromotionClass.PeriodSetup.PeriodEndDate, x => x.PeriodTo);
+            //mappings.Add(x => x.PromotionClass.Class.Grade, x => x.GradeDesc);
+            //mappings.Add(x => x.PromotionClass.Class.Grade.ToString()  + " - " + PromotionClass.Class.Name, x => x.GardeWithClass);
+            //mappings.Add(x => x.PromotionClass.PeriodSetup.PeriodStartDate, x => x.PeriodFrom);
+            //mappings.Add(x => x.PromotionClass.PeriodSetup.PeriodEndDate, x => x.PeriodTo);
             mappings.Add(x => x.Student, x => x.Student);
-    }
+        }
 
         public ClassStudentVM(ClassStudent obj) : this()
         {
@@ -92,8 +92,8 @@ namespace Nalanda.SMS.Areas.Student.Models
 
         public byte[] RowVersion { get; set; }
 
-        public virtual PeriodSetup PeriodSetup { get; set; }
-        public virtual PromotionClass PromotionClass { get; set; }        
+        //public virtual PeriodSetup PeriodSetup { get; set; }
+        //public virtual PromotionClass PromotionClass { get; set; }
 
         public virtual Nalanda.SMS.Data.Models.Student Student { get; set; }
     }

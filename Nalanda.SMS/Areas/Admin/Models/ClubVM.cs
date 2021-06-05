@@ -9,7 +9,7 @@ using System.Web;
 
 namespace Nalanda.SMS.Areas.Admin.Models
 {
-    public class ClubVM : IModel<Club,ClubVM>
+    public class ClubVM : Club, IModel<Club,ClubVM>
     {
         public ClubVM()
         {
@@ -21,22 +21,5 @@ namespace Nalanda.SMS.Areas.Admin.Models
             this.SetEntity(obj);
         }
         public ObjMappings<Club, ClubVM> mappings { get; set; }
-
-        public int CID { get; set; }
-        [DisplayName("Club"), Required]
-        public string Name { get; set; }
-        [Required]
-        [DisplayName("Description"), DataType(DataType.MultilineText)]
-        public string Description { get; set; }
-        [DisplayName("Status"), Required]
-        public ActiveState Status { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public byte[] RowVersion { get; set; }
-
-        public virtual ICollection<ClubMember> ClubMembers { get; set; }
-
     }
 }

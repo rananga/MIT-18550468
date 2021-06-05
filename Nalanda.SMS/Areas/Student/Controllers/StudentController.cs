@@ -38,7 +38,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                Nalanda.SMS.Data.Models.Student student = db.Students.Where(x => x.StudId == id).FirstOrDefault();
+                Nalanda.SMS.Data.Models.Student student = db.Students.Where(x => x.Id == id).FirstOrDefault();
                 if (student == null)
                 {
                     return HttpNotFound();
@@ -47,8 +47,8 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             }
 
             ViewBag.IsToEdit = isToEdit;
-            ViewBag.StudID = obj.StudID;
-            return PartialView("_ChildIndex", obj.StudSiblings);
+            ViewBag.StudID = obj.Id;
+            return PartialView("_ChildIndex", obj.Siblings);
         }
 
         [AllowAnonymous]
@@ -64,7 +64,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                Nalanda.SMS.Data.Models.Student student = db.Students.Where(x => x.StudId == id).FirstOrDefault();
+                Nalanda.SMS.Data.Models.Student student = db.Students.Where(x => x.Id == id).FirstOrDefault();
                 if (student == null)
                 {
                     return HttpNotFound();
@@ -73,8 +73,8 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             }
 
             ViewBag.IsToEdit = isToEdit;
-            ViewBag.StudID = obj.StudID;
-            return PartialView("_FamilyIndex", obj.StudFamilies);
+            ViewBag.StudID = obj.Id;
+            return PartialView("_FamilyIndex", obj.FamilyMembers);
         }
 
         public ActionResult Details(int? id)
@@ -102,8 +102,8 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 return View(stud);
             }
 
-            var student = new StudentVM();            
-            
+            var student = new StudentVM() { AdmissionDate = new DateTime(DateTime.Now.Year, 1, 1) };
+
             Session[sskCrtdObj] = student;
             Session.Remove(sskTempPic);
             Session.Remove(sskTempPicName);
@@ -112,8 +112,9 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudID,IndexNo,Title,Gender,FullName,Initials,LName,Address,DOB,School,SchoolAddress,LastDhammaSchool,LDhammaSchoolAdd,LastDhammaGrade,EngSpeaking,EngWriting,EngReading,EmergencyConName,EmergencyContactTel,SpecialAttention,NameWithInt,ImagePath,Status,IsLeavingIssued,InactiveReason")] StudentVM student)
+        public ActionResult Create(StudentVM student)
         {
+            var dbTrans = db.Database.BeginTransaction();
             try
             {
                 var obj = (StudentVM)Session[sskCrtdObj];
@@ -129,44 +130,53 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                     student.CreatedDate = DateTime.Now;
 
                     var lastStudIndex = db.Students.MaxOrDefault(x => x.IndexNo);
-                    student.IndexNo = lastStudIndex++;
+                    student.IndexNo = Math.Max(lastStudIndex, 10000) + 1;
 
                     var objStudent = db.Students.Add(student.GetEntity()).Entity;
                     db.SaveChanges();
 
-                    var imgPath = SaveImage(objStudent.StudId, student.ImagePath);
+                    objStudent.SchoolEmail = $"{objStudent.IndexNo}@nalandacollege.info";
+
+                    var imgPath = SaveImage(objStudent.Id, student.ImagePath);
                     if (!imgPath.IsBlank())
                     {
                         objStudent.ImagePath = imgPath;
                         db.SaveChanges();
                     }
 
-                    foreach (var det in obj.StudSiblings)
+                    foreach (var det in obj.Siblings)
                     {
-                        det.SudID = objStudent.StudId;
+                        det.StudentId = objStudent.Id;
                         det.CreatedBy = objStudent.CreatedBy;
                         det.CreatedDate = DateTime.Now;
                         db.StudSiblings.Add(det.GetEntity());
                     }
 
-                    foreach (var det in obj.StudFamilies)
+                    foreach (var det in obj.FamilyMembers)
                     {
-                        det.StudID = objStudent.StudId;
+                        det.StudentId = objStudent.Id;
                         det.CreatedBy = objStudent.CreatedBy;
                         det.CreatedDate = DateTime.Now;
                         db.StudFamilies.Add(det.GetEntity());
                     }
 
                     db.SaveChanges();
+                    dbTrans.Commit();
 
                     AddAlert(SMS.Common.AlertStyles.success, "Student Admission Created Successfully.");
-                    return RedirectToAction("Details", new { id = objStudent.StudId });
+                    return RedirectToAction("Details", new { id = objStudent.Id });
                 }
             }
             catch (DbEntityValidationException dbEx)
-            { this.ShowEntityErrors(dbEx); }
+            {
+                dbTrans.Rollback();
+                this.ShowEntityErrors(dbEx);
+            }
             catch (Exception ex)
-            { AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message); }
+            {
+                dbTrans.Rollback();
+                AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message);
+            }
 
             return View(student);
         }
@@ -179,7 +189,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             StudentVM obj = (StudentVM)Session[sskCrtdObj];
-            StudSiblingsVM studSiblings = obj.StudSiblings.Where(x => x.SubID == id.Value).FirstOrDefault();
+            StudSiblingsVM studSiblings = obj.Siblings.Where(x => x.Id == id.Value).FirstOrDefault();
             if (studSiblings == null)
             {
                 return HttpNotFound();
@@ -196,7 +206,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             StudentVM obj = (StudentVM)Session[sskCrtdObj];
-            StudFamilyVM studFamilyVM = obj.StudFamilies.Where(x => x.StudFID == id.Value).FirstOrDefault();
+            StudFamilyVM studFamilyVM = obj.FamilyMembers.Where(x => x.Id == id.Value).FirstOrDefault();
             if (studFamilyVM == null)
             {
                 return HttpNotFound();
@@ -208,33 +218,28 @@ namespace Nalanda.SMS.Areas.Student.Controllers
         [AllowAnonymous]
         public ActionResult ChildCreate(int? studID)
         {
-            StudentVM obj = null;
-
             if (studID != 0)
             {
                 if (studID == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                Nalanda.SMS.Data.Models.Student student = db.Students.Find(studID);
+                var student = db.Students.Find(studID);
 
-                obj = new StudentVM(student);
                 if (student == null)
                 {
                     return HttpNotFound();
                 }
             }
 
-            obj = (StudentVM)Session[sskCrtdObj];
-
-            var StudSiblingsVM = new StudSiblingsVM() { SudID = studID.Value };
+            var StudSiblingsVM = new StudSiblingsVM() { StudentId = studID.Value };
             return PartialView("_ChildCreate", StudSiblingsVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult ChildCreate([Bind(Include = "SubID,SudID,SiblingStudID,Relationship,StudWithInit,IndexNo,Title,FullName,Initials,LName,Title")] StudSiblingsVM studentSibling)
+        public ActionResult ChildCreate(StudSiblingsVM studentSibling)
         {
             StudentVM obj;
             try
@@ -242,11 +247,11 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 if (ModelState.IsValid)
                 {
                     obj = (StudentVM)Session[sskCrtdObj];
-                    studentSibling.SubID = Math.Min(obj.StudSiblings.Select(x => x.SubID).MinOrDefault(), 0) - 1;
-                    obj.StudSiblings.Add(studentSibling);
+                    studentSibling.Id = Math.Min(obj.Siblings.Select(x => x.Id).MinOrDefault(), 0) - 1;
+                    obj.Siblings.Add(studentSibling);
 
                     AddAlert(SMS.Common.AlertStyles.success, "Student Siblings Added Successfully.");
-                    string url = Url.Action("ChildIndex", new { id = studentSibling.SubID, isToEdit = true });
+                    string url = Url.Action("ChildIndex", new { id = studentSibling.Id, isToEdit = true });
                     return Json(new { success = true, url });
                 }
 
@@ -290,14 +295,14 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             }
             var obj = (StudentVM)Session[sskCrtdObj];
 
-            var studFamilyVM = new StudFamilyVM() { StudID = studID.Value };
+            var studFamilyVM = new StudFamilyVM() { StudentId = studID.Value };
             return PartialView("_FamilyCreate", studFamilyVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult FamilyCreate([Bind(Include = "StudFID,StudID,Name,Relationship,Occupation,WorkingAdd,OfficeTel,ContactMob,ContactHome,Email,NICNo,Title")] StudFamilyVM studFamilyVM)
+        public ActionResult FamilyCreate(StudFamilyVM studFamilyVM)
         {
             StudentVM obj;
             try
@@ -305,11 +310,11 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 if (ModelState.IsValid)
                 {
                     obj = (StudentVM)Session[sskCrtdObj];
-                    studFamilyVM.StudFID = Math.Min(obj.StudFamilies.Select(x => x.StudFID).MinOrDefault(), 0) - 1;
-                    obj.StudFamilies.Add(studFamilyVM);
+                    studFamilyVM.Id = Math.Min(obj.FamilyMembers.Select(x => x.Id).MinOrDefault(), 0) - 1;
+                    obj.FamilyMembers.Add(studFamilyVM);
 
                     AddAlert(SMS.Common.AlertStyles.success, "Family Member Added Successfully.");
-                    string url = Url.Action("FamilyIndex", new { id = studFamilyVM.StudFID, isToEdit = true });
+                    string url = Url.Action("FamilyIndex", new { id = studFamilyVM.Id, isToEdit = true });
                     return Json(new { success = true, url });
                 }
 
@@ -351,7 +356,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudID,IndexNo,Title,Gender,FullName,Initials,LName,Address,DOB,School,SchoolAddress,LastDhammaSchool,LDhammaSchoolAdd,LastDhammaGrade,EngSpeaking,EngWriting,EngReading,EmergencyConName,EmergencyContactTel,SpecialAttention,NameWithInt,RowVersion,ImagePath,Status,IsLeavingIssued,InactiveReason")] StudentVM student)
+        public ActionResult Edit(StudentVM student)
         {
             byte[] curRowVersion = null;
             try
@@ -363,26 +368,26 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var obj = db.Students.Find(student.StudID);
+                    var obj = db.Students.Find(student.Id);
                     if (obj == null)
                     { throw new DbUpdateConcurrencyException(); }
 
                     curRowVersion = obj.RowVersion;
                     var modObj = student.GetEntity();
-                    modObj.CopyContent(obj, "StudID,IndexNo,Title,Gender,FullName,Initials,LName,Address,DOB,School,SchoolAddress,LastDhammaSchool,LDhammaSchoolAdd,LastDhammaGrade,EngSpeaking,EngWriting,EngReading,EmergencyConName,EmergencyContactTel,SpecialAttention,NameWithInt,ImagePath,Status,IsLeavingIssued,InactiveReason");
+                    modObj.CopyContent(obj, "StudID,IndexNo,Title,Gender,FullName,Initials,Lname,Address,DOB,School,SchoolAddress,LastDhammaSchool,LDhammaSchoolAdd,LastDhammaGrade,EngSpeaking,EngWriting,EngReading,EmergencyConName,EmergencyContactTel,SpecialAttention,NameWithInt,ImagePath,Status,IsLeavingIssued,InactiveReason");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;
-                    obj.ImagePath = SaveImage(obj.StudId, obj.ImagePath);
+                    obj.ImagePath = SaveImage(obj.Id, obj.ImagePath);
 
                     db.Entry(obj).OriginalValues["RowVersion"] = student.RowVersion;
 
                     db.StudSiblings.RemoveRange(obj.StudSiblings.Where(x =>
-                        !studvm.StudSiblings.Select(y => y.SubID).ToList().Contains(x.SubId)));
+                        !studvm.Siblings.Select(y => y.Id).ToList().Contains(x.Id)));
 
-                    foreach (var det in studvm.StudSiblings)
+                    foreach (var det in studvm.Siblings)
                     {
-                        var objDet = db.StudSiblings.Find(det.SubID);
+                        var objDet = db.StudSiblings.Find(det.Id);
                         if (objDet == null)
                         {
                             det.CreatedBy = this.GetCurrUser();
@@ -401,11 +406,11 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
 
                     db.StudFamilies.RemoveRange(obj.StudFamilies.Where(x =>
-                       !studvm.StudFamilies.Select(y => y.StudFID).ToList().Contains(x.StudFid)));
+                       !studvm.FamilyMembers.Select(y => y.Id).ToList().Contains(x.Id)));
 
-                    foreach (var exper in studvm.StudFamilies)
+                    foreach (var exper in studvm.FamilyMembers)
                     {
-                        var objexpe = db.StudFamilies.Find(exper.StudFID);
+                        var objexpe = db.StudFamilies.Find(exper.Id);
                         if (objexpe == null)
                         {
                             exper.CreatedBy = this.GetCurrUser();
@@ -425,7 +430,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                     db.SaveChanges();
 
                     AddAlert(SMS.Common.AlertStyles.success, "Admission Modified Successfully.");
-                    return RedirectToAction("Details", new { id = obj.StudId });
+                    return RedirectToAction("Details", new { id = obj.Id });
                 }
             }
             catch (DbUpdateConcurrencyException ex)
@@ -448,7 +453,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StudSiblingsVM studSiblingsVM = ((StudentVM)Session[sskCrtdObj]).StudSiblings.FirstOrDefault(x => x.SubID == id);
+            StudSiblingsVM studSiblingsVM = ((StudentVM)Session[sskCrtdObj]).Siblings.FirstOrDefault(x => x.Id == id);
             if (studSiblingsVM == null)
             {
                 return HttpNotFound();
@@ -458,16 +463,16 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChildEdit([Bind(Include = "SubID,SudID,SiblingStudID,Relationship,StudWithInit,IndexNo,Title,FullName,Initials,LName")] StudSiblingsVM studSiblingsVM)
+        public ActionResult ChildEdit(StudSiblingsVM studSiblingsVM)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var obj = ((StudentVM)Session[sskCrtdObj]).StudSiblings.FirstOrDefault(x => x.SubID == studSiblingsVM.SubID);
+                    var obj = ((StudentVM)Session[sskCrtdObj]).Siblings.FirstOrDefault(x => x.Id == studSiblingsVM.Id);
                     studSiblingsVM.CopyContent(obj, "SudID,SiblingStudID,Relationship,StudWithInit,IndexNo,Title,FullName,Initials,LName");
                     AddAlert(SMS.Common.AlertStyles.success, "Siblings Modified Successfully.");
-                    string url = Url.Action("ChildIndex", new { id = studSiblingsVM.SubID, isToEdit = true });
+                    string url = Url.Action("ChildIndex", new { id = studSiblingsVM.Id, isToEdit = true });
                     return Json(new { success = true, url = url });
                 }
             }
@@ -485,7 +490,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StudFamilyVM studFamilyvm = ((StudentVM)Session[sskCrtdObj]).StudFamilies.FirstOrDefault(x => x.StudFID == id);
+            StudFamilyVM studFamilyvm = ((StudentVM)Session[sskCrtdObj]).FamilyMembers.FirstOrDefault(x => x.Id == id);
             if (studFamilyvm == null)
             {
                 return HttpNotFound();
@@ -495,16 +500,16 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult FamilyEdit([Bind(Include = "StudFID,StudID,Name,Relationship,Occupation,WorkingAdd,OfficeTel,ContactMob,ContactHome,Email,NICNo,Title")] StudFamilyVM studFamilyvm)
+        public ActionResult FamilyEdit(StudFamilyVM studFamilyvm)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var obj = ((StudentVM)Session[sskCrtdObj]).StudFamilies.FirstOrDefault(x => x.StudFID == studFamilyvm.StudFID);
+                    var obj = ((StudentVM)Session[sskCrtdObj]).FamilyMembers.FirstOrDefault(x => x.Id == studFamilyvm.Id);
                     studFamilyvm.CopyContent(obj, "Name,Relationship,Occupation,WorkingAdd,OfficeTel,ContactMob,ContactHome,Email,NICNo,Title");
                     AddAlert(SMS.Common.AlertStyles.success, "Family Member Modified Successfully.");
-                    string url = Url.Action("FamilyIndex", new { id = studFamilyvm.StudFID, isToEdit = true });
+                    string url = Url.Action("FamilyIndex", new { id = studFamilyvm.Id, isToEdit = true });
                     return Json(new { success = true, url });
                 }
             }
@@ -523,12 +528,18 @@ namespace Nalanda.SMS.Areas.Student.Controllers
         {
             try
             {
-                var obj = db.Students.Find(student.StudID);
+                var obj = db.Students.Find(student.Id);
                 if (obj == null)
                 { throw new DbUpdateConcurrencyException(""); }
                 db.Detach(obj);
 
-                db.Entry(student.GetEntity()).State = EntityState.Deleted;
+                var entry = db.Entry(student.GetEntity());
+                entry.State = EntityState.Unchanged;
+                entry.Collection(x => x.StudFamilies).Load();
+                db.StudFamilies.RemoveRange(entry.Entity.StudFamilies);
+                entry.Collection(x => x.StudSiblings).Load();
+                db.StudSiblings.RemoveRange(entry.Entity.StudSiblings);
+                entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
                 AddAlert(SMS.Common.AlertStyles.success, "Student Admission Deleted Successfully.");
@@ -544,7 +555,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             {
                 AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message);
             }
-            return RedirectToAction("Details", new { id = student.StudID });
+            return RedirectToAction("Details", new { id = student.Id });
         }
 
         [HttpPost, ActionName("ChildDelete")]
@@ -554,8 +565,8 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             string msg = string.Empty;
             try
             {
-                var lst = ((StudentVM)Session[sskCrtdObj]).StudSiblings;
-                var obj = lst.FirstOrDefault(x => x.SubID == id);
+                var lst = ((StudentVM)Session[sskCrtdObj]).Siblings;
+                var obj = lst.FirstOrDefault(x => x.Id == id);
                 lst.Remove(obj);
 
                 AddAlert(SMS.Common.AlertStyles.success, "Sibling Removed Successfully.");
@@ -578,8 +589,8 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             string msg = string.Empty;
             try
             {
-                var lst = ((StudentVM)Session[sskCrtdObj]).StudFamilies;
-                var obj = lst.FirstOrDefault(x => x.StudFID == id);
+                var lst = ((StudentVM)Session[sskCrtdObj]).FamilyMembers;
+                var obj = lst.FirstOrDefault(x => x.Id == id);
                 lst.Remove(obj);
 
                 AddAlert(SMS.Common.AlertStyles.success, "Family Member Removed Successfully.");
@@ -598,7 +609,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult UploadPic([Bind(Include = "StudID,IndexNo,Title,Gender,FullName,Initials,LName,Address,School,SchoolAddress,LastDhammaSchool,LDhammaSchoolAdd,EngSpeaking,EngWriting,EngReading,EmergencyConName,EmergencyContactTel,SpecialAttention,NameWithInt,RowVersion,ProfilePic,IsLeavingIssued,InactiveReason")] StudentVM student, string FromAction)
+        public ActionResult UploadPic(StudentVM student, string FromAction)
         {
             if (student.ProfilePic != null && student.ProfilePic.ContentLength > 0)
             {
@@ -687,9 +698,9 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
         public ActionResult PrintAdmissionSheet(int id)
         {
-            var lstHdr = db.Students.Where(x => x.StudId == id).Select(x => new
+            var lstHdr = db.Students.Where(x => x.Id == id).Select(x => new
             {
-                x.StudId,
+                x.Id,
                 Title = x.Title == TitleStud.Mr ? "Mr. " : "Ms.",
                 AdmissionNo = x.IndexNo,
                 FullName = x.FullName,
@@ -697,29 +708,21 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 LastName = x.Lname,
                 Address = x.Address,
                 DOB = x.Dob,
-                Gender = x.Gender == Gender.Female ? "Female" : "Male",
-                SchoolName = x.School,
-                SchoolAddress = x.SchoolAddress,
-                DhammaSchoolName = x.LastDhammaSchool,
-                DhammaSchoolAddress = x.LdhammaSchoolAdd,
-                GradehammaSchoolLeave = x.LastDhammaGrade,
-                EngSpeacking = x.EngSpeaking == Fluency.VeryGood ? "Very Good" : (x.EngSpeaking == Fluency.Good ? "Good" : (x.EngSpeaking == Fluency.Average ? "Average" : (x.EngSpeaking == Fluency.Weak ? "Weak" : "None"))),
-                EngWriting = x.EngWriting == Fluency.VeryGood ? "Very Good" : (x.EngWriting == Fluency.Good ? "Good" : (x.EngWriting == Fluency.Average ? "Average" : (x.EngWriting == Fluency.Weak ? "Weak" : "None"))),
-                EngReading = x.EngReading == Fluency.VeryGood ? "Very Good" : (x.EngReading == Fluency.Good ? "Good" : (x.EngReading == Fluency.Average ? "Average" : (x.EngReading == Fluency.Weak ? "Weak" : "None"))),
+                GradehammaSchoolLeave = x.LastGrade,
                 EmmergencyContactName = x.EmergencyConName,
                 EmmergencyContactTelno = x.EmergencyContactTel,
-                SpecialAttention = x.SpecialAttention,
-                DateRegistered = x.CreatedDate
+                SpecialAttention = x.Medium,
+                DateRegistered = x.AdmissionDate
             }).ToList();
 
-            var lstSibDet = db.Students.Where(x => x.StudId == id).SelectMany(x => x.StudSiblings).Select(x => new
+            var lstSibDet = db.Students.Where(x => x.Id == id).SelectMany(x => x.StudSiblings).Select(x => new
             {
-                Name = x.StudentRelation.Title + ". "+ x.StudentRelation.Initials + " " + x.StudentRelation.Lname,
-                Relationship = x.Relationship == SibRelationship.Brother ? "Brother" : "Sister",
-                Class = x.StudentRelation.ClassStudents.Select(y => y.PromotionClass.Class.Grade).FirstOrDefault() +" - " + x.StudentRelation.ClassStudents.Select(y => y.PromotionClass.Class.ClassDesc).FirstOrDefault()
+                Name = x.SiblingStudent.Title + ". " + x.SiblingStudent.Initials + " " + x.SiblingStudent.Lname,
+                Relationship = x.Relationship == SibRelationship.YoungerBrother ? "Younger Brother" : "Elder Brother",
+                Class = "" //x.SiblingStudent.ClassStudents.Select(y => y.PromotionClass.Class.Grade).FirstOrDefault() + " - " + x.SiblingStudent.ClassStudents.Select(y => y.PromotionClass.Class.ClassDesc).FirstOrDefault()
             }).ToList();
 
-            var lstFamDet = db.Students.Where(x => x.StudId == id).SelectMany(x => x.StudFamilies).Select(x => new
+            var lstFamDet = db.Students.Where(x => x.Id == id).SelectMany(x => x.StudFamilies).Select(x => new
             {
                 Name = x.Name,
                 Relationship = x.Relationship == Relationship.Father ? "Father" : (x.Relationship == Relationship.Mother ? "Mother" : "Guardian"),

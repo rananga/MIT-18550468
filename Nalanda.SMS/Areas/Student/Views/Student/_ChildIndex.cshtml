@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SMS.Areas.Student.Models.StudSiblingsVM>
+﻿@model IEnumerable<Nalanda.SMS.Areas.Student.Models.StudSiblingsVM>
 
 <hr />
 <h3>Student Siblings</h3>
@@ -43,10 +43,10 @@
                 {
                     <td class="btn-3">
                         <div class="btn-toolbar pull-right">
-                            @using (Html.BeginForm("ChildDelete", "Student", new { id = item.SubID }))
+                            @using (Html.BeginForm("ChildDelete", "Student", new { id = item.Id }))
                             {
                                 @Html.AntiForgeryToken()
-                                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-pencil' style='color:black'></span>", "Edit", "ChildEdit", routeValues: new { id = item.SubID }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-warning btn-xs", data_title = "Edit Student Siblings" })
+                                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-pencil' style='color:black'></span>", "Edit", "ChildEdit", routeValues: new { id = item.Id }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-warning btn-xs", data_title = "Edit Student Siblings" })
                                 @Html.ConfirmSubmitButton("<span class='glyphicon glyphicon-trash'></span>", "Are you sure you want to delete?", "Confirm Sibling deletion", "<span class='glyphicon glyphicon-trash'></span> Delete", new { data_popup_delete = "", @class = "btn btn-danger btn-xs" })
                             }
                         </div>

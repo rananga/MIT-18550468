@@ -46,7 +46,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 if (classStudentVM.PrClID == 0)
                 { ModelState.AddModelError("PrClID", "Class should be selected."); }
 
-                int ExistStudent = db.ClassStudents.Where(x => x.StudId == classStudentVM.StudID && x.PromotionClass.PeriodSetup.PeriodId == classStudentVM.PeriodID).Count();
+                int ExistStudent = 0; //db.ClassStudents.Where(x => x.StudentId == classStudentVM.StudID && x.PromotionClass.PeriodSetup.PeriodId == classStudentVM.PeriodID).Count();
                 if (ExistStudent != 0)
                 { ModelState.AddModelError("", "Student Already Registered for this Academic Period"); }
 
@@ -59,7 +59,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                     db.SaveChanges();
 
                     AddAlert(SMS.Common.AlertStyles.success, "Student Registered successfully.");
-                    return RedirectToAction("Details", new { id = newObj.ClStudId });
+                    return RedirectToAction("Details", new { id = newObj.Id });
                 }
             }
             catch (DbEntityValidationException dbEx)
@@ -133,7 +133,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             {
                 return HttpNotFound();
             }
-            var period = db.PromotionClasses.Where(x => x.PrClId == classStudent.PrClId).FirstOrDefault();
+            var period = db.PromotionClasses.Where(x => x.PrClId == classStudent.Id).FirstOrDefault();
             var obj = new ClassStudentVM(classStudent) { PeriodID = period.PeriodId };
             Session[sskCrtdObj] = obj;
             return View(obj);
@@ -165,15 +165,15 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                     var modObj = classStudentVM.GetEntity();
                     var promotionClasses = db.PromotionClasses.Find(classStudentVM.PrClID);
                     var periodsetup = db.PeriodSetups.Find(promotionClasses.PeriodId);
-                    obj.PeriodStartDate = periodsetup.PeriodStartDate;
-                    obj.PeriodEndDate = periodsetup.PeriodEndDate;
+                    //obj.PeriodStartDate = periodsetup.PeriodStartDate;
+                    //obj.PeriodEndDate = periodsetup.PeriodEndDate;
                     modObj.CopyContent(obj, "PrClID,IsMonitor");
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;
                     db.SaveChanges();
 
                     AddAlert(SMS.Common.AlertStyles.success, "Class registration modified successfully.");
-                    return RedirectToAction("Details", new { id = modObj.ClStudId });
+                    return RedirectToAction("Details", new { id = modObj.Id });
                 }
             }
             catch (DbEntityValidationException dbEx)

@@ -17,9 +17,9 @@ namespace Nalanda.SMS.Areas.Student.Models
             ClassStudents = new List<ClassStudentVM>();
             mappings = new ObjMappings<PromotionClass, PromotionClassVM>();
 
-            mappings.Add(x => x.ClassStudents.Where(z => z.Status != StudStatus.Inactive && z.Student.Status != StudStatus.Inactive).Select(y => new ClassStudentVM(y)).ToList(), x => x.ClassStudents);
-            mappings.Add(x => x.Class.ClassDesc, x => x.ClassDesc);
-            mappings.Add(x => x.Class.Grade, x => x.Grade);
+            //mappings.Add(x => x.ClassStudents.Where(z => z.Status != StudStatus.Inactive && z.Student.Status != StudStatus.Inactive).Select(y => new ClassStudentVM(y)).ToList(), x => x.ClassStudents);
+            mappings.Add(x => x.Class.Name, x => x.ClassDesc);
+            //mappings.Add(x => x.Class.Grade, x => x.Grade);
             mappings.Add(x => x.ClassStudents.Count(), x => x.NoOfStud);
             mappings.Add(x => x.Teacher.Title + ". " + x.Teacher.Initials + " " + x.Teacher.Lname, x => x.TeacherName);
             mappings.Add(x => x.PeriodSetup.PeriodStartDate, x => x.PeriodStartDate);

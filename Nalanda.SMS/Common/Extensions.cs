@@ -250,6 +250,9 @@ namespace System
         }
         public static T CopyContent<T>(this T src, T res, string propsToIncl = null, string propsToExcl = null)
         {
+            if (res == null)
+                return default(T);
+
             Type resTyp = res.GetType();
             string[] propsToInclude = (propsToIncl ?? "").Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             string[] propsToExclude = (propsToExcl ?? "").Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);

@@ -75,7 +75,6 @@
                 left: 0px;
             }
     </style>
-
 }
 
 @{
@@ -99,15 +98,11 @@
 
     }
 
-    @*<header style="height:400px; background:url(../../../../Content/Images/home_banner.jpg) no-repeat;background-size:cover; color: #fff!important;border-radius: .3rem">
-
-        </header>*@
-
     <div class="container tiles-container" style="padding-top:30px">
         @foreach (var tile in (List<HomeController.TileData>)ViewBag.Tiles)
         {
             idx++;
-            <div class="col-md-2 col-sm-4 col-xs-12" style="padding:0;min-width:220px" data-id="@idx">
+            <div class="col-md-4 col-sm-4 col-xs-12" style="padding:0;min-width:220px" data-id="@idx">
                 <div class="tile" data-url="@tile.DataURL" title='@(tile.LandingURL.IsBlank() ? "" :  "Click To View")'>
                     <div class="@tile.ColorClass" style="width:100%;height:100%;border: 4px solid transparent;">
                         @if (!tile.LandingURL.IsBlank())
@@ -115,8 +110,8 @@
                             @Html.Raw("<a class='' href='" + tile.LandingURL + "'" + (tile.OpenInNewTab ? " data-in-new-tab='1'" : "") + ">")
                         }
 
-                        <div class="tileLabelNo">0</div>
-                        <i class="tileIcon" style="background-image: url('@tile.IconURL'); "></i>
+                        @*<div class="tileLabelNo">0</div>*@
+                        <div style="text-align:center;margin-top:25px"><i class="tileIcon" style="background-image: url('@tile.IconURL'); "></i></div>
 
                         <div style="margin-left: 10px;margin-right:10px;text-align:center;">
                             <span class="tileLabel">@tile.Text</span>
@@ -132,12 +127,8 @@
         }
     </div>
 
-
 </body>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/notification")
-
 }
-
-

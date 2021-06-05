@@ -82,8 +82,8 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
             var lst = db.PromotionClasses.ToList().Select(x => new
             {
                 Grade = x.Class.Grade.ToEnumChar(),
-                NoOfStudents = x.ClassStudents.Where(y => y.PromotionClass.PeriodId == rptObj.PeriodID).Count(),
-                NoOfStudents2 = x.ClassStudents.Where(y => y.PromotionClass.PeriodId == rptObj.PeriodID2).Count(),
+                NoOfStudents =0, //x.ClassStudents.Where(y => y.PromotionClass.PeriodId == rptObj.PeriodID).Count(),
+                NoOfStudents2 = 0, //x.ClassStudents.Where(y => y.PromotionClass.PeriodId == rptObj.PeriodID2).Count(),
             }).ToList();
 
             LocalReport report = new LocalReport();

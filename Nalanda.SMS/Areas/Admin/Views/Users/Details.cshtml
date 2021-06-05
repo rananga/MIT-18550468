@@ -8,12 +8,12 @@
     <hr />
     @using (Html.BeginForm("Delete", "Users"))
     {
-        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.RowVersion)
         @Html.AntiForgeryToken()
         <p>
             <div class="btn-toolbar">
-                @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }, new { @class = "btn btn-primary", style = "min-width:75px" })
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary", style = "min-width:75px" })
                 @Html.ConfirmSubmitButton("Delete", "Are you sure you want to delete?", "Confirm user deletion",
                  "<span class='glyphicon glyphicon-trash'></span> Delete", new { @class = "btn btn-danger", style = "min-width:75px" })
             </div>
@@ -39,7 +39,7 @@
 </div>
 
 <div id="ChildContent">
-    @{ Html.RenderAction("ChildIndex", new { id = Model.UserId }); }
+    @{ Html.RenderAction("ChildIndex", new { id = Model.Id }); }
 </div>
 
 <p>

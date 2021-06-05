@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -14,9 +16,13 @@ namespace Nalanda.SMS.Data.Models
             ClubMembers = new HashSet<ClubMember>();
         }
 
-        public int Cid { get; set; }
+        public int ClubId { get; set; }
+        [DisplayName("Club"), Required]
         public string Name { get; set; }
+        [Required]
+        [DisplayName("Description"), DataType(DataType.MultilineText)]
         public string Description { get; set; }
+        [DisplayName("Status"), Required]
         public ActiveState Status { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }

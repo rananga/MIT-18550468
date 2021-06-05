@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
-
 namespace Nalanda.SMS.Data.Models
 {
-    public partial class Teacher
+    public partial class Teacher : BaseModel
     {
         public Teacher()
         {
-            ClassTeachers = new HashSet<ClassTeacher>();
-            EventParticipations = new HashSet<EventParticipation>();
-            PromotionClasses = new HashSet<PromotionClass>();
+            HeadingGrades = new HashSet<Grade>();
+            ClassTeachers = new HashSet<Class>();
+            TeacherSubjects = new HashSet<TeacherSubject>();
+            //EventParticipations = new HashSet<EventParticipation>();
+            //PromotionClasses = new HashSet<PromotionClass>();
         }
 
-        public int TeachId { get; set; }
         [Required]
         public TitleTeacher Title { get; set; }
         [Required]
         public Gender Gender { get; set; }
         [DisplayName("Full Name"), DataType(DataType.MultilineText), Required]
         public string FullName { get; set; }
+        [Required]
         public string Initials { get; set; }
         [DisplayName("Last Name"), DataType(DataType.MultilineText)]
         public string Lname { get; set; }
@@ -33,9 +30,9 @@ namespace Nalanda.SMS.Data.Models
         [DisplayName("Mobile No"), Required]
         [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
         public string ContactNo { get; set; }
-        [DisplayName("E-mail")]
+        [DisplayName("School Email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        public string Email { get; set; }
+        public string SchoolEmail { get; set; }
         [DisplayName("NIC No"), Required]
         public string Nicno { get; set; }
         [DisplayName("Home Contact No")]
@@ -49,14 +46,11 @@ namespace Nalanda.SMS.Data.Models
         public TeacherStatus Status { get; set; }
         [DisplayName("Inactive Reason")]
         public string InactiveReason { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public string ModifiedBy { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public byte[] RowVersion { get; set; }
 
-        public virtual ICollection<ClassTeacher> ClassTeachers { get; set; }
-        public virtual ICollection<EventParticipation> EventParticipations { get; set; }
-        public virtual ICollection<PromotionClass> PromotionClasses { get; set; }
+        public virtual ICollection<Grade> HeadingGrades { get; set; }
+        public virtual ICollection<Class> ClassTeachers { get; set; }
+        public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
+        //public virtual ICollection<EventParticipation> EventParticipations { get; set; }
+        //public virtual ICollection<PromotionClass> PromotionClasses { get; set; }
     }
 }

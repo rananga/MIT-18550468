@@ -22,7 +22,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             { return View(new ReportParameterVM()); }
 
             ReportParameterVM rptObj = (ReportParameterVM)Session[sskCrtdObj];
-            var Headerlst = db.Students.Where(x => x.StudId == rptObj.StudentID).ToList().Select(x => new
+            var Headerlst = db.Students.Where(x => x.Id == rptObj.StudentID).ToList().Select(x => new
             {
                 IndexNo = x.IndexNo.ToString(),
                 StudentName = x.Title + ". " + x.Initials + " " + x.Lname,
@@ -96,7 +96,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             if (basePath.StartsWith("\\") && !basePath.StartsWith("\\\\"))
             { basePath = Server.MapPath("~" + basePath); }
             var objStudent = db.ClassStudents.Find(rptObj.StudentID);
-            var lstHdr = db.Students.Where(e => e.StudId == objStudent.StudId).ToList()
+            var lstHdr = db.Students.Where(e => e.Id == objStudent.StudentId).ToList()
                  .Select(x => new
                  {
                      StudentName = x.Lname + " " + (x.Initials).ToUpper(),
@@ -150,7 +150,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             if (basePath.StartsWith("\\") && !basePath.StartsWith("\\\\"))
             { basePath = Server.MapPath("~" + basePath); }
 
-            var lst = db.ClassStudents.Where(x => x.PrClId == rptObj.ClassID).ToList()
+            var lst = db.ClassStudents.Where(x => x.Id == rptObj.ClassID).ToList()
                  .Select(x => new
                  {
                      StudentName = x.Student.Lname + " " + (x.Student.Initials).ToUpper(),
@@ -208,7 +208,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 YearPeriod = x.InactiveDate == null? x.EffectiveDate.ToString("yyyy-MM-dd") : x.EffectiveDate.ToString("yyyy-MM-dd") +" - " + x.InactiveDate.Value.ToString("yyyy-MM-dd"),
                 PrefectType = x.Type == PrefectType.Junior ? "Junior" : x.Type == PrefectType.Senior ? "Senior" : "PendingPrefect",
                 Name = x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname,
-                Class = x.PromotionClass.Class.Grade.ToEnumChar() + " - " + x.PromotionClass.Class.ClassDesc,
+                Class = x.PromotionClass.Class.Grade.ToEnumChar() + " - " + x.PromotionClass.Class.Name,
                 IsHP = x.IsHp == true ? "Yes" : "",
                 IsDHP = x.IsDhp == true ? "Yes" : ""
             }).ToList();
@@ -271,16 +271,16 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
             ReportParameterVM rptObj = (ReportParameterVM)Session[sskCrtdObj];
             var period = db.PeriodSetups.Find(rptObj.PeriodID);
-            var lst = db.ClassStudents.Where(x => (x.PrClId == rptObj.ClassID)).ToList().Select(x => new
+            var lst = db.ClassStudents.Where(x => (x.Id == rptObj.ClassID)).ToList().Select(x => new
             {
-                Grade = x.PromotionClass.Class.Grade.ToEnumChar(),
-                Class = x.PromotionClass.Class.ClassDesc,
-                TeacherInCharge = x.PromotionClass.Teacher.Title + ". " + x.PromotionClass.Teacher.Initials + " " + x.PromotionClass.Teacher.Lname,
-                ClassMonitor = x.IsCurrentMonitor == true ? x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname : "",
+                //Grade = x.PromotionClass.Class.Grade.ToEnumChar(),
+                //Class = x.PromotionClass.Class.ClassDesc,
+                //TeacherInCharge = x.PromotionClass.Teacher.Title + ". " + x.PromotionClass.Teacher.Initials + " " + x.PromotionClass.Teacher.Lname,
+                //ClassMonitor = x.IsCurrentMonitor == true ? x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname : "",
                 AdmissionNo = x.Student.IndexNo,
                 Name = x.Student.Title + " ." + x.Student.Initials + " " + x.Student.Lname,
-                IsMonitor = x.IsMonitor == true ? "Yes" : "",
-                YearPeriod = x.IsMonitor == true && x.PeriodEndDate != null ? x.PeriodStartDate.Value.ToString("yyyy-MM-dd") + " - " + x.PeriodEndDate.Value.ToString("yyyy-MM-dd") :"",
+                //IsMonitor = x.IsMonitor == true ? "Yes" : "",
+                //YearPeriod = x.IsMonitor == true && x.PeriodEndDate != null ? x.PeriodStartDate.Value.ToString("yyyy-MM-dd") + " - " + x.PeriodEndDate.Value.ToString("yyyy-MM-dd") :"",
                 PeriodCovers = period.PeriodStartDate.ToString("yyyy-MM-dd") + " - " + period.PeriodEndDate.ToString("yyyy-MM-dd")
             }).ToList().OrderBy(x => x.AdmissionNo);
 
@@ -321,17 +321,17 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
             ReportParameterVM rptObj = (ReportParameterVM)Session[sskCrtdObj];
 
-            var StudentPromotionsList = db.ClassStudents.Where(x => x.StudId == rptObj.StudentID).ToList().Select(x => new
+            var StudentPromotionsList = db.ClassStudents.Where(x => x.StudentId == rptObj.StudentID).ToList().Select(x => new
             {
-                YearPeriod = x.PromotionClass.PeriodSetup.PeriodStartDate.ToString("yyyy-MM-dd") + " - " + x.PromotionClass.PeriodSetup.PeriodEndDate.ToString("yyyy-MM-dd"),
-                Grade = x.PromotionClass.Class.Grade.ToEnumChar(),
-                Class = x.PromotionClass.Class.ClassDesc,
-                TeacherInCharge = x.PromotionClass.Teacher.Title + ". " + x.PromotionClass.Teacher.Initials + " " + x.PromotionClass.Teacher.Lname,
-                ClassMonitor = x.IsMonitor == true ? x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname : "",
+                //YearPeriod = x.PromotionClass.PeriodSetup.PeriodStartDate.ToString("yyyy-MM-dd") + " - " + x.PromotionClass.PeriodSetup.PeriodEndDate.ToString("yyyy-MM-dd"),
+                //Grade = x.PromotionClass.Class.Grade.ToEnumChar(),
+                //Class = x.PromotionClass.Class.ClassDesc,
+                //TeacherInCharge = x.PromotionClass.Teacher.Title + ". " + x.PromotionClass.Teacher.Initials + " " + x.PromotionClass.Teacher.Lname,
+                //ClassMonitor = x.IsMonitor == true ? x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname : "",
                 AdmissionNo = x.Student.IndexNo,
                 Name = x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname,
-                IsMonitor = x.IsMonitor == true ? "Yes" : "",
-                Period = x.PromotionClass.PeriodSetup.PeriodStartDate.ToString("yyyy-MM-dd") + " - " + x.PromotionClass.PeriodSetup.PeriodEndDate.ToString("yyyy-MM-dd"),
+                //IsMonitor = x.IsMonitor == true ? "Yes" : "",
+                //Period = x.PromotionClass.PeriodSetup.PeriodStartDate.ToString("yyyy-MM-dd") + " - " + x.PromotionClass.PeriodSetup.PeriodEndDate.ToString("yyyy-MM-dd"),
                 x.Student.Address,
                 GuardianName = x.Student.EmergencyConName,
                 DateofAdmission = x.Student.CreatedDate.ToString("yyyy-MM-dd")
@@ -357,7 +357,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             {
                 YearPeriod = x.InactiveDate == null ? x.EffectiveDate.ToString("yyyy-MM-dd") : x.EffectiveDate.ToString("yyyy-MM-dd") + " - " + x.InactiveDate.Value.ToString("yyyy-MM-dd"),
                 Grade = x.PromotionClass.Class.Grade.ToEnumChar(),
-                Class = x.PromotionClass.Class.ClassDesc,
+                Class = x.PromotionClass.Class.Name,
                 PrefectType = x.Type.ToEnumChar(),
                 IsDHP = x.IsDhp == true ? "Yes" : "-",
                 IsHP = x.IsHp == true ? "Yes" : "-"
@@ -428,9 +428,9 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
             ReportParameterVM rptObj = (ReportParameterVM)Session[sskCrtdObj];
 
-            var lstHdr = db.Students.Where(x => x.StudId == rptObj.StudentID).Select(x => new
+            var lstHdr = db.Students.Where(x => x.Id == rptObj.StudentID).Select(x => new
             {
-                x.StudId,
+                x.Id,
                 Title = x.Title == TitleStud.Mr ? "Mr. " : "Ms.",
                 AdmissionNo = x.IndexNo,
                 FullName = x.FullName,
@@ -438,30 +438,22 @@ namespace Nalanda.SMS.Areas.Student.Controllers
                 LastName = x.Lname,
                 Address = x.Address,
                 DOB = x.Dob,
-                Gender = x.Gender == Gender.Female ? "Female" : "Male",
-                SchoolName = x.School,
-                SchoolAddress = x.SchoolAddress,
-                DhammaSchoolName = x.LastDhammaSchool,
-                DhammaSchoolAddress = x.LdhammaSchoolAdd,
-                GradehammaSchoolLeave = x.LastDhammaGrade,
-                EngSpeacking = x.EngSpeaking == Fluency.VeryGood ? "Very Good" : (x.EngSpeaking == Fluency.Good ? "Good" : (x.EngSpeaking == Fluency.Average ? "Average" : (x.EngSpeaking == Fluency.Weak ? "Weak" : "None"))),
-                EngWriting = x.EngWriting == Fluency.VeryGood ? "Very Good" : (x.EngWriting == Fluency.Good ? "Good" : (x.EngWriting == Fluency.Average ? "Average" : (x.EngWriting == Fluency.Weak ? "Weak" : "None"))),
-                EngReading = x.EngReading == Fluency.VeryGood ? "Very Good" : (x.EngReading == Fluency.Good ? "Good" : (x.EngReading == Fluency.Average ? "Average" : (x.EngReading == Fluency.Weak ? "Weak" : "None"))),
+                GradehammaSchoolLeave = x.LastGrade,
                 EmmergencyContactName = x.EmergencyConName,
                 EmmergencyContactTelno = x.EmergencyContactTel,
-                SpecialAttention = x.SpecialAttention,
+                SpecialAttention = x.Medium,
                 DateRegistered = x.CreatedDate,
-                Grade = x.ClassStudents.Select(y => "Grade " + y.PromotionClass.Class.Grade).FirstOrDefault()
+                //Grade = x.ClassStudents.Select(y => "Grade " + y.PromotionClass.Class.Grade).FirstOrDefault()
             }).ToList();
 
-            var lstSibDet = db.Students.Where(x => x.StudId == rptObj.StudentID).SelectMany(x => x.StudSiblings).Select(x => new
+            var lstSibDet = db.Students.Where(x => x.Id == rptObj.StudentID).SelectMany(x => x.StudSiblings).Select(x => new
             {
-                Name = x.StudentRelation.Title + ". " + x.StudentRelation.FullName,
-                Relationship = x.Relationship == SibRelationship.Brother ? "Brother" : "Sister",
-                Class = x.StudentRelation.ClassStudents.Select(y => "Grade " + y.PromotionClass.Class.Grade.ToString()).FirstOrDefault() + " - " + x.StudentRelation.ClassStudents.Select(y => y.PromotionClass.Class.ClassDesc).FirstOrDefault()
+                Name = x.SiblingStudent.Title + ". " + x.SiblingStudent.FullName,
+                Relationship = x.Relationship == SibRelationship.YoungerBrother ? "Brother" : "Sister",
+                //Class = x.SiblingStudent.ClassStudents.Select(y => "Grade " + y.PromotionClass.Class.Grade.ToString()).FirstOrDefault() + " - " + x.SiblingStudent.ClassStudents.Select(y => y.PromotionClass.Class.ClassDesc).FirstOrDefault()
             }).ToList();
 
-            var lstFamDet = db.Students.Where(x => x.StudId == rptObj.StudentID).SelectMany(x => x.StudFamilies).Select(x => new
+            var lstFamDet = db.Students.Where(x => x.Id == rptObj.StudentID).SelectMany(x => x.StudFamilies).Select(x => new
             {
                 Name = x.Title + " " + x.Name,
                 Relationship = x.Relationship == Relationship.Father ? "Father" : (x.Relationship == Relationship.Mother ? "Mother" : "Guardian"),
@@ -528,7 +520,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             ReportDataSource rds = new ReportDataSource();
             if (rptObj.EnvelopType == EnvelopType.StudentWise)
             {
-                var lst1 = db.Students.Where(x => x.StudId == rptObj.StudentID).ToList().Select(x => new
+                var lst1 = db.Students.Where(x => x.Id == rptObj.StudentID).ToList().Select(x => new
                 {
                     Name = x.Title + ". " + x.Initials + " " + x.Lname,
                     AdmissionNo = "[ " + x.IndexNo + " ]",
@@ -542,7 +534,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             }
             else
             {
-                var lst2 = db.ClassStudents.Where(x => x.PrClId == rptObj.ClassID).ToList().Select(x => new
+                var lst2 = db.ClassStudents.Where(x => x.Id == rptObj.ClassID).ToList().Select(x => new
                 {
                     Name = x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname,
                     AdmissionNo = "[ " + x.Student.IndexNo + " ]",

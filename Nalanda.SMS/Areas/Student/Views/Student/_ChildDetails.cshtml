@@ -9,8 +9,8 @@
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.SubID)
-        @Html.HiddenFor(model => model.SudID)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.StudentId)
         @Html.HiddenFor(model => model.Initials)
         @Html.HiddenFor(model => model.LName)
 

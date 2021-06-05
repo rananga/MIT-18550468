@@ -1,4 +1,4 @@
-﻿@model Nalanda.SMS.Common.BaseViewModel<SMS.Areas.Admin.Models.ClubVM>
+﻿@model Nalanda.SMS.Common.BaseViewModel<Nalanda.SMS.Areas.Admin.Models.ClubVM>
 
 @{
     ViewBag.Title = "Club Information";
@@ -44,7 +44,7 @@
         tableStyle: "mGrid no-foot",
         mode: WebGridPagerModes.All,
         columns: grid.Columns(
-            grid.Column(null, null, format: (item) => Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open' style='color:black'></span>", "View Details", "Details", routeValues: new { id = item.CID }, htmlAttributes: new { @class = "btn btn-warning btn-xs" }), style: "btn-1"),
+            grid.Column(null, null, format: (item) => Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open' style='color:black'></span>", "View Details", "Details", routeValues: new { id = item.ClubId }, htmlAttributes: new { @class = "btn btn-warning btn-xs" }), style: "btn-1"),
             grid.SortColumn(columnName: "Name", header: "Club"),
             grid.SortColumn(columnName: "Description", header: "Description"),
             grid.SortColumn(columnName: "Status", header: "Status", format: (item) => ((Enum)item.Status).ToEnumChar())))

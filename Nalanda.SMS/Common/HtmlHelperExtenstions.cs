@@ -235,7 +235,7 @@ namespace System.Web.Mvc.Html
             {
                 var usrId = (int)htmlHelper.ViewContext.HttpContext.Session[BaseController.sskCurUsrID];
 
-                var roles = dbctx.Users.Where(x => x.UserId == usrId).SelectMany(x => x.UserRoles).Select(x=> x.Role.Code);
+                var roles = dbctx.Users.Where(x => x.Id == usrId).SelectMany(x => x.UserRoles).Select(x=> x.Role.Code);
                 if (roles.Where(x => x == RoleConstants.Admin).Any())
                     return dbctx.Menus.ToList();
 
