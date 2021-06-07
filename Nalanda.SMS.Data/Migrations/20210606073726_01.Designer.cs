@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nalanda.SMS.Data;
 
 namespace Nalanda.SMS.Data.Migrations
 {
     [DbContext(typeof(dbNalandaContext))]
-    partial class dbNalandaContextModelSnapshot : ModelSnapshot
+    [Migration("20210606073726_01")]
+    partial class _01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1054,32 +1056,6 @@ namespace Nalanda.SMS.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Subjects");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsBasket = false,
-                            Name = "Sinhala"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsBasket = false,
-                            Name = "English"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsBasket = false,
-                            Name = "Dancing"
-                        });
                 });
 
             modelBuilder.Entity("Nalanda.SMS.Data.Models.Teacher", b =>
@@ -1162,42 +1138,6 @@ namespace Nalanda.SMS.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teachers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "test",
-                            ContactNo = "0714479648",
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "Piumali Manorika Suraweera",
-                            Gender = 1,
-                            ImmeContactName = "Malith",
-                            ImmeContactNo = "0773411392",
-                            Initials = "P M",
-                            Lname = "Suraweera",
-                            Nicno = "880272580V",
-                            Status = 0,
-                            Title = 5
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "test",
-                            ContactNo = "0716669648",
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "Udara Rathnayaka",
-                            Gender = 0,
-                            ImmeContactName = "Umandya",
-                            ImmeContactNo = "0773412392",
-                            Initials = "U",
-                            Lname = "Rathnayaka",
-                            Nicno = "900272580V",
-                            Status = 0,
-                            Title = 5
-                        });
                 });
 
             modelBuilder.Entity("Nalanda.SMS.Data.Models.TeacherSubject", b =>

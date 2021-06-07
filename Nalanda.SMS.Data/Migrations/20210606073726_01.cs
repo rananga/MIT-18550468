@@ -674,6 +674,7 @@ namespace Nalanda.SMS.Data.Migrations
                     { 7, null, null, null, 40, 1, "-", "D" },
                     { 8, "Index", "Admin", "Grade", 50, 1, "Grade Definition", "I" },
                     { 9, "Index", "Admin", "Class", 60, 1, "Class Definition", "I" },
+                    { 10, "Index", "Admin", "ExtraActivity", 60, 1, "Extra Activity Definition", "I" },
                     { 11, "Index", "Student", "Student", 10, 2, "Student Admission", "I" }
                 });
 

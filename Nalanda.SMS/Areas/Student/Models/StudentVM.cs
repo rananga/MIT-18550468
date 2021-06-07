@@ -12,11 +12,15 @@ namespace Nalanda.SMS.Areas.Student.Models
         {
             Siblings = new List<StudSiblingsVM>();
             FamilyMembers = new List<StudFamilyVM>();
+            Acheivements = new List<StudentExtraActivityAcheivementVM>();
+            Positions = new List<StudentExtraActivityPositionVM>();
             mappings = new ObjMappings<Nalanda.SMS.Data.Models.Student, StudentVM>();
 
             mappings.Add(x => x.Title + ". " + x.Initials + " " + x.Lname, x => x.NameWithInt);
             mappings.Add(x => x.StudSiblings.Select(y => new StudSiblingsVM(y)).ToList(), x => x.Siblings);
             mappings.Add(x => x.StudFamilies.Select(y => new StudFamilyVM(y)).ToList(), x => x.FamilyMembers);
+            mappings.Add(x => x.ActivityAcheivements.Select(y => new StudentExtraActivityAcheivementVM(y)).ToList(), x => x.Acheivements);
+            mappings.Add(x => x.ActivityPositions.Select(y => new StudentExtraActivityPositionVM(y)).ToList(), x => x.Positions);
         }
 
         public StudentVM(Nalanda.SMS.Data.Models.Student obj) :this()
@@ -32,5 +36,7 @@ namespace Nalanda.SMS.Areas.Student.Models
         public HttpPostedFileBase ProfilePic { get; set; }
         public virtual ICollection<StudSiblingsVM> Siblings { get; set; }
         public virtual ICollection<StudFamilyVM> FamilyMembers { get; set; }
+        public virtual ICollection<StudentExtraActivityAcheivementVM> Acheivements { get; set; }
+        public virtual ICollection<StudentExtraActivityPositionVM> Positions { get; set; }
     }
 }

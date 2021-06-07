@@ -904,6 +904,7 @@ namespace Nalanda.SMS.Data
                 new Menu { MenuId = 7, ParentMenuId = 1, DisplaySeq = 40, Text = "-", Type = "D", Area = null, Controller = null, Action = null },
                 new Menu { MenuId = 8, ParentMenuId = 1, DisplaySeq = 50, Text = "Grade Definition", Type = "I", Area = "Admin", Controller = "Grade", Action = "Index" },
                 new Menu { MenuId = 9, ParentMenuId = 1, DisplaySeq = 60, Text = "Class Definition", Type = "I", Area = "Admin", Controller = "Class", Action = "Index" },
+                new Menu { MenuId = 10, ParentMenuId = 1, DisplaySeq = 60, Text = "Extra Activity Definition", Type = "I", Area = "Admin", Controller = "ExtraActivity", Action = "Index" },
                 new Menu { MenuId = 11, ParentMenuId = 2, DisplaySeq = 10, Text = "Student Admission", Type = "I", Area = "Student", Controller = "Student", Action = "Index" });
 
             modelBuilder.Entity<RoleMenuAccess>().HasData(
@@ -923,6 +924,15 @@ namespace Nalanda.SMS.Data
 
             modelBuilder.Entity<UserRole>().HasData(
                new UserRole { UserRoleId = 1, UserId = 1, RoleId = 1 });
+
+            modelBuilder.Entity<Teacher>().HasData(
+               new Teacher { Id = 1, Title = TitleTeacher.Mrs, Gender = Gender.Female, FullName = "Piumali Manorika Suraweera", Initials = "P M", Lname = "Suraweera", Address = "test", ContactNo = "0714479648", Nicno = "880272580V", ImmeContactNo = "0773411392", ImmeContactName = "Malith", Status = TeacherStatus.Active, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+               new Teacher { Id = 2, Title = TitleTeacher.Mrs, Gender = Gender.Male, FullName = "Udara Rathnayaka", Initials = "U", Lname = "Rathnayaka", Address = "test", ContactNo = "0716669648", Nicno = "900272580V", ImmeContactNo = "0773412392", ImmeContactName = "Umandya", Status = TeacherStatus.Active, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
+
+            modelBuilder.Entity<Subject>().HasData(
+               new Subject { Id = 1, Name = "Sinhala", IsBasket = false, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+               new Subject { Id = 2, Name = "English", IsBasket = false, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+               new Subject { Id = 3, Name = "Dancing", IsBasket = false, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
         }
 
         public override int SaveChanges()

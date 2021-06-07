@@ -12,64 +12,64 @@ using System.Web.Mvc;
 
 namespace Nalanda.SMS.Areas.Admin
 {
-    public class ClassController : BaseController
+    public class ExtraActivityController : BaseController
     {
-        public ActionResult Index(BaseViewModel<ClassVM> vm)
+        public ActionResult Index(BaseViewModel<ExtraActivityVM> vm)
         {
-            vm.SetList(db.Classes.AsQueryable(), "GradeId");
+            vm.SetList(db.ExtraActivities.AsQueryable(), "Name");
             return View(vm);
         }
 
         [AllowAnonymous]
-        public ActionResult ChildIndex(int? id, bool isToEdit = false)
+        public ActionResult AcheivementIndex(int? id, bool isToEdit = false)
         {
-            ClassVM obj;
+            ExtraActivityVM obj;
 
-            if (isToEdit && Session[sskCrtdObj] is ClassVM)
-            { obj = (ClassVM)Session[sskCrtdObj]; }
+            if (isToEdit && Session[sskCrtdObj] is ExtraActivityVM)
+            { obj = (ExtraActivityVM)Session[sskCrtdObj]; }
             else
             {
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                Class cls = db.Classes.Where(x => x.Id == id).FirstOrDefault();
+                ExtraActivity cls = db.ExtraActivities.Where(x => x.Id == id).FirstOrDefault();
                 if (cls == null)
                 {
                     return HttpNotFound();
                 }
-                obj = new ClassVM(cls);
+                obj = new ExtraActivityVM(cls);
             }
 
             ViewBag.IsToEdit = isToEdit;
-            ViewBag.ClassId = obj.Id;
-            return PartialView("_ChildIndex", obj.Subjects);
+            ViewBag.ActivityId = obj.Id;
+            return PartialView("_AcheivementIndex", obj.vmAcheivements);
         }
 
         [AllowAnonymous]
-        public ActionResult StudentIndex(int? id, bool isToEdit = false)
+        public ActionResult PositionIndex(int? id, bool isToEdit = false)
         {
-            ClassVM obj;
+            ExtraActivityVM obj;
 
-            if (isToEdit && Session[sskCrtdObj] is ClassVM)
-            { obj = (ClassVM)Session[sskCrtdObj]; }
+            if (isToEdit && Session[sskCrtdObj] is ExtraActivityVM)
+            { obj = (ExtraActivityVM)Session[sskCrtdObj]; }
             else
             {
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                Class cls = db.Classes.Where(x => x.Id == id).FirstOrDefault();
+                ExtraActivity cls = db.ExtraActivities.Where(x => x.Id == id).FirstOrDefault();
                 if (cls == null)
                 {
                     return HttpNotFound();
                 }
-                obj = new ClassVM(cls);
+                obj = new ExtraActivityVM(cls);
             }
 
             ViewBag.IsToEdit = isToEdit;
-            ViewBag.ClassId = obj.Id;
-            return PartialView("_StudentIndex", obj.Students);
+            ViewBag.ActivityId = obj.Id;
+            return PartialView("_PositionIndex", obj.vmPositions);
         }
 
         public ActionResult Details(int? id)
@@ -78,33 +78,33 @@ namespace Nalanda.SMS.Areas.Admin
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Class classes = db.Classes.Find(id);
+            ExtraActivity classes = db.ExtraActivities.Find(id);
             if (classes == null)
             {
                 return HttpNotFound();
             }
-            return View(new ClassVM(classes));
+            return View(new ExtraActivityVM(classes));
         }
 
         [AllowAnonymous]
-        public ActionResult ChildDetails(int? id)
+        public ActionResult AcheivementDetails(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ClassVM obj = (ClassVM)Session[sskCrtdObj];
-            ClassSubjectVM clsSubject = obj.Subjects.Where(x => x.Id == id.Value).FirstOrDefault();
-            if (clsSubject == null)
+            ExtraActivityVM obj = (ExtraActivityVM)Session[sskCrtdObj];
+            ExtraActivityAcheivementVM actAcheiv = obj.vmAcheivements.Where(x => x.Id == id.Value).FirstOrDefault();
+            if (actAcheiv == null)
             {
                 return HttpNotFound();
             }
-            return PartialView("_ChildDetails", clsSubject);
+            return PartialView("_AcheivementDetails", actAcheiv);
         }
 
         public ActionResult Create()
         {
-            var cls = new ClassVM() { Year = DateTime.Now.Year };
+            var cls = new ExtraActivityVM();
 
             Session[sskCrtdObj] = cls;
             return View(cls);
@@ -112,36 +112,36 @@ namespace Nalanda.SMS.Areas.Admin
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ClassVM classes)
+        public ActionResult Create(ExtraActivityVM activity)
         {
             try
             {
-                var svm = (ClassVM)Session[sskCrtdObj];
-                var existingClass = db.Classes.Where(e => e.Grade == classes.Grade && e.Name == classes.Name).FirstOrDefault();
+                var svm = (ExtraActivityVM)Session[sskCrtdObj];
+                var existingClass = db.ExtraActivities.Where(e => e.Name == activity.Name).FirstOrDefault();
 
                 if (existingClass != null)
                 { ModelState.AddModelError("", "Grade & Class Already Exist"); }
 
                 if (ModelState.IsValid)
                 {
-                    classes.CreatedBy = this.GetCurrUser();
-                    classes.CreatedDate = DateTime.Now;
-                    var objclass = db.Classes.Add(classes.GetEntity()).Entity;
+                    activity.CreatedBy = this.GetCurrUser();
+                    activity.CreatedDate = DateTime.Now;
+                    var objActivity = db.ExtraActivities.Add(activity.GetEntity()).Entity;
 
-                    foreach (var det in svm.Subjects)
+                    foreach (var det in svm.vmAcheivements)
                     {
-                        det.ClassId = objclass.Id;
-                        det.CreatedBy = objclass.CreatedBy;
+                        det.ActivityId = objActivity.Id;
+                        det.CreatedBy = objActivity.CreatedBy;
                         det.CreatedDate = DateTime.Now;
-                        objclass.ClassSubjects.Add(det.GetEntity());
+                        objActivity.Acheivements.Add(det.GetEntity());
                     }
 
-                    foreach (var det in svm.Students)
+                    foreach (var det in svm.vmPositions)
                     {
-                        det.ClassId = objclass.Id;
-                        det.CreatedBy = objclass.CreatedBy;
+                        det.ActivityId = objActivity.Id;
+                        det.CreatedBy = objActivity.CreatedBy;
                         det.CreatedDate = DateTime.Now;
-                        objclass.ClassStudents.Add(det.GetEntity());
+                        objActivity.Positions.Add(det.GetEntity());
                     }
                     db.SaveChanges();
 
@@ -154,19 +154,19 @@ namespace Nalanda.SMS.Areas.Admin
             catch (Exception ex)
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
-            return View(classes);
+            return View(activity);
         }
 
         [AllowAnonymous]
-        public ActionResult ChildCreate(int? classId)
+        public ActionResult AcheivementCreate(int? activityId)
         {
-            if (classId != 0)
+            if (activityId != 0)
             {
-                if (classId == null)
+                if (activityId == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                var cls = db.Classes.Find(classId);
+                var cls = db.ExtraActivities.Find(activityId);
 
                 if (cls == null)
                 {
@@ -174,28 +174,26 @@ namespace Nalanda.SMS.Areas.Admin
                 }
             }
 
-            var vm = new ClassSubjectVM() { ClassId = classId.Value };
-            return PartialView("_ChildCreate", vm);
+            var vm = new ExtraActivityAcheivementVM() { ActivityId = activityId.Value };
+            return PartialView("_AcheivementCreate", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult ChildCreate(ClassSubjectVM vm)
+        public ActionResult AcheivementCreate(ExtraActivityAcheivementVM vm)
         {
-            ClassVM obj;
+            ExtraActivityVM obj;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    obj = (ClassVM)Session[sskCrtdObj];
-                    vm.Id = Math.Min(obj.Subjects.Select(x => x.Id).MinOrDefault(), 0) - 1;
-                    vm.SubjectName = db.TeacherSubjects.Find(vm.TeacherSubjectId).Subject.Name;
-                    vm.TeacherName = db.TeacherSubjects.Where(x=> x.Id == vm.TeacherSubjectId).Select(x=> x.Teacher.Title + " " + x.Teacher.FullName).FirstOrDefault();
-                    obj.Subjects.Add(vm);
+                    obj = (ExtraActivityVM)Session[sskCrtdObj];
+                    vm.Id = Math.Min(obj.vmAcheivements.Select(x => x.Id).MinOrDefault(), 0) - 1;
+                    obj.vmAcheivements.Add(vm);
 
-                    AddAlert(SMS.Common.AlertStyles.success, "Class Subject Teacher Added Successfully.");
-                    string url = Url.Action("ChildIndex", new { id = vm.Id, isToEdit = true });
+                    AddAlert(SMS.Common.AlertStyles.success, "Acheivement Added Successfully.");
+                    string url = Url.Action("AcheivementIndex", new { id = vm.Id, isToEdit = true });
                     return Json(new { success = true, url });
                 }
 
@@ -205,21 +203,21 @@ namespace Nalanda.SMS.Areas.Admin
             catch (Exception ex)
             { AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message); }
 
-            obj = (ClassVM)Session[sskCrtdObj];
+            obj = (ExtraActivityVM)Session[sskCrtdObj];
 
-            return PartialView("_ChildCreate", vm);
+            return PartialView("_AcheivementCreate", vm);
         }
 
         [AllowAnonymous]
-        public ActionResult StudentCreate(int? classId)
+        public ActionResult PositionCreate(int? activityId)
         {
-            if (classId != 0)
+            if (activityId != 0)
             {
-                if (classId == null)
+                if (activityId == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                var cls = db.Classes.Find(classId);
+                var cls = db.ExtraActivities.Find(activityId);
 
                 if (cls == null)
                 {
@@ -227,29 +225,26 @@ namespace Nalanda.SMS.Areas.Admin
                 }
             }
 
-            var vm = new ClassStudentVM() { ClassId = classId.Value };
-            return PartialView("_StudentCreate", vm);
+            var vm = new ExtraActivityPositionVM() { ActivityId = activityId.Value };
+            return PartialView("_PositionCreate", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult StudentCreate(ClassStudentVM vm)
+        public ActionResult PositionCreate(ExtraActivityPositionVM vm)
         {
-            ClassVM obj;
+            ExtraActivityVM obj;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    obj = (ClassVM)Session[sskCrtdObj];
-                    vm.Id = Math.Min(obj.Students.Select(x => x.Id).MinOrDefault(), 0) - 1;
-                    var stud = db.Students.Find(vm.StudentId);
-                    vm.StudentName = stud.FullName;
-                    vm.StudentIndex = stud.IndexNo;
-                    obj.Students.Add(vm);
+                    obj = (ExtraActivityVM)Session[sskCrtdObj];
+                    vm.Id = Math.Min(obj.vmPositions.Select(x => x.Id).MinOrDefault(), 0) - 1;
+                    obj.vmPositions.Add(vm);
 
-                    AddAlert(SMS.Common.AlertStyles.success, "Class Student Added Successfully.");
-                    string url = Url.Action("StudentIndex", new { id = vm.Id, isToEdit = true });
+                    AddAlert(SMS.Common.AlertStyles.success, "Position Added Successfully.");
+                    string url = Url.Action("PositionIndex", new { id = vm.Id, isToEdit = true });
                     return Json(new { success = true, url });
                 }
 
@@ -259,9 +254,9 @@ namespace Nalanda.SMS.Areas.Admin
             catch (Exception ex)
             { AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message); }
 
-            obj = (ClassVM)Session[sskCrtdObj];
+            obj = (ExtraActivityVM)Session[sskCrtdObj];
 
-            return PartialView("_StudentCreate", vm);
+            return PartialView("_PositionCreate", vm);
         }
 
         public ActionResult Edit(int? id)
@@ -270,56 +265,56 @@ namespace Nalanda.SMS.Areas.Admin
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Class classes = db.Classes.Find(id);
-            if (classes == null)
+            var activity = db.ExtraActivities.Find(id);
+            if (activity == null)
             {
                 return HttpNotFound();
             }
 
-            var obj = new ClassVM(classes);
+            var obj = new ExtraActivityVM(activity);
             Session[sskCrtdObj] = obj;
             return View(obj);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ClassVM classes)
+        public ActionResult Edit(ExtraActivityVM activity)
         {
             byte[] curRowVersion = null;
             try
             {
-                var svm = (ClassVM)Session[sskCrtdObj];
-                var existingClass = db.Classes.Where(e => e.Grade == classes.Grade && e.Name == classes.Name).FirstOrDefault();
+                var svm = (ExtraActivityVM)Session[sskCrtdObj];
+                var existingClass = db.ExtraActivities.Where(e => e.Id != activity.Id && e.Name == activity.Name).FirstOrDefault();
 
                 if (existingClass != null)
-                { ModelState.AddModelError("", "Grade & Class Already Exist"); }
+                { ModelState.AddModelError("", "Activity Name Already Exist"); }
 
                 if (ModelState.IsValid)
                 {
-                    var obj = db.Classes.Find(classes.Id);
+                    var obj = db.ExtraActivities.Find(activity.Id);
                     if (obj == null)
                     { throw new DbUpdateConcurrencyException(); }
 
                     curRowVersion = obj.RowVersion;
-                    var modObj = classes.GetEntity();
+                    var modObj = activity.GetEntity();
                     modObj.CopyContent(obj, "Grade,Name,Status");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;
 
-                    db.Entry(obj).OriginalValues["RowVersion"] = classes.RowVersion;
+                    db.Entry(obj).OriginalValues["RowVersion"] = activity.RowVersion;
 
-                    db.ClassSubjects.RemoveRange(obj.ClassSubjects.Where(x =>
-                        !svm.Subjects.Select(y => y.Id).ToList().Contains(x.Id)));
+                    db.ExtraActivityAcheivements.RemoveRange(obj.Acheivements.Where(x =>
+                        !svm.vmAcheivements.Select(y => y.Id).ToList().Contains(x.Id)));
 
-                    foreach (var det in svm.Subjects)
+                    foreach (var det in svm.vmAcheivements)
                     {
-                        var objDet = db.ClassSubjects.Find(det.Id);
+                        var objDet = db.ExtraActivityAcheivements.Find(det.Id);
                         if (objDet == null)
                         {
                             det.CreatedBy = this.GetCurrUser();
                             det.CreatedDate = DateTime.Now;
-                            obj.ClassSubjects.Add(det.GetEntity());
+                            obj.Acheivements.Add(det.GetEntity());
                         }
                         else
                         {
@@ -331,17 +326,17 @@ namespace Nalanda.SMS.Areas.Admin
                         }
                     }
 
-                    db.ClassStudents.RemoveRange(obj.ClassStudents.Where(x =>
-                        !svm.Students.Select(y => y.Id).ToList().Contains(x.Id)));
+                    db.ExtraActivityPositions.RemoveRange(obj.Positions.Where(x =>
+                        !svm.vmPositions.Select(y => y.Id).ToList().Contains(x.Id)));
 
-                    foreach (var det in svm.Students)
+                    foreach (var det in svm.vmPositions)
                     {
-                        var objDet = db.ClassStudents.Find(det.Id);
+                        var objDet = db.ExtraActivityPositions.Find(det.Id);
                         if (objDet == null)
                         {
                             det.CreatedBy = this.GetCurrUser();
                             det.CreatedDate = DateTime.Now;
-                            obj.ClassStudents.Add(det.GetEntity());
+                            obj.Positions.Add(det.GetEntity());
                         }
                         else
                         {
@@ -362,33 +357,33 @@ namespace Nalanda.SMS.Areas.Admin
             catch (DbUpdateConcurrencyException ex)
             {
                 this.ShowConcurrencyErrors(ex);
-                classes.RowVersion = curRowVersion;
+                activity.RowVersion = curRowVersion;
             }
             catch (DbEntityValidationException dbEx)
             { this.ShowEntityErrors(dbEx); }
             catch (Exception ex)
             { AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message); }
 
-            return View(classes);
+            return View(activity);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(ClassVM classes)
+        public ActionResult DeleteConfirmed(ExtraActivityVM activity)
         {
             try
             {
-                var obj = db.Classes.Find(classes.Id);
+                var obj = db.ExtraActivities.Find(activity.Id);
                 if (obj == null)
                 { throw new DbUpdateConcurrencyException(""); }
                 db.Detach(obj);
 
-                var entry = db.Entry(classes.GetEntity());
+                var entry = db.Entry(activity.GetEntity());
                 entry.State = EntityState.Unchanged;
-                entry.Collection(x => x.ClassSubjects).Load();
-                db.ClassSubjects.RemoveRange(entry.Entity.ClassSubjects);
-                entry.Collection(x => x.ClassStudents).Load();
-                db.ClassStudents.RemoveRange(entry.Entity.ClassStudents);
+                entry.Collection(x => x.Acheivements).Load();
+                db.ExtraActivityAcheivements.RemoveRange(entry.Entity.Acheivements);
+                entry.Collection(x => x.Positions).Load();
+                db.ExtraActivityPositions.RemoveRange(entry.Entity.Positions);
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
@@ -405,21 +400,21 @@ namespace Nalanda.SMS.Areas.Admin
             {
                 AddAlert(SMS.Common.AlertStyles.danger, ex.GetInnerException().Message);
             }
-            return RedirectToAction("Details", new { id = classes.Id });
+            return RedirectToAction("Details", new { id = activity.Id });
         }
 
-        [HttpPost, ActionName("ChildDelete")]
+        [HttpPost, ActionName("AcheivementDelete")]
         [ValidateAntiForgeryToken]
-        public ActionResult ChildDeleteConfirmed(int id)
+        public ActionResult AcheivementDeleteConfirmed(int id)
         {
             string msg = string.Empty;
             try
             {
-                var lst = ((ClassVM)Session[sskCrtdObj]).Subjects;
+                var lst = ((ExtraActivityVM)Session[sskCrtdObj]).vmAcheivements;
                 var obj = lst.FirstOrDefault(x => x.Id == id);
                 lst.Remove(obj);
 
-                AddAlert(SMS.Common.AlertStyles.success, "Subject Removed Successfully.");
+                AddAlert(SMS.Common.AlertStyles.success, "Acheivement Removed Successfully.");
             }
             catch (Exception ex)
             {
@@ -428,22 +423,22 @@ namespace Nalanda.SMS.Areas.Admin
             }
             string url = "";
             if (msg.IsBlank())
-            { url = Url.Action("ChildIndex", new { isToEdit = true }); }
+            { url = Url.Action("AcheivementIndex", new { isToEdit = true }); }
             return Json(new { success = true, url, msg });
         }
 
-        [HttpPost, ActionName("StudentDelete")]
+        [HttpPost, ActionName("PositionDelete")]
         [ValidateAntiForgeryToken]
-        public ActionResult StudentDeleteConfirmed(int id)
+        public ActionResult PositionDeleteConfirmed(int id)
         {
             string msg = string.Empty;
             try
             {
-                var lst = ((ClassVM)Session[sskCrtdObj]).Students;
+                var lst = ((ExtraActivityVM)Session[sskCrtdObj]).vmPositions;
                 var obj = lst.FirstOrDefault(x => x.Id == id);
                 lst.Remove(obj);
 
-                AddAlert(SMS.Common.AlertStyles.success, "Student Removed Successfully.");
+                AddAlert(SMS.Common.AlertStyles.success, "Position Removed Successfully.");
             }
             catch (Exception ex)
             {
@@ -452,7 +447,7 @@ namespace Nalanda.SMS.Areas.Admin
             }
             string url = "";
             if (msg.IsBlank())
-            { url = Url.Action("StudentIndex", new { isToEdit = true }); }
+            { url = Url.Action("PositionIndex", new { isToEdit = true }); }
             return Json(new { success = true, url, msg });
         }
     }

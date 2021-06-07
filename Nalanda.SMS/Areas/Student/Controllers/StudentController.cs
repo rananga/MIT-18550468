@@ -77,6 +77,58 @@ namespace Nalanda.SMS.Areas.Student.Controllers
             return PartialView("_FamilyIndex", obj.FamilyMembers);
         }
 
+        [AllowAnonymous]
+        public ActionResult AcheivementIndex(int? id, bool isToEdit = false)
+        {
+            StudentVM obj;
+
+            if (isToEdit && Session[sskCrtdObj] is StudentVM)
+            { obj = (StudentVM)Session[sskCrtdObj]; }
+            else
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var cls = db.Students.Where(x => x.Id == id).FirstOrDefault();
+                if (cls == null)
+                {
+                    return HttpNotFound();
+                }
+                obj = new StudentVM(cls);
+            }
+
+            ViewBag.IsToEdit = isToEdit;
+            ViewBag.ActivityId = obj.Id;
+            return PartialView("_AcheivementIndex", obj.Acheivements);
+        }
+
+        [AllowAnonymous]
+        public ActionResult PositionIndex(int? id, bool isToEdit = false)
+        {
+            StudentVM obj;
+
+            if (isToEdit && Session[sskCrtdObj] is StudentVM)
+            { obj = (StudentVM)Session[sskCrtdObj]; }
+            else
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var cls = db.Students.Where(x => x.Id == id).FirstOrDefault();
+                if (cls == null)
+                {
+                    return HttpNotFound();
+                }
+                obj = new StudentVM(cls);
+            }
+
+            ViewBag.IsToEdit = isToEdit;
+            ViewBag.ActivityId = obj.Id;
+            return PartialView("_PositionIndex", obj.Positions);
+        }
+
         public ActionResult Details(int? id)
         {
             if (id == null)
