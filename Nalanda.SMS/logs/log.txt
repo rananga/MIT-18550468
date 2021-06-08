@@ -526,3 +526,68 @@
   
 2021-06-06 13:44:20,432 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/ExtraActivity/Edit/1 User: rananga Error Message: D:\GitHub\MIT18550468\Nalanda.SMS\Areas\Admin\Views\ExtraActivity\Edit.cshtml(22): error CS1061: 'ExtraActivityVM' does not contain a definition for 'Year' and no accessible extension method 'Year' accepting a first argument of type 'ExtraActivityVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
   
+2021-06-08 00:20:33,345 [12] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home User: rananga Error Message: The partial view '~/Areas/Base/Views/Shared/_PartialNotifications.cshtml' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Base/Views/Shared/_PartialNotifications.cshtml Line:    at System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+  
+2021-06-08 00:20:42,245 [12] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: The partial view '~/Areas/Base/Views/Shared/_PartialNotifications.cshtml' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Base/Views/Shared/_PartialNotifications.cshtml Line:    at System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+  
+2021-06-08 00:20:43,501 [12] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: The partial view '~/Areas/Base/Views/Shared/_PartialNotifications.cshtml' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Base/Views/Shared/_PartialNotifications.cshtml Line:    at System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+  
+2021-06-08 00:21:23,929 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Content/fontawesome User: rananga Error Message: The controller for path '/Content/fontawesome' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:21:28,911 [10] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/layout User: rananga Error Message: The controller for path '/bundles/layout' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:21:29,413 [9] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/chart User: rananga Error Message: The controller for path '/bundles/chart' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:21:29,912 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapmin User: rananga Error Message: The controller for path '/Content/bootstrapmin' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:21:30,413 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrap.beta/bootstrapminbeta User: rananga Error Message: The controller for path '/Content/bootstrap.beta/bootstrapminbeta' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:21:30,918 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapicons User: rananga Error Message: The controller for path '/Content/bootstrapicons' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:21:31,416 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Content/Layout/LayoutBundle User: rananga Error Message: The controller for path '/Content/Layout/LayoutBundle' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:22:11,870 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Content/fontawesome User: rananga Error Message: The controller for path '/Content/fontawesome' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:22:23,452 [19] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrap.beta/bootstrapminbeta User: rananga Error Message: The controller for path '/Content/bootstrap.beta/bootstrapminbeta' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:22:31,492 [8] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/layout User: rananga Error Message: The controller for path '/bundles/layout' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:22:45,302 [23] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapicons User: rananga Error Message: The controller for path '/Content/bootstrapicons' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:22:45,305 [10] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapmin User: rananga Error Message: The controller for path '/Content/bootstrapmin' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:22:46,307 [8] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/chart User: rananga Error Message: The controller for path '/bundles/chart' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 00:22:46,821 [20] ERROR ASP.global_asax - Error in http://localhost:24368/Content/Layout/LayoutBundle User: rananga Error Message: The controller for path '/Content/Layout/LayoutBundle' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 01:49:25,868 [12] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapicons User: rananga Error Message: The controller for path '/Content/bootstrapicons' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 01:49:26,097 [11] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/chart User: rananga Error Message: The controller for path '/bundles/chart' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 01:49:26,354 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapmin User: rananga Error Message: The controller for path '/Content/bootstrapmin' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 01:49:26,359 [13] ERROR ASP.global_asax - Error in http://localhost:24368/Content/fontawesome User: rananga Error Message: The controller for path '/Content/fontawesome' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 01:49:26,373 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrap.beta/bootstrapminbeta User: rananga Error Message: The controller for path '/Content/bootstrap.beta/bootstrapminbeta' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 01:49:26,608 [15] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/layout User: rananga Error Message: The controller for path '/bundles/layout' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 01:49:27,376 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Content/Layout/LayoutBundle User: rananga Error Message: The controller for path '/Content/Layout/LayoutBundle' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:16:13,215 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Content/Layout/LayoutBundle User: rananga Error Message: The controller for path '/Content/Layout/LayoutBundle' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:16:13,705 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapicons User: rananga Error Message: The controller for path '/Content/bootstrapicons' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:16:13,723 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapmin User: rananga Error Message: The controller for path '/Content/bootstrapmin' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:16:14,110 [8] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/chart User: rananga Error Message: The controller for path '/bundles/chart' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:16:14,235 [9] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/layout User: rananga Error Message: The controller for path '/bundles/layout' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:16:14,734 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Content/fontawesome User: rananga Error Message: The controller for path '/Content/fontawesome' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:16:15,236 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrap.beta/bootstrapminbeta User: rananga Error Message: The controller for path '/Content/bootstrap.beta/bootstrapminbeta' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  

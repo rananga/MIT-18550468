@@ -335,11 +335,11 @@ namespace Nalanda.SMS.Data
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
-                entity.HasOne(d => d.HeadTeacher)
-                    .WithMany(p => p.HeadingGrades)
-                    .HasForeignKey(d => d.HeadTeacherId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Teacher_GradeHead");
+                //entity.HasOne(d => d.GradeHead)
+                //    .WithMany(p => p.HeadingGrades)
+                //    .HasForeignKey(d => d.HeadTeacherId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Teacher_GradeHead");
             });
 
             modelBuilder.Entity<LeavingCertificate>(entity =>

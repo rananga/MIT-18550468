@@ -16,10 +16,12 @@ namespace Nalanda.SMS.Data.Models
         [Range(1, 13)]
         [DisplayName("Grade")]
         public int GradeId { get; set; }
-        [DisplayName("Head Teacher")]
-        public int? HeadTeacherId { get; set; }
+        [DisplayName("Section")]
+        public int SectionId { get; set; }
+        [DisplayName("Grade Head")]
+        public int? HeadId { get; set; }
 
-        public virtual Teacher HeadTeacher { get; set; }
+        public virtual StaffMember GradeHead { get; set; }
         public virtual ICollection<Class> GradeClasses { get; set; }
         public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
     }

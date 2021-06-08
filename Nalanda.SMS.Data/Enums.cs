@@ -170,6 +170,13 @@ namespace Nalanda.SMS.Data
         [Description("Transferred")]
         Transferred = 3
     }
+    public enum ActiveStatus
+    {
+        [Description("Active")]
+        Active = 0,
+        [Description("Inactive")]
+        Inactive = 1
+    }
     public enum TeacherStatus
     {
         [Description("Active")]

@@ -85,7 +85,7 @@ namespace Nalanda.SMS.Areas.Base
 
                 if (!filter.IsBlank())
                 {
-                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.GradeId.ToString() + (x.HeadTeacher.Initials + x.HeadTeacher.Lname).ToString()).ToLower().Contains(filter.ToLower()));
+                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.GradeId.ToString() + (x.GradeHead.Initials + x.GradeHead.LastName).ToString()).ToLower().Contains(filter.ToLower()));
                     //qry = qry.Where(searchForKey ? "StudID.ToString().Contains(@0)" : "(IndexNo+FullName).ToLower().Contains(@0)", filter.ToLower());
                 }
 
