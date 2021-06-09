@@ -23,6 +23,8 @@ namespace Nalanda.SMS.Data.Models
         public string Area { get; set; }
         public string Controller { get; set; }
         public string Action { get; set; }
+        public string Icon { get; set; }
+        public bool IsHidden { get; set; }
 
         public virtual Menu ParentMenu { get; set; }
         public virtual ICollection<Menu> InverseParentMenu { get; set; }

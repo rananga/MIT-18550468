@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("SignOut", "Home", new { area = "Base" }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav pull-right top-menu">
+            <li class="dropdown">
+                <a data-toggle="collapse" class="dropdown" href="#collapseID2" aria-expanded="true" aria-controls="collapseExample">
+                    <span class="profile-ava">
+                        <img alt="" src="@Url.Action("GetMyProfilePicture","Home", new { area = "Base" })" style="height:35px" />
+                    </span>
+                    <span class="username">Rananga Suraweera</span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="collapse dropdown-menu extended logout" id="collapseID2" style="margin-top:10px">
+                    <li class="eborder-top" style="display:none">
+                        <a href="#"><i class="icon_profile"></i> My Profile</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dlgChangePassword" style="text-align:center;color:maroon">Change Password</a>
+                    </li>
+                    <li style="background-color:maroon">
+                        <a href="#" class="dlgConfirmSubmit" data-button-text="Yes" data-message="Are you sure you want to sign out?"
+                           data-title="&lt;span class=&quot; bi bi-question-circle&quot; style=&quot; font-size:x-large;&quot;&gt &lt;/span&gt Confirm sign out"
+                           style="min-width:75px;text-align:center;color:white;background-color:maroon">Sign out</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- user login dropdown end -->
+        </ul>
+    }
+}

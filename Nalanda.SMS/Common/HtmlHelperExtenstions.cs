@@ -19,6 +19,7 @@ using System.Web.Script.Serialization;
 using System.Web.WebPages;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 
 namespace System.Web
 {
@@ -235,7 +236,7 @@ namespace System.Web.Mvc.Html
             {
                 var usrId = (int)htmlHelper.ViewContext.HttpContext.Session[BaseController.sskCurUsrID];
 
-                var roles = dbctx.Users.Where(x => x.Id == usrId).SelectMany(x => x.UserRoles).Select(x=> x.Role.Code);
+                var roles = dbctx.Users.Where(x => x.Id == usrId).SelectMany(x => x.UserRoles).Select(x => x.Role.Code);
                 if (roles.Where(x => x == RoleConstants.Admin).Any())
                     return dbctx.Menus.ToList();
 
@@ -247,6 +248,70 @@ namespace System.Web.Mvc.Html
 
             return lst;
         }
+        //public static MvcHtmlString SelectListFor<TEntity, TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, Func<TEntity, TProperty> getValue, Func<TEntity, string> getText, object htmlAttributes = null) where TEntity : class
+        //{
+        //    List<Menu> lst;
+        //    using (dbNalandaContext dbctx = new dbNalandaContext())
+        //    {
+        //        dbctx.Set<TEntity>().Select(x => new { value = getValue(x), text = getText(x) });
+
+        //        var usrId = (int)htmlHelper.ViewContext.HttpContext.Session[BaseController.sskCurUsrID];
+
+        //        var roles = dbctx.Users.Where(x => x.Id == usrId).SelectMany(x => x.UserRoles).Select(x => x.Role.Code);
+        //        if (roles.Where(x => x == RoleConstants.Admin).Any())
+        //            return dbctx.Menus.ToList();
+
+        //        lst = dbctx.Menus
+        //            .Where(x => x.RoleMenuAccesses
+        //            .Where(y => y.Role.UserRoles
+        //            .Where(z => z.UserId == usrId).Count() > 0).Count() > 0).ToList();
+        //    }
+
+        //    var pi = GetPropertyInfo(expression);
+
+        //    Type typ = null;
+        //    if (pi.PropertyType.IsEnum)
+        //    { typ = pi.PropertyType; }
+        //    if (pi.PropertyType.IsGenericType &&
+        //        pi.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) &&
+        //        pi.PropertyType.GetGenericArguments()[0].IsEnum)
+        //    { typ = pi.PropertyType.GetGenericArguments()[0]; }
+
+        //    if (typ == null)
+        //    { return htmlHelper.EditorFor(expression, new { htmlAttributes = htmlAttributes }); }
+
+        //    TModel mdl = htmlHelper.ViewData.Model;
+        //    var sval = mdl == null ? null : (object)expression.Compile()(mdl);
+
+        //    var sel = new TagBuilder("select");
+        //    sel.Attributes.Add("id", pi.Name);
+        //    sel.Attributes.Add("name", pi.Name);
+
+        //    object attrs = htmlAttributes.ToDynamic();
+        //    foreach (KeyValuePair<string, object> kvp in (ExpandoObject)attrs)
+        //    { sel.Attributes.Add(kvp.Key, kvp.Value.ToString()); }
+        //    StringBuilder sb = new StringBuilder();
+
+        //    if (!pi.PropertyType.IsEnum)
+        //    {
+        //        var opt = new TagBuilder("option");
+        //        opt.Attributes.Add("value", "");
+        //        sb.Append(opt.ToString());
+        //    }
+
+        //    foreach (var enm in Enum.GetValues(typ))
+        //    {
+        //        var opt = new TagBuilder("option");
+        //        opt.Attributes.Add("value", Convert.ToInt64(enm).ToString());
+        //        if (sval != null && enm.Equals(Enum.Parse(typ, sval.ToString())))
+        //        { opt.Attributes.Add("selected", "selected"); }
+        //        opt.InnerHtml = enm.ToEnumChar();
+        //        sb.Append(opt.ToString());
+        //    }
+
+        //    sel.InnerHtml = sb.ToString();
+        //    return new MvcHtmlString(sel.ToString());
+        //}
 
         public static WebGridColumn SortColumn(this WebGrid grid, string columnName = null, string header = null, Func<dynamic, object> format = null, string style = null, bool canSort = true)
         {
@@ -688,6 +753,200 @@ namespace System.Web.Mvc.Html
 
                 return htmlHelper.Label(name, value.ToString(), newAttrs);
             }
+        }
+
+        public static MvcHtmlString ImageCaptor(this HtmlHelper htmlHelper, string imageSource, string uploadArea, string uploadController, string uploadAction)
+        {
+            var vid = new TagBuilder("video");
+            vid.Attributes.Add("id", "vidCam");
+            vid.Attributes.Add("width", "240");
+            vid.Attributes.Add("height", "180");
+            vid.Attributes.Add("autoplay", "");
+            vid.Attributes.Add("style", "display:none;");
+
+            var cnvs = new TagBuilder("canvas");
+            cnvs.Attributes.Add("id", "vidCamCanvas");
+            cnvs.Attributes.Add("width", "240");
+            cnvs.Attributes.Add("height", "180");
+            cnvs.Attributes.Add("style", "display:none");
+
+            var imgDiv = new TagBuilder("div");
+            imgDiv.Attributes.Add("style", "text-align:center;width:240px;float:none;margin:auto;");
+            var img = new TagBuilder("img");
+            img.Attributes.Add("id", "imgPic");
+            img.Attributes.Add("class", "btn");
+            img.Attributes.Add("src", imageSource);
+            img.Attributes.Add("style", "height:180px;object-fit: cover;");
+            imgDiv.InnerHtml = img.ToString();
+
+            var btnToolBar = new TagBuilder("div");
+            btnToolBar.Attributes.Add("class", "d-grid gap-2 d-md-block");
+            btnToolBar.Attributes.Add("style", "min-width:240px;margin-top:5px;text-align:center;");
+
+            var btnCam = new TagBuilder("input");
+            btnCam.Attributes.Add("type", "button");
+            btnCam.Attributes.Add("id", "btnCam");
+            btnCam.Attributes.Add("class", "btn btn-success");
+            btnCam.Attributes.Add("style", "min-width:75px; float:none;");
+            btnCam.Attributes.Add("data-mode", "R");
+            btnCam.Attributes.Add("value", "RETAKE");
+
+            var btnCancel = new TagBuilder("input");
+            btnCancel.Attributes.Add("type", "button");
+            btnCancel.Attributes.Add("id", "btnCancel");
+            btnCancel.Attributes.Add("class", "btn btn-danger");
+            btnCancel.Attributes.Add("style", "min-width:75px; float:none; display:none; margin-left:5px;");
+            btnCancel.Attributes.Add("value", "CANCEL");
+
+            btnToolBar.InnerHtml = btnCam.ToString() + btnCancel.ToString();
+
+            var script = new TagBuilder("script");
+            script.Attributes.Add("type", "text/javascript");
+
+            var str = @"
+                var objVidCam = $('#vidCam');
+                var objVidCamCanvas = document.getElementById('vidCamCanvas');
+                var objBtnCam = $('#btnCam');
+                var objBtnCancel = $('#btnCancel');
+                var objPic = $('#imgPic');
+
+                objPic.data('org-src', objPic.attr('src'));
+
+                function AttachVideoListener(video)
+                {
+                    var mediaConfig = { video: true };
+                    // Put video listeners into place
+                    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                        navigator.mediaDevices.getUserMedia(mediaConfig).then(function (stream) {
+                        //video.src = window.URL.createObjectURL(stream);
+                        video.srcObject = stream;
+                        video.play();
+                    });
+                    }
+
+                    /* Legacy code below! */
+                    else if (navigator.getUserMedia) { // Standard
+                        navigator.getUserMedia(mediaConfig, function (stream) {
+                            video.src = stream;
+                            video.play();
+                        }, errBack);
+                    } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed
+                        navigator.webkitGetUserMedia(mediaConfig, function (stream) {
+                            video.src = window.webkitURL.createObjectURL(stream);
+                            video.play();
+                        }, errBack);
+                    } else if (navigator.mozGetUserMedia) { // Mozilla-prefixed
+                        navigator.mozGetUserMedia(mediaConfig, function (stream) {
+                            video.src = window.URL.createObjectURL(stream);
+                            video.play();
+                        }, errBack);
+                    }
+                }
+
+                objBtnCam.click(function () {
+                    if (objBtnCam.data('mode') == 'R') {
+                        objPic.hide();
+                        objVidCam.show();
+                        AttachVideoListener(objVidCam[0]);
+                        objBtnCancel.show();
+                        objBtnCam.val('CAPTURE');
+                        objBtnCam.data('mode', 'C');
+                    }
+                    else {
+                        var context = objVidCamCanvas.getContext('2d');
+                        context.drawImage(objVidCam[0], 0, 0, 240, 180);
+
+                        $.ajax({
+                            url: AppRoot + '{uploadArea}/{uploadController}/{uploadAction}',
+                            type: 'POST',
+                            data: { imgString: objVidCamCanvas.toDataURL() },
+                            success: function(result) {
+                                objPic.attr('src', objPic.data('org-src') + '?timestamp=' + new Date().getTime());
+                                objPic.show();
+                            },
+                            error: function(data, status, jqXHR) {
+                                if (IsJson(data.responseText)) { AlertIt('ERROR: ' + JSON.parse(data.responseText).Message); }
+                                else { AlertIt('ERROR: ' + data.statusText); }
+                            }
+                        });
+                        objProg.hide();
+                        objVidCam.hide();
+
+                        objBtnCancel.hide();
+                        objBtnCam.val('RETAKE');
+                        objBtnCam.data('mode', 'R');
+                    }
+                });
+
+                objBtnCancel.click(function () {
+                    objVidCam.hide();
+                    objBtnCancel.hide();
+                    objPic.show();
+                    objBtnCam.data('mode', 'R');
+                });
+            ";
+
+            script.InnerHtml = str.Replace("{uploadArea}", uploadArea).Replace("{uploadController}", uploadController).Replace("{uploadAction}", uploadAction);
+            return new MvcHtmlString(vid.ToString() + cnvs.ToString() + imgDiv.ToString() + btnToolBar.ToString() + script.ToString());
+        }
+
+        public static MvcHtmlString RequiredLabelFor<TModel, TValue>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TValue>> expression, object htmlAttributes)
+        {
+            TagBuilder astrik = new TagBuilder("span");
+            astrik.SetInnerText("*");
+            astrik.Attributes.Add("style", "color:red");
+
+            TagBuilder builder = new TagBuilder("label");
+
+            var pi = GetPropertyInfo(expression);
+
+            builder.InnerHtml = GetPropertyDisplayName(expression) + " " + astrik.ToString();
+            builder.Attributes.Add("for", pi.Name);
+
+            object attrs = htmlAttributes.ToDynamic();
+            foreach (KeyValuePair<string, object> kvp in (ExpandoObject)attrs)
+            { builder.Attributes.Add(kvp.Key, kvp.Value.ToString()); }
+
+            return new MvcHtmlString(builder.ToString());
+        }
+
+        private static string GetPropertyDisplayName<TModel, TValue>(Expression<Func<TModel, TValue>> propertyExpression)
+        {
+            var memberInfo = GetPropertyInformation(propertyExpression.Body);
+            if (memberInfo == null)
+            {
+                throw new ArgumentException(
+                    "No property reference expression was found.",
+                    "propertyExpression");
+            }
+
+            var attr = memberInfo.GetCustomAttribute<DisplayNameAttribute>(false);
+            if (attr == null)
+            {
+                return memberInfo.Name;
+            }
+
+            return attr.DisplayName;
+        }
+
+        public static MemberInfo GetPropertyInformation(Expression propertyExpression)
+        {
+            MemberExpression memberExpr = propertyExpression as MemberExpression;
+            if (memberExpr == null)
+            {
+                UnaryExpression unaryExpr = propertyExpression as UnaryExpression;
+                if (unaryExpr != null && unaryExpr.NodeType == ExpressionType.Convert)
+                {
+                    memberExpr = unaryExpr.Operand as MemberExpression;
+                }
+            }
+
+            if (memberExpr != null && memberExpr.Member.MemberType == MemberTypes.Property)
+            {
+                return memberExpr.Member;
+            }
+
+            return null;
         }
     }
 }

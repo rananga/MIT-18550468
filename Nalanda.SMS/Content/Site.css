@@ -211,11 +211,11 @@ textarea {
         background-color: #cccccc;
         border: 0px solid #000000;
         border-width: 0px 0px 1px 1px;
-        color: #000000;
+        color: maroon;
     }
 
         .mGrid thead tr th a {
-            color: #000;
+            color: maroon;
             text-decoration: none;
         }
 

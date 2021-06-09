@@ -42,17 +42,17 @@
             </div>
         </div>
 
-        <div id="ChildContent">
+        <div class="ChildContent">
             @{ Html.RenderAction("ChildIndex", new { id = Model.PreID, isSenior = true }); }
         </div>
         <br />
 
-        <div id="ChildContent">
+        <div class="ChildContent">
             @{ Html.RenderAction("ChildIndex", new { id = Model.PreID, isJunior = true }); }
         </div>
 
         <br />
-        <div id="ChildContent">
+        <div class="ChildContent">
             @{ Html.RenderAction("ChildIndex", new { id = Model.PreID, isPending = true }); }
         </div>
         <br />

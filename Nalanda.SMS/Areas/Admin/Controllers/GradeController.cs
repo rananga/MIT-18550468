@@ -20,7 +20,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
         }
         public ActionResult Create()
         {
-            var grade = new GradeVM() { GradeId = 1 };
+            var grade = new GradeVM() { GradeId =  Grades.Grade1 };
 
             return View(grade);
         }

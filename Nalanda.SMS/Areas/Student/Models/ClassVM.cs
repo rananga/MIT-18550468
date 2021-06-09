@@ -28,7 +28,7 @@ namespace Nalanda.SMS.Areas.Student.Models
 
         [DisplayName("Class"), Required]
         public int ClassID { get; set; }
-        public StudGrade Grade { get; set; }
+        public Grades Grade { get; set; }
         [DisplayName("Class"), Required]
         public string ClassDesc { get; set; }
         public ActiveState Status { get; set; }

@@ -591,3 +591,433 @@
   
 2021-06-08 12:16:15,236 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrap.beta/bootstrapminbeta User: rananga Error Message: The controller for path '/Content/bootstrap.beta/bootstrapminbeta' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
   
+2021-06-08 12:26:25,091 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Content/Layout/LayoutBundle User: rananga Error Message: The controller for path '/Content/Layout/LayoutBundle' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:26:25,306 [8] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/chart User: rananga Error Message: The controller for path '/bundles/chart' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:26:25,587 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrap.beta/bootstrapminbeta User: rananga Error Message: The controller for path '/Content/bootstrap.beta/bootstrapminbeta' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:26:25,591 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapmin User: rananga Error Message: The controller for path '/Content/bootstrapmin' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:26:25,832 [9] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/layout User: rananga Error Message: The controller for path '/bundles/layout' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:26:26,593 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Content/fontawesome User: rananga Error Message: The controller for path '/Content/fontawesome' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:26:27,097 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapicons User: rananga Error Message: The controller for path '/Content/bootstrapicons' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:07,933 [17] ERROR ASP.global_asax - Error in http://localhost:24368/Content/fontawesome User: rananga Error Message: The controller for path '/Content/fontawesome' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:07,942 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrap.beta/bootstrapminbeta User: rananga Error Message: The controller for path '/Content/bootstrap.beta/bootstrapminbeta' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:07,951 [18] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapicons User: rananga Error Message: The controller for path '/Content/bootstrapicons' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:08,436 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Content/Layout/LayoutBundle User: rananga Error Message: The controller for path '/Content/Layout/LayoutBundle' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:08,451 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapmin User: rananga Error Message: The controller for path '/Content/bootstrapmin' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:11,019 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Content/Layout/LayoutBundle User: rananga Error Message: The controller for path '/Content/Layout/LayoutBundle' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:11,024 [16] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapicons User: rananga Error Message: The controller for path '/Content/bootstrapicons' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:11,271 [8] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/chart User: rananga Error Message: The controller for path '/bundles/chart' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:11,522 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrap.beta/bootstrapminbeta User: rananga Error Message: The controller for path '/Content/bootstrap.beta/bootstrapminbeta' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:11,797 [10] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/layout User: rananga Error Message: The controller for path '/bundles/layout' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:12,030 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Content/fontawesome User: rananga Error Message: The controller for path '/Content/fontawesome' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:28:12,533 [14] ERROR ASP.global_asax - Error in http://localhost:24368/Content/bootstrapmin User: rananga Error Message: The controller for path '/Content/bootstrapmin' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:34:47,621 [10] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/chart User: rananga Error Message: The controller for path '/bundles/chart' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:34:48,106 [8] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/layout User: rananga Error Message: The controller for path '/bundles/layout' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:35:41,472 [9] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/chart User: rananga Error Message: The controller for path '/bundles/chart' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:35:41,974 [12] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/layout User: rananga Error Message: The controller for path '/bundles/layout' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:35:44,034 [9] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/chart User: rananga Error Message: The controller for path '/bundles/chart' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:35:44,539 [11] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/layout User: rananga Error Message: The controller for path '/bundles/layout' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:39:47,266 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:39:49,578 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:39:50,165 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:39:50,770 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:39:51,343 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:39:52,015 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:39:52,488 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:41:54,991 [8] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/chart User: rananga Error Message: The controller for path '/bundles/chart' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:41:55,485 [9] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/layout User: rananga Error Message: The controller for path '/bundles/layout' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:43:29,737 [9] ERROR ASP.global_asax - Error in http://localhost:24368/bundles/chart User: rananga Error Message: The controller for path '/bundles/chart' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 12:47:33,948 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:47:40,651 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:47:42,356 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:47:45,014 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:47:45,638 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:47:46,317 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:47:46,977 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:47:51,694 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:47:52,406 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:47:52,742 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 12:47:53,065 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at Microsoft.Ajax.Utilities.JSParser.ParseObjectLiteralProperty(Boolean isBindingPattern)
+  
+2021-06-08 13:19:38,514 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 13:20:21,208 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 13:21:43,126 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 13:26:21,024 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 13:26:53,332 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 13:27:02,696 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 13:32:50,047 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 13:37:14,401 [25] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 13:58:35,543 [67] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 13:59:27,696 [71] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 13:59:57,853 [68] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 14:00:23,580 [70] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 14:00:30,108 [70] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 14:00:55,910 [70] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:03:58,870 [28] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:06:00,461 [36] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:08:08,822 [77] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:10:10,495 [77] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:19:57,740 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:20:41,860 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:21:31,203 [13] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:22:00,722 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:24:59,196 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Base/DashBoard/Home User: rananga Error Message: The controller for path '/Base/DashBoard/Home' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 15:24:59,605 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:25:07,557 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Base/DashBoard/Home User: rananga Error Message: The controller for path '/Base/DashBoard/Home' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 15:25:08,335 [15] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:25:17,162 [13] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:27:50,466 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:27:54,074 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:28:15,980 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:34:26,112 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:35:17,848 [12] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:36:15,668 [7] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 15:38:27,752 [7] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:10:55,935 [76] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:11:28,151 [76] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:11:40,172 [74] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:12:20,499 [74] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:13:06,917 [60] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:16:08,600 [88] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:16:37,090 [90] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:17:24,692 [92] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:17:55,169 [90] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:18:30,726 [90] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:18:46,507 [92] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:19:18,446 [92] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:25:03,150 [99] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:25:40,272 [92] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:25:59,452 [98] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:26:13,216 [74] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:31:52,794 [74] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/UserRoles/Create User: rananga Error Message: Object reference not set to an instance of an object. Line:    at ASP._Page_Areas_Base_Views_Shared__Layout_cshtml.Execute() in D:\GitHub\MIT18550468\Nalanda.SMS\Areas\Base\Views\Shared\_Layout.cshtml:line 123
+  
+2021-06-08 16:31:54,182 [74] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:31:59,667 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:32:08,753 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Index/UserRoles User: rananga Error Message: The controller for path '/Base/Index/UserRoles' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 16:32:09,169 [27] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:33:08,103 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:33:11,647 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\HtmlHelperExtenstions.cs:line 236
+  
+2021-06-08 16:33:12,162 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\HtmlHelperExtenstions.cs:line 236
+  
+2021-06-08 16:33:12,672 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\HtmlHelperExtenstions.cs:line 236
+  
+2021-06-08 16:33:13,164 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\HtmlHelperExtenstions.cs:line 236
+  
+2021-06-08 16:33:13,300 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\HtmlHelperExtenstions.cs:line 236
+  
+2021-06-08 16:33:13,419 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\HtmlHelperExtenstions.cs:line 236
+  
+2021-06-08 16:33:13,554 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\HtmlHelperExtenstions.cs:line 236
+  
+2021-06-08 16:33:13,696 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\HtmlHelperExtenstions.cs:line 236
+  
+2021-06-08 16:33:13,827 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\HtmlHelperExtenstions.cs:line 236
+  
+2021-06-08 16:33:13,958 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/Error/ User: rananga Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\HtmlHelperExtenstions.cs:line 236
+  
+2021-06-08 16:33:21,599 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:33:30,309 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/DashBoard/Home User: rananga Error Message: The controller for path '/Base/DashBoard/Home' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 16:33:30,727 [78] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:33:58,945 [74] ERROR ASP.global_asax - Error in http://localhost:24368/Base/DashBoard/Home User: rananga Error Message: The controller for path '/Base/DashBoard/Home' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 16:33:59,390 [93] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:34:01,945 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/DashBoard/Home User: rananga Error Message: The controller for path '/Base/DashBoard/Home' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 16:34:02,354 [78] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:34:06,636 [93] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:34:08,187 [74] ERROR ASP.global_asax - Error in http://localhost:24368/Base/DashBoard/Home User: rananga Error Message: The controller for path '/Base/DashBoard/Home' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 16:34:08,586 [78] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:34:11,137 [93] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:34:14,403 [78] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:34:18,306 [83] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:35:31,693 [93] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:36:30,623 [93] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:36:34,688 [93] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:46:35,360 [39] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:47:07,288 [26] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:51:12,709 [18] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:51:19,451 [25] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:51:54,658 [25] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:52:38,360 [25] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:53:12,542 [26] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:55:13,177 [89] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 16:56:30,053 [18] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:00:48,641 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/UserRoles User: rananga Error Message: The controller for path '/Base/UserRoles' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 17:00:49,252 [22] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:00:57,020 [79] ERROR ASP.global_asax - Error in http://localhost:24368/Base/UserRoles User: rananga Error Message: The controller for path '/Base/UserRoles' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 17:00:57,614 [22] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:01:05,131 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:02:19,525 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:02:32,479 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:02:40,632 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:02:42,683 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/UserRoles User: rananga Error Message: The controller for path '/Base/UserRoles' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 17:02:43,182 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:02:50,454 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/UserRoles/Index User: rananga Error Message: The controller for path '/Base/UserRoles/Index' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 17:02:50,989 [66] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:02:58,218 [22] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:03:12,587 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/UserRoles User: rananga Error Message: The controller for path '/Base/UserRoles' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 17:03:13,394 [22] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:03:16,045 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/UserRoles User: rananga Error Message: The controller for path '/Base/UserRoles' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-08 17:03:16,571 [66] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:03:18,502 [22] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:03:20,646 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:03:22,621 [22] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:03:24,643 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:03:26,649 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:03:31,933 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:03:36,348 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:03:38,787 [22] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:04:36,689 [48] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:04:46,330 [79] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:04:49,905 [66] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:04:53,899 [67] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:04:55,975 [79] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:04:58,382 [66] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:05:47,985 [79] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:05:49,374 [66] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:05:51,748 [79] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:06:03,861 [79] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:09:15,584 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:09:20,420 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:12:48,965 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:15:21,320 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:16:08,927 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:22:34,683 [49] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:22:38,898 [49] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:22:40,849 [57] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:22:42,714 [49] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:22:49,318 [51] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:22:52,728 [49] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:22:54,707 [49] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:26:40,085 [58] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:28:15,828 [58] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:28:41,624 [64] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:29:33,784 [64] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:34:45,828 [51] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-08 17:35:55,704 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-09 01:35:33,732 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-09 01:41:56,030 [27] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-09 01:42:26,292 [27] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-09 01:43:19,015 [30] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/GetMyProfilePicture User: rananga Error Message: A public action method 'GetMyProfilePicture' was not found on controller 'Nalanda.SMS.Areas.Base.HomeController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-09 03:05:05,593 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMembers User: rananga Error Message: The controller for path '/Admin/StaffMembers' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-09 03:05:13,059 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/Sections User: rananga Error Message: The controller for path '/Admin/Sections' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-09 03:05:20,502 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/Grades User: rananga Error Message: The controller for path '/Admin/Grades' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-09 03:05:24,847 [10] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/GradeClasses User: rananga Error Message: The controller for path '/Admin/GradeClasses' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-09 03:05:30,934 [8] ERROR ASP.global_asax - Error in http://localhost:24368/Student/Students User: rananga Error Message: The controller for path '/Student/Students' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-09 10:46:57,634 [19] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/ChangePassword User: rananga Error Message: D:\GitHub\MIT18550468\Nalanda.SMS\Areas\Base\Views\Home\_ChangePassword.cshtml(12): error CS1061: 'SignInVM' does not contain a definition for 'UserId' and no accessible extension method 'UserId' accepting a first argument of type 'SignInVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-09 10:48:59,488 [19] ERROR ASP.global_asax - Error in http://localhost:24368/Base/Home/ChangePassword User: rananga Error Message: D:\GitHub\MIT18550468\Nalanda.SMS\Areas\Base\Views\Home\_ChangePassword.cshtml(12): error CS1061: 'SignInVM' does not contain a definition for 'UserId' and no accessible extension method 'UserId' accepting a first argument of type 'SignInVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-09 14:19:33,882 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMembers User: rananga Error Message: The controller for path '/Admin/StaffMembers' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-09 14:21:58,780 [5] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMembers User: rananga Error Message: Index was outside the bounds of the array. Line:    at Nalanda.SMS.Common.BaseViewModel`1.SetList[E](IQueryable`1 qry, String DefaultSort, SortDirection DefaultSortDir, String[] properties) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\BaseViewModel.cs:line 47
+  
+2021-06-09 14:22:13,949 [5] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMembers User: rananga Error Message: Index was outside the bounds of the array. Line:    at Nalanda.SMS.Common.BaseViewModel`1.SetList[E](IQueryable`1 qry, String DefaultSort, SortDirection DefaultSortDir, String[] properties) in D:\GitHub\MIT18550468\Nalanda.SMS\Common\BaseViewModel.cs:line 47
+  
+2021-06-09 14:22:29,557 [5] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMembers User: rananga Error Message: Index was outside the bounds of the array. Line:    at Nalanda.SMS.Common.BaseViewModel`1.SetList[E](IQueryable`1 qry, String DefaultSort, SortDirection DefaultSortDir, String[] properties)
+  
+2021-06-09 14:22:55,843 [5] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMembers User: rananga Error Message: Index was outside the bounds of the array. Line:    at Nalanda.SMS.Common.BaseViewModel`1.SetList[E](IQueryable`1 qry, String DefaultSort, SortDirection DefaultSortDir, String[] properties)
+  
+2021-06-09 14:43:33,756 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMember/Create User: rananga Error Message: D:\GitHub\MIT18550468\Nalanda.SMS\Areas\Admin\Views\StaffMember\Create.cshtml(50): error CS1061: 'StaffMemberVM' does not contain a definition for 'Address' and no accessible extension method 'Address' accepting a first argument of type 'StaffMemberVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-09 14:43:54,100 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMember/Create User: rananga Error Message: D:\GitHub\MIT18550468\Nalanda.SMS\Areas\Admin\Views\StaffMember\Create.cshtml(57): error CS1061: 'StaffMemberVM' does not contain a definition for 'ContactNo' and no accessible extension method 'ContactNo' accepting a first argument of type 'StaffMemberVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-09 14:44:36,943 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMember/Create User: rananga Error Message: D:\GitHub\MIT18550468\Nalanda.SMS\Areas\Admin\Views\StaffMember\Create.cshtml(57): error CS1061: 'StaffMemberVM' does not contain a definition for 'ContactNo' and no accessible extension method 'ContactNo' accepting a first argument of type 'StaffMemberVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-09 14:44:55,482 [6] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMember/Create User: rananga Error Message: D:\GitHub\MIT18550468\Nalanda.SMS\Areas\Admin\Views\StaffMember\Create.cshtml(101): error CS1061: 'StaffMemberVM' does not contain a definition for 'InactiveReason' and no accessible extension method 'InactiveReason' accepting a first argument of type 'StaffMemberVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-09 14:45:12,449 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMember/Create User: rananga Error Message: A public action method 'ChildIndex' was not found on controller 'Nalanda.SMS.Areas.Admin.Controllers.StaffMemberController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-09 19:07:15,320 [15] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/StaffMember/Edit/1 User: rananga Error Message: A public action method 'ChildIndex' was not found on controller 'Nalanda.SMS.Areas.Admin.Controllers.StaffMemberController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-09 23:30:07,881 [40] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/Section User: rananga Error Message: The controller for path '/Admin/Section' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-10 00:48:03,548 [11] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/Section/Details/1 User: rananga Error Message: D:\GitHub\MIT18550468\Nalanda.SMS\Areas\Admin\Views\Section\Details.cshtml(30): error CS1061: 'SectionVM' does not contain a definition for 'IsBasket' and no accessible extension method 'IsBasket' accepting a first argument of type 'SectionVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-10 00:50:36,089 [9] ERROR ASP.global_asax - Error in http://localhost:24368/Admin/Grade/Create User: rananga Error Message: D:\GitHub\MIT18550468\Nalanda.SMS\Areas\Admin\Views\Grade\Create.cshtml(26): error CS1061: 'GradeVM' does not contain a definition for 'HeadTeacherId' and no accessible extension method 'HeadTeacherId' accepting a first argument of type 'GradeVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  

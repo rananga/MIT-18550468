@@ -23,10 +23,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HeadTeacherId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SectionId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.PopUpSelectorFor(model => model.HeadTeacherId, "Base", "Data", "GetTeachers", new { @class = "form-control" }, "Please select a Teacher", null, dspFormat: "{1}", hiddenIndices: "0")
-                @Html.ValidationMessageFor(model => model.HeadTeacherId, "", new { @class = "text-danger" })
+                @Html.PopUpSelectorFor(model => model.SectionId, "Base", "Data", "GetSections", new { @class = "form-control" }, "Please select a Section", null, dspFormat: "{1}", hiddenIndices: "0")
+                @Html.ValidationMessageFor(model => model.SectionId, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>

@@ -8,23 +8,19 @@ namespace Nalanda.SMS.Data.Models
     {
         public Class()
         {
-            ClassSubjects = new HashSet<ClassSubject>();
-            ClassStudents = new HashSet<ClassStudent>();
+            ClassTeachers = new HashSet<ClassTeacher>();
+            ClassMonitors = new HashSet<ClassMonitor>();
         }
 
         [Required]
         public int Year { get; set; }
-        [DisplayName("Grade"), Required]
-        public int GradeId { get; set; }
-        [DisplayName("Class"), Required]
-        public string Name { get; set; }
-        [DisplayName("Class Teacher"), Required]
-        public int TeacherId { get; set; }
+        [DisplayName("Grade Class"), Required]
+        public int GradeClassId { get; set; }
+        [Required]
         public Medium Medium { get; set; }
 
-        public virtual Grade Grade { get; set; }
-        public virtual Teacher ClassTeacher { get; set; }
-        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
-        public virtual ICollection<ClassStudent> ClassStudents { get; set; }
+        public virtual GradeClass GradeClass { get; set; }
+        public virtual ICollection<ClassTeacher> ClassTeachers { get; set; }
+        public virtual ICollection<ClassMonitor> ClassMonitors { get; set; }
     }
 }

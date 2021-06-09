@@ -5,121 +5,148 @@
 
 @helper ThirdLevel(List<Nalanda.SMS.Data.Models.Menu> FullList, int menuID, int level)
 {
-var lst = FullList.Where(x => x.ParentMenuId == menuID).OrderBy(x => x.DisplaySeq).ToList();
+    var lst = FullList.Where(x => x.ParentMenuId == menuID && x.IsHidden == false).OrderBy(x => x.DisplaySeq).ToList();
 
-foreach (var item in lst)
-{
-    if (item.Type == "I")
+    foreach (var item in lst)
     {
-            <li role="menuitem">@Html.ActionLink(item.Text, item.Action, item.Controller, new { area = item.Area }, new { })</li>
-    }
-    else if (item.Type == "D")
-    {
-            <li role="menuitem" class="divider"></li>
-    }
-    else if (item.Type == "M")
-    {
-            <li class="dropdown-submenu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@item.Text</a>
-                <ul class="dropdown-menu menu-ul-color" role="menu" aria-labelledby="@level.ToString()">
+        if (item.Type == "I")
+        {
+            <li class="wraptext">
+                <a class="" href="@Url.Action(item.Action, item.Controller, new { area = item.Area })">
+                    @if (item.Icon.IsBlank())
+                    {
+                        <i class="fas fa-ellipsis-h"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-@item.Icon"></i>
+                    }
+                    <span style="margin-left:5px;padding-right:5px;">@item.Text</span>
+                </a>
+            </li>
+        }
+        else if (item.Type == "M")
+        {
+            <li class="sub-menu dropdown-submenu wraptext">
+                <a href="javascript:;" class="">
+                    @if (item.Icon.IsBlank())
+                    {
+                        <i class="fas fa-hand-point-right"></i>
+                    }
+                    else
+                    {
+                        <i class="fas fa-@item.Icon"></i>
+                    }
+                    <span style="margin-left:5px;padding-right:5px;">@item.Text</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="">
                     @ThirdLevel(FullList, item.MenuId, level + 1)
                 </ul>
             </li>
+        }
     }
-}
 }
 
 @helper SecondLevel(List<Nalanda.SMS.Data.Models.Menu> FullList, int menuID)
 {
-var lst = FullList.Where(x => x.ParentMenuId == menuID).OrderBy(x => x.DisplaySeq).ToList();
+    var lst = FullList.Where(x => x.ParentMenuId == menuID && x.IsHidden == false).OrderBy(x => x.DisplaySeq).ToList();
 
-foreach (var item in lst)
-{
-    if (item.Type == "I")
+    foreach (var item in lst)
     {
-            <li role="menuitem">@Html.ActionLink(item.Text, item.Action, item.Controller, new { area = item.Area }, new { })</li>
-    }
-    else if (item.Type == "D")
-    {
-            <li class="divider"></li>
-    }
-    else if (item.Type == "M")
-    {
-            <li class="dropdown-submenu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@item.Text</a>
-                <ul class="dropdown-menu menu-ul-color" role="menu" aria-labelledby="sec">
+        if (item.Type == "I")
+        {
+            <li class="wraptext">
+                <a class="" href="@Url.Action(item.Action, item.Controller, new { area = item.Area })">
+                    @if (item.Icon.IsBlank())
+                    {
+                        <i class="fas fa-hand-point-right"></i>
+                    }
+                    else
+                    {
+                        <i class="@item.Icon"></i>
+                    }
+                    <span style="margin-left:5px;padding-right:5px;">@item.Text</span>
+                </a>
+            </li>
+        }
+        else if (item.Type == "M")
+        {
+            <li class="sub-menu wraptext">
+                <a href="javascript:;" class="">
+                    @if (item.Icon.IsBlank())
+                    {
+                        <i class="fas fa-hand-point-right"></i>
+                    }
+                    else
+                    {
+                        <i class="@item.Icon"></i>
+                    }
+                    <span style="margin-left:5px;padding-right:5px;">@item.Text</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="">
                     @ThirdLevel(FullList, item.MenuId, 3)
                 </ul>
             </li>
+        }
     }
 }
-}
 
-@helper FirstLevel(List<Nalanda.SMS.Data.Models.Menu> lstMenus, bool isSub)
+@helper FirstLevel(List<Nalanda.SMS.Data.Models.Menu> lstMenus)
 {
-var lstFirst = lstMenus.Where(x => x.ParentMenuId == null).OrderBy(x => x.DisplaySeq).ToList();
+    var lstFirst = lstMenus.Where(x => x.ParentMenuId == null).OrderBy(x => x.DisplaySeq).ToList();
 
-if (lstFirst.Count > 0)
-{
+    if (lstFirst.Count > 0)
+    {
         @*<li class="divider-vertical"></li>*@
-}
-
-foreach (var item in lstFirst)
-{
-    if (item.Type == "I")
-    {
-            <li role="menuitem">@Html.ActionLink(item.Text, item.Action, item.Controller, new { area = item.Area }, new { })</li>
-    }
-    else if (item.Type == "M")
-    {
-        if (isSub)
-        {
-                <li class="dropdown-submenu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">@item.Text</a>
-                    <ul class="dropdown-menu menu-ul-color" role="menu" aria-labelledby="top">
-                        @SecondLevel(lstMenus, item.MenuId)
-                    </ul>
-                </li>
-        }
-        else
-        {
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">@item.Text <b class="caret"></b></a>
-                    <ul class="dropdown-menu menu-ul-color" role="menu" aria-labelledby="top">
-                        @SecondLevel(lstMenus, item.MenuId)
-                    </ul>
-                </li>
-        }
-    }
-    else if (item.Type == "D" && isSub)
-    {
-        if (isSub)
-        {
-                <li class="divider"></li>
-        }
-        else
-        {
-                @*<li class="divider-vertical"></li>*@
-        }
     }
 
-}
-}
-
-<ul class="nav navbar-nav">
-    @{
-        if (lstFirst.Count > 1)
+    foreach (var item in lstFirst)
+    {
+        if (item.Type == "I")
         {
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></a>
-                <ul class="dropdown-menu menu-ul-color" role="menu" aria-labelledby="top">
-                    @FirstLevel(lstMenus, true)
+            <li class="wraptext">
+                <a class="" href="@Url.Action(item.Action, item.Controller, new { area = item.Area })">
+                    @if (item.Icon.IsBlank())
+                    {
+                        <i class="fas fa-infinity"></i>
+                    }
+                    else
+                    {
+                        <i class="@item.Icon"></i>
+                    }
+                    <span style="margin-left:5px;padding-right:5px;">@item.Text</span>
+                </a>
+            </li>
+        }
+        else if (item.Type == "M")
+        {
+            <li class="sub-menu wraptext">
+                <a href="javascript:;" class="" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+                    @if (item.Icon.IsBlank())
+                    {
+                        <i class="fas fa-infinity"></i>
+                    }
+                    else
+                    {
+                        <i class="@item.Icon"></i>
+                    }
+                    <span style="margin-left:5px;padding-right:5px;">@item.Text</span>
+                    @*<span class="menu-arrow arrow_carrot-right"></span>*@
+                    <span class="fas fa-angle-right pull-right" style="margin-right:5px"></span>
+                </a>
+                <ul class="sub">
+                    @SecondLevel(lstMenus, item.MenuId)
                 </ul>
             </li>
         }
-        else
-        {
-            @FirstLevel(lstMenus, false)
-        }
+
+    }
+}
+
+<ul class="sidebar-menu">
+    @{
+        @FirstLevel(lstMenus)
     }
 </ul>

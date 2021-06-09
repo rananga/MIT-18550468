@@ -77,6 +77,44 @@ namespace Nalanda.SMS.Areas.Base
             }
         }
 
+        public ActionResult GetStaffMembers(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false)
+        {
+            using (dbNalandaContext dbctx = new dbNalandaContext())
+            {
+                var qry = dbctx.StaffMembers.AsQueryable();
+
+                if (!filter.IsBlank())
+                { qry = qry.Where(searchForKey ? "Id.ToString().Contains(@0)" : "FullName.ToLower().Contains(@0) || StaffNumber.ToString().ToLower().Contains(@0)", filter.ToLower()); }
+                
+                int rowCount = qry.Count();
+                if (pageSize <= 0)
+                {
+                    pageSize = 10;
+                    startIndex = 0;
+                }
+
+                if (startIndex > rowCount)
+                { startIndex = 0; }
+
+                if (sortBy.IsBlank())
+                { sortBy = "Staff_Number"; }
+
+                var lstSortColMap = new Dictionary<string, string>()
+                {
+                    { "Staff_Number", "StaffNumber" },
+                    { "Full_Name", "FullName" }
+                };
+
+                return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
+                    x => new
+                    {
+                        x.Id,
+                        Staff_Number = x.StaffNumber,
+                        Full_Name = x.FullName
+                    });
+            }
+        }
+
         public ActionResult GetGrades(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false)
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
@@ -85,7 +123,7 @@ namespace Nalanda.SMS.Areas.Base
 
                 if (!filter.IsBlank())
                 {
-                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.GradeId.ToString() + (x.GradeHead.Initials + x.GradeHead.LastName).ToString()).ToLower().Contains(filter.ToLower()));
+                    //qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.GradeId.ToString() + (x.GradeHead.Initials + x.GradeHead.LastName).ToString()).ToLower().Contains(filter.ToLower()));
                     //qry = qry.Where(searchForKey ? "StudID.ToString().Contains(@0)" : "(IndexNo+FullName).ToLower().Contains(@0)", filter.ToLower());
                 }
 
@@ -197,49 +235,49 @@ namespace Nalanda.SMS.Areas.Base
             }
         }
 
-        public ActionResult GetTeacherSubjects(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int grade = 0)
-        {
-            using (dbNalandaContext dbctx = new dbNalandaContext())
-            {
-                var qry = dbctx.TeacherSubjects.Where(x => grade == 0 || x.Grade.GradeId == grade).AsQueryable();
+        //public ActionResult GetTeacherSubjects(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int grade = 0)
+        //{
+        //    using (dbNalandaContext dbctx = new dbNalandaContext())
+        //    {
+        //        var qry = dbctx.TeacherSubjects.Where(x => grade == 0 || x.Grade.GradeId == grade).AsQueryable();
 
-                if (!filter.IsBlank())
-                {
-                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Grade.GradeId.ToString() + x.Subject.Name).ToLower().Contains(filter.ToLower()));
-                    //qry = qry.Where(searchForKey ? "StudID.ToString().Contains(@0)" : "(IndexNo+FullName).ToLower().Contains(@0)", filter.ToLower());
-                }
+        //        if (!filter.IsBlank())
+        //        {
+        //            qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Grade.GradeId.ToString() + x.Subject.Name).ToLower().Contains(filter.ToLower()));
+        //            //qry = qry.Where(searchForKey ? "StudID.ToString().Contains(@0)" : "(IndexNo+FullName).ToLower().Contains(@0)", filter.ToLower());
+        //        }
 
-                int rowCount = qry.Count();
-                if (pageSize <= 0)
-                {
-                    pageSize = 10;
-                    startIndex = 0;
-                }
+        //        int rowCount = qry.Count();
+        //        if (pageSize <= 0)
+        //        {
+        //            pageSize = 10;
+        //            startIndex = 0;
+        //        }
 
-                if (startIndex > rowCount)
-                { startIndex = 0; }
+        //        if (startIndex > rowCount)
+        //        { startIndex = 0; }
 
-                if (sortBy.IsBlank())
-                { sortBy = "Subject"; }
+        //        if (sortBy.IsBlank())
+        //        { sortBy = "Subject"; }
 
-                var lstSortColMap = new Dictionary<string, string>()
-                {
-                    { "Id", "Id" },
-                    { "Grade", "Grade" },
-                    { "Subject", "Subject" },
-                    { "Medium", "Medium" }
-                };
+        //        var lstSortColMap = new Dictionary<string, string>()
+        //        {
+        //            { "Id", "Id" },
+        //            { "Grade", "Grade" },
+        //            { "Subject", "Subject" },
+        //            { "Medium", "Medium" }
+        //        };
 
-                return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
-                    x => new
-                    {
-                        x.Id,
-                        Grade = "Grade " + x.Grade.GradeId,
-                        Subject = x.Subject.Name,
-                        Medium = x.Medium == 0 ? "Sinhala" : "English"
-                    });
-            }
-        }
+        //        return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
+        //            x => new
+        //            {
+        //                x.Id,
+        //                Grade = "Grade " + x.Grade.GradeId,
+        //                Subject = x.Subject.Name,
+        //                Medium = x.Medium == 0 ? "Sinhala" : "English"
+        //            });
+        //    }
+        //}
 
         public ActionResult GetStudents(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, bool isOldStudent = false, bool allStudents = false)
         {
@@ -302,7 +340,7 @@ namespace Nalanda.SMS.Areas.Base
 
                 if (!filter.IsBlank())
                 {
-                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Name + x.Grade.ToString()).Contains(filter.ToLower()));
+                    //qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Name + x.Grade.ToString()).Contains(filter.ToLower()));
                     //qry = qry.Where(searchForKey ? "ClassID.ToString().Contains(@0)" : "(ClassDesc).Contains(@0)", filter.ToLower());
                 }
 
@@ -329,8 +367,8 @@ namespace Nalanda.SMS.Areas.Base
                     x => new
                     {
                         x.Id,
-                        Grade = $"Grade {x.Grade.GradeId}",
-                        Class_Description = x.Name
+                        Grade = $"Grade {x.GradeClass.GradeId}",
+                        Class_Description = x.GradeClass.Name
                     });
             }
         }

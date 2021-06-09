@@ -1,7 +1,7 @@
 ﻿@model Nalanda.SMS.Areas.Admin.Models.RoleVM
 
 @{
-    ViewBag.Title = "Edit User Role";
+    ViewBag.Title = "Edit User Permission";
 }
 
 @using (Html.BeginForm())
@@ -34,7 +34,7 @@
     </div>
 }
 
-<div id="ChildContent">
+<div class="ChildContent">
     @{ Html.RenderAction("ChildIndex", new { id = Model.RoleId, isToEdit = true }); }
 </div>
 

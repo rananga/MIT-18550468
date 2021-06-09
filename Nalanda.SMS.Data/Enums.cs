@@ -88,7 +88,7 @@ namespace Nalanda.SMS.Data
         [Description("Younger Brother")]
         YoungerBrother = 1,
     }
-    public enum StudGrade
+    public enum Grades
     {
         [Description("Grade 1")]
         Grade1 = 1,
@@ -99,23 +99,58 @@ namespace Nalanda.SMS.Data
         [Description("Grade 4")]
         Grade4 = 4,
         [Description("Grade 5")]
-        Grade5 = 4,
+        Grade5 = 5,
         [Description("Grade 6")]
-        Grade6 = 4,
+        Grade6 = 6,
         [Description("Grade 7")]
-        Grade7 = 4,
+        Grade7 = 7,
         [Description("Grade 8")]
-        Grade8 = 4,
+        Grade8 = 8,
         [Description("Grade 9")]
-        Grade9 = 4,
+        Grade9 = 9,
         [Description("Grade 10")]
-        Grade10 = 4,
+        Grade10 = 10,
         [Description("Grade 11")]
-        Grade11 = 4,
+        Grade11 = 11,
         [Description("Grade 12")]
-        Grade12 = 4,
+        Grade12 = 12,
         [Description("Grade 13")]
-        Grade13 = 4
+        Grade13 = 13
+    }
+    public enum Classes
+    {
+        [Description("A")]
+        A = 1,
+        [Description("B")]
+        B = 2,
+        [Description("C")]
+        C = 3,
+        [Description("D")]
+        D = 4,
+        [Description("E")]
+        E = 5,
+        [Description("F")]
+        F = 6,
+        [Description("G")]
+        G = 7,
+        [Description("H")]
+        H = 8,
+        [Description("I")]
+        I = 9,
+        [Description("J")]
+        J = 10,
+        [Description("K")]
+        K = 11,
+        [Description("L")]
+        L = 12,
+        [Description("M")]
+        M = 13,
+        [Description("EE-M")]
+        EE_M = 14,
+        [Description("EE-B")]
+        EE_B = 15,
+        [Description("T")]
+        T = 16
     }
 
     public enum Medium

@@ -65,14 +65,12 @@ namespace Nalanda.SMS.Areas.Student.Models
         [DisplayName("School")]
         public string School { get; set; }
         [DisplayName("Grade")]
-        public StudGrade Grade { get; set; }
+        public Grades Grade { get; set; }
         [DisplayName("Teacher")]
         public int TeachID { get; set; }
         [DisplayName("Admission No")]
         public int IndexNo { get; set; }
         public string ClassListJson { get; set; }
-        [DisplayName("Grade")]
-        public StudGrade GradeDesc { get; set; }
         [DisplayName("Status")]
         public StudStatus Status { get; set; }
         [DisplayName("Period Start Date")]

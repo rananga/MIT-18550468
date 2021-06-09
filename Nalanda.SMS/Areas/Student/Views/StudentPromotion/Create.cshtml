@@ -56,7 +56,7 @@
 
 @{ var rvals = new { id = Model.ClassID, istoEdit = true, isCreate =true, classListJson = Model.ClassListJson }; }
 
-<div id="ChildContent" data-url="@Html.ActionUrl("ChildIndex")">
+<div class="ChildContent" data-url="@Html.ActionUrl("ChildIndex")">
     @{ Html.RenderAction("ChildIndex", rvals); }
 </div>
 

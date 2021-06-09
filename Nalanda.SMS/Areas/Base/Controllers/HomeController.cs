@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Security;
+using System.Security.Claims;
 
 namespace Nalanda.SMS.Areas.Base
 {
@@ -206,6 +207,31 @@ namespace Nalanda.SMS.Areas.Base
             }
 
             return PartialView("_ChangePassword");
+        }
+
+        public ActionResult GetMyProfilePicture()
+        {
+            var claims = ClaimsPrincipal.Current.Identities.First().Claims.ToList();
+            var email = claims?.FirstOrDefault(x => x.Type.Equals(ClaimTypes.Email, StringComparison.OrdinalIgnoreCase))?.Value;
+
+            return GetProfilePicture(email);
+        }
+
+        public ActionResult GetProfilePicture(string email)
+        {
+            var path = Server.MapPath("~/Content/Images/nalanda_logo.png");
+            //if (string.IsNullOrEmpty(email))
+            return File(path, "image/jpeg");
+
+            //byte[] bytes;
+            //using (var ms = GraphApiAccess.GetProfilePicture(email))
+            //{
+            //    if (ms == null)
+            //        return File(path, "image/jpeg");
+            //    bytes = ms.ToArray();
+            //}
+
+            //return File(bytes, "image/jpeg");
         }
 
         public ActionResult GetStudentAdmissions()

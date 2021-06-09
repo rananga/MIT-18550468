@@ -16,10 +16,8 @@ namespace Nalanda.SMS.Areas.Admin.Models
         {
             DetailsList = new List<UserRoleVM>();
             mappings = new ObjMappings<User, UserVM>();
+            mappings.Add(x => $"{x.StaffMember.Title.ToEnumChar("")}. {x.StaffMember.Initials.Trim()} {x.StaffMember.LastName}", x => x.SatffName);
             mappings.Add(x => x.UserRoles.Select(y => new UserRoleVM(y)).ToList(), x => x.DetailsList);
-            mappings.Add(x => x.Password, x => x.Password.Encrypt());
-            mappings.Add(x => x.Password.Decrypt(), x => x.Password);
-            mappings.Add(x => x.Password.Decrypt(), x => x.Password);
         }
         public UserVM(User obj)
             : this()
@@ -30,19 +28,9 @@ namespace Nalanda.SMS.Areas.Admin.Models
         public ObjMappings<User, UserVM> mappings { get; set; }
 
 
-        [DisplayName("Employee")]
-        public string EmpDspStr { get; set; }
-        [DisplayName("Call Center User Name")]
-        public string CallCenterUserName { get; set; }
+        [DisplayName("Staff Member")]
+        public string SatffName { get; set; }
 
-        [DisplayName("Branch")]
-        public Nullable<int> BranchID { get; set; }
-        [DisplayName("Department")]
-        public Nullable<int> DepartmentID { get; set; }
-        [DisplayName("Branch")]
-        public string BranchDesc { get; set; }
-        [DisplayName("Department")]
-        public string DepartmentDesc { get; set; }
         public virtual ICollection<UserRoleVM> DetailsList { get; set; }
     }
 }

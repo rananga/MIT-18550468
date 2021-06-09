@@ -14,7 +14,7 @@ namespace Nalanda.SMS.Areas.Admin.Models
         public ClassSubjectVM()
         {
             mappings = new ObjMappings<ClassSubject, ClassSubjectVM>();
-            mappings.Add(x => x.Class.Grade.GradeId + x.Class.Name, x => x.ClassName);
+            //mappings.Add(x => x.Class.Grade.GradeId + x.Class.Name, x => x.ClassName);
             mappings.Add(x => x.TeacherSubject.Subject.Name, x => x.SubjectName);
             mappings.Add(x => $"{x.TeacherSubject.Teacher.Title} {x.TeacherSubject.Teacher.FullName}", x => x.TeacherName);
         }

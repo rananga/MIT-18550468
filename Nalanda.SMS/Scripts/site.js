@@ -238,7 +238,7 @@ function AlertIt(msg) {
         open: function (event, ui) {
             var dlgParent = dlg.closest('.ui-dialog');
             var closeBtn = $('.ui-dialog-titlebar-close', dlgParent);
-            closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
+            closeBtn.html('<span><i class="fas fa-times"></i></span>');
             dlg_z_index++;
             dlgParent.css("z-index", dlg_z_index.toString());
             dlg.dialog("option", "position", { my: "center", at: "center", of: window });
@@ -314,7 +314,7 @@ function ConfirmIt(msg, title, posButText, negButText, showCancel, funcSuccess, 
         open: function (event, ui) {
             var dlgParent = dlg.closest('.ui-dialog');
             var closeBtn = $('.ui-dialog-titlebar-close', dlgParent);
-            closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
+            closeBtn.html('<span><i class="fas fa-times"></i></span>');
             dlg_z_index++;
             dlgParent.css("z-index", dlg_z_index.toString());
             dlg.dialog("option", "position", { my: "center", at: "center", of: window });
@@ -459,7 +459,7 @@ function DocReadyFunc() {
             open: function (event, ui) {
                 var dlgParent = dlg.closest('.ui-dialog');
                 var closeBtn = $('.ui-dialog-titlebar-close', dlgParent);
-                closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
+                closeBtn.html('<span><i class="fas fa-times"></i></span>');
                 dlg_z_index++;
                 dlgParent.css("z-index", dlg_z_index.toString());
                 dlg.dialog("option", "position", { my: "center", at: "center", of: window });
@@ -569,7 +569,7 @@ function DocReadyFunc() {
             open: function (event, ui) {
                 var dlgParent = dlg.closest('.ui-dialog');
                 var closeBtn = $('.ui-dialog-titlebar-close', dlgParent);
-                closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
+                closeBtn.html('<span><i class="fas fa-times"></i></span>');
                 dlg_z_index++;
                 dlgParent.css("z-index", dlg_z_index.toString());
                 dlg.dialog("option", "position", { my: "center", at: "center", of: window });
@@ -645,7 +645,7 @@ function DocReadyFunc() {
             open: function (event, ui) {
                 var dlgParent = dlg.closest('.ui-dialog');
                 var closeBtn = $('.ui-dialog-titlebar-close', dlgParent);
-                closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
+                closeBtn.html('<span><i class="fas fa-times"></i></span>');
                 dlg_z_index++;
                 dlgParent.css("z-index", dlg_z_index.toString());
                 dlg.dialog("option", "position", { my: "center", at: "center", of: window });
@@ -746,7 +746,7 @@ function PopupDocReadyFunc() {
             autoOpen: false,
             open: function (event, ui) {
                 var closeBtn = $('.ui-dialog-titlebar-close');
-                closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
+                closeBtn.html('<span><i class="fas fa-times"></i></span>');
                 dlg_z_index++;
                 $(".ui-dialog").css("z-index", dlg_z_index.toString());
                 dlg.dialog("option", "position", { my: "center", at: "center", of: window });
@@ -773,6 +773,7 @@ function PopupDocReadyFunc() {
                     type: this.method,
                     data: $(this).serialize(),
                     success: function (result) {
+                        console.log(776);
                         if (result.success) {
                             closeDialogModal(dlg);
                             $this.parents('.ChildContent').load(result.url, function (response, status, xhr) {
@@ -828,6 +829,7 @@ function PopupDocReadyFunc() {
                 type: this.method,
                 data: $(this).serialize(),
                 success: function (result) {
+                    console.log($this.parents('.ChildContent'));
                     closeDialogModal(dlg);
                     if (result.url) {
                         $this.parents('.ChildContent').load(result.url, function (response, status, xhr) {

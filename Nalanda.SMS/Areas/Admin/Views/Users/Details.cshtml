@@ -28,7 +28,13 @@
             </div>
         </div>
 
-        
+        <div class="form-group">
+            @Html.LabelFor(model => model.SatffName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DetailsViewFor(model => model.SatffName)
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -38,7 +44,7 @@
     </div>
 </div>
 
-<div id="ChildContent">
+<div class="ChildContent">
     @{ Html.RenderAction("ChildIndex", new { id = Model.Id }); }
 </div>
 

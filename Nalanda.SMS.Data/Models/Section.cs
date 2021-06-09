@@ -6,12 +6,17 @@ namespace Nalanda.SMS.Data.Models
 {
     public partial class Section : BaseModel
     {
+        public Section()
+        {
+            SectionHeads = new HashSet<SectionHead>();
+            Grades = new HashSet<Grade>();
+        }
+
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
-        [DisplayName("Section Head")]
-        public int? HeadId { get; set; }
 
-        public virtual StaffMember SectionHead { get; set; }
+        public virtual ICollection<SectionHead> SectionHeads { get; set; }
+        public virtual ICollection<Grade> Grades { get; set; }
     }
 }

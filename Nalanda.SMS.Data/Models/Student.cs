@@ -16,6 +16,7 @@ namespace Nalanda.SMS.Data.Models
             //Prefects = new HashSet<Prefect>();
             StudFamilies = new HashSet<StudFamily>();
             StudSiblings = new HashSet<StudSibling>();
+            ClassMonitors = new HashSet<ClassMonitor>();
         }
 
         [DisplayName("Admission No")]
@@ -60,5 +61,6 @@ namespace Nalanda.SMS.Data.Models
         public virtual ICollection<StudSibling> StudSiblings { get; set; }
         public virtual ICollection<StudentExtraActivityPosition> ActivityPositions { get; set; }
         public virtual ICollection<StudentExtraActivityAcheivement> ActivityAcheivements { get; set; }
+        public virtual ICollection<ClassMonitor> ClassMonitors { get; set; }
     }
 }

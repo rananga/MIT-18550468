@@ -10,7 +10,7 @@ namespace Nalanda.SMS.Areas.Admin.Models
         {
             mappings = new ObjMappings<Grade, GradeVM>();
             mappings.Add(x => $"Grade {x.GradeId}", x => x.GradeName);
-            mappings.Add(x => $"{x.GradeHead.Title} {x.GradeHead.FullName}", x => x.GradeHeadName);
+            mappings.Add(x => x.Section.Name, x => x.SectionName);
         }
 
         public GradeVM(Grade obj) : this()
@@ -20,6 +20,6 @@ namespace Nalanda.SMS.Areas.Admin.Models
         public ObjMappings<Grade, GradeVM> mappings { get; set; }
 
         public string GradeName { get; set; }
-        public string GradeHeadName { get; set; }
+        public string SectionName { get; set; }
     }
 }

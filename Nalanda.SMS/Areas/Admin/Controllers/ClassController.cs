@@ -117,10 +117,10 @@ namespace Nalanda.SMS.Areas.Admin
             try
             {
                 var svm = (ClassVM)Session[sskCrtdObj];
-                var existingClass = db.Classes.Where(e => e.Grade == classes.Grade && e.Name == classes.Name).FirstOrDefault();
+                //var existingClass = db.Classes.Where(e => e.Grade == classes.Grade && e.Name == classes.Name).FirstOrDefault();
 
-                if (existingClass != null)
-                { ModelState.AddModelError("", "Grade & Class Already Exist"); }
+                //if (existingClass != null)
+                //{ ModelState.AddModelError("", "Grade & Class Already Exist"); }
 
                 if (ModelState.IsValid)
                 {
@@ -133,7 +133,7 @@ namespace Nalanda.SMS.Areas.Admin
                         det.ClassId = objclass.Id;
                         det.CreatedBy = objclass.CreatedBy;
                         det.CreatedDate = DateTime.Now;
-                        objclass.ClassSubjects.Add(det.GetEntity());
+                        //objclass.ClassSubjects.Add(det.GetEntity());
                     }
 
                     foreach (var det in svm.Students)
@@ -141,7 +141,7 @@ namespace Nalanda.SMS.Areas.Admin
                         det.ClassId = objclass.Id;
                         det.CreatedBy = objclass.CreatedBy;
                         det.CreatedDate = DateTime.Now;
-                        objclass.ClassStudents.Add(det.GetEntity());
+                        //objclass.ClassStudents.Add(det.GetEntity());
                     }
                     db.SaveChanges();
 
@@ -289,10 +289,10 @@ namespace Nalanda.SMS.Areas.Admin
             try
             {
                 var svm = (ClassVM)Session[sskCrtdObj];
-                var existingClass = db.Classes.Where(e => e.Grade == classes.Grade && e.Name == classes.Name).FirstOrDefault();
+                //var existingClass = db.Classes.Where(e => e.Grade == classes.Grade && e.Name == classes.Name).FirstOrDefault();
 
-                if (existingClass != null)
-                { ModelState.AddModelError("", "Grade & Class Already Exist"); }
+                //if (existingClass != null)
+                //{ ModelState.AddModelError("", "Grade & Class Already Exist"); }
 
                 if (ModelState.IsValid)
                 {
@@ -309,8 +309,8 @@ namespace Nalanda.SMS.Areas.Admin
 
                     db.Entry(obj).OriginalValues["RowVersion"] = classes.RowVersion;
 
-                    db.ClassSubjects.RemoveRange(obj.ClassSubjects.Where(x =>
-                        !svm.Subjects.Select(y => y.Id).ToList().Contains(x.Id)));
+                    //db.ClassSubjects.RemoveRange(obj.ClassSubjects.Where(x =>
+                    //    !svm.Subjects.Select(y => y.Id).ToList().Contains(x.Id)));
 
                     foreach (var det in svm.Subjects)
                     {
@@ -319,7 +319,7 @@ namespace Nalanda.SMS.Areas.Admin
                         {
                             det.CreatedBy = this.GetCurrUser();
                             det.CreatedDate = DateTime.Now;
-                            obj.ClassSubjects.Add(det.GetEntity());
+                            //obj.ClassSubjects.Add(det.GetEntity());
                         }
                         else
                         {
@@ -331,8 +331,8 @@ namespace Nalanda.SMS.Areas.Admin
                         }
                     }
 
-                    db.ClassStudents.RemoveRange(obj.ClassStudents.Where(x =>
-                        !svm.Students.Select(y => y.Id).ToList().Contains(x.Id)));
+                    //db.ClassStudents.RemoveRange(obj.ClassStudents.Where(x =>
+                    //    !svm.Students.Select(y => y.Id).ToList().Contains(x.Id)));
 
                     foreach (var det in svm.Students)
                     {
@@ -341,7 +341,7 @@ namespace Nalanda.SMS.Areas.Admin
                         {
                             det.CreatedBy = this.GetCurrUser();
                             det.CreatedDate = DateTime.Now;
-                            obj.ClassStudents.Add(det.GetEntity());
+                            //obj.ClassStudents.Add(det.GetEntity());
                         }
                         else
                         {
@@ -385,10 +385,10 @@ namespace Nalanda.SMS.Areas.Admin
 
                 var entry = db.Entry(classes.GetEntity());
                 entry.State = EntityState.Unchanged;
-                entry.Collection(x => x.ClassSubjects).Load();
-                db.ClassSubjects.RemoveRange(entry.Entity.ClassSubjects);
-                entry.Collection(x => x.ClassStudents).Load();
-                db.ClassStudents.RemoveRange(entry.Entity.ClassStudents);
+                //entry.Collection(x => x.ClassSubjects).Load();
+                //db.ClassSubjects.RemoveRange(entry.Entity.ClassSubjects);
+                //entry.Collection(x => x.ClassStudents).Load();
+                //db.ClassStudents.RemoveRange(entry.Entity.ClassStudents);
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
 

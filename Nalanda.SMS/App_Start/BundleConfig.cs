@@ -33,7 +33,24 @@ namespace Nalanda.SMS
             bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                       "~/Scripts/site.js",
                       "~/Scripts/PopUpSelector.js",
-                      "~/Scripts/jquery.webcam.js"));
+                      "~/Scripts/fontawesome/all.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/chart").Include(
+                      "~/Scripts/Chart.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/layout").IncludeDirectory(
+                      "~/Scripts/Layout", "*.js", false));
+
+            bundles.Add(new ScriptBundle("~/bundles/layoutless").Include(
+                "~/Scripts/Layout/jquery.autosize.js",
+                "~/Scripts/Layout/jquery.customSelect.js",
+                "~/Scripts/Layout/jquery.nicescroll.js",
+                "~/Scripts/Layout/jquery.placeholder.js",
+                "~/Scripts/Layout/jquery.scrollTo.js",
+                "~/Scripts/Layout/jquery.slimscroll.js"));
+
+            bundles.Add(new StyleBundle("~/Scripts/bootstrapbundleminjs").Include(
+                      "~/Scripts/bootstrap.bundle.min.js"));
 
             #endregion
 
@@ -266,6 +283,7 @@ namespace Nalanda.SMS
             bundles.Add(new ScriptBundle("~/bundles/examination/specialpermissionstudents").Include(
              "~/Scripts/Examination/SpecialPermissionStudents.js"));
             #endregion
+
             bundles.Add(new ScriptBundle("~/bundles/oraganization/kpisatisfactionmarks").Include(
           "~/Scripts/Oraganization/KPISatisfactionMarks.js"));
 
@@ -281,8 +299,8 @@ namespace Nalanda.SMS
             bundles.Add(new ScriptBundle("~/bundles/admin/employeeprobation").Include(
                  "~/Scripts/Admin/EmployeeProbation.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/admin/teacher").Include(
-                 "~/Scripts/Admin/Teacher.js"));
+            bundles.Add(new ScriptBundle("~/bundles/admin/staffmember").Include(
+                 "~/Scripts/Admin/StaffMember.js"));
             
             bundles.Add(new ScriptBundle("~/bundles/admin/vehicle").Include(
                 "~/Scripts/Admin/vehicle.js"));
@@ -359,6 +377,18 @@ namespace Nalanda.SMS
             bundles.Add(new StyleBundle("~/Content/custom").Include(
                       "~/Content/Site.css",
                       "~/Content/PopUpSelector.css"));
+
+            bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
+                      "~/Content/fontawesome-all.css"));
+
+            bundles.Add(new StyleBundle("~/Content/Layout/LayoutBundle").IncludeDirectory(
+                      "~/Content/Layout", "*.css"));
+            bundles.Add(new StyleBundle("~/Content/bootstrapicons").Include(
+                      "~/Content/bootstrap-icons.css"));
+            bundles.Add(new StyleBundle("~/Content/bootstrapmin").Include(
+                      "~/Content/bootstrap.min.css"));
+            bundles.Add(new StyleBundle("~/Content/bootstrap.beta/bootstrapminbeta").Include(
+                      "~/Content/bootstrap.beta/bootstrap.min.css"));
 
             #endregion
         }

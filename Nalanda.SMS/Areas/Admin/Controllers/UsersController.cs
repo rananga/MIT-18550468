@@ -183,7 +183,7 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = user.GetEntity();
-                    var props = "EmployeeID,Status,CallCenterUserName,BranchID,DepartmentID";
+                    var props = "UserName,Status,StaffId";
                     if (!user.Password.IsBlank())
                     { props += ",Password"; }
                     modObj.CopyContent(obj, props);
@@ -304,27 +304,6 @@ namespace Nalanda.SMS.Areas.Admin.Controllers
             ViewBag.IsToEdit = isToEdit;
             ViewBag.UserID = obj.Id;
             return PartialView("_ChildIndex", obj.DetailsList.OrderBy(x => x.RoleName));
-        }
-
-        public ActionResult EncryptUserPasswords()
-        {
-            try
-            {
-                foreach (var usr in db.Users)
-                {
-                    var pw = usr.Password.Decrypt();
-                    if (pw == usr.Password)
-                    {
-                        usr.Password = usr.Password.Encrypt();
-                    }
-                }
-                db.SaveChanges();
-                return Json(new { success = true });
-            }
-            catch (Exception ex)
-            {
-                return Json(ex);
-            }
         }
     }
 }

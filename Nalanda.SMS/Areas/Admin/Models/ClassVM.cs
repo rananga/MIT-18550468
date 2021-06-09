@@ -18,10 +18,10 @@ namespace Nalanda.SMS.Areas.Admin.Models
             Subjects = new HashSet<ClassSubjectVM>();
             Students = new HashSet<ClassStudentVM>();
 
-            mappings.Add(x => "Grade " + x.Grade.GradeId, x => x.GradeDesc);
-            mappings.Add(x => $"{x.ClassTeacher.Title} {x.ClassTeacher.FullName}", x => x.ClassTeacherName);
-            mappings.Add(x => x.ClassSubjects.Select(y => new ClassSubjectVM(y)).ToList(), x => x.Subjects);
-            mappings.Add(x => x.ClassStudents.Select(y => new ClassStudentVM(y)).ToList(), x => x.Students);
+            //mappings.Add(x => "Grade " + x.Grade.GradeId, x => x.GradeDesc);
+            //mappings.Add(x => $"{x.ClassTeacher.Title} {x.ClassTeacher.FullName}", x => x.ClassTeacherName);
+            //mappings.Add(x => x.ClassSubjects.Select(y => new ClassSubjectVM(y)).ToList(), x => x.Subjects);
+            //mappings.Add(x => x.ClassStudents.Select(y => new ClassStudentVM(y)).ToList(), x => x.Students);
         }
 
         public ClassVM(Class obj, params string[] properties) : this()

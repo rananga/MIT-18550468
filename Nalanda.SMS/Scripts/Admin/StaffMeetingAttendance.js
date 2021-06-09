@@ -133,7 +133,7 @@ function StaffMeetingMinsDocReadyFunc() {
             autoOpen: false,
             open: function (event, ui) {
                 var closeBtn = $('.ui-dialog-titlebar-close');
-                closeBtn.html('<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>');
+                closeBtn.html('<span><i class="fas fa-times"></i></span>');
                 dlg_z_index++;
                 $(".ui-dialog").css("z-index", dlg_z_index.toString());
                 dlg.dialog("option", "position", { my: "center", at: "center", of: window });

@@ -12,11 +12,14 @@ namespace Nalanda.SMS.Data.Models
             TeacherSubjects = new HashSet<TeacherSubject>();
         }
 
+        [DisplayName("Section"), Required]
+        public int SectionId { get; set; }
         [DisplayName("Subject"), Required]
         public string Name { get; set; }
         [DisplayName("Is Basket Subject")]
         public bool IsBasket { get; set; }
 
+        public virtual Section Section { get; set; }
         public virtual ICollection<ClassStudentSubject> StudentSubjects { get; set; }
         public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
     }

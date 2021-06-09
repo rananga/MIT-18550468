@@ -699,7 +699,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
             Nalanda.SMS.Data.Models.Student student = db.Students.Find(id);
 
-            var basePath = ConfigurationManager.AppSettings["EnrollmentsImagePath"];
+            var basePath = ConfigurationManager.AppSettings["StudentImagePath"];
             if (basePath.StartsWith("\\") && !basePath.StartsWith("\\\\"))
             { basePath = Server.MapPath("~" + basePath); }
             var defFilePath = Path.Combine(basePath, "Default.png");
@@ -726,7 +726,7 @@ namespace Nalanda.SMS.Areas.Student.Controllers
 
             try
             {
-                var basePath = ConfigurationManager.AppSettings["EnrollmentsImagePath"];
+                var basePath = ConfigurationManager.AppSettings["StudentImagePath"];
                 if (basePath.StartsWith("\\") && !basePath.StartsWith("\\\\"))
                 { basePath = Server.MapPath("~" + basePath); }
 

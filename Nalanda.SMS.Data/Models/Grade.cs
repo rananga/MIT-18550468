@@ -8,21 +8,18 @@ namespace Nalanda.SMS.Data.Models
     {
         public Grade()
         {
-            GradeClasses = new HashSet<Class>();
+            GradeClasses = new HashSet<GradeClass>();
             TeacherSubjects = new HashSet<TeacherSubject>();
         }
 
         [Required]
-        [Range(1, 13)]
-        [DisplayName("Grade")]
-        public int GradeId { get; set; }
-        [DisplayName("Section")]
+        public Grades GradeId { get; set; }
+        [DisplayName("Section"), Required]
         public int SectionId { get; set; }
-        [DisplayName("Grade Head")]
-        public int? HeadId { get; set; }
+        public string Description { get; set; }
 
-        public virtual StaffMember GradeHead { get; set; }
-        public virtual ICollection<Class> GradeClasses { get; set; }
+        public virtual Section Section { get; set; }
+        public virtual ICollection<GradeClass> GradeClasses { get; set; }
         public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
     }
 }

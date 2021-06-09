@@ -1,13 +1,13 @@
 ﻿@model Nalanda.SMS.Common.BaseViewModel<Nalanda.SMS.Areas.Admin.Models.RoleVM>
 
 @{
-    ViewBag.Title = "User Roles";
+    ViewBag.Title = "User Permissions";
     var grid = Model.GetGrid();
 }
 
 @{
     var srchOpts = new List<SelectListItem>();
-    srchOpts.Add(new SelectListItem { Text = "Role Name", Value = "Name" });
+    srchOpts.Add(new SelectListItem { Text = "Permission Name", Value = "Name" });
 }
 
 <p>
@@ -16,26 +16,16 @@
 
 @using (Html.BeginForm("Index", null, FormMethod.Get))
 {
+    @Html.HiddenFor(model => model.FilterBy, new { Value = "Name" });
     <div class="form-horizontal row">
-        <div class="col-md-4">
-            <div class="form-group">
-                @Html.Label("Search By", htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    @Html.DropDownList("FilterBy", new SelectList(srchOpts, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
-                </div>
+        <div class="form-inline">
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Filter, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="submit" value="Search" name="Search" class="btn btn-default" />
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group">
-                <div class="col-md-12">
-                    @Html.EditorFor(model => model.Filter, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <input type="submit" value="Search" name="Search" class="btn btn-default" />
         </div>
     </div>
+
     <hr />
 
     <div id="content">
@@ -44,8 +34,8 @@
         mode: WebGridPagerModes.All,
         columns: grid.Columns(
             grid.Column(null, null, format: (item) => Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open' style='color:black'></span>", "View Details", "Details", routeValues: new { id = item.RoleID }, htmlAttributes: new { @class = "btn btn-warning btn-xs" }), style: "btn-1"),
-            grid.SortColumn(columnName: "Code", header: "Role Code"),
-            grid.SortColumn(columnName: "Name", header: "Role Name")))
+            grid.SortColumn(columnName: "Code", header: "Permission Code"),
+            grid.SortColumn(columnName: "Name", header: "Permission Name")))
 
         <div id="content-footer">
             @grid.PagerList(WebGridPagerModes.All, Model.PageSize, Model.TotalRecords)
