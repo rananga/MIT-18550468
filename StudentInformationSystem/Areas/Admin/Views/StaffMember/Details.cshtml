@@ -1,0 +1,137 @@
+﻿@model StudentInformationSystem.Areas.Admin.Models.StaffMemberVM
+
+@{
+    ViewBag.Title = "Staff Member Details";
+}
+
+<div>
+    <hr />
+    @using (Html.BeginForm("Delete", "Teacher"))
+    {
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.RowVersion)
+        @Html.AntiForgeryToken()
+        <p>
+            <div class="btn-toolbar">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary", style = "min-width:75px" })
+                @Html.ConfirmSubmitButton("Delete", "Are you sure you want to delete?", "Confirm teacher deletion",
+                 "<span class='glyphicon glyphicon-trash'></span> Delete", new { @class = "btn btn-danger", style = "min-width:75px" })
+            </div>
+        </p>
+    }
+    <div class="form-horizontal">
+        <div class="row justify-content-between">
+            <div class="col-md-6">
+                <div class="card" style="height: 100%; width:45%; border-radius:10px;border:0px;background:transparent; float:none;margin:auto;">
+                    <div class="card-body center" style="text-align:center;">
+                        <img class="left card-img-top" src="@Html.ActionUrl("GetPic", routeValues: new { id = Model.Id })" style="padding:0; height:180px;width:240px;object-fit:contain" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    @Html.RequiredLabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DetailsViewFor(model => model.Title)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.RequiredLabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DetailsViewFor(model => model.Gender)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.RequiredLabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DetailsViewFor(model => model.FullName)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.RequiredLabelFor(model => model.Initials, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DetailsViewFor(model => model.Initials)
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.RequiredLabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DetailsViewFor(model => model.LastName)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.Address1)
+            </div>
+            @Html.LabelFor(model => model.ImmeContactName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.ImmeContactName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.Address2)
+            </div>
+            @Html.RequiredLabelFor(model => model.ImmeContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.ImmeContactNo)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.RequiredLabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.City)
+            </div>
+            @Html.RequiredLabelFor(model => model.Nicno, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.Nicno)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.RequiredLabelFor(model => model.MobileNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.MobileNo)
+            </div>
+            @Html.LabelFor(model => model.SchoolEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.SchoolEmail)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TelHome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.TelHome)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.TeacherId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.TeacherId)
+            </div>
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.Status)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.JoinedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.JoinedDate)
+            </div>
+            @Html.LabelFor(model => model.RetiredDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.RetiredDate)
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

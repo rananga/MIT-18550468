@@ -1,0 +1,40 @@
+﻿@model StudentInformationSystem.Areas.Admin.Models.SubjectVM
+
+@{
+    ViewBag.Title = "Subject Details";
+}
+
+<div>
+    <hr />
+    @using (Html.BeginForm("Delete", "Subject"))
+    {
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.RowVersion)
+        @Html.AntiForgeryToken()
+        <p>
+            <div class="btn-toolbar">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary", style = "min-width:75px" })
+                @Html.ConfirmSubmitButton("Delete", "Are you sure you want to delete?", "Confirm club deletion",
+                 "<span class='glyphicon glyphicon-trash'></span> Delete", new { @class = "btn btn-danger", style = "min-width:75px" })
+            </div>
+        </p>
+    }
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.Name)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsBasket, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.IsBasket)
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

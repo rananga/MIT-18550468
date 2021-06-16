@@ -1,0 +1,62 @@
+﻿@model StudentInformationSystem.Common.BaseViewModel<SMS.Areas.Student.Models.PromotionClassVM>
+
+@{
+    ViewBag.Title = "Student Promotion";
+    var grid = Model.GetGrid();
+}
+
+@{
+    var srchOpts = new List<SelectListItem>();
+    srchOpts.Add(new SelectListItem { Text = "Grade", Value = "Grade" });
+    srchOpts.Add(new SelectListItem { Text = "Class", Value = "ClassDesc" });
+    srchOpts.Add(new SelectListItem { Text = "Period Start Date", Value = "PeriodStartDate" });
+    srchOpts.Add(new SelectListItem { Text = "Period End Date", Value = "PeriodEndDate" });
+}
+
+<p>
+    @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary", style = "min-width:75px" })
+</p>
+
+@using (Html.BeginForm("Index", null, FormMethod.Get))
+{
+    <div class="form-horizontal row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.Label("Search By", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownList("FilterBy", new SelectList(srchOpts, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Filter, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <input type="submit" value="Search" name="Search" class="btn btn-default" />
+        </div>
+    </div>
+    <hr />
+
+    <div id="content">
+        @grid.GetHtml(
+        tableStyle: "mGrid no-foot",
+        mode: WebGridPagerModes.All,
+        columns: grid.Columns(
+            grid.Column(null, null, format: (item) => Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open' style='color:black'></span>", "View Details", "Details", routeValues: new { id = item.PrClID }, htmlAttributes: new { @class = "btn btn-warning btn-xs" }), style: "btn-1"),
+            grid.SortColumn(columnName: "Grade", header: "Grade", format: (item) => ((SMS.Common.StudGrade)item.Grade).ToEnumChar()),
+            grid.SortColumn(columnName: "ClassDesc", header: "Class"),
+            grid.SortColumn(columnName: "NoOfStud", header: "No of Students"),
+            grid.SortColumn(columnName: "PeriodStartDate", header: "Period Start Date", format: (item) => item.PeriodStartDate == null ? "-": ((DateTime)item.PeriodStartDate).ToString("yyyy-MM-dd")),
+            grid.SortColumn(columnName: "PeriodEndDate", header: "Period End Date", format: (item) => item.PeriodEndDate == null ? "-": ((DateTime)item.PeriodEndDate).ToString("yyyy-MM-dd"))
+            ))
+
+        <div id="content-footer">
+            @grid.PagerList(WebGridPagerModes.All, Model.PageSize, Model.TotalRecords)
+        </div>
+    </div>
+}
+

@@ -1,0 +1,46 @@
+﻿@model StudentInformationSystem.Areas.Admin.Models.GradeVM
+
+@{
+    ViewBag.Title = "Edit Grade";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(model => model.GradeId)
+    @Html.HiddenFor(x => x.RowVersion)
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <p>
+            <input type="submit" value="Save" class="btn btn-primary" style="min-width:75px" />
+        </p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.GradeName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GradeName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HeadTeacherId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PopUpSelectorFor(model => model.HeadTeacherId, "Base", "Data", "GetTeachers", new { @class = "form-control" }, "Please select a Teacher", null, dspFormat: "{1}", hiddenIndices: "0")
+                @Html.ValidationMessageFor(model => model.HeadTeacherId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+<br />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
