@@ -14,10 +14,10 @@ namespace StudentInformationSystem.Areas.Admin.Models
     {
         public UserVM()
         {
-            DetailsList = new List<UserRoleVM>();
+            DetailsList = new List<UserPermissionVM>();
             mappings = new ObjMappings<User, UserVM>();
             mappings.Add(x => $"{x.StaffMember.Title.ToEnumChar("")}. {x.StaffMember.Initials.Trim()} {x.StaffMember.LastName}", x => x.SatffName);
-            mappings.Add(x => x.UserRoles.Select(y => new UserRoleVM(y)).ToList(), x => x.DetailsList);
+            mappings.Add(x => x.UserPermissions.Select(y => new UserPermissionVM(y)).ToList(), x => x.DetailsList);
         }
         public UserVM(User obj)
             : this()
@@ -31,6 +31,6 @@ namespace StudentInformationSystem.Areas.Admin.Models
         [DisplayName("Staff Member")]
         public string SatffName { get; set; }
 
-        public virtual ICollection<UserRoleVM> DetailsList { get; set; }
+        public virtual ICollection<UserPermissionVM> DetailsList { get; set; }
     }
 }

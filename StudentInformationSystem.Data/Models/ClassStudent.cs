@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace StudentInformationSystem.Data.Models
@@ -12,8 +13,10 @@ namespace StudentInformationSystem.Data.Models
         }
 
         [Required]
+        [DisplayName("Class")]
         public int ClassId { get; set; }
         [Required]
+        [DisplayName("Student")]
         public int StudentId { get; set; }
 
         public virtual Class Class { get; set; }

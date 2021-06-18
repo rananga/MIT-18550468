@@ -4,17 +4,22 @@ using StudentInformationSystem.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Linq;
 
 namespace StudentInformationSystem.Data
 {
-    public partial class dbSISContext : DbContext
+    public partial class dbNalandaContext : DbContext
     {
-        public dbSISContext()
+        public static string ConnectionString { get; set; }
+
+        public dbNalandaContext()
         {
+            ConnectionString = "Server=(localdb)\\mssqllocaldb;Database=dbNalanda;Trusted_Connection=True;MultipleActiveResultSets=true";
+            //ConnectionString = "Server=tcp:enalanda.database.windows.net,1433;Initial Catalog=dbNalanda;Persist Security Info=False;User ID=admindbenalanda;Password=Pass@123!;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         }
 
-        public dbSISContext(DbContextOptions<dbSISContext> options)
+        public dbNalandaContext(DbContextOptions<dbNalandaContext> options)
             : base(options)
         {
         }
@@ -22,45 +27,46 @@ namespace StudentInformationSystem.Data
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<ClassStudent> ClassStudents { get; set; }
         public virtual DbSet<ClassStudentSubject> ClassStudentSubjects { get; set; }
+        public virtual DbSet<ClassStudentSubjectMark> ClassStudentSubjectMarks { get; set; }
         public virtual DbSet<ClassMonitor> ClassMonitors { get; set; }
         public virtual DbSet<ClassSubject> ClassSubjects { get; set; }
         public virtual DbSet<ClassTeacher> ClassTeachers { get; set; }
-        //public virtual DbSet<ClubMember> ClubMembers { get; set; }
-        //public virtual DbSet<Club> Clubs { get; set; }
-        //public virtual DbSet<EventParticipation> EventParticipations { get; set; }
         public virtual DbSet<ExtraActivity> ExtraActivities { get; set; }
         public virtual DbSet<ExtraActivityAcheivement> ExtraActivityAcheivements { get; set; }
         public virtual DbSet<ExtraActivityPosition> ExtraActivityPositions { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<GradeClass> GradeClasses { get; set; }
+        public virtual DbSet<GradeClassSubject> GradeClassSubjects { get; set; }
+        public virtual DbSet<GradeSubject> GradeSubjects { get; set; }
         public virtual DbSet<GradeHead> GradeHeads { get; set; }
         public virtual DbSet<LeavingCertificate> LeavingCertificates { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
-        //public virtual DbSet<PeriodSetup> PeriodSetups { get; set; }
-        //public virtual DbSet<Prefect> Prefects { get; set; }
-        //public virtual DbSet<PromotionClass> PromotionClasses { get; set; }
-        public virtual DbSet<RoleMenuAccess> RoleMenuAccesses { get; set; }
-        //public virtual DbSet<RoleTile> RoleTiles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<PermissionMenuAccess> PermissionMenuAccesses { get; set; }
+        public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Section> Sections { get; set; }
         public virtual DbSet<SectionHead> SectionHeads { get; set; }
         public virtual DbSet<StaffMember> StaffMembers { get; set; }
-        public virtual DbSet<StudFamily> StudFamilies { get; set; }
-        public virtual DbSet<StudSibling> StudSiblings { get; set; }
+        public virtual DbSet<StudentFamily> StudentFamilies { get; set; }
+        public virtual DbSet<StudentSibling> StudentSiblings { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<StudentBasketSubject> StudentBasketSubjects { get; set; }
         public virtual DbSet<StudentExtraActivityPosition> StudentExtraActivityPositions { get; set; }
         public virtual DbSet<StudentExtraActivityAcheivement> StudentExtraActivityAcheivements { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<SubjectCategory> SubjectCategories { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
-        public virtual DbSet<TeacherSubject> TeacherSubjects { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<TeacherQualification> TeacherQualifications { get; set; }
+        public virtual DbSet<TeacherQualificationSubject> TeacherQualificationSubjects { get; set; }
+        public virtual DbSet<TeacherPreferedSubject> TeacherPreferedSubjects { get; set; }
+        public virtual DbSet<UserPermission> UserPermissions { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Visitor> Visitors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=dbSIS;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer(ConnectionString);
                 optionsBuilder.UseLazyLoadingProxies();
             }
         }
@@ -87,17 +93,15 @@ namespace StudentInformationSystem.Data
                     .HasForeignKey(d => d.GradeClassId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_GradeClass_Classes");
-
-                //entity.HasOne(d => d.ClassTeacher)
-                //    .WithMany(p => p.ClassTeachers)
-                //    .HasForeignKey(d => d.TeacherId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_Teacher_Class");
             });
 
             modelBuilder.Entity<ClassMonitor>(entity =>
             {
                 entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.FromDate).HasColumnType("date");
+
+                entity.Property(e => e.ToDate).HasColumnType("date");
 
                 entity.Property(e => e.CreatedBy).IsRequired();
 
@@ -138,17 +142,17 @@ namespace StudentInformationSystem.Data
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
-                //entity.HasOne(d => d.Class)
-                //    .WithMany(p => p.ClassStudents)
-                //    .HasForeignKey(d => d.ClassId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_Class_ClassStudent");
+                entity.HasOne(d => d.Class)
+                    .WithMany(p => p.ClassStudents)
+                    .HasForeignKey(d => d.ClassId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Class_ClassStudents");
 
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.ClassStudents)
                     .HasForeignKey(d => d.StudentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Student_ClassStudent");
+                    .HasConstraintName("FK_Student_ClassStudents");
             });
 
             modelBuilder.Entity<ClassStudentSubject>(entity =>
@@ -179,6 +183,28 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_Subject_StudentSubjects");
             });
 
+            modelBuilder.Entity<ClassStudentSubjectMark>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.ClassStudentSubject)
+                    .WithMany(p => p.ClassStudentSubjectMarks)
+                    .HasForeignKey(d => d.ClsStudSubjectId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ClassStudentSubject_ClassStudentSubjectMarks");
+            });
+
             modelBuilder.Entity<ClassSubject>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -194,22 +220,32 @@ namespace StudentInformationSystem.Data
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
-                //entity.HasOne(d => d.Class)
-                //    .WithMany(p => p.ClassSubjects)
-                //    .HasForeignKey(d => d.ClassId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_Class_ClassSubjects");
-
-                entity.HasOne(d => d.TeacherSubject)
+                entity.HasOne(d => d.Class)
                     .WithMany(p => p.ClassSubjects)
-                    .HasForeignKey(d => d.TeacherSubjectId)
+                    .HasForeignKey(d => d.ClassId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TeacherSubject_ClassSubjects");
+                    .HasConstraintName("FK_Class_ClassSubjects");
+
+                entity.HasOne(d => d.Subject)
+                    .WithMany(p => p.ClassSubjects)
+                    .HasForeignKey(d => d.SubjectId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Subject_ClassSubjects");
+
+                entity.HasOne(d => d.StaffMember)
+                    .WithMany(p => p.ClassSubjects)
+                    .HasForeignKey(d => d.StaffId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_StaffMember_ClassSubjects");
             });
 
             modelBuilder.Entity<ClassTeacher>(entity =>
             {
                 entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.FromDate).HasColumnType("date");
+
+                entity.Property(e => e.ToDate).HasColumnType("date");
 
                 entity.Property(e => e.CreatedBy).IsRequired();
 
@@ -234,110 +270,6 @@ namespace StudentInformationSystem.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_StaffMember_ClassTeachers");
             });
-
-            //modelBuilder.Entity<ClubMember>(entity =>
-            //{
-            //    entity.HasKey(e => e.Cmid);
-
-            //    entity.HasIndex(e => e.Cid)
-            //        .HasName("IX_FK_ClubClubMember");
-
-            //    entity.HasIndex(e => e.StudentId)
-            //        .HasName("IX_FK_StudentClubMember");
-
-            //    entity.Property(e => e.Cmid).HasColumnName("CMID");
-
-            //    entity.Property(e => e.Cid).HasColumnName("CID");
-
-            //    entity.Property(e => e.CreatedBy).IsRequired();
-
-            //    entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.MemberDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.RowVersion)
-            //        .IsRequired()
-            //        .IsRowVersion()
-            //        .IsConcurrencyToken();
-
-            //    entity.Property(e => e.StudentId).HasColumnName("StudentID");
-
-            //    entity.HasOne(d => d.Club)
-            //        .WithMany(p => p.ClubMembers)
-            //        .HasForeignKey(d => d.Cid)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_ClubClubMember");
-
-            //    entity.HasOne(d => d.Student)
-            //        .WithMany(p => p.ClubMembers)
-            //        .HasForeignKey(d => d.StudentId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_StudentClubMember");
-            //});
-
-            //modelBuilder.Entity<Club>(entity =>
-            //{
-            //    entity.HasKey(e => e.ClubId);
-
-            //    entity.Property(e => e.ClubId).HasColumnName("CID");
-
-            //    entity.Property(e => e.CreatedBy).IsRequired();
-
-            //    entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.Name).IsRequired();
-
-            //    entity.Property(e => e.RowVersion)
-            //        .IsRequired()
-            //        .IsRowVersion()
-            //        .IsConcurrencyToken();
-            //});
-
-            //modelBuilder.Entity<EventParticipation>(entity =>
-            //{
-            //    entity.HasKey(e => e.Epid);
-
-            //    entity.HasIndex(e => e.StudId)
-            //        .HasName("IX_FK_StudentEventParticipation");
-
-            //    entity.HasIndex(e => e.TeacherInCharge)
-            //        .HasName("IX_FK_TeacherEventParticipation");
-
-            //    entity.Property(e => e.Epid).HasColumnName("EPID");
-
-            //    entity.Property(e => e.CreatedBy).IsRequired();
-
-            //    entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.Date).HasColumnType("datetime");
-
-            //    entity.Property(e => e.EventDesc).IsRequired();
-
-            //    entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.RowVersion)
-            //        .IsRequired()
-            //        .IsRowVersion()
-            //        .IsConcurrencyToken();
-
-            //    entity.Property(e => e.StudId).HasColumnName("StudID");
-
-            //    entity.HasOne(d => d.Student)
-            //        .WithMany(p => p.EventParticipations)
-            //        .HasForeignKey(d => d.StudId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_StudentEventParticipation");
-
-            //    entity.HasOne(d => d.Teacher)
-            //        .WithMany(p => p.EventParticipations)
-            //        .HasForeignKey(d => d.TeacherInCharge)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_TeacherEventParticipation");
-            //});
 
             modelBuilder.Entity<ExtraActivity>(entity =>
             {
@@ -443,6 +375,34 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_Grade_GradeClasses");
             });
 
+            modelBuilder.Entity<GradeClassSubject>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.GradeClass)
+                    .WithMany(p => p.GradeClassSubjects)
+                    .HasForeignKey(d => d.GradeClassId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GradeClass_GradeClassSubjects");
+
+                entity.HasOne(d => d.Subject)
+                    .WithMany(p => p.GradeClassSubjects)
+                    .HasForeignKey(d => d.SubjectId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Subject_GradeClassSubjects");
+            });
+
             modelBuilder.Entity<GradeHead>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -462,11 +422,45 @@ namespace StudentInformationSystem.Data
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
+                entity.HasOne(d => d.Grade)
+                    .WithMany(p => p.GradeHeads)
+                    .HasForeignKey(d => d.GradeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Grade_GradeHeads");
+
                 entity.HasOne(d => d.StaffMember)
                     .WithMany(p => p.HeadingGrades)
                     .HasForeignKey(d => d.StaffId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_StaffMember_HeadingGrades");
+            });
+
+            modelBuilder.Entity<GradeSubject>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.Grade)
+                    .WithMany(p => p.GradeSubjects)
+                    .HasForeignKey(d => d.GradeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Grade_GradeSubjects");
+
+                entity.HasOne(d => d.Subject)
+                    .WithMany(p => p.GradeSubjects)
+                    .HasForeignKey(d => d.SubjectId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Subject_GradeSubjects");
             });
 
             modelBuilder.Entity<LeavingCertificate>(entity =>
@@ -475,8 +469,6 @@ namespace StudentInformationSystem.Data
 
                 entity.HasIndex(e => e.StudId)
                     .HasName("IX_FK_StudentLeavingCertificate");
-
-                entity.Property(e => e.LeavCertId).HasColumnName("LeavCertID");
 
                 entity.Property(e => e.CreatedBy).IsRequired();
 
@@ -491,8 +483,6 @@ namespace StudentInformationSystem.Data
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
-                entity.Property(e => e.StudId).HasColumnName("StudID");
-
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.LeavingCertificates)
                     .HasForeignKey(d => d.StudId)
@@ -504,13 +494,6 @@ namespace StudentInformationSystem.Data
             {
                 entity.HasKey(e => e.MenuId);
 
-                entity.HasIndex(e => e.ParentMenuId)
-                    .HasName("IX_FK_MenuMenu");
-
-                entity.Property(e => e.MenuId).HasColumnName("MenuID");
-
-                entity.Property(e => e.ParentMenuId).HasColumnName("ParentMenuID");
-
                 entity.Property(e => e.Text).IsRequired();
 
                 entity.Property(e => e.Type).IsRequired();
@@ -521,179 +504,26 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_MenuMenu");
             });
 
-            //modelBuilder.Entity<PeriodSetup>(entity =>
-            //{
-            //    entity.HasKey(e => e.PeriodId);
-
-            //    entity.Property(e => e.PeriodId).HasColumnName("PeriodID");
-
-            //    entity.Property(e => e.CreatedBy).IsRequired();
-
-            //    entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.PeriodEndDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.PeriodStartDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.RowVersion)
-            //        .IsRequired()
-            //        .IsRowVersion()
-            //        .IsConcurrencyToken();
-            //});
-
-            //modelBuilder.Entity<Prefect>(entity =>
-            //{
-            //    entity.HasKey(e => e.PreId);
-
-            //    entity.HasIndex(e => e.PrefClassId)
-            //        .HasName("IX_FK_PromotionClassPrefect");
-
-            //    entity.HasIndex(e => e.StudId)
-            //        .HasName("IX_FK_StudentPrefect");
-
-            //    entity.Property(e => e.PreId).HasColumnName("PreID");
-
-            //    entity.Property(e => e.CreatedBy).IsRequired();
-
-            //    entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.EffectiveDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.InactiveDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.IsDhp).HasColumnName("IsDHP");
-
-            //    entity.Property(e => e.IsHp).HasColumnName("IsHP");
-
-            //    entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.PrefClassId).HasColumnName("PrefClassID");
-
-            //    entity.Property(e => e.PromotedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.RowVersion)
-            //        .IsRequired()
-            //        .IsRowVersion()
-            //        .IsConcurrencyToken();
-
-            //    entity.Property(e => e.StudId).HasColumnName("StudID");
-
-            //    entity.HasOne(d => d.PromotionClass)
-            //        .WithMany(p => p.Prefects)
-            //        .HasForeignKey(d => d.PrefClassId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_PromotionClassPrefect");
-
-            //    entity.HasOne(d => d.Student)
-            //        .WithMany(p => p.Prefects)
-            //        .HasForeignKey(d => d.StudId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_StudentPrefect");
-            //});
-
-            //modelBuilder.Entity<PromotionClass>(entity =>
-            //{
-            //    entity.HasKey(e => e.PrClId);
-
-            //    entity.HasIndex(e => e.ClassId)
-            //        .HasName("IX_FK_ClassPromotionClass");
-
-            //    entity.HasIndex(e => e.PeriodId)
-            //        .HasName("IX_FK_PeriodSetupPromotionClass");
-
-            //    entity.HasIndex(e => e.TeacherId)
-            //        .HasName("IX_FK_TeacherPromotionClass");
-
-            //    entity.Property(e => e.PrClId).HasColumnName("PrClID");
-
-            //    entity.Property(e => e.ClassId).HasColumnName("ClassID");
-
-            //    entity.Property(e => e.CreatedBy).IsRequired();
-
-            //    entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.MonitorStud2Id).HasColumnName("MonitorStud2ID");
-
-            //    entity.Property(e => e.MonitorStudId)
-            //        .IsRequired()
-            //        .HasColumnName("MonitorStudID");
-
-            //    entity.Property(e => e.PeriodId).HasColumnName("PeriodID");
-
-            //    entity.Property(e => e.RowVersion)
-            //        .IsRequired()
-            //        .IsRowVersion()
-            //        .IsConcurrencyToken();
-
-            //    entity.Property(e => e.TeacherId).HasColumnName("TeacherID");
-            //});
-
-            modelBuilder.Entity<RoleMenuAccess>(entity =>
+            modelBuilder.Entity<PermissionMenuAccess>(entity =>
             {
-                entity.HasKey(e => new { e.MenuId, e.RoleId });
-
-                entity.HasIndex(e => e.RoleId)
-                    .HasName("IX_FK_RoleMenuAccesses_Roles");
-
-                entity.Property(e => e.MenuId).HasColumnName("MenuID");
-
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
+                entity.HasKey(e => new { e.MenuId, e.PermissionId });
 
                 entity.HasOne(d => d.Menu)
-                    .WithMany(p => p.RoleMenuAccesses)
+                    .WithMany(p => p.PermissionMenuAccesses)
                     .HasForeignKey(d => d.MenuId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_RoleMenuAccesses_Menus");
+                    .HasConstraintName("FK_Menu_PermissionMenuAccesses");
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.RoleMenuAccesses)
-                    .HasForeignKey(d => d.RoleId)
+                entity.HasOne(d => d.Permission)
+                    .WithMany(p => p.PermissionMenuAccesses)
+                    .HasForeignKey(d => d.PermissionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_RoleMenuAccesses_Roles");
+                    .HasConstraintName("FK_Permission_PermissionMenuAccesses");
             });
 
-            //modelBuilder.Entity<RoleTile>(entity =>
-            //{
-            //    entity.HasKey(e => e.RoleTileId);
-
-            //    entity.HasIndex(e => e.RoleId)
-            //        .HasName("IX_FK_RoleRoleTiles");
-
-            //    entity.Property(e => e.RoleTileId).HasColumnName("RoleTileID");
-
-            //    entity.Property(e => e.CreatedBy).IsRequired();
-
-            //    entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-            //    entity.Property(e => e.RoleId).HasColumnName("RoleID");
-
-            //    entity.Property(e => e.RowVersion)
-            //        .IsRequired()
-            //        .IsRowVersion()
-            //        .IsConcurrencyToken();
-
-            //    entity.Property(e => e.TileId).HasColumnName("TileID");
-
-            //    entity.HasOne(d => d.Role)
-            //        .WithMany(p => p.RoleTiles)
-            //        .HasForeignKey(d => d.RoleId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_RoleRoleTiles");
-            //});
-
-            modelBuilder.Entity<Role>(entity =>
+            modelBuilder.Entity<Permission>(entity =>
             {
-                entity.HasKey(e => e.RoleId);
-
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
-
-                entity.Property(e => e.Code).IsRequired();
+                entity.HasKey(e => e.PermissionId);
 
                 entity.Property(e => e.CreatedBy).IsRequired();
 
@@ -749,10 +579,18 @@ namespace StudentInformationSystem.Data
                     .HasForeignKey(d => d.SectionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Section_SectionHeads");
+
+                entity.HasOne(d => d.StaffMember)
+                    .WithMany(p => p.HeadingSections)
+                    .HasForeignKey(d => d.StaffId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_StaffMember_HeadingSections");
             });
 
             modelBuilder.Entity<StaffMember>(entity =>
             {
+                entity.HasKey(e => e.Id);
+
                 entity.Property(e => e.JoinedDate).HasColumnType("date");
 
                 entity.Property(e => e.RetiredDate).HasColumnType("date");
@@ -771,18 +609,9 @@ namespace StudentInformationSystem.Data
                 entity.HasOne(b => b.User).WithOne(p => p.StaffMember).HasForeignKey<User>(b => b.StaffId);
             });
 
-            modelBuilder.Entity<StudFamily>(entity =>
+            modelBuilder.Entity<StudentFamily>(entity =>
             {
                 entity.HasKey(e => e.Id);
-
-                entity.HasIndex(e => e.StudentId)
-                    .HasName("IX_FK_StudentStudFamily");
-
-                entity.Property(e => e.Id).HasColumnName("StudFID");
-
-                entity.Property(e => e.ContactHome).IsRequired();
-
-                entity.Property(e => e.ContactMob).IsRequired();
 
                 entity.Property(e => e.CreatedBy).IsRequired();
 
@@ -790,39 +619,21 @@ namespace StudentInformationSystem.Data
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Name).IsRequired();
-
-                entity.Property(e => e.Nicno)
-                    .IsRequired()
-                    .HasColumnName("NICNo");
-
-                entity.Property(e => e.Occupation).IsRequired();
-
                 entity.Property(e => e.RowVersion)
                     .IsRequired()
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
-                entity.Property(e => e.StudentId).HasColumnName("StudID");
-
-                entity.Property(e => e.WorkingAdd).IsRequired();
-
                 entity.HasOne(d => d.Student)
-                    .WithMany(p => p.StudFamilies)
+                    .WithMany(p => p.StudentFamilies)
                     .HasForeignKey(d => d.StudentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_StudentStudFamily");
             });
 
-            modelBuilder.Entity<StudSibling>(entity =>
+            modelBuilder.Entity<StudentSibling>(entity =>
             {
                 entity.HasKey(e => e.Id);
-
-                entity.HasIndex(e => e.SiblingStudentId)
-                    .HasName("IX_FK_StudentStudSibling1");
-
-                entity.HasIndex(e => e.StudentId)
-                    .HasName("IX_FK_StudentStudSibling");
 
                 entity.Property(e => e.Id);
 
@@ -842,7 +653,7 @@ namespace StudentInformationSystem.Data
                 entity.Property(e => e.StudentId);
 
                 entity.HasOne(d => d.SiblingStudent)
-                    .WithMany(p => p.StudSiblings)
+                    .WithMany(p => p.StudentSiblings)
                     .HasForeignKey(d => d.StudentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Stud_StudSibling");
@@ -852,29 +663,11 @@ namespace StudentInformationSystem.Data
             {
                 entity.HasKey(e => e.Id);
 
-                entity.Property(e => e.Id).HasColumnName("StudID");
-
-                entity.Property(e => e.Address).IsRequired();
-
                 entity.Property(e => e.CreatedBy).IsRequired();
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Dob)
-                    .HasColumnName("DOB")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.EmergencyConName).IsRequired();
-
-                entity.Property(e => e.EmergencyContactTel).IsRequired();
-
-                entity.Property(e => e.FullName).IsRequired();
-
-                entity.Property(e => e.Initials).IsRequired();
-
-                entity.Property(e => e.Lname)
-                    .IsRequired()
-                    .HasColumnName("LName");
+                entity.Property(e => e.DOB).HasColumnType("datetime");
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
@@ -882,6 +675,34 @@ namespace StudentInformationSystem.Data
                     .IsRequired()
                     .IsRowVersion()
                     .IsConcurrencyToken();
+            });
+
+            modelBuilder.Entity<StudentBasketSubject>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.Student)
+                    .WithMany(p => p.StudentBasketSubjects)
+                    .HasForeignKey(d => d.StudentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Student_StudentBasketSubjects");
+
+                entity.HasOne(d => d.Subject)
+                    .WithMany(p => p.StudentBasketSubjects)
+                    .HasForeignKey(d => d.StudentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Subject_StudentBasketSubjects");
             });
 
             modelBuilder.Entity<StudentExtraActivityAcheivement>(entity =>
@@ -950,7 +771,27 @@ namespace StudentInformationSystem.Data
 
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Name).IsRequired();
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.SubjectCategory)
+                    .WithMany(p => p.Subjects)
+                    .HasForeignKey(d => d.SubjectCategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_SubjectCategory_Subjects");
+            });
+
+            modelBuilder.Entity<SubjectCategory>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.RowVersion)
                     .IsRequired()
@@ -966,23 +807,23 @@ namespace StudentInformationSystem.Data
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Lname)
-                    .IsRequired()
-                    .HasColumnName("LName");
-
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.Nicno)
-                    .IsRequired()
-                    .HasColumnName("NICNo");
 
                 entity.Property(e => e.RowVersion)
                     .IsRequired()
                     .IsRowVersion()
                     .IsConcurrencyToken();
+
+                entity.HasOne(d => d.StaffMember).WithOne(p => p.Teacher).HasForeignKey<StaffMember>(d => d.TeacherId);
+
+                entity.HasOne(d => d.Section)
+                    .WithMany(p => p.Teachers)
+                    .HasForeignKey(d => d.SectionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Section_Teachers");
             });
 
-            modelBuilder.Entity<TeacherSubject>(entity =>
+            modelBuilder.Entity<TeacherQualification>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -998,58 +839,88 @@ namespace StudentInformationSystem.Data
                     .IsConcurrencyToken();
 
                 entity.HasOne(d => d.Teacher)
-                    .WithMany(p => p.TeacherSubjects)
+                    .WithMany(p => p.TeacherQualifications)
                     .HasForeignKey(d => d.TeacherId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Teacher_TeacherSubjects");
-
-                entity.HasOne(d => d.Grade)
-                    .WithMany(p => p.TeacherSubjects)
-                    .HasForeignKey(d => d.GradeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Grade_TeacherSubjects");
-
-                entity.HasOne(d => d.Subject)
-                    .WithMany(p => p.TeacherSubjects)
-                    .HasForeignKey(d => d.SubjectId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Subject_TeacherSubjects");
+                    .HasConstraintName("FK_Teacher_TeacherQualifications");
             });
 
-            modelBuilder.Entity<UserRole>(entity =>
+            modelBuilder.Entity<TeacherQualificationSubject>(entity =>
             {
-                entity.HasKey(e => e.UserRoleId);
+                entity.HasKey(e => e.Id);
 
-                entity.HasIndex(e => e.RoleId)
-                    .HasName("IX_FK_RoleUserRole");
+                entity.Property(e => e.CreatedBy).IsRequired();
 
-                entity.HasIndex(e => e.UserId)
-                    .HasName("IX_FK_UserUserRole");
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.UserRoleId).HasColumnName("UserRoleID");
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
 
-                entity.Property(e => e.UserId).HasColumnName("UserID");
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.UserRoles)
-                    .HasForeignKey(d => d.RoleId)
+                entity.HasOne(d => d.TeacherQualification)
+                    .WithMany(p => p.TeacherQualificationSubjects)
+                    .HasForeignKey(d => d.TeacherQualificationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_RoleUserRole");
+                    .HasConstraintName("FK_TeacherQualification_TeacherQualificationSubjects");
+
+                entity.HasOne(d => d.Subject)
+                    .WithMany(p => p.TeacherQualificationSubjects)
+                    .HasForeignKey(d => d.SubjectId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Subject_TeacherQualificationSubjects");
+            });
+
+            modelBuilder.Entity<TeacherPreferedSubject>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.Teacher)
+                    .WithMany(p => p.TeacherPreferedSubjects)
+                    .HasForeignKey(d => d.TeacherId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Teacher_TeacherPreferedSubjects");
+
+                entity.HasOne(d => d.Subject)
+                    .WithMany(p => p.TeacherPreferedSubjects)
+                    .HasForeignKey(d => d.SubjectId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Subject_TeacherPreferedSubjects");
+            });
+
+            modelBuilder.Entity<UserPermission>(entity =>
+            {
+                entity.HasKey(e => e.UserPermissionId);
+
+                entity.HasOne(d => d.Permission)
+                    .WithMany(p => p.UserPermissions)
+                    .HasForeignKey(d => d.PermissionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Permission_UserPermissions");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserRoles)
+                    .WithMany(p => p.UserPermissions)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserUserRole");
+                    .HasConstraintName("FK_User_UserPermissions");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.Id).HasColumnName("UserID");
 
                 entity.Property(e => e.CreatedBy).IsRequired();
 
@@ -1063,8 +934,24 @@ namespace StudentInformationSystem.Data
                     .IsRequired()
                     .IsRowVersion()
                     .IsConcurrencyToken();
+            });
 
-                entity.Property(e => e.UserName).IsRequired();
+            modelBuilder.Entity<Visitor>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(b => b.User).WithOne(p => p.Visitor).HasForeignKey<User>(b => b.VisitorId);
             });
 
             OnModelCreatingPartial(modelBuilder);
@@ -1076,43 +963,63 @@ namespace StudentInformationSystem.Data
 
         private void SeedData(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Grade>().HasData(
-                new Grade { Id = 1, GradeId = Data.Grades.Grade1, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 2, GradeId = Data.Grades.Grade2, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 3, GradeId = Data.Grades.Grade3, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 4, GradeId = Data.Grades.Grade4, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 5, GradeId = Data.Grades.Grade5, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 6, GradeId = Data.Grades.Grade6, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 7, GradeId = Data.Grades.Grade7, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 8, GradeId = Data.Grades.Grade8, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 9, GradeId = Data.Grades.Grade9, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 10, GradeId = Data.Grades.Grade10, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 11, GradeId = Data.Grades.Grade11, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
+            modelBuilder.Entity<Section>().HasData(
+                new Section { Id = 1, Code = "Primary", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Section { Id = 2, Code = "Junior", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Section { Id = 3, Code = "Senior", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Section { Id = 4, Code = "AL-Science", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Section { Id = 5, Code = "AL-Art & Commerce", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Section { Id = 6, Code = "AL-Technology", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
 
-            modelBuilder.Entity<Role>().HasData(
-                new Role { RoleId = 1, Code = "Admin", Name = "Administrator", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Role { RoleId = 2, Code = "AdminUser", Name = "Admin Department User", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
+            modelBuilder.Entity<Grade>().HasData(
+                new Grade { Id = 1, SectionId = 1, GradeNo = Data.Grades.Grade1, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 2, SectionId = 1, GradeNo = Data.Grades.Grade2, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 3, SectionId = 1, GradeNo = Data.Grades.Grade3, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 4, SectionId = 1, GradeNo = Data.Grades.Grade4, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 5, SectionId = 1, GradeNo = Data.Grades.Grade5, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 6, SectionId = 2, GradeNo = Data.Grades.Grade6, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 7, SectionId = 2, GradeNo = Data.Grades.Grade7, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 8, SectionId = 2, GradeNo = Data.Grades.Grade8, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 9, SectionId = 3, GradeNo = Data.Grades.Grade9, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 10, SectionId = 3, GradeNo = Data.Grades.Grade10, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 11, SectionId = 3, GradeNo = Data.Grades.Grade11, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
+
+            modelBuilder.Entity<Permission>().HasData(
+                new Permission { PermissionId = 1, Code = "Admin", Name = "Administrator", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Permission { PermissionId = 2, Code = "AdminUser", Name = "Admin Department User", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
 
             modelBuilder.Entity<Menu>().HasData(
                 new Menu { MenuId = 1, ParentMenuId = null, DisplaySeq = 10, Text = "Admin", Type = "M", Area = null, Controller = null, Action = null, IsHidden = false, Icon = "fas fa-user-tie" },
                 new Menu { MenuId = 2, ParentMenuId = null, DisplaySeq = 20, Text = "Academic", Type = "M", Area = null, Controller = null, Action = null, IsHidden = false, Icon = "fas fa-book-reader" },
                 new Menu { MenuId = 3, ParentMenuId = null, DisplaySeq = 30, Text = "Teacher", Type = "M", Area = null, Controller = null, Action = null, IsHidden = false, Icon = "fas fa-chalkboard-teacher" },
                 new Menu { MenuId = 4, ParentMenuId = null, DisplaySeq = 40, Text = "Student", Type = "M", Area = null, Controller = null, Action = null, IsHidden = false, Icon = "fas fa-user-graduate" },
-                new Menu { MenuId = 5, ParentMenuId = null, DisplaySeq = 50, Text = "Report", Type = "M", Area = null, Controller = null, Action = null, IsHidden = false, Icon = "fas fa-chart-bar" },
-                new Menu { MenuId = 6, ParentMenuId = 1, DisplaySeq = 10, Text = "User Permissions", Type = "I", Area = "Admin", Controller = "UserRoles", Action = "Index" },
-                new Menu { MenuId = 7, ParentMenuId = 1, DisplaySeq = 20, Text = "Users", Type = "I", Area = "Admin", Controller = "Users", Action = "Index" },
-                new Menu { MenuId = 8, ParentMenuId = 1, DisplaySeq = 30, Text = "Staff Members", Type = "I", Area = "Admin", Controller = "StaffMember", Action = "Index" },
-                new Menu { MenuId = 9, ParentMenuId = 1, DisplaySeq = 40, Text = "Sections", Type = "I", Area = "Admin", Controller = "Section", Action = "Index" },
-                new Menu { MenuId = 10, ParentMenuId = 1, DisplaySeq = 50, Text = "Grades", Type = "I", Area = "Admin", Controller = "Grade", Action = "Index" },
-                new Menu { MenuId = 11, ParentMenuId = 1, DisplaySeq = 60, Text = "Grade Classes", Type = "I", Area = "Admin", Controller = "GradeClass", Action = "Index" },
-                new Menu { MenuId = 12, ParentMenuId = 2, DisplaySeq = 10, Text = "Section Heads", Type = "I", Area = "Academic", Controller = "SectionHead", Action = "Index" },
-                new Menu { MenuId = 13, ParentMenuId = 2, DisplaySeq = 20, Text = "Grade Heads", Type = "I", Area = "Academic", Controller = "GradeHead", Action = "Index" },
-                new Menu { MenuId = 14, ParentMenuId = 2, DisplaySeq = 30, Text = "Classes", Type = "I", Area = "Academic", Controller = "Class", Action = "Index" },
-                new Menu { MenuId = 15, ParentMenuId = 3, DisplaySeq = 10, Text = "Teacher Maintenance", Type = "I", Area = "Teacher", Controller = "Teacher", Action = "Index" },
-                new Menu { MenuId = 16, ParentMenuId = 4, DisplaySeq = 10, Text = "Student Maintenance", Type = "I", Area = "Student", Controller = "Student", Action = "Index" });
+                new Menu { MenuId = 5, ParentMenuId = null, DisplaySeq = 50, Text = "Online", Type = "M", Area = null, Controller = null, Action = null, IsHidden = false, Icon = "fas fa-laptop-code" },
+                new Menu { MenuId = 6, ParentMenuId = null, DisplaySeq = 60, Text = "Report", Type = "M", Area = null, Controller = null, Action = null, IsHidden = false, Icon = "fas fa-chart-bar" },
+                new Menu { MenuId = 7, ParentMenuId = 1, DisplaySeq = 10, Text = "User Permissions", Type = "I", Area = "Admin", Controller = "UserPermission", Action = "Index" },
+                new Menu { MenuId = 8, ParentMenuId = 1, DisplaySeq = 20, Text = "Users", Type = "I", Area = "Admin", Controller = "Users", Action = "Index" },
+                new Menu { MenuId = 9, ParentMenuId = 1, DisplaySeq = 30, Text = "Staff Members", Type = "I", Area = "Admin", Controller = "StaffMember", Action = "Index" },
+                new Menu { MenuId = 10, ParentMenuId = 1, DisplaySeq = 40, Text = "Sections", Type = "I", Area = "Admin", Controller = "Section", Action = "Index" },
+                new Menu { MenuId = 11, ParentMenuId = 1, DisplaySeq = 50, Text = "Section Heads", Type = "I", Area = "Admin", Controller = "SectionHead", Action = "Index" },
+                new Menu { MenuId = 12, ParentMenuId = 1, DisplaySeq = 60, Text = "Grades", Type = "I", Area = "Admin", Controller = "Grade", Action = "Index" },
+                new Menu { MenuId = 13, ParentMenuId = 1, DisplaySeq = 70, Text = "Grade Heads", Type = "I", Area = "Admin", Controller = "GradeHead", Action = "Index" },
+                new Menu { MenuId = 14, ParentMenuId = 2, DisplaySeq = 10, Text = "Subject Categories", Type = "I", Area = "Academic", Controller = "SubjectCategory", Action = "Index" },
+                new Menu { MenuId = 15, ParentMenuId = 2, DisplaySeq = 20, Text = "Subjects", Type = "I", Area = "Academic", Controller = "Subject", Action = "Index" },
+                new Menu { MenuId = 16, ParentMenuId = 2, DisplaySeq = 30, Text = "Grade Subjects", Type = "I", Area = "Academic", Controller = "GradeSubject", Action = "Index" },
+                new Menu { MenuId = 17, ParentMenuId = 2, DisplaySeq = 40, Text = "Grade Classes", Type = "I", Area = "Academic", Controller = "GradeClass", Action = "Index" },
+                new Menu { MenuId = 18, ParentMenuId = 2, DisplaySeq = 50, Text = "Class Rooms", Type = "I", Area = "Academic", Controller = "Class", Action = "Index" },
+                new Menu { MenuId = 19, ParentMenuId = 3, DisplaySeq = 20, Text = "Teacher Information", Type = "I", Area = "Teacher", Controller = "Teacher", Action = "Index" },
+                new Menu { MenuId = 20, ParentMenuId = 4, DisplaySeq = 10, Text = "Student Maintenance", Type = "I", Area = "Student", Controller = "Student", Action = "Index" },
+                new Menu { MenuId = 21, ParentMenuId = 4, DisplaySeq = 20, Text = "Student Basket Subjects", Type = "I", Area = "Student", Controller = "BasketSubject", Action = "Index" },
+                new Menu { MenuId = 22, ParentMenuId = 4, DisplaySeq = 30, Text = "Student Marks", Type = "I", Area = "Student", Controller = "StudentMark", Action = "Index" },
+                new Menu { MenuId = 23, ParentMenuId = 5, DisplaySeq = 30, Text = "Online Class Rooms", Type = "I", Area = "Student", Controller = "StudentMark", Action = "Index" },
+                new Menu { MenuId = 24, ParentMenuId = 5, DisplaySeq = 30, Text = "Online Time Table", Type = "I", Area = "Student", Controller = "StudentMark", Action = "Index" },
+                new Menu { MenuId = 25, ParentMenuId = 6, DisplaySeq = 30, Text = "Student Attendance", Type = "I", Area = "Report", Controller = "StudentAttendance", Action = "Index" },
+                new Menu { MenuId = 26, ParentMenuId = 6, DisplaySeq = 30, Text = "Attendance By Duration", Type = "I", Area = "Report", Controller = "AttendanceByDuration", Action = "Index" },
+                new Menu { MenuId = 27, ParentMenuId = 6, DisplaySeq = 30, Text = "Term Wise Student Marks", Type = "I", Area = "Report", Controller = "StudentMarks", Action = "Process" },
+                new Menu { MenuId = 28, ParentMenuId = 6, DisplaySeq = 30, Text = "Online Sessions Summary", Type = "I", Area = "Report", Controller = "OnlineSessionsSummary", Action = "Process" });
 
-            modelBuilder.Entity<RoleMenuAccess>().HasData(
-                new RoleMenuAccess { MenuId = 1, RoleId = 1 }
+            modelBuilder.Entity<PermissionMenuAccess>().HasData(
+                new PermissionMenuAccess { MenuId = 1, PermissionId = 1 }
                 );
 
             modelBuilder.Entity<User>().HasData(
@@ -1126,17 +1033,25 @@ namespace StudentInformationSystem.Data
                    CreatedDate = new DateTime(2021, 1, 1)
                });
 
-            modelBuilder.Entity<UserRole>().HasData(
-               new UserRole { UserRoleId = 1, UserId = 1, RoleId = 1 });
+            modelBuilder.Entity<UserPermission>().HasData(
+               new UserPermission { UserPermissionId = 1, UserId = 1, PermissionId = 1 });
 
-            modelBuilder.Entity<Teacher>().HasData(
-               new Teacher { Id = 1, Title = TitleTeacher.Mrs, Gender = Gender.Female, FullName = "Piumali Manorika Suraweera", Initials = "P M", Lname = "Suraweera", Address = "test", ContactNo = "0714479648", Nicno = "880272580V", ImmeContactNo = "0773411392", ImmeContactName = "Malith", Status = TeacherStatus.Active, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-               new Teacher { Id = 2, Title = TitleTeacher.Mrs, Gender = Gender.Male, FullName = "Udara Rathnayaka", Initials = "U", Lname = "Rathnayaka", Address = "test", ContactNo = "0716669648", Nicno = "900272580V", ImmeContactNo = "0773412392", ImmeContactName = "Umandya", Status = TeacherStatus.Active, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
+            modelBuilder.Entity<StaffMember>().HasData(
+               new StaffMember { Id = 1, StaffNumber = 123, Title = TitleStaff.Mrs, Gender = Gender.Female, FullName = "Piumali Manorika Suraweera", Initials = "P M", LastName = "Suraweera", Address1 = "24/3, Udyana Avenue", Address2 = "Pepiliyana Road", City = "Nugegoda", MobileNo = "0714479648", Nicno = "880272580V", ImmeContactNo = "0773411392", ImmeContactName = "Malith", Status = ActiveStatus.Active, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+               new StaffMember { Id = 2, StaffNumber = 456, Title = TitleStaff.Mrs, Gender = Gender.Male, FullName = "Udara Rathnayaka", Initials = "U", LastName = "Rathnayaka", Address1 = "45C, School Avenue", Address2 = "Raththanapitiya", City = "Boralesgamuwa", MobileNo = "0716669648", Nicno = "900272580V", ImmeContactNo = "0773412392", ImmeContactName = "Umandya", Status = ActiveStatus.Active, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
 
-            //modelBuilder.Entity<Subject>().HasData(
-            //   new Subject { Id = 1, Name = "Sinhala", IsBasket = false, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-            //   new Subject { Id = 2, Name = "English", IsBasket = false, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-            //   new Subject { Id = 3, Name = "Dancing", IsBasket = false, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
+            modelBuilder.Entity<SubjectCategory>().HasData(
+               new SubjectCategory { Id = 1, Code = "Main", IsBasket = false, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+               new SubjectCategory { Id = 2, Code = "Basket 1", IsBasket = true, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+               new SubjectCategory { Id = 3, Code = "Basket 2", IsBasket = true, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+               new SubjectCategory { Id = 4, Code = "Basket 3", IsBasket = true, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
+
+            modelBuilder.Entity<Subject>().HasData(
+               new Subject { Id = 1, Code = "Sinhala", SectionId = 3, SubjectCategoryId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+               new Subject { Id = 2, Code = "English", SectionId = 3, SubjectCategoryId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+               new Subject { Id = 3, Code = "Geography", SectionId = 3, SubjectCategoryId = 2, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+               new Subject { Id = 4, Code = "Dancing", SectionId = 3, SubjectCategoryId = 3, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+               new Subject { Id = 5, Code = "ICT", SectionId = 3, SubjectCategoryId = 4, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
         }
 
         public override int SaveChanges()

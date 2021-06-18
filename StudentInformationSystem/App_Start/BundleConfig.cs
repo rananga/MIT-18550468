@@ -44,10 +44,11 @@ namespace StudentInformationSystem
             bundles.Add(new ScriptBundle("~/bundles/layoutless").Include(
                 "~/Scripts/Layout/jquery.autosize.js",
                 "~/Scripts/Layout/jquery.customSelect.js",
-                "~/Scripts/Layout/jquery.nicescroll.js",
-                "~/Scripts/Layout/jquery.placeholder.js",
-                "~/Scripts/Layout/jquery.scrollTo.js",
-                "~/Scripts/Layout/jquery.slimscroll.js"));
+                //"~/Scripts/Layout/jquery.nicescroll.js",
+                "~/Scripts/Layout/jquery.placeholder.js"//,
+                //"~/Scripts/Layout/jquery.scrollTo.js",
+                //"~/Scripts/Layout/jquery.slimscroll.js"
+                ));
 
             bundles.Add(new StyleBundle("~/Scripts/bootstrapbundleminjs").Include(
                       "~/Scripts/bootstrap.bundle.min.js"));
@@ -59,8 +60,14 @@ namespace StudentInformationSystem
             bundles.Add(new ScriptBundle("~/bundles/admin/user").Include(
                       "~/Scripts/Admin/User.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/admin/userrole").Include(
-                      "~/Scripts/Admin/UserRole.js"));
+            bundles.Add(new ScriptBundle("~/bundles/admin/userpermission").Include(
+                      "~/Scripts/Admin/UserPermission.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/academic/gradeclass").Include(
+                      "~/Scripts/Academic/GradeClass.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/academic/gradesubject").Include(
+                      "~/Scripts/Academic/GradeSubject.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/admin/employee").Include(
                       "~/Scripts/Admin/Employee.js"));

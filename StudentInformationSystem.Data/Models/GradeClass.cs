@@ -9,6 +9,7 @@ namespace StudentInformationSystem.Data.Models
     {
         public GradeClass()
         {
+            GradeClassSubjects = new HashSet<GradeClassSubject>();
             Classes = new HashSet<Class>();
         }
 
@@ -17,9 +18,13 @@ namespace StudentInformationSystem.Data.Models
         public int GradeId { get; set; }
         [Required]
         public Classes Name { get; set; }
-        public string Description { get; set; }
+        public string Code { get; set; }
+        public Medium Medium { get; set; }
+        [DisplayName("Max Student Count")]
+        public int? MaxStudentCount { get; set; }
 
         public virtual Grade Grade { get; set; }
+        public virtual ICollection<GradeClassSubject> GradeClassSubjects { get; set; }
         public virtual ICollection<Class> Classes { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model StudentInformationSystem.Areas.Admin.Models.GradeVM
+﻿@using StudentInformationSystem.Data.Models;
+@model StudentInformationSystem.Areas.Admin.Models.GradeVM
 
 @{
     ViewBag.Title = "Edit Grade";
@@ -8,7 +9,7 @@
 {
 
     @Html.HiddenFor(x => x.Id)
-    @Html.HiddenFor(model => model.GradeId)
+    @Html.HiddenFor(model => model.GradeNo)
     @Html.HiddenFor(x => x.RowVersion)
     @Html.AntiForgeryToken()
 
@@ -26,10 +27,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HeadTeacherId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PopUpSelectorFor(model => model.HeadTeacherId, "Base", "Data", "GetTeachers", new { @class = "form-control" }, "Please select a Teacher", null, dspFormat: "{1}", hiddenIndices: "0")
-                @Html.ValidationMessageFor(model => model.HeadTeacherId, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.SectionId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.SelectListFor(model => model.SectionId, (Section x) => x.Id, (Section x) => x.Code, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.SectionId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>

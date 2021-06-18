@@ -22,6 +22,8 @@ namespace StudentInformationSystem.Areas.Base.Models
 
         public ObjMappings<User, SignInVM> mappings { get; set; }
 
+        public string UserEmail { get; set; }
+        public string AccessToken { get; set; }
         public bool RememberMe { get; set; }
         [DisplayName("New Password")]
         public string NewPassword { get; set; }

@@ -16,7 +16,7 @@ namespace StudentInformationSystem.Areas.Student.Models
             StudentList = new List<ClassStudentVM>();
 
             mappings = new ObjMappings<ClassStudent, ClassStudentVM>();
-            mappings.Add(x => x.Student.Title + ". " + x.Student.Initials + "" + x.Student.Lname, x => x.StudentName);
+            mappings.Add(x => x.Student.Initials + " " + x.Student.LastName, x => x.StudentName);
             //mappings.Add(x => x.PromotionClass.Class.ClassDesc, x => x.ClassName);
             //mappings.Add(x => "Grade " + x.PromotionClass.Class.Grade + " - " + x.PromotionClass.Class.ClassDesc, x => x.ClassGrade);
             //mappings.Add(x => x.PromotionClass.Class.Grade, x => x.Grade);

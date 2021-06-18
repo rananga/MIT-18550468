@@ -9,18 +9,22 @@ namespace StudentInformationSystem.Data.Models
     {
         [Required]
         public int Year { get; set; }
+        [Required]
         [DisplayName("Grade")]
+        public int GradeId { get; set; }
         [Required]
-        public Grades GradeId { get; set; }
         [DisplayName("Grade Head")]
-        [Required]
         public int StaffId { get; set; }
+        [Required]
         [DisplayName("From Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FromDate { get; set; }
+        [Required]
         [DisplayName("To Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ToDate { get; set; }
 
-        public virtual Section Section { get; set; }
+        public virtual Grade Grade { get; set; }
         public virtual StaffMember StaffMember { get; set; }
     }
 }

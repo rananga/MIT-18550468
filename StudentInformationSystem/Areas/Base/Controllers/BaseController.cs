@@ -13,7 +13,7 @@ namespace StudentInformationSystem.Areas.Base
     [ExtendedActionFilter, ExtendedAuthorize]
     public class BaseController : Controller
     {
-        protected dbSISContext db = new dbSISContext();
+        protected dbNalandaContext db = new dbNalandaContext();
         public static readonly string sskCrtdObj = "CreatedObject";
         public static readonly string sskCurUsrID = "CurUserID";
         public static readonly string sskDelInds = "DeletedIndices";

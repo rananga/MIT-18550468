@@ -17,8 +17,6 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 {
     public class StudentController : BaseController
     {
-        // GET: Student/Student
-        public static readonly string tdkTempEnrol = "TempEnrol";
         public ActionResult Index(BaseViewModel<StudentVM> vm)
         {
             vm.SetList(db.Students.AsQueryable(), "IndexNo", SortDirection.Descending);
@@ -77,58 +75,6 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             return PartialView("_FamilyIndex", obj.FamilyMembers);
         }
 
-        [AllowAnonymous]
-        public ActionResult AcheivementIndex(int? id, bool isToEdit = false)
-        {
-            StudentVM obj;
-
-            if (isToEdit && Session[sskCrtdObj] is StudentVM)
-            { obj = (StudentVM)Session[sskCrtdObj]; }
-            else
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                var cls = db.Students.Where(x => x.Id == id).FirstOrDefault();
-                if (cls == null)
-                {
-                    return HttpNotFound();
-                }
-                obj = new StudentVM(cls);
-            }
-
-            ViewBag.IsToEdit = isToEdit;
-            ViewBag.ActivityId = obj.Id;
-            return PartialView("_AcheivementIndex", obj.Acheivements);
-        }
-
-        [AllowAnonymous]
-        public ActionResult PositionIndex(int? id, bool isToEdit = false)
-        {
-            StudentVM obj;
-
-            if (isToEdit && Session[sskCrtdObj] is StudentVM)
-            { obj = (StudentVM)Session[sskCrtdObj]; }
-            else
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                var cls = db.Students.Where(x => x.Id == id).FirstOrDefault();
-                if (cls == null)
-                {
-                    return HttpNotFound();
-                }
-                obj = new StudentVM(cls);
-            }
-
-            ViewBag.IsToEdit = isToEdit;
-            ViewBag.ActivityId = obj.Id;
-            return PartialView("_PositionIndex", obj.Positions);
-        }
-
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -145,15 +91,41 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             return View(new StudentVM(student));
         }
 
+        [AllowAnonymous]
+        public ActionResult ChildDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            StudentVM obj = (StudentVM)Session[sskCrtdObj];
+            StudSiblingsVM studSiblings = obj.Siblings.Where(x => x.Id == id.Value).FirstOrDefault();
+            if (studSiblings == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("_ChildDetails", studSiblings);
+        }
+
+        [AllowAnonymous]
+        public ActionResult FamilyDetails(int? id)
+        {
+            if (id == null)
+            {
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            StudentVM obj = (StudentVM)Session[sskCrtdObj];
+            StudFamilyVM studFamilyVM = obj.FamilyMembers.Where(x => x.Id == id.Value).FirstOrDefault();
+            if (studFamilyVM == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("_FamilyDetails", studFamilyVM);
+        }
+
         public ActionResult Create()
         {
-            if (TempData.ContainsKey(tdkTempEnrol))
-            {
-                var stud = (StudentVM)TempData[tdkTempEnrol];
-                TempData.Remove(tdkTempEnrol);
-                return View(stud);
-            }
-
             var student = new StudentVM() { AdmissionDate = new DateTime(DateTime.Now.Year, 1, 1) };
 
             Session[sskCrtdObj] = student;
@@ -201,7 +173,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                         det.StudentId = objStudent.Id;
                         det.CreatedBy = objStudent.CreatedBy;
                         det.CreatedDate = DateTime.Now;
-                        db.StudSiblings.Add(det.GetEntity());
+                        db.StudentSiblings.Add(det.GetEntity());
                     }
 
                     foreach (var det in obj.FamilyMembers)
@@ -209,7 +181,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                         det.StudentId = objStudent.Id;
                         det.CreatedBy = objStudent.CreatedBy;
                         det.CreatedDate = DateTime.Now;
-                        db.StudFamilies.Add(det.GetEntity());
+                        db.StudentFamilies.Add(det.GetEntity());
                     }
 
                     db.SaveChanges();
@@ -231,39 +203,6 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             }
 
             return View(student);
-        }
-
-        [AllowAnonymous]
-        public ActionResult ChildDetails(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            StudentVM obj = (StudentVM)Session[sskCrtdObj];
-            StudSiblingsVM studSiblings = obj.Siblings.Where(x => x.Id == id.Value).FirstOrDefault();
-            if (studSiblings == null)
-            {
-                return HttpNotFound();
-            }
-            return PartialView("_ChildDetails", studSiblings);
-        }
-
-        [AllowAnonymous]
-        public ActionResult FamilyDetails(int? id)
-        {
-            if (id == null)
-            {
-
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            StudentVM obj = (StudentVM)Session[sskCrtdObj];
-            StudFamilyVM studFamilyVM = obj.FamilyMembers.Where(x => x.Id == id.Value).FirstOrDefault();
-            if (studFamilyVM == null)
-            {
-                return HttpNotFound();
-            }
-            return PartialView("_FamilyDetails", studFamilyVM);
         }
 
 
@@ -300,6 +239,10 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                 {
                     obj = (StudentVM)Session[sskCrtdObj];
                     studentSibling.Id = Math.Min(obj.Siblings.Select(x => x.Id).MinOrDefault(), 0) - 1;
+                    var sibStud = db.Students.Find(studentSibling.SiblingStudentId);
+                    studentSibling.StudWithInit = sibStud.Initials + " " + sibStud.LastName;
+                    studentSibling.IndexNo = sibStud.IndexNo;
+
                     obj.Siblings.Add(studentSibling);
 
                     AddAlert(AlertStyles.success, "Student Siblings Added Successfully.");
@@ -323,11 +266,10 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             var obj = db.Students.Find(studID);
 
             var IndexNo = obj.IndexNo;
-            var Title = obj.Title.ToEnumChar();
-            var InitName = obj.Initials + " " + obj.Lname;
+            var InitName = obj.Initials + " " + obj.LastName;
             var Fullname = obj.FullName;
 
-            return Json(new { IndexNo, Title, InitName, Fullname }, JsonRequestBehavior.AllowGet);
+            return Json(new { IndexNo, InitName, Fullname }, JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]
@@ -383,13 +325,6 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
         public ActionResult Edit(int? id)
         {
-            if (TempData.ContainsKey(tdkTempEnrol))
-            {
-                var std = (StudentVM)TempData[tdkTempEnrol];
-                TempData.Remove(tdkTempEnrol);
-                return View(std);
-            }
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -415,9 +350,6 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             {
                 var studvm = (StudentVM)Session[sskCrtdObj];
 
-                if (student.Status == StudStatus.Inactive && student.InactiveReason == null)
-                { ModelState.AddModelError("InactiveReason", "InactiveReason is required"); }
-
                 if (ModelState.IsValid)
                 {
                     var obj = db.Students.Find(student.Id);
@@ -426,7 +358,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = student.GetEntity();
-                    modObj.CopyContent(obj, "StudID,IndexNo,Title,Gender,FullName,Initials,Lname,Address,DOB,School,SchoolAddress,LastDhammaSchool,LDhammaSchoolAdd,LastDhammaGrade,EngSpeaking,EngWriting,EngReading,EmergencyConName,EmergencyContactTel,SpecialAttention,NameWithInt,ImagePath,Status,IsLeavingIssued,InactiveReason");
+                    modObj.CopyContent(obj, "Id,AdmissionDate,DOB,FullName,Initials,LastName,SchoolEmail,Address1,Address2,City,EmergContactName,EmergContactNo,Medium");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;
@@ -434,45 +366,37 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
                     db.Entry(obj).OriginalValues["RowVersion"] = student.RowVersion;
 
-                    db.StudSiblings.RemoveRange(obj.StudSiblings.Where(x =>
+                    db.StudentSiblings.RemoveRange(obj.StudentSiblings.Where(x =>
                         !studvm.Siblings.Select(y => y.Id).ToList().Contains(x.Id)));
 
                     foreach (var det in studvm.Siblings)
                     {
-                        var objDet = db.StudSiblings.Find(det.Id);
+                        var objDet = db.StudentSiblings.Find(det.Id);
                         if (objDet == null)
                         {
                             det.CreatedBy = this.GetCurrUser();
                             det.CreatedDate = DateTime.Now;
-                            db.StudSiblings.Add(det.GetEntity());
-                        }
-                        else
-                        {
-                            var modObjDet = det.GetEntity();
-                            modObjDet.CopyContent(objDet, "SudID,SiblingStudID,Relationship,StudWithInit,IndexNo,Title,FullName,Initials,LName");
-
-                            objDet.ModifiedBy = this.GetCurrUser();
-                            objDet.ModifiedDate = DateTime.Now;
+                            db.StudentSiblings.Add(det.GetEntity());
                         }
                     }
 
 
-                    db.StudFamilies.RemoveRange(obj.StudFamilies.Where(x =>
+                    db.StudentFamilies.RemoveRange(obj.StudentFamilies.Where(x =>
                        !studvm.FamilyMembers.Select(y => y.Id).ToList().Contains(x.Id)));
 
                     foreach (var exper in studvm.FamilyMembers)
                     {
-                        var objexpe = db.StudFamilies.Find(exper.Id);
+                        var objexpe = db.StudentFamilies.Find(exper.Id);
                         if (objexpe == null)
                         {
                             exper.CreatedBy = this.GetCurrUser();
                             exper.CreatedDate = DateTime.Now;
-                            db.StudFamilies.Add(exper.GetEntity());
+                            db.StudentFamilies.Add(exper.GetEntity());
                         }
                         else
                         {
                             var modObjDet = exper.GetEntity();
-                            modObjDet.CopyContent(objexpe, "StudID,Name,Relationship,Occupation,WorkingAdd,OfficeTel,ContactMob,ContactHome,Email,NICNo");
+                            modObjDet.CopyContent(objexpe, "Title,Name,Relationship,Occupation,WorkingAdd,OfficeTel,ContactMob,ContactHome,Email,NICNo");
 
                             objexpe.ModifiedBy = this.GetCurrUser();
                             objexpe.ModifiedDate = DateTime.Now;
@@ -587,10 +511,10 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
                 var entry = db.Entry(student.GetEntity());
                 entry.State = EntityState.Unchanged;
-                entry.Collection(x => x.StudFamilies).Load();
-                db.StudFamilies.RemoveRange(entry.Entity.StudFamilies);
-                entry.Collection(x => x.StudSiblings).Load();
-                db.StudSiblings.RemoveRange(entry.Entity.StudSiblings);
+                entry.Collection(x => x.StudentFamilies).Load();
+                db.StudentFamilies.RemoveRange(entry.Entity.StudentFamilies);
+                entry.Collection(x => x.StudentSiblings).Load();
+                db.StudentSiblings.RemoveRange(entry.Entity.StudentSiblings);
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
@@ -753,28 +677,27 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             var lstHdr = db.Students.Where(x => x.Id == id).Select(x => new
             {
                 x.Id,
-                Title = x.Title == TitleStud.Mr ? "Mr. " : "Ms.",
                 AdmissionNo = x.IndexNo,
                 FullName = x.FullName,
                 Initials = x.Initials,
-                LastName = x.Lname,
-                Address = x.Address,
-                DOB = x.Dob,
-                GradehammaSchoolLeave = x.LastGrade,
-                EmmergencyContactName = x.EmergencyConName,
-                EmmergencyContactTelno = x.EmergencyContactTel,
+                LastName = x.LastName,
+                Address = x.Address1 + " " + x.Address2 + " " + x.City,
+                DOB = x.DOB,
+                GradehammaSchoolLeave = x.LastClassId,
+                EmmergencyContactName = x.EmergContactName,
+                EmmergencyContactTelno = x.EmergContactNo,
                 SpecialAttention = x.Medium,
                 DateRegistered = x.AdmissionDate
             }).ToList();
 
-            var lstSibDet = db.Students.Where(x => x.Id == id).SelectMany(x => x.StudSiblings).Select(x => new
+            var lstSibDet = db.Students.Where(x => x.Id == id).SelectMany(x => x.StudentSiblings).Select(x => new
             {
-                Name = x.SiblingStudent.Title + ". " + x.SiblingStudent.Initials + " " + x.SiblingStudent.Lname,
+                Name = x.SiblingStudent.Initials + " " + x.SiblingStudent.LastName,
                 Relationship = x.Relationship == SibRelationship.YoungerBrother ? "Younger Brother" : "Elder Brother",
                 Class = "" //x.SiblingStudent.ClassStudents.Select(y => y.PromotionClass.Class.Grade).FirstOrDefault() + " - " + x.SiblingStudent.ClassStudents.Select(y => y.PromotionClass.Class.ClassDesc).FirstOrDefault()
             }).ToList();
 
-            var lstFamDet = db.Students.Where(x => x.Id == id).SelectMany(x => x.StudFamilies).Select(x => new
+            var lstFamDet = db.Students.Where(x => x.Id == id).SelectMany(x => x.StudentFamilies).Select(x => new
             {
                 Name = x.Name,
                 Relationship = x.Relationship == Relationship.Father ? "Father" : (x.Relationship == Relationship.Mother ? "Mother" : "Guardian"),

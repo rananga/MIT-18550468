@@ -2,9 +2,9 @@
     Layout = null;
 }
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!DOCTYPE html>
 <html>
@@ -85,10 +85,14 @@
             width: 100px;
             font-weight:bold;
         }
-
             .login_btn:hover {
                 color: maroon;
                 background-color: white;
+            }
+            .login_btn:disabled {
+                pointer-events: none;
+                color: silver;
+                background-color: maroon;
             }
 
         .links {
@@ -100,8 +104,98 @@
             }
     </style>
 
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <script>
+        var googleUser = {};
+        var startApp = function () {
+            gapi.load('auth2', function () {
+                // Retrieve the singleton for the GoogleAuth library and set up the client.
+                auth2 = gapi.auth2.init({
+                    client_id: '563950166494-38if8pdcmnbb08v0bjb95r8q36h0ftve.apps.googleusercontent.com',
+                    cookiepolicy: 'single_host_origin',
+                    // Request scopes in addition to 'profile' and 'email'
+                    //scope: 'additional_scope'
+                });
+                attachSignin(document.getElementById('customBtn'));
+            });
+        };
+
+        function attachSignin(element) {
+            auth2.attachClickHandler(element, {}, onSuccess, onFailure);
+        }
+        function onSuccess(googleUser) {
+            if ($.isFunction(logOut)) {
+                logOut();
+            }
+            $('#customBtn').prop('disabled', true);
+            $('#customBtn').addClass('disabled');
+            $('#btnClassicLogin').prop('disabled', true);
+            $('#UserEmail').val(googleUser.getBasicProfile().getEmail());
+            $('#AccessToken').val(googleUser.getAuthResponse().id_token);
+
+            $('form').submit();
+        }
+        function onFailure(error) {
+            console.log(error);
+        }
+        function logOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+            auth2.disconnect();
+        }
+
+        $(function () {
+            $('#btnClassicLogin').click(function (e) {
+                e.preventDefault();
+
+                $('#customBtn').prop('disabled', true);
+                $('#customBtn').addClass('disabled');
+                $('#btnClassicLogin').prop('disabled', true);
+                $('form').submit();
+            });
+        });
+
+    </script>
+    <style type="text/css">
+        #customBtn {
+            display: inline-block;
+            background-color: maroon;
+            color: silver;
+            border-radius: 5px;
+            border: thin solid #888;
+            box-shadow: 1px 1px 1px grey;
+            white-space: nowrap;
+            font-weight: bold;
+            width: 215px;
+            height: 38px;
+        }
+
+            #customBtn:hover {
+                cursor: pointer;
+                color: maroon;
+                background-color: white;
+            }
+
+            #customBtn > span {
+                padding-left: 5px;
+                line-height: 38px;
+                vertical-align: middle;
+            }
+
+            #customBtn:disabled, #customBtn.disabled {
+                pointer-events: none;
+                /* for "disabled" effect */
+                opacity: 0.7;
+            }
+    </style>
+
 </head>
 <body>
+    <meta name="google-signin-client_id" content="563950166494-38if8pdcmnbb08v0bjb95r8q36h0ftve.apps.googleusercontent.com">
     <div class="container">
         <div class="d-flex justify-content-center h-100">
             <div class="card">
@@ -109,9 +203,10 @@
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
+                    <input type="hidden" id="UserEmail" name="UserEmail">
+                    <input type="hidden" id="AccessToken" name="AccessToken">
                     <div class="card-header">
-                        @*<img src="@Url.Content("~/Content/Images/login_header.png")" class="img-responsive" style="height:85px" />*@
-                        <label style="padding:.45rem 0; color:maroon; font-weight:bold;">Student Information System</label>
+                        <img src="@Url.Content("~/Content/Images/login_header.png")" class="img-responsive" style="height:85px" />
                     </div>
                     <div class="card-body">
                         <div class="input-group form-group">
@@ -133,14 +228,27 @@
                             @{ Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml"); }
                         </div>
                         <div class="form-group" style="margin-bottom: 0">
-                            <label style="padding:.45rem 0; color:maroon; font-weight:bold;margin-bottom:0">School Moto</label>
-                            <input type="submit" value="Login" class="btn float-right login_btn col-sm-4" style="margin-bottom:0">
+                            <div id="customBtn" class="customGPlusSignIn col-sm-8">
+                                <img src="~/Content/Images/Google-Logo-min.png" height="36" style="padding:5px 0" />
+                                <span>Sign In With Google</span>
+                            </div>
+                            <input id="btnClassicLogin" type="submit" value="Login" class="btn float-right login_btn col-sm-4" style="margin-bottom:0">
+                            <div class="col-sm-12 center-block" style="text-align:center">
+                                @*<label style="padding:.45rem 0; color:maroon; font-weight:bold;margin-bottom:0">අපදාන ශෝභිනී පඤ්ඤා</label>*@
+                                <label style="color:maroon; bottom:0;font-weight:bold;margin-bottom:-5px;margin-top:15px">අපදාන ශෝභිනී පඤ්ඤා</label>
+                            </div>
                         </div>
+                        @*<div>
+                                <div class="signin-button" id="my-signin2"></div>
+
+                            </div>*@
                     </div>
 
                 }
             </div>
         </div>
     </div>
+
+    <script>startApp();</script>
 </body>
 </html>

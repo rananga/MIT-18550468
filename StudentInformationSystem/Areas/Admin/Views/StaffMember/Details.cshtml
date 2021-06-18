@@ -6,7 +6,7 @@
 
 <div>
     <hr />
-    @using (Html.BeginForm("Delete", "Teacher"))
+    @using (Html.BeginForm("Delete", "StaffMember"))
     {
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.RowVersion)
@@ -111,13 +111,21 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.TeacherId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.TeacherId)
-            </div>
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
                 @Html.DetailsViewFor(model => model.Status)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsTeacher, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.DetailsViewFor(model => model.IsTeacher)
+            </div>
+            <div style="@(Model.IsTeacher?"":"display:none")">
+                @Html.LabelFor(model => model.TeacherSectionName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DetailsViewFor(model => model.TeacherSectionName)
+                </div>
             </div>
         </div>
         <div class="form-group">

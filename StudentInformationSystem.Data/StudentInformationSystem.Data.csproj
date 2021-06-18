@@ -5,63 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20210603175015_Migration_01.cs" />
-    <Compile Remove="Migrations\20210603175015_Migration_01.Designer.cs" />
-    <Compile Remove="Migrations\20210603205855_Migration_01.cs" />
-    <Compile Remove="Migrations\20210603205855_Migration_01.Designer.cs" />
-    <Compile Remove="Migrations\20210604112828_01.cs" />
-    <Compile Remove="Migrations\20210604112828_01.Designer.cs" />
-    <Compile Remove="Migrations\20210604120806_02.cs" />
-    <Compile Remove="Migrations\20210604120806_02.Designer.cs" />
-    <Compile Remove="Migrations\20210604141433_01.cs" />
-    <Compile Remove="Migrations\20210604141433_01.Designer.cs" />
-    <Compile Remove="Migrations\20210604171034_01.cs" />
-    <Compile Remove="Migrations\20210604171034_01.Designer.cs" />
-    <Compile Remove="Migrations\20210604171333_02.cs" />
-    <Compile Remove="Migrations\20210604171333_02.Designer.cs" />
-    <Compile Remove="Migrations\20210604174707_03.cs" />
-    <Compile Remove="Migrations\20210604174707_03.Designer.cs" />
-    <Compile Remove="Migrations\20210604180037_01.cs" />
-    <Compile Remove="Migrations\20210604180037_01.Designer.cs" />
-    <Compile Remove="Migrations\20210604192724_02.cs" />
-    <Compile Remove="Migrations\20210604192724_02.Designer.cs" />
-    <Compile Remove="Migrations\20210605105030_01.cs" />
-    <Compile Remove="Migrations\20210605105030_01.Designer.cs" />
-    <Compile Remove="Migrations\20210605130020_01.cs" />
-    <Compile Remove="Migrations\20210605130020_01.Designer.cs" />
-    <Compile Remove="Migrations\20210605165027_01.cs" />
-    <Compile Remove="Migrations\20210605165027_01.Designer.cs" />
-    <Compile Remove="Migrations\20210605174043_01.cs" />
-    <Compile Remove="Migrations\20210605174043_01.Designer.cs" />
-    <Compile Remove="Migrations\20210605225656_01.cs" />
-    <Compile Remove="Migrations\20210605225656_01.Designer.cs" />
-    <Compile Remove="Migrations\20210606073304_02.cs" />
-    <Compile Remove="Migrations\20210606073304_02.Designer.cs" />
-    <Compile Remove="Migrations\20210606073726_01.cs" />
-    <Compile Remove="Migrations\20210606073726_01.Designer.cs" />
-    <Compile Remove="Migrations\20210606085508_03.cs" />
-    <Compile Remove="Migrations\20210606085508_03.Designer.cs" />
-    <Compile Remove="Migrations\20210608094912_01.cs" />
-    <Compile Remove="Migrations\20210608094912_01.Designer.cs" />
-    <Compile Remove="Migrations\20210608200448_01.cs" />
-    <Compile Remove="Migrations\20210608200448_01.Designer.cs" />
-    <Compile Remove="Migrations\20210608213030_01.cs" />
-    <Compile Remove="Migrations\20210608213030_01.Designer.cs" />
-    <Compile Remove="Migrations\20210609081335_01.cs" />
-    <Compile Remove="Migrations\20210609081335_01.Designer.cs" />
-    <Compile Remove="Migrations\20210609090412_02.cs" />
-    <Compile Remove="Migrations\20210609090412_02.Designer.cs" />
-    <Compile Remove="Migrations\20210609132608_02.cs" />
-    <Compile Remove="Migrations\20210609132608_02.Designer.cs" />
-    <Compile Remove="Migrations\20210609132658_01.cs" />
-    <Compile Remove="Migrations\20210609132658_01.Designer.cs" />
-    <Compile Remove="Models\Club.cs" />
-    <Compile Remove="Models\ClubMember.cs" />
-    <Compile Remove="Models\EventParticipation.cs" />
-    <Compile Remove="Models\PeriodSetup.cs" />
-    <Compile Remove="Models\Prefect.cs" />
-    <Compile Remove="Models\PromotionClass.cs" />
-    <Compile Remove="Models\RoleTile.cs" />
+    <Compile Remove="Migrations\20210616174805_01.cs" />
+    <Compile Remove="Migrations\20210616174805_01.Designer.cs" />
+    <Compile Remove="Migrations\20210618220650_01.cs" />
+    <Compile Remove="Migrations\20210618220650_01.Designer.cs" />
+    <Compile Remove="Migrations\20210618223331_01.cs" />
+    <Compile Remove="Migrations\20210618223331_01.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,6 +21,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

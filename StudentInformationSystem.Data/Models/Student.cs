@@ -10,57 +10,66 @@ namespace StudentInformationSystem.Data.Models
         public Student()
         {
             ClassStudents = new HashSet<ClassStudent>();
-            //ClubMembers = new HashSet<ClubMember>();
-            //EventParticipations = new HashSet<EventParticipation>();
-            LeavingCertificates = new HashSet<LeavingCertificate>();
-            //Prefects = new HashSet<Prefect>();
-            StudFamilies = new HashSet<StudFamily>();
-            StudSiblings = new HashSet<StudSibling>();
+            StudentFamilies = new HashSet<StudentFamily>();
+            StudentSiblings = new HashSet<StudentSibling>();
             ClassMonitors = new HashSet<ClassMonitor>();
+            StudentBasketSubjects = new HashSet<StudentBasketSubject>();
+
+            ActivityPositions = new HashSet<StudentExtraActivityPosition>();
+            ActivityAcheivements = new HashSet<StudentExtraActivityAcheivement>();
+            LeavingCertificates = new HashSet<LeavingCertificate>();
         }
 
         [DisplayName("Admission No")]
         public int IndexNo { get; set; }
-        [Required]
-        public TitleStud Title { get; set; }
+        [DisplayName("Date of Birth"), Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? DOB { get; set; }
         [DisplayName("Full Name"), DataType(DataType.MultilineText), Required]
         public string FullName { get; set; }
+        [Required]
         public string Initials { get; set; }
         [DisplayName("Last Name"), Required]
-        public string Lname { get; set; }
+        public string LastName { get; set; }
+        [DisplayName("School Email")]
         public string SchoolEmail { get; set; }
-        [Required, DataType(DataType.MultilineText)]
-        public string Address { get; set; }
+        [DisplayName("Address")]
+        [Required]
+        public string Address1 { get; set; }
+        [DisplayName("Street Name")]
+        public string Address2 { get; set; }
+        [Required]
+        public string City { get; set; }
         [DisplayName("Emergency Contact Name"), Required]
-        public string EmergencyConName { get; set; }
-        [DisplayName("Emergency Contact Telephone"), Required]
+        public string EmergContactName { get; set; }
+        [DisplayName("Emergency Contact No"), Required]
         [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
-        public string EmergencyContactTel { get; set; }
+        public string EmergContactNo { get; set; }
         public Medium Medium { get; set; }
         public string ImagePath { get; set; }
-        [DisplayName("Date of Birth"), Required]
-        public DateTime? Dob { get; set; }
-        [DisplayName("Last Grade")]
-        public string LastGrade { get; set; }
-        public StudStatus Status { get; set; }
-        [DisplayName("Inactive Reason"), DataType(DataType.MultilineText)]
-        public string InactiveReason { get; set; }
-        [DisplayName("Is Leaving Certificate Issued")]
-        public bool IsLeavingIssued { get; set; }
         [Required]
+        [DisplayName("Admission Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime AdmissionDate { get; set; }
+        [DisplayName("Leaving Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? LeavingDate { get; set; }
+        public StudStatus Status { get; set; }
+        [DisplayName("Is Leaving Certificate Issued")]
+        public bool IsLeavingIssued { get; set; }
+        [DisplayName("Last Class")]
+        public int LastClassId { get; set; }
+        [DisplayName("Admitted Class")]
         public int AdmittedClassId { get; set; }
 
         public virtual ICollection<ClassStudent> ClassStudents { get; set; }
-        //public virtual ICollection<ClubMember> ClubMembers { get; set; }
-        //public virtual ICollection<EventParticipation> EventParticipations { get; set; }
-        public virtual ICollection<LeavingCertificate> LeavingCertificates { get; set; }
-        //public virtual ICollection<Prefect> Prefects { get; set; }
-        public virtual ICollection<StudFamily> StudFamilies { get; set; }
-        public virtual ICollection<StudSibling> StudSiblings { get; set; }
+        public virtual ICollection<StudentFamily> StudentFamilies { get; set; }
+        public virtual ICollection<StudentSibling> StudentSiblings { get; set; }
+        public virtual ICollection<ClassMonitor> ClassMonitors { get; set; }
+        public virtual ICollection<StudentBasketSubject> StudentBasketSubjects { get; set; }
+
         public virtual ICollection<StudentExtraActivityPosition> ActivityPositions { get; set; }
         public virtual ICollection<StudentExtraActivityAcheivement> ActivityAcheivements { get; set; }
-        public virtual ICollection<ClassMonitor> ClassMonitors { get; set; }
+        public virtual ICollection<LeavingCertificate> LeavingCertificates { get; set; }
     }
 }

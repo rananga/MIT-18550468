@@ -8,18 +8,21 @@ namespace StudentInformationSystem.Data.Models
     {
         public Grade()
         {
+            GradeHeads = new HashSet<GradeHead>();
+            GradeSubjects = new HashSet<GradeSubject>();
             GradeClasses = new HashSet<GradeClass>();
-            TeacherSubjects = new HashSet<TeacherSubject>();
         }
 
-        [Required]
-        public Grades GradeId { get; set; }
         [DisplayName("Section"), Required]
         public int SectionId { get; set; }
+        [DisplayName("Grade"), Required]
+        public Grades GradeNo { get; set; }
         public string Description { get; set; }
 
         public virtual Section Section { get; set; }
+
+        public virtual ICollection<GradeHead> GradeHeads { get; set; }
+        public virtual ICollection<GradeSubject> GradeSubjects { get; set; }
         public virtual ICollection<GradeClass> GradeClasses { get; set; }
-        public virtual ICollection<TeacherSubject> TeacherSubjects { get; set; }
     }
 }

@@ -28,8 +28,8 @@ namespace StudentInformationSystem.Common
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            if (!Roles.IsBlank() && !Roles.Split(',').Contains(RoleConstants.Admin))
-            { Roles = Roles + "," + RoleConstants.Admin; }
+            if (!Roles.IsBlank() && !Roles.Split(',').Contains(PermissionConstants.Admin))
+            { Roles = Roles + "," + PermissionConstants.Admin; }
             bool isUserAuthorized = base.AuthorizeCore(httpContext);
             return isUserAuthorized;
         }
@@ -57,7 +57,7 @@ namespace StudentInformationSystem.Common
         }
         public static ExtRole operator |(ExtRole c1, ExtRole c2)
         {
-            return new ExtRole( c1.roles.Concat(c2.roles));
+            return new ExtRole(c1.roles.Concat(c2.roles));
         }
 
         public static bool operator ==(ExtRole c1, string c2)

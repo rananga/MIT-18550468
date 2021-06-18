@@ -8,18 +8,18 @@ using System.Web;
 
 namespace StudentInformationSystem.Areas.Student.Models
 {
-    public class StudFamilyVM : StudFamily, IModel<StudFamily, StudFamilyVM>
+    public class StudFamilyVM : StudentFamily, IModel<StudentFamily, StudFamilyVM>
     {
         public StudFamilyVM()
         {
-            mappings = new ObjMappings<StudFamily, StudFamilyVM>();
+            mappings = new ObjMappings<StudentFamily, StudFamilyVM>();
         }
 
-        public StudFamilyVM(StudFamily obj) : this()
+        public StudFamilyVM(StudentFamily obj) : this()
         {
             this.SetEntity(obj);
         }
 
-        public ObjMappings<StudFamily, StudFamilyVM> mappings { get; set; }
+        public ObjMappings<StudentFamily, StudFamilyVM> mappings { get; set; }
     }
 }

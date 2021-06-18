@@ -8,6 +8,7 @@ using System;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace StudentInformationSystem.Areas.Admin.Controllers
 {
@@ -15,12 +16,12 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
     {
         public ActionResult Index(BaseViewModel<GradeVM> vm)
         {
-            vm.SetList(db.Grades.AsQueryable(), "GradeId");
+            vm.SetList(db.Grades.AsQueryable(), "GradeNo");
             return View(vm);
         }
         public ActionResult Create()
         {
-            var grade = new GradeVM() { GradeId =  Grades.Grade1 };
+            var grade = new GradeVM() { GradeNo =  Grades.Grade1 };
 
             return View(grade);
         }
@@ -30,6 +31,10 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
         {
             try
             {
+                var exStaffNo = db.Grades.Where(e => e.GradeNo == grade.GradeNo && e.SectionId == grade.SectionId).FirstOrDefault();
+                if (exStaffNo != null)
+                { ModelState.AddModelError("", "Grade already exists for the section."); }
+
                 if (ModelState.IsValid)
                 {
                     grade.CreatedBy = this.GetCurrUser();
@@ -92,7 +97,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = grade.GetEntity();
-                    modObj.CopyContent(obj, "GradeId,HeadTeacherId");
+                    modObj.CopyContent(obj, "Description");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;

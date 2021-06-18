@@ -9,11 +9,11 @@ function initializeJS() {
 
     //custom scrollbar
     //for html
-    jQuery("html").niceScroll({ styler: "fb", cursorcolor: "#007AFF", cursorwidth: '6', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: '', zindex: '1000' });
+    //jQuery("html").niceScroll({ styler: "fb", cursorcolor: "#007AFF", cursorwidth: '6', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: '', zindex: '1000' });
     //for sidebar
-    $sideBar.niceScroll({ styler: "fb", cursorcolor: "#007AFF", cursorwidth: '3', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: '' });
+    //$sideBar.niceScroll({ styler: "fb", cursorcolor: "#007AFF", cursorwidth: '3', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: '' });
     // for scroll panel
-    jQuery(".scroll-panel").niceScroll({ styler: "fb", cursorcolor: "#007AFF", cursorwidth: '3', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: '' });
+    //jQuery(".scroll-panel").niceScroll({ styler: "fb", cursorcolor: "#007AFF", cursorwidth: '3', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: '' });
 
     //sidebar dropdown menu
     $('li.sub-menu > a', $sideBar).click(function () {
@@ -25,12 +25,15 @@ function initializeJS() {
         if ($li.children('ul').length === 0)
             return;
 
-        if ($li.hasClass('cur'))
+        if ($li.hasClass('cur')) {
             $li.removeClass('cur');
+            $li.find('a').removeClass('cur');
+        }
         else {
             $li.addClass('cur');
             $li.siblings('li').removeClass('cur');
             $li.siblings('li').find('li.cur').removeClass('cur');
+            $li.siblings('li').find('a.cur').removeClass('cur');
         }
 
         //var last = jQuery('.sub-menu.open', jQuery('#sidebar'));
@@ -89,7 +92,7 @@ function initializeJS() {
                 });
                 $container.removeClass("sidebar-closed");
             }
-            $sideBar.getNiceScroll().resize();
+            //$sideBar.getNiceScroll().resize();
         }
         function responsiveViewResize() {
             $container = $("#container");
@@ -114,7 +117,7 @@ function initializeJS() {
                 });
                 $container.removeClass("sidebar-closed");
             }
-            $sideBar.getNiceScroll().resize();
+            //$sideBar.getNiceScroll().resize();
         }
         $().ready(responsiveView);
         $window = $(window);

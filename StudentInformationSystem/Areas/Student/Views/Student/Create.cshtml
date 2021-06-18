@@ -15,97 +15,89 @@
         </p>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="stud-image stud-image-file" style="display:none">
-            <div style="position:relative">
-                <img class="btn" src="@Html.ActionUrl("GetPic", routeValues: new { id = Model.Id })" height="210" style="padding:0 0 35px 0" />
-                <div style="position:absolute;right:0px; bottom:0px">
-                    <input class="form-control" type="file" name="ProfilePic" id="ProfilePic" />
+        <div class="row justify-content-between">
+            <div class="col-md-6">
+                <div class="card" style="height: 100%; width:45%; border-radius:10px;border:0px;background:transparent; float:none;margin:auto;">
+                    <div class="card-body center" style="text-align:center;">
+                        @Html.ImageCaptor(Html.ActionUrl("GetPic", routeValues: new { id = Model.Id, @style = "height:100px;width:100px;" }), "Admin", "StaffMember", "UploadPicStr")
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    @Html.RequiredLabelFor(model => model.AdmissionDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.AdmissionDate, new { htmlAttributes = new { @class = "form-control form-control-sm", type = "JQ-date" } })
+                        @Html.ValidationMessageFor(model => model.AdmissionDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.RequiredLabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control form-control-sm", type = "JQ-date", data_default_date = DateTime.Now.AddYears(-6).ToString("yyyy-MM-dd") } })
+                        @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.RequiredLabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.RequiredLabelFor(model => model.Initials, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Initials, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                        @Html.ValidationMessageFor(model => model.Initials, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.RequiredLabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="stud-image stud-image-cam">
-            <div id="my_camera" style="display:none"></div>
-            <div style="text-align:center;width:240px">
-                <img id="imgPic" class="btn" src="@Html.ActionUrl("GetPic", routeValues: new { id = Model.Id })" style="height:180px;" />
-            </div>
-            <div class="btn-toolbar" style="min-width:240px;margin-top:5px;text-align:center;">
-                <input type="button" id="btnCam" class="btn btn-success" style="min-width:75px; float:none" data-mode="R" value="RETAKE" />
-                <input type="button" id="btnCancel" class="btn btn-danger" style="min-width:75px; float:none; display:none" value="CANCEL" />
-            </div>
-        </div>
-
-        <br /><br />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AdmissionDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.AdmissionDate, new { htmlAttributes = new { @class = "form-control", type = "JQ-date" } })
-                @Html.ValidationMessageFor(model => model.AdmissionDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Dob, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.Dob, new { htmlAttributes = new { @class = "form-control", type = "JQ-date" } })
-                @Html.ValidationMessageFor(model => model.Dob, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-            </div>
-        </div>
         <br />
-        <div class="form-group">
-            @Html.LabelFor(model => model.Initials, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.Initials, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Initials, "", new { @class = "text-danger" })
-            </div>
-            @Html.LabelFor(model => model.Lname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.Lname, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Lname, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <br />
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <br />
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmergencyConName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.EmergencyConName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EmergencyConName, "", new { @class = "text-danger" })
-            </div>
-
-            @Html.LabelFor(model => model.EmergencyContactTel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.EmergencyContactTel, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EmergencyContactTel, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.RequiredLabelFor(model => model.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EnumEditorFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
             </div>
-            @Html.LabelFor(model => model.InactiveReason, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.RequiredLabelFor(model => model.EmergContactName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.InactiveReason, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.InactiveReason, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.EmergContactName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmergContactName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Address2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+            </div>
+            @Html.RequiredLabelFor(model => model.EmergContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.EmergContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmergContactNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.RequiredLabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Medium, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EnumEditorFor(model => model.Medium, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Medium, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -123,14 +115,6 @@
     @{ Html.RenderAction("ChildIndex", new { id = Model.Id, isToEdit = true }); }
 </div>
 
-<div class="ChildContent">
-    @{ Html.RenderAction("PositionIndex", new { id = Model.Id, isToEdit = true }); }
-</div>
-
-<div class="ChildContent">
-    @{ Html.RenderAction("AcheivementIndex", new { id = Model.Id, isToEdit = true }); }
-</div>
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
@@ -139,66 +123,3 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/student/enrollment")
 }
-
-<script src="~/Scripts/webcam.js"></script>
-<script>
-    var objMyCam = $('#my_camera');
-    var objBtnCam = $('#btnCam');
-    var objBtnCancel = $('#btnCancel');
-    var objPic = $('#imgPic');
-
-    objPic.data("org-src", objPic.attr("src"));
-
-    Webcam.set({
-        width: 240,
-        height: 180,
-        dest_width: 640,
-        dest_height: 480,
-        image_format: 'jpeg',
-        jpeg_quality: 90,
-        force_flash: false,
-        flip_horiz: true,
-        fps: 45
-    });
-
-    objBtnCam.click(function () {
-        if (objBtnCam.data("mode") == "R") {
-            objPic.hide();
-            objMyCam.show();
-            Webcam.attach('#my_camera');
-            objBtnCancel.show();
-            objBtnCam.val("CAPTURE");
-            objBtnCam.data("mode", "C");
-        }
-        else {
-            Webcam.snap(function (data_uri) {
-                $.ajax({
-                    url: AppRoot + "Student/Student/UploadPicStr",
-                    type: "POST",
-                    data: { imgString: data_uri },
-                    success: function (result) {
-                        objPic.attr("src", objPic.data("org-src") + "?timestamp=" + new Date().getTime());
-                        objPic.show();
-                    },
-                    error: function (data, status, jqXHR) {
-                        if (IsJson(data.responseText)) { AlertIt("ERROR: " + JSON.parse(data.responseText).Message); }
-                        else { AlertIt("ERROR: " + data.statusText); }
-                    }
-                });
-                objProg.hide();
-                Webcam.reset();
-                objMyCam.hide();
-            });
-            objBtnCancel.hide();
-            objBtnCam.val("RETAKE");
-            objBtnCam.data("mode", "R");
-        }
-    });
-
-    objBtnCancel.click(function () {
-        objMyCam.hide();
-        objBtnCancel.hide();
-        objPic.show();
-        objBtnCam.data("mode", "R");
-    });
-</script>

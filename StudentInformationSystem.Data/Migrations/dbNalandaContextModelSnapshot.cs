@@ -8,8 +8,8 @@ using StudentInformationSystem.Data;
 
 namespace StudentInformationSystem.Data.Migrations
 {
-    [DbContext(typeof(dbSISContext))]
-    partial class dbSISContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(dbNalandaContext))]
+    partial class dbNalandaContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -84,7 +84,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<DateTime>("FromDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -102,7 +102,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ToDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
@@ -195,6 +195,48 @@ namespace StudentInformationSystem.Data.Migrations
                     b.ToTable("ClassStudentSubjects");
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassStudentSubjectMark", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClsStudSubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("Marks")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("Term")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClsStudSubjectId");
+
+                    b.ToTable("ClassStudentSubjectMarks");
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassSubject", b =>
                 {
                     b.Property<int>("Id")
@@ -224,14 +266,19 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int>("TeacherSubjectId")
+                    b.Property<int>("StaffId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClassId");
 
-                    b.HasIndex("TeacherSubjectId");
+                    b.HasIndex("StaffId");
+
+                    b.HasIndex("SubjectId");
 
                     b.ToTable("ClassSubjects");
                 });
@@ -254,7 +301,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<DateTime>("FromDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -272,7 +319,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ToDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
@@ -421,7 +468,7 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GradeId")
+                    b.Property<int>("GradeNo")
                         .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
@@ -444,6 +491,8 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SectionId");
+
                     b.HasIndex("TeacherId");
 
                     b.ToTable("Grades");
@@ -454,88 +503,88 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 1,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeId = 1,
-                            SectionId = 0
+                            GradeNo = 1,
+                            SectionId = 1
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeId = 2,
-                            SectionId = 0
+                            GradeNo = 2,
+                            SectionId = 1
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeId = 3,
-                            SectionId = 0
+                            GradeNo = 3,
+                            SectionId = 1
                         },
                         new
                         {
                             Id = 4,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeId = 4,
-                            SectionId = 0
+                            GradeNo = 4,
+                            SectionId = 1
                         },
                         new
                         {
                             Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeId = 5,
-                            SectionId = 0
+                            GradeNo = 5,
+                            SectionId = 1
                         },
                         new
                         {
                             Id = 6,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeId = 6,
-                            SectionId = 0
+                            GradeNo = 6,
+                            SectionId = 2
                         },
                         new
                         {
                             Id = 7,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeId = 7,
-                            SectionId = 0
+                            GradeNo = 7,
+                            SectionId = 2
                         },
                         new
                         {
                             Id = 8,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeId = 8,
-                            SectionId = 0
+                            GradeNo = 8,
+                            SectionId = 2
                         },
                         new
                         {
                             Id = 9,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeId = 9,
-                            SectionId = 0
+                            GradeNo = 9,
+                            SectionId = 3
                         },
                         new
                         {
                             Id = 10,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeId = 10,
-                            SectionId = 0
+                            GradeNo = 10,
+                            SectionId = 3
                         },
                         new
                         {
                             Id = 11,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeId = 11,
-                            SectionId = 0
+                            GradeNo = 11,
+                            SectionId = 3
                         });
                 });
 
@@ -546,6 +595,9 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -553,10 +605,13 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MaxStudentCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Medium")
                         .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
@@ -579,6 +634,47 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasIndex("GradeId");
 
                     b.ToTable("GradeClasses");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.GradeClassSubject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("GradeClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GradeClassId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("GradeClassSubjects");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.GradeHead", b =>
@@ -613,9 +709,6 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int?>("SectionId")
-                        .HasColumnType("int");
-
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
 
@@ -627,18 +720,58 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SectionId");
+                    b.HasIndex("GradeId");
 
                     b.HasIndex("StaffId");
 
                     b.ToTable("GradeHeads");
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.GradeSubject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GradeId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("GradeSubjects");
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.LeavingCertificate", b =>
                 {
                     b.Property<int>("LeavCertId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("LeavCertID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -671,7 +804,6 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("rowversion");
 
                     b.Property<int>("StudId")
-                        .HasColumnName("StudID")
                         .HasColumnType("int");
 
                     b.HasKey("LeavCertId");
@@ -686,7 +818,6 @@ namespace StudentInformationSystem.Data.Migrations
                 {
                     b.Property<int>("MenuId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("MenuID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -709,7 +840,6 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int?>("ParentMenuId")
-                        .HasColumnName("ParentMenuID")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -722,8 +852,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasKey("MenuId");
 
-                    b.HasIndex("ParentMenuId")
-                        .HasName("IX_FK_MenuMenu");
+                    b.HasIndex("ParentMenuId");
 
                     b.ToTable("Menus");
 
@@ -768,6 +897,15 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             MenuId = 5,
                             DisplaySeq = 50,
+                            Icon = "fas fa-laptop-code",
+                            IsHidden = false,
+                            Text = "Online",
+                            Type = "M"
+                        },
+                        new
+                        {
+                            MenuId = 6,
+                            DisplaySeq = 60,
                             Icon = "fas fa-chart-bar",
                             IsHidden = false,
                             Text = "Report",
@@ -775,10 +913,10 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 6,
+                            MenuId = 7,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "UserRoles",
+                            Controller = "UserPermission",
                             DisplaySeq = 10,
                             IsHidden = false,
                             ParentMenuId = 1,
@@ -787,7 +925,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 7,
+                            MenuId = 8,
                             Action = "Index",
                             Area = "Admin",
                             Controller = "Users",
@@ -799,7 +937,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 8,
+                            MenuId = 9,
                             Action = "Index",
                             Area = "Admin",
                             Controller = "StaffMember",
@@ -811,7 +949,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 9,
+                            MenuId = 10,
                             Action = "Index",
                             Area = "Admin",
                             Controller = "Section",
@@ -823,11 +961,23 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 10,
+                            MenuId = 11,
+                            Action = "Index",
+                            Area = "Admin",
+                            Controller = "SectionHead",
+                            DisplaySeq = 50,
+                            IsHidden = false,
+                            ParentMenuId = 1,
+                            Text = "Section Heads",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 12,
                             Action = "Index",
                             Area = "Admin",
                             Controller = "Grade",
-                            DisplaySeq = 50,
+                            DisplaySeq = 60,
                             IsHidden = false,
                             ParentMenuId = 1,
                             Text = "Grades",
@@ -835,37 +985,13 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 11,
-                            Action = "Index",
-                            Area = "Admin",
-                            Controller = "GradeClass",
-                            DisplaySeq = 60,
-                            IsHidden = false,
-                            ParentMenuId = 1,
-                            Text = "Grade Classes",
-                            Type = "I"
-                        },
-                        new
-                        {
-                            MenuId = 12,
-                            Action = "Index",
-                            Area = "Academic",
-                            Controller = "SectionHead",
-                            DisplaySeq = 10,
-                            IsHidden = false,
-                            ParentMenuId = 2,
-                            Text = "Section Heads",
-                            Type = "I"
-                        },
-                        new
-                        {
                             MenuId = 13,
                             Action = "Index",
-                            Area = "Academic",
+                            Area = "Admin",
                             Controller = "GradeHead",
-                            DisplaySeq = 20,
+                            DisplaySeq = 70,
                             IsHidden = false,
-                            ParentMenuId = 2,
+                            ParentMenuId = 1,
                             Text = "Grade Heads",
                             Type = "I"
                         },
@@ -874,28 +1000,76 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 14,
                             Action = "Index",
                             Area = "Academic",
-                            Controller = "Class",
-                            DisplaySeq = 30,
+                            Controller = "SubjectCategory",
+                            DisplaySeq = 10,
                             IsHidden = false,
                             ParentMenuId = 2,
-                            Text = "Classes",
+                            Text = "Subject Categories",
                             Type = "I"
                         },
                         new
                         {
                             MenuId = 15,
                             Action = "Index",
-                            Area = "Teacher",
-                            Controller = "Teacher",
-                            DisplaySeq = 10,
+                            Area = "Academic",
+                            Controller = "Subject",
+                            DisplaySeq = 20,
                             IsHidden = false,
-                            ParentMenuId = 3,
-                            Text = "Teacher Maintenance",
+                            ParentMenuId = 2,
+                            Text = "Subjects",
                             Type = "I"
                         },
                         new
                         {
                             MenuId = 16,
+                            Action = "Index",
+                            Area = "Academic",
+                            Controller = "GradeSubject",
+                            DisplaySeq = 30,
+                            IsHidden = false,
+                            ParentMenuId = 2,
+                            Text = "Grade Subjects",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 17,
+                            Action = "Index",
+                            Area = "Academic",
+                            Controller = "GradeClass",
+                            DisplaySeq = 40,
+                            IsHidden = false,
+                            ParentMenuId = 2,
+                            Text = "Grade Classes",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 18,
+                            Action = "Index",
+                            Area = "Academic",
+                            Controller = "Class",
+                            DisplaySeq = 50,
+                            IsHidden = false,
+                            ParentMenuId = 2,
+                            Text = "Class Rooms",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 19,
+                            Action = "Index",
+                            Area = "Teacher",
+                            Controller = "Teacher",
+                            DisplaySeq = 20,
+                            IsHidden = false,
+                            ParentMenuId = 3,
+                            Text = "Teacher Information",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 20,
                             Action = "Index",
                             Area = "Student",
                             Controller = "Student",
@@ -904,19 +1078,113 @@ namespace StudentInformationSystem.Data.Migrations
                             ParentMenuId = 4,
                             Text = "Student Maintenance",
                             Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 21,
+                            Action = "Index",
+                            Area = "Student",
+                            Controller = "BasketSubject",
+                            DisplaySeq = 20,
+                            IsHidden = false,
+                            ParentMenuId = 4,
+                            Text = "Student Basket Subjects",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 22,
+                            Action = "Index",
+                            Area = "Student",
+                            Controller = "StudentMark",
+                            DisplaySeq = 30,
+                            IsHidden = false,
+                            ParentMenuId = 4,
+                            Text = "Student Marks",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 23,
+                            Action = "Index",
+                            Area = "Student",
+                            Controller = "StudentMark",
+                            DisplaySeq = 30,
+                            IsHidden = false,
+                            ParentMenuId = 5,
+                            Text = "Online Class Rooms",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 24,
+                            Action = "Index",
+                            Area = "Student",
+                            Controller = "StudentMark",
+                            DisplaySeq = 30,
+                            IsHidden = false,
+                            ParentMenuId = 5,
+                            Text = "Online Time Table",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 25,
+                            Action = "Index",
+                            Area = "Report",
+                            Controller = "StudentAttendance",
+                            DisplaySeq = 30,
+                            IsHidden = false,
+                            ParentMenuId = 6,
+                            Text = "Student Attendance",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 26,
+                            Action = "Index",
+                            Area = "Report",
+                            Controller = "AttendanceByDuration",
+                            DisplaySeq = 30,
+                            IsHidden = false,
+                            ParentMenuId = 6,
+                            Text = "Attendance By Duration",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 27,
+                            Action = "Process",
+                            Area = "Report",
+                            Controller = "StudentMarks",
+                            DisplaySeq = 30,
+                            IsHidden = false,
+                            ParentMenuId = 6,
+                            Text = "Term Wise Student Marks",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 28,
+                            Action = "Process",
+                            Area = "Report",
+                            Controller = "OnlineSessionsSummary",
+                            DisplaySeq = 30,
+                            IsHidden = false,
+                            ParentMenuId = 6,
+                            Text = "Online Sessions Summary",
+                            Type = "I"
                         });
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.Role", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.Permission", b =>
                 {
-                    b.Property<int>("RoleId")
+                    b.Property<int>("PermissionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("RoleID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
@@ -942,14 +1210,14 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.HasKey("RoleId");
+                    b.HasKey("PermissionId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Permissions");
 
                     b.HasData(
                         new
                         {
-                            RoleId = 1,
+                            PermissionId = 1,
                             Code = "Admin",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -957,7 +1225,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            RoleId = 2,
+                            PermissionId = 2,
                             Code = "AdminUser",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -965,28 +1233,25 @@ namespace StudentInformationSystem.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.RoleMenuAccess", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PermissionMenuAccess", b =>
                 {
                     b.Property<int>("MenuId")
-                        .HasColumnName("MenuID")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnName("RoleID")
+                    b.Property<int>("PermissionId")
                         .HasColumnType("int");
 
-                    b.HasKey("MenuId", "RoleId");
+                    b.HasKey("MenuId", "PermissionId");
 
-                    b.HasIndex("RoleId")
-                        .HasName("IX_FK_RoleMenuAccesses_Roles");
+                    b.HasIndex("PermissionId");
 
-                    b.ToTable("RoleMenuAccesses");
+                    b.ToTable("PermissionMenuAccesses");
 
                     b.HasData(
                         new
                         {
                             MenuId = 1,
-                            RoleId = 1
+                            PermissionId = 1
                         });
                 });
 
@@ -996,6 +1261,10 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -1013,10 +1282,6 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -1026,6 +1291,56 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sections");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "Primary",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = ""
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "Junior",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = ""
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "Senior",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = ""
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "AL-Science",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = ""
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "AL-Art & Commerce",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = ""
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Code = "AL-Technology",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = ""
+                        });
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.SectionHead", b =>
@@ -1063,9 +1378,6 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StaffMemberId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("ToDate")
                         .HasColumnType("date");
 
@@ -1076,7 +1388,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("SectionId");
 
-                    b.HasIndex("StaffMemberId");
+                    b.HasIndex("StaffId");
 
                     b.ToTable("SectionHeads");
                 });
@@ -1160,9 +1472,9 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<string>("SchoolEmail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StaffNumber")
+                    b.Property<int?>("StaffNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -1178,141 +1490,67 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TeacherId")
+                        .IsUnique()
+                        .HasFilter("[TeacherId] IS NOT NULL");
+
                     b.ToTable("StaffMembers");
-                });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudFamily", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("StudFID")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ContactHome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactMob")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nicno")
-                        .IsRequired()
-                        .HasColumnName("NICNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Occupation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OfficeTel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Relationship")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnName("StudID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Title")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WorkingAdd")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId")
-                        .HasName("IX_FK_StudentStudFamily");
-
-                    b.ToTable("StudFamilies");
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudSibling", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("Relationship")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("SiblingStudentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SiblingStudentId")
-                        .HasName("IX_FK_StudentStudSibling1");
-
-                    b.HasIndex("StudentId")
-                        .HasName("IX_FK_StudentStudSibling");
-
-                    b.ToTable("StudSiblings");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address1 = "24/3, Udyana Avenue",
+                            Address2 = "Pepiliyana Road",
+                            City = "Nugegoda",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Piumali Manorika Suraweera",
+                            Gender = 1,
+                            ImmeContactName = "Malith",
+                            ImmeContactNo = "0773411392",
+                            Initials = "P M",
+                            LastName = "Suraweera",
+                            MobileNo = "0714479648",
+                            Nicno = "880272580V",
+                            StaffNumber = 123,
+                            Status = 0,
+                            Title = 5
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address1 = "45C, School Avenue",
+                            Address2 = "Raththanapitiya",
+                            City = "Boralesgamuwa",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Udara Rathnayaka",
+                            Gender = 0,
+                            ImmeContactName = "Umandya",
+                            ImmeContactNo = "0773412392",
+                            Initials = "U",
+                            LastName = "Rathnayaka",
+                            MobileNo = "0716669648",
+                            Nicno = "900272580V",
+                            StaffNumber = 456,
+                            Status = 0,
+                            Title = 5
+                        });
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("StudID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("Address1")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("AdmissionDate")
@@ -1321,6 +1559,10 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("AdmittedClassId")
                         .HasColumnType("int");
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1328,16 +1570,15 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("Dob")
+                    b.Property<DateTime?>("DOB")
                         .IsRequired()
-                        .HasColumnName("DOB")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("EmergencyConName")
+                    b.Property<string>("EmergContactName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmergencyContactTel")
+                    b.Property<string>("EmergContactNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1346,9 +1587,6 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InactiveReason")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IndexNo")
@@ -1361,13 +1599,15 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<bool>("IsLeavingIssued")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LastGrade")
+                    b.Property<int>("LastClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Lname")
-                        .IsRequired()
-                        .HasColumnName("LName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("LeavingDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Medium")
                         .HasColumnType("int");
@@ -1390,12 +1630,48 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("Title")
+                    b.HasKey("Id");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentBasketSubject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentBasketSubjects");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentExtraActivityAcheivement", b =>
@@ -1495,12 +1771,19 @@ namespace StudentInformationSystem.Data.Migrations
                     b.ToTable("StudentExtraActivityPositions");
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.Subject", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentFamily", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContactHome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactMob")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -1509,8 +1792,8 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<bool>("IsBasket")
-                        .HasColumnType("bit");
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1522,6 +1805,117 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Nicno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Occupation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OfficeTel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Relationship")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Title")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WorkingAdd")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentFamilies");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentSibling", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("Relationship")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("SiblingStudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentSiblings");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.Subject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Medium")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("Number")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -1531,11 +1925,143 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("SectionId")
                         .HasColumnType("int");
 
+                    b.Property<int>("SubjectCategoryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SectionId");
 
+                    b.HasIndex("SubjectCategoryId");
+
                     b.ToTable("Subjects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "Sinhala",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "English",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "Geography",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "Dancing",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "ICT",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 4
+                        });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.SubjectCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsBasket")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubjectCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "Main",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsBasket = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "Basket 1",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsBasket = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "Basket 2",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsBasket = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "Basket 3",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsBasket = true
+                        });
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Teacher", b =>
@@ -1545,14 +2071,6 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1560,43 +2078,11 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImmeContactName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImmeContactNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InactiveReason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Initials")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lname")
-                        .IsRequired()
-                        .HasColumnName("LName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime");
-
-                    b.Property<string>("Nicno")
-                        .IsRequired()
-                        .HasColumnName("NICNo")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
@@ -1604,60 +2090,20 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<string>("SchoolEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
+                    b.Property<int>("SectionId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TelHome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Title")
+                    b.Property<int>("StaffId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teachers");
+                    b.HasIndex("SectionId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "test",
-                            ContactNo = "0714479648",
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "Piumali Manorika Suraweera",
-                            Gender = 1,
-                            ImmeContactName = "Malith",
-                            ImmeContactNo = "0773411392",
-                            Initials = "P M",
-                            Lname = "Suraweera",
-                            Nicno = "880272580V",
-                            Status = 0,
-                            Title = 5
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "test",
-                            ContactNo = "0716669648",
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "Udara Rathnayaka",
-                            Gender = 0,
-                            ImmeContactName = "Umandya",
-                            ImmeContactNo = "0773412392",
-                            Initials = "U",
-                            Lname = "Rathnayaka",
-                            Nicno = "900272580V",
-                            Status = 0,
-                            Title = 5
-                        });
+                    b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.TeacherSubject", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.TeacherPreferedSubject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1670,12 +2116,6 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime");
-
-                    b.Property<int>("GradeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Medium")
-                        .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1697,20 +2137,107 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GradeId");
-
                     b.HasIndex("SubjectId");
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("TeacherSubjects");
+                    b.ToTable("TeacherPreferedSubjects");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.TeacherQualification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AwardedYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Institute")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("QualificationType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Remarks")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherQualifications");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.TeacherQualificationSubject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherQualificationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("TeacherQualificationId");
+
+                    b.ToTable("TeacherQualificationSubjects");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("UserID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -1747,11 +2274,18 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("VisitorId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("StaffId")
                         .IsUnique()
                         .HasFilter("[StaffId] IS NOT NULL");
+
+                    b.HasIndex("VisitorId")
+                        .IsUnique()
+                        .HasFilter("[VisitorId] IS NOT NULL");
 
                     b.ToTable("Users");
 
@@ -1767,39 +2301,101 @@ namespace StudentInformationSystem.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserRole", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserPermission", b =>
                 {
-                    b.Property<int>("UserRoleId")
+                    b.Property<int>("UserPermissionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("UserRoleID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("RoleId")
-                        .HasColumnName("RoleID")
+                    b.Property<int>("PermissionId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
-                        .HasColumnName("UserID")
                         .HasColumnType("int");
 
-                    b.HasKey("UserRoleId");
+                    b.HasKey("UserPermissionId");
 
-                    b.HasIndex("RoleId")
-                        .HasName("IX_FK_RoleUserRole");
+                    b.HasIndex("PermissionId");
 
-                    b.HasIndex("UserId")
-                        .HasName("IX_FK_UserUserRole");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserPermissions");
 
                     b.HasData(
                         new
                         {
-                            UserRoleId = 1,
-                            RoleId = 1,
+                            UserPermissionId = 1,
+                            PermissionId = 1,
                             UserId = 1
                         });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.Visitor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Initials")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Nicno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("SchoolEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Title")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Visitors");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Class", b =>
@@ -1833,15 +2429,15 @@ namespace StudentInformationSystem.Data.Migrations
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassStudent", b =>
                 {
                     b.HasOne("StudentInformationSystem.Data.Models.Class", "Class")
-                        .WithMany()
+                        .WithMany("ClassStudents")
                         .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("FK_Class_ClassStudents")
                         .IsRequired();
 
                     b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
                         .WithMany("ClassStudents")
                         .HasForeignKey("StudentId")
-                        .HasConstraintName("FK_Student_ClassStudent")
+                        .HasConstraintName("FK_Student_ClassStudents")
                         .IsRequired();
                 });
 
@@ -1860,18 +2456,33 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassStudentSubjectMark", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.ClassStudentSubject", "ClassStudentSubject")
+                        .WithMany("ClassStudentSubjectMarks")
+                        .HasForeignKey("ClsStudSubjectId")
+                        .HasConstraintName("FK_ClassStudentSubject_ClassStudentSubjectMarks")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassSubject", b =>
                 {
                     b.HasOne("StudentInformationSystem.Data.Models.Class", "Class")
-                        .WithMany()
+                        .WithMany("ClassSubjects")
                         .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("FK_Class_ClassSubjects")
                         .IsRequired();
 
-                    b.HasOne("StudentInformationSystem.Data.Models.TeacherSubject", "TeacherSubject")
+                    b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
                         .WithMany("ClassSubjects")
-                        .HasForeignKey("TeacherSubjectId")
-                        .HasConstraintName("FK_TeacherSubject_ClassSubjects")
+                        .HasForeignKey("StaffId")
+                        .HasConstraintName("FK_StaffMember_ClassSubjects")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
+                        .WithMany("ClassSubjects")
+                        .HasForeignKey("SubjectId")
+                        .HasConstraintName("FK_Subject_ClassSubjects")
                         .IsRequired();
                 });
 
@@ -1910,6 +2521,12 @@ namespace StudentInformationSystem.Data.Migrations
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Grade", b =>
                 {
+                    b.HasOne("StudentInformationSystem.Data.Models.Section", "Section")
+                        .WithMany("Grades")
+                        .HasForeignKey("SectionId")
+                        .HasConstraintName("FK_Section_Grades")
+                        .IsRequired();
+
                     b.HasOne("StudentInformationSystem.Data.Models.Teacher", null)
                         .WithMany("HeadingGrades")
                         .HasForeignKey("TeacherId");
@@ -1924,16 +2541,48 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.GradeClassSubject", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.GradeClass", "GradeClass")
+                        .WithMany("GradeClassSubjects")
+                        .HasForeignKey("GradeClassId")
+                        .HasConstraintName("FK_GradeClass_GradeClassSubjects")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
+                        .WithMany("GradeClassSubjects")
+                        .HasForeignKey("SubjectId")
+                        .HasConstraintName("FK_Subject_GradeClassSubjects")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.GradeHead", b =>
                 {
-                    b.HasOne("StudentInformationSystem.Data.Models.Section", "Section")
-                        .WithMany()
-                        .HasForeignKey("SectionId");
+                    b.HasOne("StudentInformationSystem.Data.Models.Grade", "Grade")
+                        .WithMany("GradeHeads")
+                        .HasForeignKey("GradeId")
+                        .HasConstraintName("FK_Grade_GradeHeads")
+                        .IsRequired();
 
                     b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
                         .WithMany("HeadingGrades")
                         .HasForeignKey("StaffId")
                         .HasConstraintName("FK_StaffMember_HeadingGrades")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.GradeSubject", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Grade", "Grade")
+                        .WithMany("GradeSubjects")
+                        .HasForeignKey("GradeId")
+                        .HasConstraintName("FK_Grade_GradeSubjects")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
+                        .WithMany("GradeSubjects")
+                        .HasForeignKey("SubjectId")
+                        .HasConstraintName("FK_Subject_GradeSubjects")
                         .IsRequired();
                 });
 
@@ -1954,18 +2603,18 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasConstraintName("FK_MenuMenu");
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.RoleMenuAccess", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PermissionMenuAccess", b =>
                 {
                     b.HasOne("StudentInformationSystem.Data.Models.Menu", "Menu")
-                        .WithMany("RoleMenuAccesses")
+                        .WithMany("PermissionMenuAccesses")
                         .HasForeignKey("MenuId")
-                        .HasConstraintName("FK_RoleMenuAccesses_Menus")
+                        .HasConstraintName("FK_Menu_PermissionMenuAccesses")
                         .IsRequired();
 
-                    b.HasOne("StudentInformationSystem.Data.Models.Role", "Role")
-                        .WithMany("RoleMenuAccesses")
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("FK_RoleMenuAccesses_Roles")
+                    b.HasOne("StudentInformationSystem.Data.Models.Permission", "Permission")
+                        .WithMany("PermissionMenuAccesses")
+                        .HasForeignKey("PermissionId")
+                        .HasConstraintName("FK_Permission_PermissionMenuAccesses")
                         .IsRequired();
                 });
 
@@ -1978,25 +2627,31 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
-                        .WithMany()
-                        .HasForeignKey("StaffMemberId");
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudFamily", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
-                        .WithMany("StudFamilies")
-                        .HasForeignKey("StudentId")
-                        .HasConstraintName("FK_StudentStudFamily")
+                        .WithMany("HeadingSections")
+                        .HasForeignKey("StaffId")
+                        .HasConstraintName("FK_StaffMember_HeadingSections")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudSibling", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.StaffMember", b =>
                 {
-                    b.HasOne("StudentInformationSystem.Data.Models.Student", "SiblingStudent")
-                        .WithMany("StudSiblings")
+                    b.HasOne("StudentInformationSystem.Data.Models.Teacher", "Teacher")
+                        .WithOne("StaffMember")
+                        .HasForeignKey("StudentInformationSystem.Data.Models.StaffMember", "TeacherId");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentBasketSubject", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
+                        .WithMany("StudentBasketSubjects")
                         .HasForeignKey("StudentId")
-                        .HasConstraintName("FK_Stud_StudSibling")
+                        .HasConstraintName("FK_Student_StudentBasketSubjects")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
+                        .WithMany("StudentBasketSubjects")
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("FK_Subject_StudentBasketSubjects")
                         .IsRequired();
                 });
 
@@ -2030,6 +2685,24 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentFamily", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
+                        .WithMany("StudentFamilies")
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("FK_StudentStudFamily")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentSibling", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Student", "SiblingStudent")
+                        .WithMany("StudentSiblings")
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("FK_Stud_StudSibling")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Subject", b =>
                 {
                     b.HasOne("StudentInformationSystem.Data.Models.Section", "Section")
@@ -2037,26 +2710,59 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.SubjectCategory", "SubjectCategory")
+                        .WithMany("Subjects")
+                        .HasForeignKey("SubjectCategoryId")
+                        .HasConstraintName("FK_SubjectCategory_Subjects")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.TeacherSubject", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.Teacher", b =>
                 {
-                    b.HasOne("StudentInformationSystem.Data.Models.Grade", "Grade")
-                        .WithMany("TeacherSubjects")
-                        .HasForeignKey("GradeId")
-                        .HasConstraintName("FK_Grade_TeacherSubjects")
+                    b.HasOne("StudentInformationSystem.Data.Models.Section", "Section")
+                        .WithMany("Teachers")
+                        .HasForeignKey("SectionId")
+                        .HasConstraintName("FK_Section_Teachers")
                         .IsRequired();
+                });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.TeacherPreferedSubject", b =>
+                {
                     b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
-                        .WithMany("TeacherSubjects")
+                        .WithMany("TeacherPreferedSubjects")
                         .HasForeignKey("SubjectId")
-                        .HasConstraintName("FK_Subject_TeacherSubjects")
+                        .HasConstraintName("FK_Subject_TeacherPreferedSubjects")
                         .IsRequired();
 
                     b.HasOne("StudentInformationSystem.Data.Models.Teacher", "Teacher")
-                        .WithMany("TeacherSubjects")
+                        .WithMany("TeacherPreferedSubjects")
                         .HasForeignKey("TeacherId")
-                        .HasConstraintName("FK_Teacher_TeacherSubjects")
+                        .HasConstraintName("FK_Teacher_TeacherPreferedSubjects")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.TeacherQualification", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Teacher", "Teacher")
+                        .WithMany("TeacherQualifications")
+                        .HasForeignKey("TeacherId")
+                        .HasConstraintName("FK_Teacher_TeacherQualifications")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.TeacherQualificationSubject", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
+                        .WithMany("TeacherQualificationSubjects")
+                        .HasForeignKey("SubjectId")
+                        .HasConstraintName("FK_Subject_TeacherQualificationSubjects")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.TeacherQualification", "TeacherQualification")
+                        .WithMany("TeacherQualificationSubjects")
+                        .HasForeignKey("TeacherQualificationId")
+                        .HasConstraintName("FK_TeacherQualification_TeacherQualificationSubjects")
                         .IsRequired();
                 });
 
@@ -2065,20 +2771,24 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
                         .WithOne("User")
                         .HasForeignKey("StudentInformationSystem.Data.Models.User", "StaffId");
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Visitor", "Visitor")
+                        .WithOne("User")
+                        .HasForeignKey("StudentInformationSystem.Data.Models.User", "VisitorId");
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserRole", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserPermission", b =>
                 {
-                    b.HasOne("StudentInformationSystem.Data.Models.Role", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("FK_RoleUserRole")
+                    b.HasOne("StudentInformationSystem.Data.Models.Permission", "Permission")
+                        .WithMany("UserPermissions")
+                        .HasForeignKey("PermissionId")
+                        .HasConstraintName("FK_Permission_UserPermissions")
                         .IsRequired();
 
                     b.HasOne("StudentInformationSystem.Data.Models.User", "User")
-                        .WithMany("UserRoles")
+                        .WithMany("UserPermissions")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK_UserUserRole")
+                        .HasConstraintName("FK_User_UserPermissions")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

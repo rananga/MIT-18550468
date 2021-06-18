@@ -44,7 +44,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                 if (leavingCertificate.DateLeaving == null)
                 { ModelState.AddModelError("DateLeaving", "Leaving Date should be selected."); }
 
-              
+
                 int ExistLeavingCet = db.LeavingCertificates.Where(x => x.StudId == leavingCertificate.StudID).Count();
                 if (ExistLeavingCet != 0)
                 { ModelState.AddModelError("", "Leaving Certificate already issued for this student."); }
@@ -58,7 +58,6 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                     var student = db.Students.Find(leavingCertificate.StudID);
                     student.IsLeavingIssued = true;
                     student.Status = StudStatus.Inactive;
-                    student.InactiveReason = leavingCertificate.Reason;
                     student.ModifiedBy = this.GetCurrUser();
                     student.ModifiedDate = DateTime.Now;
                     db.SaveChanges();
@@ -150,9 +149,9 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                 .Select(x => new
                 {
                     StudentName = x.Student.FullName,
-                    DOB = x.Student.Dob.Value.ToString("dd-MM-yyyy"),
-                    x.Student.Address,
-                    EmergencyConName =  x.Student.StudFamilies.Select(y => y.Name+" "+"("+y.Relationship.ToEnumChar()+")").FirstOrDefault(),
+                    DOB = x.Student.DOB.Value.ToString("dd-MM-yyyy"),
+                    Address = x.Student.Address1 + " " + x.Student.Address2 + " " + x.Student.City,
+                    EmergencyConName = x.Student.StudentFamilies.Select(y => y.Name + " " + "(" + y.Relationship.ToEnumChar() + ")").FirstOrDefault(),
                     DateOfAdmission = x.Student.CreatedDate.ToString("dd-MM-yyyy"),
                     AdmissionNo = x.Student.IndexNo,
                     DateLeaving = x.DateLeaving.ToString("dd-MM-yyyy"),
@@ -161,7 +160,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                     //LastClassAttend = x.Student.ClassStudents.Select(y => y.PromotionClass.Class.Grade.ToEnumChar()).LastOrDefault()
                 }).ToList();
 
- 
+
             LocalReport report = new LocalReport();
             report.ReportPath = System.Web.HttpContext.Current.Server.MapPath("~/Reports/StudentLeavingCertificate.rdlc");
 
@@ -169,7 +168,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             rds.Name = "dsLeavingCertificateDetails";
             rds.Value = lst;
             report.DataSources.Add(rds);
-  
+
             Byte[] mybytes = report.Render("PDF");
 
             Response.AppendHeader("content-disposition", "inline; filename=file.pdf");
@@ -181,11 +180,10 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             var obj = db.Students.Find(studID);
 
             var IndexNo = obj.IndexNo;
-            var Title = obj.Title.ToEnumChar();
-            var InitName = obj.Initials + " " + obj.Lname;
+            var InitName = obj.Initials + " " + obj.LastName;
             var Fullname = obj.FullName;
 
-            return Json(new { IndexNo, Title, InitName, Fullname, }, JsonRequestBehavior.AllowGet);
+            return Json(new { IndexNo, InitName, Fullname, }, JsonRequestBehavior.AllowGet);
         }
     }
 }

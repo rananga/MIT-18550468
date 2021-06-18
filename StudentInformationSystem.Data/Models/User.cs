@@ -9,9 +9,10 @@ namespace StudentInformationSystem.Data.Models
     {
         public User()
         {
-            UserRoles = new HashSet<UserRole>();
+            UserPermissions = new HashSet<UserPermission>();
         }
 
+        [Required]
         [DisplayName("User Name")]
         public virtual string UserName { get; set; }
         [PasswordPropertyText(true)]
@@ -19,8 +20,11 @@ namespace StudentInformationSystem.Data.Models
         public ActiveState Status { get; set; }
         [DisplayName("Staff Member")]
         public int? StaffId { get; set; }
+        [DisplayName("Visitor")]
+        public int? VisitorId { get; set; }
 
         public virtual StaffMember StaffMember { get; set; }
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual Visitor Visitor { get; set; }
+        public virtual ICollection<UserPermission> UserPermissions { get; set; }
     }
 }

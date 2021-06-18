@@ -1,18 +1,42 @@
-﻿@{
+﻿@using StudentInformationSystem.Data.Models;
+
+@{
     var lstMenus = Html.GetAccessibleMenus();
     var lstFirst = lstMenus.Where(x => x.ParentMenuId == null).OrderBy(x => x.DisplaySeq).ToList();
+
+    var curArea = HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"].ToString();
+    var curController = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+
+    Func<Menu, bool> IsCurrentItem = null;
+    IsCurrentItem = (item) =>
+    {
+        if (item.Area == curArea && item.Controller == curController)
+            return true;
+
+        if (item.InverseParentMenu.Where(x => IsCurrentItem(x)).Any())
+            return true;
+
+        return false;
+    };
 }
 
-@helper ThirdLevel(List<StudentInformationSystem.Data.Models.Menu> FullList, int menuID, int level)
+@helper ThirdLevel(List<Menu> FullList, int menuID, int level, Func<Menu, bool> IsCurrentItem)
 {
     var lst = FullList.Where(x => x.ParentMenuId == menuID && x.IsHidden == false).OrderBy(x => x.DisplaySeq).ToList();
 
     foreach (var item in lst)
     {
+        string IsCur = "", IsFoc = "";
+        if (IsCurrentItem(item))
+        {
+            IsCur = "cur";
+            IsFoc = "foc";
+        }
+
         if (item.Type == "I")
         {
-            <li class="wraptext">
-                <a class="" href="@Url.Action(item.Action, item.Controller, new { area = item.Area })">
+            <li class="wraptext @IsCur">
+                <a class="@IsCur @IsFoc" href="@Url.Action(item.Action, item.Controller, new { area = item.Area })">
                     @if (item.Icon.IsBlank())
                     {
                         <i class="fas fa-ellipsis-h"></i>
@@ -27,8 +51,8 @@
         }
         else if (item.Type == "M")
         {
-            <li class="sub-menu dropdown-submenu wraptext">
-                <a href="javascript:;" class="">
+            <li class="sub-menu dropdown-submenu wraptext @IsCur">
+                <a href="javascript:;" class="@IsCur">
                     @if (item.Icon.IsBlank())
                     {
                         <i class="fas fa-hand-point-right"></i>
@@ -41,23 +65,30 @@
                     <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
                 <ul class="">
-                    @ThirdLevel(FullList, item.MenuId, level + 1)
+                    @ThirdLevel(FullList, item.MenuId, level + 1, IsCurrentItem)
                 </ul>
             </li>
         }
     }
 }
 
-@helper SecondLevel(List<StudentInformationSystem.Data.Models.Menu> FullList, int menuID)
+@helper SecondLevel(List<Menu> FullList, int menuID, Func<Menu, bool> IsCurrentItem)
 {
     var lst = FullList.Where(x => x.ParentMenuId == menuID && x.IsHidden == false).OrderBy(x => x.DisplaySeq).ToList();
 
     foreach (var item in lst)
     {
+        string IsCur = "", IsFoc = "";
+        if (IsCurrentItem(item))
+        {
+            IsCur = "cur";
+            IsFoc = "foc";
+        }
+
         if (item.Type == "I")
         {
-            <li class="wraptext">
-                <a class="" href="@Url.Action(item.Action, item.Controller, new { area = item.Area })">
+            <li class="wraptext @IsCur">
+                <a class="@IsCur @IsFoc" href="@Url.Action(item.Action, item.Controller, new { area = item.Area })">
                     @if (item.Icon.IsBlank())
                     {
                         <i class="fas fa-hand-point-right"></i>
@@ -72,8 +103,8 @@
         }
         else if (item.Type == "M")
         {
-            <li class="sub-menu wraptext">
-                <a href="javascript:;" class="">
+            <li class="sub-menu wraptext @IsCur">
+                <a href="javascript:;" class="@IsCur">
                     @if (item.Icon.IsBlank())
                     {
                         <i class="fas fa-hand-point-right"></i>
@@ -86,14 +117,14 @@
                     <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
                 <ul class="">
-                    @ThirdLevel(FullList, item.MenuId, 3)
+                    @ThirdLevel(FullList, item.MenuId, 3, IsCurrentItem)
                 </ul>
             </li>
         }
     }
 }
 
-@helper FirstLevel(List<StudentInformationSystem.Data.Models.Menu> lstMenus)
+@helper FirstLevel(List<Menu> lstMenus, Func<Menu, bool> IsCurrentItem)
 {
     var lstFirst = lstMenus.Where(x => x.ParentMenuId == null).OrderBy(x => x.DisplaySeq).ToList();
 
@@ -104,10 +135,17 @@
 
     foreach (var item in lstFirst)
     {
+        string IsCur = "", IsFoc = "";
+        if (IsCurrentItem(item))
+        {
+            IsCur = "cur";
+            IsFoc = "foc";
+        }
+
         if (item.Type == "I")
         {
-            <li class="wraptext">
-                <a class="" href="@Url.Action(item.Action, item.Controller, new { area = item.Area })">
+            <li class="wraptext @IsCur">
+                <a class="@IsCur @IsFoc" href="@Url.Action(item.Action, item.Controller, new { area = item.Area })">
                     @if (item.Icon.IsBlank())
                     {
                         <i class="fas fa-infinity"></i>
@@ -122,8 +160,8 @@
         }
         else if (item.Type == "M")
         {
-            <li class="sub-menu wraptext">
-                <a href="javascript:;" class="" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+            <li class="sub-menu wraptext @IsCur">
+                <a href="javascript:;" class="@IsCur" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
                     @if (item.Icon.IsBlank())
                     {
                         <i class="fas fa-infinity"></i>
@@ -137,7 +175,7 @@
                     <span class="fas fa-angle-right pull-right" style="margin-right:5px"></span>
                 </a>
                 <ul class="sub">
-                    @SecondLevel(lstMenus, item.MenuId)
+                    @SecondLevel(lstMenus, item.MenuId, IsCurrentItem)
                 </ul>
             </li>
         }
@@ -147,6 +185,6 @@
 
 <ul class="sidebar-menu">
     @{
-        @FirstLevel(lstMenus)
+        @FirstLevel(lstMenus, IsCurrentItem)
     }
 </ul>

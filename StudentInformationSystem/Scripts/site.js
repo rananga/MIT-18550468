@@ -24,6 +24,12 @@
 }
 
 function SetDatePicker(ctrl, fmt, mxdt) {
+    var defDate = new Date();
+    if (ctrl.data("default-date")) {
+        var datParts = ctrl.data("default-date").split("-");
+        defDate = new Date(parseInt(datParts[0]), parseInt(datParts[1]) - 1, 1);
+    }
+
     if (!fmt) { fmt = "yy-mm-dd"; }
     ctrl.css("text-transform", "uppercase");
     ctrl.css("position", "relative");
@@ -38,6 +44,7 @@ function SetDatePicker(ctrl, fmt, mxdt) {
             }
         },
         dateFormat: fmt,
+        defaultDate: defDate,
         changeMonth: true,
         changeYear: true,
         yearRange: "c-10:c+10",
@@ -743,6 +750,7 @@ function PopupDocReadyFunc() {
             height: "auto",
             show: "clip",
             modal: true,
+            resize: "auto",
             autoOpen: false,
             open: function (event, ui) {
                 var closeBtn = $('.ui-dialog-titlebar-close');
@@ -907,7 +915,7 @@ function SetProgressPosition() {
     });
 
     function set(i) {
-        if (i > 4) i = 1;
+        if (i > 9) i = 1;
         if (window.timer_on === 0) return;
 
         $('img', objProgBody).attr('src', progImgUrl + '0' + i + '.png');
@@ -920,6 +928,43 @@ function SetProgressPosition() {
 
 $(document).ready(function () {
     $(window).bind('resize', function () { SetProgressPosition(); });
+
+    $("form#frmReport").submit(function (e) {
+        var frm = $(this);
+
+        $.ajax({
+            type: "POST",
+            url: frm[0].action,
+            data: frm.serialize(),
+            success: function (data, textStatus, jqXHR) {
+                var ct = jqXHR.getResponseHeader("content-type") || "";
+                if (ct.indexOf('ms-excel') > -1) {
+                    objProg.hide();
+                    var win = window.open(frm[0].action + '?' + frm.serialize(), '_blank');
+                    if (win) {
+                        win.focus();
+                    }
+                }
+                else if (ct.indexOf('json') > -1) {
+                    objProg.hide();
+                    var win = window.open(frm[0].action + '?' + $.param(data), '_blank');
+                    if (win) {
+                        win.focus();
+                    }
+                }
+                else {
+                    var w = document.open("text/html", "replace");
+                    w.write(data);
+                    w.close();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                AlertIt(textStatus);
+            }
+        });
+
+        e.preventDefault();
+    });
 });
 
 (function ($) {

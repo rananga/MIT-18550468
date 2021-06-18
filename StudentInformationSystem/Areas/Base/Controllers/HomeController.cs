@@ -25,30 +25,32 @@ namespace StudentInformationSystem.Areas.Base
         {
             var lst = new List<TileData>();
             // tile1 - tile7
-            lst.Add(new TileData()
-            {
-                Text = "Student Admission",
-                LandingURL = Url.Action("Index", "Student", new { area = "Student" }),
-                DataURL = Url.Action("GetStudentAdmissions", "Home", new { area = "Base" }),
-                ColorClass = "tile4",
-                IconURL = Url.Content("~/Content/Images/interview.png")
-            });
-            lst.Add(new TileData()
-            {
-                Text = "Teacher Management",
-                LandingURL = Url.Action("Index", "Teacher", new { area = "Admin" }),
-                DataURL = Url.Action("GetTeachers", "Home", new { area = "Base" }),
-                ColorClass = "tile2",
-                IconURL = Url.Content("~/Content/Images/LecHrs.png")
-            });
-            lst.Add(new TileData()
-            {
-                Text = "Class Management",
-                LandingURL = Url.Action("Index", "Class", new { area = "Admin" }),
-                //DataURL = Url.Action("GetUserLeaveApprovals", "Home", new { area = "Base" }),
-                ColorClass = "tile5",
-                IconURL = Url.Content("~/Content/Images/studentProgress.png")
-            });
+
+            //lst.Add(new TileData()
+            //{
+            //    Text = "Student Admission",
+            //    LandingURL = Url.Action("Index", "Student", new { area = "Student" }),
+            //    DataURL = Url.Action("GetStudentAdmissions", "Home", new { area = "Base" }),
+            //    ColorClass = "tile4",
+            //    IconURL = Url.Content("~/Content/Images/interview.png")
+            //});
+            //lst.Add(new TileData()
+            //{
+            //    Text = "Teacher Management",
+            //    LandingURL = Url.Action("Index", "Teacher", new { area = "Admin" }),
+            //    DataURL = Url.Action("GetTeachers", "Home", new { area = "Base" }),
+            //    ColorClass = "tile2",
+            //    IconURL = Url.Content("~/Content/Images/LecHrs.png")
+            //});
+            //lst.Add(new TileData()
+            //{
+            //    Text = "Class Management",
+            //    LandingURL = Url.Action("Index", "Class", new { area = "Admin" }),
+            //    //DataURL = Url.Action("GetUserLeaveApprovals", "Home", new { area = "Base" }),
+            //    ColorClass = "tile5",
+            //    IconURL = Url.Content("~/Content/Images/studentProgress.png")
+            //});
+
             //lst.Add(new TileData()
             //{
             //    Text = "Student Attendance Management",
@@ -116,39 +118,63 @@ namespace StudentInformationSystem.Areas.Base
         [ValidateAntiForgeryToken]
         public ActionResult SignIn(SignInVM signInVM, string ReturnUrl)
         {
-            if (!ModelState.IsValid)
-            { return View(signInVM); }
+            Data.Models.User user = null;
 
-            var lst = db.Users.Where(x => x.UserName.ToLower() == signInVM.UserName.ToLower()).ToList();
-            var obj = lst.Where(x => x.Password.Decrypt() == signInVM.Password).FirstOrDefault();
-
-            if (obj == null)
+            if (!string.IsNullOrEmpty(signInVM.AccessToken))
             {
-                AddAlert(AlertStyles.danger, "The user name or password provided is incorrect.");
-                return View(signInVM);
+                Data.Models.Visitor visitor = null;
+                var staff = db.StaffMembers.Where(x => x.SchoolEmail.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
+                if (staff == null)
+                    visitor = db.Visitors.Where(x => x.SchoolEmail.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
+
+                user = staff?.User ?? visitor?.User;
+
+                if (user == null)
+                {
+                    AddAlert(AlertStyles.warning, $"Access denied for user '{signInVM.UserEmail}'. Please contact support team to obtain the required access.");
+                    return View(signInVM);
+                }
             }
-            if (obj.Status == ActiveState.Inactive)
+            else
             {
-                AddAlert(AlertStyles.warning, "The user \"" + obj.UserName + "\" is inactive. Please contact IT Administrator.");
-                return View(signInVM);
+                if (!ModelState.IsValid)
+                {
+                    var msg = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).Aggregate((x, y) => x + "," + y);
+                    AddAlert(AlertStyles.danger, msg);
+                    return View(signInVM);
+                }
+
+                var lst = db.Users.Where(x => signInVM.UserName != null && x.UserName.ToLower() == signInVM.UserName.ToLower()).ToList();
+                user = lst.Where(x => x.Password.Decrypt() == signInVM.Password).FirstOrDefault();
+
+                if (user == null)
+                {
+                    AddAlert(AlertStyles.danger, "The user name or password provided is incorrect.");
+                    return View(signInVM);
+                }
+                if (user.Status == ActiveState.Inactive)
+                {
+                    AddAlert(AlertStyles.warning, "The user \"" + user.UserName + "\" is inactive. Please contact IT Administrator.");
+                    return View(signInVM);
+                }
             }
 
             var jser = new JavaScriptSerializer();
-            var lstRoles = db.UserRoles.Include(x => x.Role).Where(x => x.UserId == obj.Id).Select(x => x.Role.Code).ToList();
+            var lstPermissions = db.UserPermissions.Include(x => x.Permission).Where(x => x.UserId == user.Id).Select(x => x.Permission.Code).ToList();
 
             var authTicket = new FormsAuthenticationTicket(
                 1,
-                obj.UserName,
+                user.UserName,
                 DateTime.Now,
                 DateTime.Now.AddMinutes(20),
                 signInVM.RememberMe,
-                jser.Serialize(new { userName = obj.UserName, roles = lstRoles }));
+                jser.Serialize(new { userName = user.UserName, permissions = lstPermissions }));
 
             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
 
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
             Response.Cookies.Add(authCookie);
-            Session[sskCurUsrID] = obj.Id;
+            Session[sskCurUsrID] = user.Id;
 
             if (Url.IsLocalUrl(ReturnUrl) && ReturnUrl.Length > 1 && ReturnUrl.StartsWith("/")
                 && !ReturnUrl.StartsWith("//") && !ReturnUrl.StartsWith("/\\"))
@@ -219,7 +245,7 @@ namespace StudentInformationSystem.Areas.Base
 
         public ActionResult GetProfilePicture(string email)
         {
-            var path = Server.MapPath("~/Content/Images/school_logo.png");
+            var path = Server.MapPath("~/Content/Images/nalanda_logo.png");
             //if (string.IsNullOrEmpty(email))
             return File(path, "image/jpeg");
 

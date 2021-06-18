@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace StudentInformationSystem.Areas.Admin.Controllers
 {
-    [ExtendedAuthorize(Roles = RoleConstants.AdminUser)]
+    [ExtendedAuthorize(Roles = PermissionConstants.AdminUser)]
     public class UsersController : BaseController
     {
         public ActionResult Index(BaseViewModel<UserVM> vm)
@@ -43,12 +43,12 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             UserVM obj = (UserVM)Session[sskCrtdObj];
-            UserRoleVM userRole = obj.DetailsList.Where(x => x.UserRoleId == id.Value).FirstOrDefault();
-            if (userRole == null)
+            UserPermissionVM userPermission = obj.DetailsList.Where(x => x.UserPermissionId == id.Value).FirstOrDefault();
+            if (userPermission == null)
             {
                 return HttpNotFound();
             }
-            return PartialView("_ChildDetails", userRole);
+            return PartialView("_ChildDetails", userPermission);
         }
 
         public ActionResult Create()
@@ -68,9 +68,11 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 var exUserName = db.Users.Where(e => e.UserName == user.UserName).FirstOrDefault();
 
                 if (exUserName != null)
-                { ModelState.AddModelError("", "User Name Already Exists."); }
+                { ModelState.AddModelError("UserName", "User Name Already Exists."); }
                 if (user.Password == null)
-                { ModelState.AddModelError("", "Enter Password."); }
+                { ModelState.AddModelError("Password", "Enter Password."); }
+                if (user.StaffId != null && user.VisitorId != null)
+                { ModelState.AddModelError("", "Cannot assign both staff member and visitor to the same user."); }
 
                 if (ModelState.IsValid)
                 {
@@ -81,7 +83,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     foreach (var det in user.DetailsList)
                     {
-                        newObj.UserRoles.Add(det.GetEntity());
+                        newObj.UserPermissions.Add(det.GetEntity());
                     }
                     db.SaveChanges();
 
@@ -113,15 +115,15 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             }
 
             var obj = (UserVM)Session[sskCrtdObj];
-            ViewBag.UserRoles = obj.DetailsList.Select(x => x.RoleId).ToList();
+            ViewBag.UserPermissions = obj.DetailsList.Select(x => x.PermissionId).ToList();
 
-            var userRole = new UserRoleVM() { UserId = userID.Value };
-            return PartialView("_ChildCreate", userRole);
+            var vm = new UserPermissionVM() { UserId = userID.Value };
+            return PartialView("_ChildCreate", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChildCreate(UserRoleVM userRole)
+        public ActionResult ChildCreate(UserPermissionVM vm)
         {
             UserVM obj;
             try
@@ -129,13 +131,13 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     obj = (UserVM)Session[sskCrtdObj];
-                    var role = db.Roles.Find(userRole.RoleId);
-                    userRole.RoleName = role.Name;
-                    userRole.UserRoleId = Math.Min(obj.DetailsList.Select(x => x.UserRoleId).MinOrDefault(), 0) - 1;
-                    obj.DetailsList.Add(userRole);
+                    var permission = db.Permissions.Find(vm.PermissionId);
+                    vm.PermissionName = permission.Name;
+                    vm.UserPermissionId = Math.Min(obj.DetailsList.Select(x => x.UserPermissionId).MinOrDefault(), 0) - 1;
+                    obj.DetailsList.Add(vm);
 
-                    AddAlert(AlertStyles.success, "User Role added successfully.");
-                    string url = Url.Action("ChildIndex", new { id = userRole.UserId, isToEdit = true });
+                    AddAlert(AlertStyles.success, "User Permission added successfully.");
+                    string url = Url.Action("ChildIndex", new { id = vm.UserId, isToEdit = true });
                     return Json(new { success = true, url = url });
                 }
             }
@@ -145,9 +147,9 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
             obj = (UserVM)Session[sskCrtdObj];
-            ViewBag.UserRoles = obj.DetailsList.Select(x => x.RoleId).ToList();
+            ViewBag.UserPermissions = obj.DetailsList.Select(x => x.PermissionId).ToList();
 
-            return PartialView("_ChildCreate", userRole);
+            return PartialView("_ChildCreate", vm);
         }
 
         public ActionResult Edit(int? id)
@@ -173,6 +175,9 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             byte[] curRowVersion = null;
             try
             {
+                if (user.StaffId != null && user.VisitorId != null)
+                { ModelState.AddModelError("", "Cannot assign both staff member and visitor to the same user."); }
+
                 if (ModelState.IsValid)
                 {
                     var sUser = (UserVM)Session[sskCrtdObj];
@@ -183,7 +188,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = user.GetEntity();
-                    var props = "UserName,Status,StaffId";
+                    var props = "UserName,Status,StaffId,VisitorId";
                     if (!user.Password.IsBlank())
                     { props += ",Password"; }
                     modObj.CopyContent(obj, props);
@@ -193,15 +198,15 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     db.Entry(obj).OriginalValues["RowVersion"] = user.RowVersion;
 
-                    db.UserRoles.RemoveRange(obj.UserRoles.Where(x =>
-                        !sUser.DetailsList.Select(y => y.UserRoleId).ToList().Contains(x.UserRoleId)));
+                    db.UserPermissions.RemoveRange(obj.UserPermissions.Where(x =>
+                        !sUser.DetailsList.Select(y => y.UserPermissionId).ToList().Contains(x.UserPermissionId)));
 
                     foreach (var det in sUser.DetailsList)
                     {
-                        var objDet = db.UserRoles.Find(det.UserRoleId);
+                        var objDet = db.UserPermissions.Find(det.UserPermissionId);
                         if (objDet == null)
                         {
-                            db.UserRoles.Add(det.GetEntity());
+                            db.UserPermissions.Add(det.GetEntity());
                         }
                     }
                     db.SaveChanges();
@@ -236,8 +241,8 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                 var entry = db.Entry(user.GetEntity());
                 entry.State = EntityState.Unchanged;
-                entry.Collection(x => x.UserRoles).Load();
-                db.UserRoles.RemoveRange(entry.Entity.UserRoles);
+                entry.Collection(x => x.UserPermissions).Load();
+                db.UserPermissions.RemoveRange(entry.Entity.UserPermissions);
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
@@ -265,10 +270,10 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             try
             {
                 var lst = ((UserVM)Session[sskCrtdObj]).DetailsList;
-                var obj = lst.FirstOrDefault(x => x.UserRoleId == id);
+                var obj = lst.FirstOrDefault(x => x.UserPermissionId == id);
                 lst.Remove(obj);
 
-                AddAlert(AlertStyles.success, "User Role removed successfully.");
+                AddAlert(AlertStyles.success, "User Permission removed successfully.");
             }
             catch (Exception ex)
             {
@@ -303,7 +308,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
             ViewBag.IsToEdit = isToEdit;
             ViewBag.UserID = obj.Id;
-            return PartialView("_ChildIndex", obj.DetailsList.OrderBy(x => x.RoleName));
+            return PartialView("_ChildIndex", obj.DetailsList.OrderBy(x => x.PermissionName));
         }
     }
 }

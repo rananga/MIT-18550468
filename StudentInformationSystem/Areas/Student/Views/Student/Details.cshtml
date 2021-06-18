@@ -24,112 +24,104 @@
     }
 
 
-    <div class="form-horizontal stud-image-container">
-        <div class="stud-image">
-            <img class="btn" src="@Html.ActionUrl("GetPic", routeValues: new { id = Model.Id })" height="200" style="padding:0" />
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IndexNo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.IndexNo)
+    <div class="row justify-content-between">
+        <div class="col-md-6">
+            <div class="card" style="height: 100%; width:45%; border-radius:10px;border:0px;background:transparent; float:none;margin:auto;">
+                <div class="card-body center" style="text-align:center;">
+                    <img class="left card-img-top" src="@Html.ActionUrl("GetPic", routeValues: new { id = Model.Id })" style="padding:0; height:180px;width:240px;object-fit:contain" />
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AdmissionDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.AdmissionDate)
+        <div class="col-md-6">
+            <div class="form-group row">
+                @Html.RequiredLabelFor(model => model.AdmissionDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DetailsViewFor(model => model.AdmissionDate)
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Dob, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.Dob)
+            <div class="form-group row">
+                @Html.RequiredLabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DetailsViewFor(model => model.DOB)
+                </div>
             </div>
-        </div>
-
-        <br />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.FullName)
+            <div class="form-group row">
+                @Html.RequiredLabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DetailsViewFor(model => model.FullName)
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Initials, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.Initials)
+            <div class="form-group row">
+                @Html.RequiredLabelFor(model => model.Initials, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DetailsViewFor(model => model.Initials)
+                </div>
             </div>
-            @Html.LabelFor(model => model.Lname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.Lname)
+            <div class="form-group row">
+                @Html.RequiredLabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.DetailsViewFor(model => model.LastName)
+                </div>
             </div>
-        </div>
-        <br />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.Address)
-            </div>
-        </div>
-        <br />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastGrade, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.LastGrade)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmergencyConName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.EmergencyConName)
-            </div>
-            @Html.LabelFor(model => model.EmergencyContactTel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.EmergencyContactTel)
-            </div>
-        </div>
-        <br />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.Status)
-            </div>
-            @Html.LabelFor(model => model.InactiveReason, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.InactiveReason)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsLeavingIssued, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DetailsViewFor(model => model.IsLeavingIssued)
-            </div>
-        </div>
-
-        <div class="ChildContent">
-            @{ Html.RenderAction("FamilyIndex", new { id = Model.Id }); }
-        </div>
-        <div class="ChildContent">
-            @{ Html.RenderAction("ChildIndex", new { id = Model.Id }); }
-        </div>
-        <div class="ChildContent">
-            @{ Html.RenderAction("PositionIndex", new { id = Model.Id }); }
-        </div>
-        <div class="ChildContent">
-            @{ Html.RenderAction("AcheivementIndex", new { id = Model.Id }); }
         </div>
     </div>
+
+    <br />
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.IndexNo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DetailsViewFor(model => model.IndexNo)
+        </div>
+        @Html.LabelFor(model => model.SchoolEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DetailsViewFor(model => model.SchoolEmail)
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DetailsViewFor(model => model.Address1)
+        </div>
+        @Html.LabelFor(model => model.EmergContactName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DetailsViewFor(model => model.EmergContactName)
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Address2, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DetailsViewFor(model => model.Address2)
+        </div>
+        @Html.LabelFor(model => model.EmergContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DetailsViewFor(model => model.EmergContactNo)
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DetailsViewFor(model => model.City)
+        </div>
+        @Html.LabelFor(model => model.Medium, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DetailsViewFor(model => model.Medium)
+        </div>
+    </div>
+
 </div>
+
+<div class="ChildContent">
+    @{ Html.RenderAction("FamilyIndex", new { id = Model.Id }); }
+</div>  
+
+<div class="ChildContent">
+    @{ Html.RenderAction("ChildIndex", new { id = Model.Id }); }
+</div>
+
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>

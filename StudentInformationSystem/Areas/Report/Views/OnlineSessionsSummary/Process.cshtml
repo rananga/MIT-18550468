@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Term Wise Student Marks";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmReport" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <br />
+        <p>
+            @Html.ConfirmSubmitButton("Generate PDF", "PDF Document will be downloaded to your computer. Please find it once the download is completed.",
+                                        "Confirm Generate PDF", "<span class='bi bi-hand-thumbs-up'></span> Generate",
+                                        new { @class = "btn btn-primary", style = "min-width:75px" }, "btn-success")
+
+            @Html.ConfirmSubmitButton("Generate Excel Sheet", "Excel Sheet will be downloaded to your computer. Please find once the download is completed.",
+                                                 "Confirm Generate Excel Sheet", "<span class='bi bi-hand-thumbs-up'></span> Generate",
+                                                 new { @class = "btn btn-success", style = "min-width:75px" }, "btn-success", "Excel")
+        </p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+}
+

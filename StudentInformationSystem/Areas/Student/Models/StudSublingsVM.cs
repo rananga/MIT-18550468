@@ -8,31 +8,26 @@ using System.Web;
 
 namespace StudentInformationSystem.Areas.Student.Models
 {
-    public class StudSiblingsVM : StudSibling, IModel<StudSibling, StudSiblingsVM>
+    public class StudSiblingsVM : StudentSibling, IModel<StudentSibling, StudSiblingsVM>
     {
         public StudSiblingsVM()
         {
-            mappings = new ObjMappings<StudSibling, StudSiblingsVM>();
+            mappings = new ObjMappings<StudentSibling, StudSiblingsVM>();
 
-            mappings.Add(x => x.SiblingStudent.Title +". "+ x.SiblingStudent.Initials +" "+ x.SiblingStudent.Lname, x => x.StudWithInit);
+            mappings.Add(x => x.SiblingStudent.Initials + " " + x.SiblingStudent.LastName, x => x.StudWithInit);
             mappings.Add(x => x.SiblingStudent.IndexNo, x => x.IndexNo);
         }
 
-        public StudSiblingsVM(StudSibling obj) : this()
+        public StudSiblingsVM(StudentSibling obj) : this()
         {
             this.SetEntity(obj);
         }
 
-        public ObjMappings<StudSibling, StudSiblingsVM> mappings { get; set; }
+        public ObjMappings<StudentSibling, StudSiblingsVM> mappings { get; set; }
 
         [DisplayName("Name with initials")]
         public string StudWithInit { get; set; }
         [DisplayName("Admission No")]
         public int IndexNo { get; set; }
-        [DisplayName("Full Name")]
-        public string FullName { get; set; }
-        public string Initials { get; set; }
-        [DisplayName("Last Name")]
-        public string LName { get; set; }
     }
 }

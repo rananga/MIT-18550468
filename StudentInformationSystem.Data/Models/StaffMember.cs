@@ -9,16 +9,18 @@ namespace StudentInformationSystem.Data.Models
     {
         public StaffMember()
         {
+            HeadingSections = new HashSet<SectionHead>();
             HeadingGrades = new HashSet<GradeHead>();
             ClassTeachers = new HashSet<ClassTeacher>();
+            ClassSubjects = new HashSet<ClassSubject>();
         }
 
         [DisplayName("Staff Number"), Required]
-        public string StaffNumber { get; set; }
+        public int? StaffNumber { get; set; }
         [Required]
         public Gender Gender { get; set; }
         [Required]
-        public TitleTeacher Title { get; set; }
+        public TitleStaff Title { get; set; }
         [DisplayName("Full Name"), DataType(DataType.MultilineText), Required]
         public string FullName { get; set; }
         [Required]
@@ -47,16 +49,19 @@ namespace StudentInformationSystem.Data.Models
         [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
         public string ImmeContactNo { get; set; }
         public ActiveStatus Status { get; set; }
+        public string ImagePath { get; set; }
         [DisplayName("Teacher")]
         public int? TeacherId { get; set; }
-        public string ImagePath { get; set; }
         [DisplayName("Joined Date")]
         public DateTime? JoinedDate { get; set; }
         [DisplayName("Retired Date")]
         public DateTime? RetiredDate { get; set; }
 
         public virtual User User { get; set; }
+        public virtual Teacher Teacher { get; set; }
+        public virtual ICollection<SectionHead> HeadingSections { get; set; }
         public virtual ICollection<GradeHead> HeadingGrades { get; set; }
         public virtual ICollection<ClassTeacher> ClassTeachers { get; set; }
+        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }        
     }
 }

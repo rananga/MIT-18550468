@@ -1,0 +1,40 @@
+﻿@model StudentInformationSystem.Areas.Academic.Models.GradeSubjectVM
+
+@{
+    ViewBag.Title = "Grade Subject Details";
+}
+
+<div>
+    <hr />
+    @using (Html.BeginForm("Delete", "GradeSubject"))
+    {
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.RowVersion)
+        @Html.AntiForgeryToken()
+        <p>
+            <div class="btn-toolbar">
+                @Html.ConfirmSubmitButton("Delete", "Are you sure you want to delete?", "Confirm grade subject deletion",
+                 "<span class='glyphicon glyphicon-trash'></span> Delete", new { @class = "btn btn-danger", style = "min-width:75px" })
+            </div>
+        </p>
+    }
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.GradeName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GradeName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubjectName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumEditorFor(model => model.SubjectName, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

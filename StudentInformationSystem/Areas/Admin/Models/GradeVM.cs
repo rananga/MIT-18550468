@@ -1,5 +1,7 @@
 ﻿using StudentInformationSystem.Common;
 using StudentInformationSystem.Data.Models;
+using System;
+using System.ComponentModel;
 using System.Web;
 
 namespace StudentInformationSystem.Areas.Admin.Models
@@ -9,8 +11,8 @@ namespace StudentInformationSystem.Areas.Admin.Models
         public GradeVM()
         {
             mappings = new ObjMappings<Grade, GradeVM>();
-            mappings.Add(x => $"Grade {x.GradeId}", x => x.GradeName);
-            mappings.Add(x => x.Section.Name, x => x.SectionName);
+            mappings.Add(x => x.GradeNo.ToEnumChar(null), x => x.GradeName);
+            mappings.Add(x => x.Section.Code, x => x.SectionName);
         }
 
         public GradeVM(Grade obj) : this()
@@ -19,7 +21,9 @@ namespace StudentInformationSystem.Areas.Admin.Models
         }
         public ObjMappings<Grade, GradeVM> mappings { get; set; }
 
+        [DisplayName("Grade")]
         public string GradeName { get; set; }
+        [DisplayName("Section")]
         public string SectionName { get; set; }
     }
 }

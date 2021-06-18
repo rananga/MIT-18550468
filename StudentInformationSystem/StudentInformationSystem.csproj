@@ -17,8 +17,8 @@
     <AssemblyName>StudentInformationSystem</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
-    <IISExpressSSLPort />
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44380</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>
     </IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>
@@ -170,17 +170,32 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1404.0-rc\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1404.0-rc\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1404.0-rc\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.10.0.40219.1\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1404.0-rc\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1404.0-rc\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1404.0-rc\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -304,37 +319,54 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Academic\AcademicAreaRegistration.cs" />
+    <Compile Include="Areas\Academic\Controllers\GradeSubjectController.cs" />
+    <Compile Include="Areas\Academic\Controllers\SubjectCategoryController.cs" />
+    <Compile Include="Areas\Academic\Models\ClassTeacherVM.cs" />
+    <Compile Include="Areas\Academic\Models\GradeClassSubjectVM.cs" />
+    <Compile Include="Areas\Academic\Models\GradeSubjectVM.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ExtraActivityController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ClassController.cs" />
+    <Compile Include="Areas\Academic\Controllers\ClassController.cs" />
+    <Compile Include="Areas\Academic\Controllers\GradeClassController.cs" />
     <Compile Include="Areas\Admin\Controllers\GradeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GradeHeadController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SectionHeadController.cs" />
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SubjectController.cs" />
+    <Compile Include="Areas\Academic\Controllers\SubjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\StaffMemberController.cs" />
-    <Compile Include="Areas\Admin\Controllers\TeacherController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UserRolesController.cs" />
-    <Compile Include="Areas\Admin\Models\ClassStudentVM.cs" />
-    <Compile Include="Areas\Admin\Models\ClassSubjectVM.cs" />
-    <Compile Include="Areas\Admin\Models\ClassVM.cs" />
+    <Compile Include="Areas\Academic\Models\GradeClassVM.cs" />
+    <Compile Include="Areas\Admin\Models\GradeHeadVM.cs" />
+    <Compile Include="Areas\Admin\Models\SectionHeadVM.cs" />
+    <Compile Include="Areas\Report\Controllers\OnlineSessionsSummaryController.cs" />
+    <Compile Include="Areas\Report\Controllers\StudentMarksController.cs" />
+    <Compile Include="Areas\Online\OnlineAreaRegistration.cs" />
+    <Compile Include="Areas\Report\Models\ReportParameterVM.cs" />
+    <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
+    <Compile Include="Areas\Teacher\Controllers\TeacherController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserPermissionController.cs" />
+    <Compile Include="Areas\Academic\Models\ClassStudentVM.cs" />
+    <Compile Include="Areas\Academic\Models\ClassSubjectVM.cs" />
+    <Compile Include="Areas\Academic\Models\ClassVM.cs" />
     <Compile Include="Areas\Admin\Models\ExtraActivityAcheivementVM.cs" />
     <Compile Include="Areas\Admin\Models\ExtraActivityPositionVM.cs" />
     <Compile Include="Areas\Admin\Models\GradeVM.cs" />
     <Compile Include="Areas\Admin\Models\SectionVM.cs" />
-    <Compile Include="Areas\Admin\Models\SubjectVM.cs" />
+    <Compile Include="Areas\Academic\Models\SubjectVM.cs" />
     <Compile Include="Areas\Admin\Models\ExtraActivityVM.cs" />
-    <Compile Include="Areas\Admin\Models\TeacherSubjectVM.cs" />
+    <Compile Include="Areas\Academic\Models\SubjectCategoryVM.cs" />
+    <Compile Include="Areas\Teacher\Models\TeacherPreferedSubjectVM.cs" />
     <Compile Include="Areas\Admin\Models\StaffMemberVM.cs" />
-    <Compile Include="Areas\Admin\Models\TeacherVM.cs" />
-    <Compile Include="Areas\Admin\Models\UserRoleVM.cs" />
+    <Compile Include="Areas\Teacher\Models\TeacherVM.cs" />
+    <Compile Include="Areas\Admin\Models\UserPermissionVM.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
-    <Compile Include="Areas\Admin\Models\RoleVM.cs" />
+    <Compile Include="Areas\Admin\Models\PermissionVM.cs" />
     <Compile Include="Areas\Admin\Models\UserVM.cs" />
     <Compile Include="Areas\Base\BaseAreaRegistration.cs" />
     <Compile Include="Areas\Base\Controllers\BaseController.cs" />
     <Compile Include="Areas\Base\Controllers\DataController.cs" />
     <Compile Include="Areas\Base\Controllers\HomeController.cs" />
     <Compile Include="Areas\Base\Models\SignInVM.cs" />
-    <Compile Include="Areas\Base\Models\ReportParameterVM.cs" />
     <Compile Include="Areas\Student\Controllers\LeavingCertificateController.cs" />
     <Compile Include="Areas\Student\Controllers\StudentController.cs" />
     <Compile Include="Areas\Student\Models\ClassStudentVM.cs" />
@@ -347,6 +379,7 @@
     <Compile Include="Areas\Student\Models\StudFamilyVM.cs" />
     <Compile Include="Areas\Student\Models\StudSublingsVM.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
+    <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
     <Compile Include="Common\ExtendedActionFilterAttribute.cs" />
     <Compile Include="Common\ExtendedAuthorizeAttribute.cs" />
     <Compile Include="Common\Alert.cs" />
@@ -370,6 +403,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsReports.xsd</DependentUpon>
     </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -396,10 +430,10 @@
     <Content Include="Content\Images\checklist.png" />
     <Content Include="Content\Images\dropStudent.png" />
     <Content Include="Content\Images\Enrollmentsuccess.png" />
-    <Content Include="Content\Images\Enrollments\Default.png" />
     <Content Include="Content\Images\ExamScedule.png" />
     <Content Include="Content\Images\finalizeExam.png" />
     <Content Include="Content\Images\Final_Logo_2018_1.png" />
+    <Content Include="Content\Images\Google-Logo-min.png" />
     <Content Include="Content\Images\GovernmrntLogo.jpg" />
     <Content Include="Content\Images\home_banner.jpg" />
     <Content Include="Content\Images\interview.png" />
@@ -428,15 +462,21 @@
     <Content Include="Content\Images\Progress-02.png" />
     <Content Include="Content\Images\Progress-03.png" />
     <Content Include="Content\Images\Progress-04.png" />
+    <Content Include="Content\Images\Progress-05.png" />
+    <Content Include="Content\Images\Progress-06.png" />
+    <Content Include="Content\Images\Progress-07.png" />
+    <Content Include="Content\Images\Progress-08.png" />
+    <Content Include="Content\Images\Progress-09.png" />
     <Content Include="Content\Images\progressSummary.png" />
     <Content Include="Content\Images\restaurant-membership-card-tool.png" />
-    <Content Include="Content\Images\sdu_logo_512.png" />
     <Content Include="Content\Images\search.png" />
     <Content Include="Content\Images\signin_banner.jpg" />
     <Content Include="Content\Images\SMS logo.png" />
+    <Content Include="Content\Images\Staff\Default.png" />
     <Content Include="Content\Images\studentProgress.png" />
     <Content Include="Content\Images\NewYear2018.png" />
     <Content Include="Content\Images\DailyPerformance.png" />
+    <Content Include="Content\Images\Student\Default.png" />
     <Content Include="Content\Images\success.png" />
     <Content Include="Content\Images\vline.png" />
     <Content Include="Content\jquery-ui-MonthPicker.css" />
@@ -511,9 +551,11 @@
     <Content Include="Content\Images\SingupPageBackGround.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Academic\GradeSubject.js" />
+    <Content Include="Scripts\Academic\GradeClass.js" />
     <Content Include="Scripts\Admin\StaffMeetingAttendance.js" />
     <Content Include="Scripts\Admin\StaffMember.js" />
-    <Content Include="Scripts\Admin\UserRole.js" />
+    <Content Include="Scripts\Admin\UserPermission.js" />
     <Content Include="Scripts\Admin\User.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Base\Views\Home\AccessDenied.cshtml" />
@@ -533,11 +575,11 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Base\Views\Home\Error.cshtml" />
     <Content Include="Areas\Base\Views\Home\_ChangePassword.cshtml" />
-    <Content Include="Areas\Admin\Views\UserRoles\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\UserRoles\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\UserRoles\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\UserRoles\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\UserRoles\_ChildIndex.cshtml" />
+    <Content Include="Areas\Admin\Views\UserPermission\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\UserPermission\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\UserPermission\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UserPermission\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UserPermission\_ChildIndex.cshtml" />
     <Content Include="Areas\Admin\Views\Users\_ChildCreate.cshtml" />
     <Content Include="Areas\Admin\Views\Users\_ChildDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Users\_ChildIndex.cshtml" />
@@ -550,6 +592,43 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Teacher\Views\web.config" />
+    <Content Include="Areas\Teacher\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Academic\Views\GradeClass\Create.cshtml" />
+    <Content Include="Areas\Academic\Views\GradeClass\Details.cshtml" />
+    <Content Include="Areas\Academic\Views\GradeClass\Edit.cshtml" />
+    <Content Include="Areas\Academic\Views\GradeClass\Index.cshtml" />
+    <Content Include="Areas\Academic\Views\web.config" />
+    <Content Include="Areas\Academic\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Academic\Views\SubjectCategory\Create.cshtml" />
+    <Content Include="Areas\Academic\Views\SubjectCategory\Details.cshtml" />
+    <Content Include="Areas\Academic\Views\SubjectCategory\Edit.cshtml" />
+    <Content Include="Areas\Academic\Views\SubjectCategory\Index.cshtml" />
+    <Content Include="Areas\Academic\Views\GradeSubject\Create.cshtml" />
+    <Content Include="Areas\Academic\Views\GradeSubject\Details.cshtml" />
+    <Content Include="Areas\Academic\Views\GradeSubject\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SectionHead\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SectionHead\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\SectionHead\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SectionHead\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\GradeHead\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\GradeHead\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\GradeHead\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\GradeHead\Index.cshtml" />
+    <Content Include="Areas\Academic\Views\GradeClass\_SubjectCreate.cshtml" />
+    <Content Include="Areas\Academic\Views\GradeClass\_SubjectIndex.cshtml" />
+    <Content Include="Areas\Academic\Views\Class\_ClassSubjectCreate.cshtml" />
+    <Content Include="Areas\Academic\Views\Class\_ClassSubjectIndex.cshtml" />
+    <Content Include="Areas\Academic\Views\Class\_TeacherCreate - Copy.cshtml" />
+    <Content Include="Areas\Online\Views\web.config" />
+    <Content Include="Areas\Online\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Report\Views\StudentMarks\Process.cshtml" />
+    <Content Include="Areas\Report\Views\web.config" />
+    <Content Include="Areas\Report\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Report\Views\OnlineSessionsSummary\Process.cshtml" />
+    <None Include="Properties\PublishProfiles\nibmapp1-sis - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\nibmapp1-sis - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\nibmapp1-sis - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -564,11 +643,28 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Layout\jquery.autosize.js" />
+    <Content Include="Scripts\Layout\jquery.customSelect.js" />
+    <Content Include="Scripts\Layout\jquery.placeholder.js" />
+    <Content Include="Scripts\Layout\scripts.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="webfonts\alarm-fill.svg" />
     <Content Include="webfonts\alarm.svg" />
     <Content Include="webfonts\align-bottom.svg" />
@@ -1905,24 +2001,20 @@
     <Content Include="Areas\Admin\Views\Section\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Section\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Section\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Subject\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Subject\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Subject\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Subject\Index.cshtml" />
+    <Content Include="Areas\Academic\Views\Subject\Create.cshtml" />
+    <Content Include="Areas\Academic\Views\Subject\Details.cshtml" />
+    <Content Include="Areas\Academic\Views\Subject\Edit.cshtml" />
+    <Content Include="Areas\Academic\Views\Subject\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Grade\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Grade\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Grade\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Grade\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\_StudentCreate.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\_StudentDetails.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\_StudentIndex.cshtml" />
-    <Content Include="Areas\Admin\Views\Teacher\_ChildCreate.cshtml" />
-    <Content Include="Areas\Admin\Views\Teacher\_ChildDetails.cshtml" />
-    <Content Include="Areas\Admin\Views\Teacher\_ChildEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\Teacher\_ChildIndex.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\_ChildCreate.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\_ChildDetails.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\_ChildIndex.cshtml" />
+    <Content Include="Areas\Academic\Views\Class\_StudentCreate.cshtml" />
+    <Content Include="Areas\Academic\Views\Class\_StudentIndex.cshtml" />
+    <Content Include="Areas\Teacher\Views\Teacher\_PrefSubjectCreate.cshtml" />
+    <Content Include="Areas\Teacher\Views\Teacher\_PrefSubjectIndex.cshtml" />
+    <Content Include="Areas\Academic\Views\Class\_TeacherCreate.cshtml" />
+    <Content Include="Areas\Academic\Views\Class\_TeacherIndex.cshtml" />
     <Content Include="Areas\Admin\Views\ExtraActivity\_PositionCreate.cshtml" />
     <Content Include="Areas\Admin\Views\ExtraActivity\_PositionDetails.cshtml" />
     <Content Include="Areas\Admin\Views\ExtraActivity\_PositionIndex.cshtml" />
@@ -1933,12 +2025,6 @@
     <Content Include="Areas\Admin\Views\ExtraActivity\Details.cshtml" />
     <Content Include="Areas\Admin\Views\ExtraActivity\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ExtraActivity\Index.cshtml" />
-    <Content Include="Areas\Student\Views\Student\_AcheivementCreate.cshtml" />
-    <Content Include="Areas\Student\Views\Student\_AcheivementDetails.cshtml" />
-    <Content Include="Areas\Student\Views\Student\_AcheivementIndex.cshtml" />
-    <Content Include="Areas\Student\Views\Student\_PositionCreate.cshtml" />
-    <Content Include="Areas\Student\Views\Student\_PositionDetails.cshtml" />
-    <Content Include="Areas\Student\Views\Student\_PositionIndex.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1951,14 +2037,13 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="Areas\Admin\Views\Teacher\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Teacher\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Teacher\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Teacher\Edit.cshtml" />
+    <Content Include="Areas\Teacher\Views\Teacher\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\Teacher\Details.cshtml" />
+    <Content Include="Areas\Academic\Views\Class\Index.cshtml" />
+    <Content Include="Areas\Academic\Views\Class\Create.cshtml" />
+    <Content Include="Areas\Academic\Views\Class\Details.cshtml" />
+    <Content Include="Areas\Academic\Views\Class\Edit.cshtml" />
+    <Content Include="Areas\Teacher\Views\Teacher\Edit.cshtml" />
     <Content Include="Areas\Student\Views\web.config" />
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Student\Views\Student\Index.cshtml" />
@@ -1969,9 +2054,7 @@
     <Content Include="Areas\Student\Views\Student\_FamilyCreate.cshtml" />
     <Content Include="Areas\Student\Views\Student\Details.cshtml" />
     <Content Include="Areas\Student\Views\Student\Edit.cshtml" />
-    <Content Include="Areas\Student\Views\Student\_ChildEdit.cshtml" />
     <Content Include="Areas\Student\Views\Student\_FamilyEdit.cshtml" />
-    <Content Include="Areas\Student\Views\Student\_ChildDetails.cshtml" />
     <Content Include="Areas\Student\Views\StudentPromotion\Index.cshtml" />
     <Content Include="Areas\Student\Views\StudentPromotion\Create.cshtml" />
     <Content Include="Areas\Student\Views\StudentPromotion\_ChildIndex.cshtml" />
@@ -2079,10 +2162,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Reports\ApplicationForm.rdlc">
+    <Content Include="Reports\ApplicationForm.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Reports\ClassRegistry - Copy.rdlc">
+    </Content>
+    <None Include="Reports\ClassRegistry.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Reports\CurPrefectGuildReport.rdlc">
@@ -2137,11 +2220,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\Online\Controllers\" />
+    <Folder Include="Areas\Online\Models\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StudentInformationSystem.Data\StudentInformationSystem.Data.csproj">
       <Project>{601a5258-ee62-4fba-a555-c6de8f85b031}</Project>
       <Name>StudentInformationSystem.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentInformationSystem.Reporting\StudentInformationSystem.Reporting.csproj">
+      <Project>{bac4584a-7569-432b-b408-adf4cbb65c53}</Project>
+      <Name>StudentInformationSystem.Reporting</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -2158,11 +2248,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>24368</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:24368/</IISUrl>
+          <IISUrl>https://localhost:44380/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -67,7 +67,7 @@ namespace System.Web
                 { propInfo.SetValue(retObj, valObj); }
             }
 
-            using (var db = new dbSISContext())
+            using (var db = new dbNalandaContext())
             {
                 var pkProps = db.Model.FindEntityType(retTyp).FindPrimaryKey().Properties;
 
@@ -225,93 +225,74 @@ namespace System.Web.Mvc.Html
 
         public static List<Menu> GetAllMenus(this HtmlHelper htmlHelper)
         {
-            using (dbSISContext dbctx = new dbSISContext())
+            using (dbNalandaContext dbctx = new dbNalandaContext())
             { return dbctx.Menus.ToList(); }
         }
 
         public static List<Menu> GetAccessibleMenus(this HtmlHelper htmlHelper)
         {
             List<Menu> lst;
-            using (dbSISContext dbctx = new dbSISContext())
+            using (dbNalandaContext dbctx = new dbNalandaContext())
             {
                 var usrId = (int)htmlHelper.ViewContext.HttpContext.Session[BaseController.sskCurUsrID];
 
-                var roles = dbctx.Users.Where(x => x.Id == usrId).SelectMany(x => x.UserRoles).Select(x => x.Role.Code);
-                if (roles.Where(x => x == RoleConstants.Admin).Any())
-                    return dbctx.Menus.ToList();
+                var permissions = dbctx.Users.Where(x => x.Id == usrId).SelectMany(x => x.UserPermissions).Select(x => x.Permission.Code);
+                if (permissions.Where(x => x == PermissionConstants.Admin).Any())
+                    return dbctx.Menus.Include(x => x.InverseParentMenu).ToList();
 
-                lst = dbctx.Menus
-                    .Where(x => x.RoleMenuAccesses
-                    .Where(y => y.Role.UserRoles
+                lst = dbctx.Menus.Include(x=> x.InverseParentMenu)
+                    .Where(x => x.PermissionMenuAccesses
+                    .Where(y => y.Permission.UserPermissions
                     .Where(z => z.UserId == usrId).Count() > 0).Count() > 0).ToList();
             }
 
             return lst;
         }
-        //public static MvcHtmlString SelectListFor<TEntity, TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, Func<TEntity, TProperty> getValue, Func<TEntity, string> getText, object htmlAttributes = null) where TEntity : class
-        //{
-        //    List<Menu> lst;
-        //    using (dbSISContext dbctx = new dbSISContext())
-        //    {
-        //        dbctx.Set<TEntity>().Select(x => new { value = getValue(x), text = getText(x) });
 
-        //        var usrId = (int)htmlHelper.ViewContext.HttpContext.Session[BaseController.sskCurUsrID];
+        public static MvcHtmlString SelectListFor<TEntity, TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, Func<TEntity, TProperty> getValue, Func<TEntity, string> getText, object htmlAttributes = null, Func<TEntity, object> getData = null) where TEntity : class
+        {
+            var pi = GetPropertyInfo(expression);
 
-        //        var roles = dbctx.Users.Where(x => x.Id == usrId).SelectMany(x => x.UserRoles).Select(x => x.Role.Code);
-        //        if (roles.Where(x => x == RoleConstants.Admin).Any())
-        //            return dbctx.Menus.ToList();
+            var sel = new TagBuilder("select");
+            sel.Attributes.Add("id", pi.Name);
+            sel.Attributes.Add("name", pi.Name);
 
-        //        lst = dbctx.Menus
-        //            .Where(x => x.RoleMenuAccesses
-        //            .Where(y => y.Role.UserRoles
-        //            .Where(z => z.UserId == usrId).Count() > 0).Count() > 0).ToList();
-        //    }
+            object attrs = htmlAttributes.ToDynamic();
+            foreach (KeyValuePair<string, object> kvp in (ExpandoObject)attrs)
+            { sel.Attributes.Add(kvp.Key, kvp.Value.ToString()); }
+            StringBuilder sb = new StringBuilder();
 
-        //    var pi = GetPropertyInfo(expression);
+            if (!pi.PropertyType.IsEnum)
+            {
+                var opt = new TagBuilder("option");
+                opt.Attributes.Add("value", "");
+                sb.Append(opt.ToString());
+            }
 
-        //    Type typ = null;
-        //    if (pi.PropertyType.IsEnum)
-        //    { typ = pi.PropertyType; }
-        //    if (pi.PropertyType.IsGenericType &&
-        //        pi.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) &&
-        //        pi.PropertyType.GetGenericArguments()[0].IsEnum)
-        //    { typ = pi.PropertyType.GetGenericArguments()[0]; }
+            TModel mdl = htmlHelper.ViewData.Model;
+            var sval = mdl == null ? null : (object)expression.Compile()(mdl);
 
-        //    if (typ == null)
-        //    { return htmlHelper.EditorFor(expression, new { htmlAttributes = htmlAttributes }); }
+            using (dbNalandaContext dbctx = new dbNalandaContext())
+            {
+                var lst = dbctx.Set<TEntity>().ToList().Select(x => new { value = getValue(x), text = getText(x), data = getData == null ? null : getData(x) }).ToList();
 
-        //    TModel mdl = htmlHelper.ViewData.Model;
-        //    var sval = mdl == null ? null : (object)expression.Compile()(mdl);
+                foreach (var itm in lst)
+                {
+                    var strVal = Convert.ToString(itm.value);
+                    var strData = Json.Encode(itm.data);
+                    var opt = new TagBuilder("option");
+                    opt.Attributes.Add("value", strVal);
+                    opt.Attributes.Add("data-info", strData);
+                    if (sval != null && sval.ToString() == strVal)
+                    { opt.Attributes.Add("selected", "selected"); }
+                    opt.InnerHtml = itm.text;
+                    sb.Append(opt.ToString());
+                }
+            }
 
-        //    var sel = new TagBuilder("select");
-        //    sel.Attributes.Add("id", pi.Name);
-        //    sel.Attributes.Add("name", pi.Name);
-
-        //    object attrs = htmlAttributes.ToDynamic();
-        //    foreach (KeyValuePair<string, object> kvp in (ExpandoObject)attrs)
-        //    { sel.Attributes.Add(kvp.Key, kvp.Value.ToString()); }
-        //    StringBuilder sb = new StringBuilder();
-
-        //    if (!pi.PropertyType.IsEnum)
-        //    {
-        //        var opt = new TagBuilder("option");
-        //        opt.Attributes.Add("value", "");
-        //        sb.Append(opt.ToString());
-        //    }
-
-        //    foreach (var enm in Enum.GetValues(typ))
-        //    {
-        //        var opt = new TagBuilder("option");
-        //        opt.Attributes.Add("value", Convert.ToInt64(enm).ToString());
-        //        if (sval != null && enm.Equals(Enum.Parse(typ, sval.ToString())))
-        //        { opt.Attributes.Add("selected", "selected"); }
-        //        opt.InnerHtml = enm.ToEnumChar();
-        //        sb.Append(opt.ToString());
-        //    }
-
-        //    sel.InnerHtml = sb.ToString();
-        //    return new MvcHtmlString(sel.ToString());
-        //}
+            sel.InnerHtml = sb.ToString();
+            return new MvcHtmlString(sel.ToString());
+        }
 
         public static WebGridColumn SortColumn(this WebGrid grid, string columnName = null, string header = null, Func<dynamic, object> format = null, string style = null, bool canSort = true)
         {
@@ -547,7 +528,7 @@ namespace System.Web.Mvc.Html
             cls = cls + (cls == "dlgPopUpSelector" || cls.Contains(" dlgPopUpSelector") || cls.Contains("dlgPopUpSelector ") ? "" : (cls.IsBlank() ? "" : " ") + "dlgPopUpSelector");
 
             s.Attributes.Add("class", cls);
-            s.Attributes.Add("data-para-json", new JavaScriptSerializer().Serialize(dataParas));
+            s.Attributes.Add("data-para-json", Json.Encode(dataParas));
             s.Attributes.Add("data-selected-item", selectedJsonObj);
             s.Attributes.Add("data-empty-text", emptyText);
             s.Attributes.Add("data-dsp-format", dspFormat);

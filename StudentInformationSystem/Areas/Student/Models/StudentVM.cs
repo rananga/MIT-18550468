@@ -16,9 +16,9 @@ namespace StudentInformationSystem.Areas.Student.Models
             Positions = new List<StudentExtraActivityPositionVM>();
             mappings = new ObjMappings<StudentInformationSystem.Data.Models.Student, StudentVM>();
 
-            mappings.Add(x => x.Title + ". " + x.Initials + " " + x.Lname, x => x.NameWithInt);
-            mappings.Add(x => x.StudSiblings.Select(y => new StudSiblingsVM(y)).ToList(), x => x.Siblings);
-            mappings.Add(x => x.StudFamilies.Select(y => new StudFamilyVM(y)).ToList(), x => x.FamilyMembers);
+            mappings.Add(x => x.Initials + " " + x.LastName, x => x.NameWithInt);
+            mappings.Add(x => x.StudentSiblings.Select(y => new StudSiblingsVM(y)).ToList(), x => x.Siblings);
+            mappings.Add(x => x.StudentFamilies.Select(y => new StudFamilyVM(y)).ToList(), x => x.FamilyMembers);
             mappings.Add(x => x.ActivityAcheivements.Select(y => new StudentExtraActivityAcheivementVM(y)).ToList(), x => x.Acheivements);
             mappings.Add(x => x.ActivityPositions.Select(y => new StudentExtraActivityPositionVM(y)).ToList(), x => x.Positions);
         }

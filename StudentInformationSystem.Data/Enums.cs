@@ -6,7 +6,7 @@ using System.Web;
 
 namespace StudentInformationSystem.Data
 {
-    public static class RoleConstants
+    public static class PermissionConstants
     {
         public const string Admin = "Admin";
         public const string AdminUser = "AdminUser";
@@ -35,7 +35,7 @@ namespace StudentInformationSystem.Data
         Female = 1
     }
 
-    public enum TitleTeacher
+    public enum TitleStaff
     {
         [Description("Rev")]
         Rev = 0,
@@ -51,26 +51,6 @@ namespace StudentInformationSystem.Data
         Mrs = 5,
         [Description("Ms")]
         Ms = 6
-    }
-    public enum TitleStud
-    {
-        [Description("Mr")]
-        Mr = 1,
-        [Description("Ms")]
-        Ms = 2
-    }
-    public enum Fluency
-    {
-        [Description("None")]
-        None = 0,
-        [Description("Very Good")]
-        VeryGood = 1,
-        [Description("Good")]
-        Good = 2,
-        [Description("Average")]
-        Average = 3,
-        [Description("Weak")]
-        Weak = 4
     }
     public enum Relationship
     {
@@ -90,23 +70,23 @@ namespace StudentInformationSystem.Data
     }
     public enum Grades
     {
-        [Description("Grade 1")]
+        [Description("Grade 01")]
         Grade1 = 1,
-        [Description("Grade 2")]
+        [Description("Grade 02")]
         Grade2 = 2,
-        [Description("Grade 3")]
+        [Description("Grade 03")]
         Grade3 = 3,
-        [Description("Grade 4")]
+        [Description("Grade 04")]
         Grade4 = 4,
-        [Description("Grade 5")]
+        [Description("Grade 05")]
         Grade5 = 5,
-        [Description("Grade 6")]
+        [Description("Grade 06")]
         Grade6 = 6,
-        [Description("Grade 7")]
+        [Description("Grade 07")]
         Grade7 = 7,
-        [Description("Grade 8")]
+        [Description("Grade 08")]
         Grade8 = 8,
-        [Description("Grade 9")]
+        [Description("Grade 09")]
         Grade9 = 9,
         [Description("Grade 10")]
         Grade10 = 10,
@@ -160,40 +140,6 @@ namespace StudentInformationSystem.Data
         [Description("English")]
         English = 1
     }
-
-    public enum PrefectType
-    {
-        [Description("Junior Prefect")]
-        Junior = 0,
-        [Description("Senior Prefect")]
-        Senior = 1,
-        [Description("Pending Prefect")]
-        PendingPrefect = 2
-    }
-    public enum MembershipType
-    {
-        [Description("Member")]
-        Member = 0,
-        [Description("Committee Member")]
-        CommitteeMember = 1
-    }
-    public enum CommitteeMemberType
-    {
-        [Description("None")]
-        None = 0,
-        [Description("President")]
-        President = 1,
-        [Description("Vice President")]
-        VisePresident = 2,
-        [Description("Secretary")]
-        Secretary = 3,
-        [Description("Vice Secretary")]
-        ViseSecretary = 4,
-        [Description("Treasurer")]
-        Treasurer = 5,
-        [Description("Vice Treasurer")]
-        ViseTreasurer = 6,
-    }
     public enum StudStatus
     {
         [Description("Active")]
@@ -212,14 +158,26 @@ namespace StudentInformationSystem.Data
         [Description("Inactive")]
         Inactive = 1
     }
-    public enum TeacherStatus
+    public enum QualificationType
     {
-        [Description("Active")]
-        Active = 0,
-        [Description("Inactive")]
-        Inactive = 1,
-        [Description("On Leave")]
-        OnLeave = 2
+        [Description("Diploma")]
+        Diploma = 0,
+        [Description("Degree")]
+        Degree = 1,
+        [Description("Master")]
+        Master = 2,
+        [Description("PHD")]
+        PHD = 3
+    }
+
+    public enum Term
+    {
+        [Description("Term 1")]
+        Term1 = 0,
+        [Description("Term 2")]
+        Term2 = 1,
+        [Description("Term 3")]
+        Term3 = 2
     }
 
     public enum Conduct

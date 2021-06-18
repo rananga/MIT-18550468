@@ -16,7 +16,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
     {
         public ActionResult Index(BaseViewModel<SectionVM> vm)
         {
-            vm.SetList(db.Sections.AsQueryable(), "Name");
+            vm.SetList(db.Sections.AsQueryable(), "Code");
             return View(vm);
         }
         public ActionResult Create()
@@ -31,7 +31,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
         {
             try
             {
-                var exName = db.Sections.Where(e => e.Name.ToLower().Trim() == section.Name.ToLower().Trim()).FirstOrDefault();
+                var exName = db.Sections.Where(e => e.Code.ToLower().Trim() == section.Code.ToLower().Trim()).FirstOrDefault();
 
                 if (exName != null)
                 { ModelState.AddModelError("Name", "Name Already Exists."); }
@@ -90,7 +90,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             byte[] curRowVersion = null;
             try
             {
-                var exName = db.Sections.Where(e => e.Id != section.Id && e.Name.ToLower().Trim() == section.Name.ToLower().Trim()).FirstOrDefault();
+                var exName = db.Sections.Where(e => e.Id != section.Id && e.Code.ToLower().Trim() == section.Code.ToLower().Trim()).FirstOrDefault();
 
                 if (exName != null)
                 { ModelState.AddModelError("Name", "Name Already Exists."); }

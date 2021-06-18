@@ -9,15 +9,17 @@ namespace StudentInformationSystem.Data.Models
     {
         [Required]
         public int Year { get; set; }
+        [Required]
         [DisplayName("Section")]
-        [Required]
         public int SectionId { get; set; }
-        [DisplayName("Section Head")]
         [Required]
+        [DisplayName("Section Head")]
         public int StaffId { get; set; }
-        [DisplayName("From Date")]
+        [DisplayName("From Date"), Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime FromDate { get; set; }
-        [DisplayName("To Date")]
+        [DisplayName("To Date"), Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ToDate { get; set; }
 
         public virtual Section Section { get; set; }

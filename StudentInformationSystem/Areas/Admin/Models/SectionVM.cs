@@ -10,7 +10,7 @@ namespace StudentInformationSystem.Areas.Admin.Models
         {
             mappings = new ObjMappings<Section, SectionVM>();
 
-            mappings.Add(x => x.Name + x.Description, x => SearchBy);
+            mappings.Add(x => x.Code + x.Description, x => SearchBy);
         }
 
         public SectionVM(Section obj) : this()

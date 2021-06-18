@@ -10,6 +10,8 @@ namespace StudentInformationSystem.Data.Models
         {
             ClassTeachers = new HashSet<ClassTeacher>();
             ClassMonitors = new HashSet<ClassMonitor>();
+            ClassSubjects = new HashSet<ClassSubject>();
+            ClassStudents = new HashSet<ClassStudent>();
         }
 
         [Required]
@@ -22,5 +24,7 @@ namespace StudentInformationSystem.Data.Models
         public virtual GradeClass GradeClass { get; set; }
         public virtual ICollection<ClassTeacher> ClassTeachers { get; set; }
         public virtual ICollection<ClassMonitor> ClassMonitors { get; set; }
+        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
+        public virtual ICollection<ClassStudent> ClassStudents { get; set; }
     }
 }

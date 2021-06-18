@@ -1,0 +1,44 @@
+﻿@model StudentInformationSystem.Areas.Teacher.Models.TeacherVM
+
+@{
+    ViewBag.Title = "Edit Teacher Information";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    <p>
+        <input type="submit" value="Save" class="btn btn-primary" style="min-width:75px" />
+    </p>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.RowVersion)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StaffNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DetailsViewFor(model => model.StaffNumber)
+        </div>
+        @Html.LabelFor(model => model.TeacherName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.DetailsViewFor(model => model.TeacherName)
+        </div>
+    </div>
+</div>
+}
+
+<div class="ChildContent">
+    @{ Html.RenderAction("PrefSubjectIndex", new { id = Model.Id, isToEdit = true }); }
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/Admin/Teacher.js")
+}

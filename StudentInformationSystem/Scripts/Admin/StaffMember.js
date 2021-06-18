@@ -2,8 +2,8 @@
 
 $(function () {
     objFullName = $('#FullName');
-    objStatus = $('#Status');
-    objInactiveReason = $('#InactiveReason');
+    objIsTeacher = $('#IsTeacher');
+    objDivTeacherCategory = $('#divTeacherCategory');
 
     objFullName.change(function () {
         var initials = "";
@@ -16,22 +16,13 @@ $(function () {
         $('#Initials').val(initials);
     });
 
-    if (objStatus.val() == 0) {
-        objInactiveReason.val("");
-        SetComboReadonly(objInactiveReason, true);
-    }
-    else {
-        SetComboReadonly(objInactiveReason, false);
-    }
-
-    objStatus.change(function () {
-        if (objStatus.val() == 0) {
-            objInactiveReason.val("");
-            SetComboReadonly(objInactiveReason, true);
-        }
-        else {
-            SetComboReadonly(objInactiveReason, false);
+    objIsTeacher.change(function (event) {
+        var checkbox = event.target;
+        if (checkbox.checked) {
+            objDivTeacherCategory.show();
+        } else {
+            objDivTeacherCategory.hide();
         }
     });
-
+    objIsTeacher.trigger("change");
 });

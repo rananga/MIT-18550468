@@ -48,13 +48,21 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(StaffMemberVM staff)
         {
+            var dbTrans = db.Database.BeginTransaction();
             try
             {
-                var svm = (StaffMemberVM)Session[sskCrtdObj];
-                var existingTeacher = db.Teachers.Where(e => e.Nicno == staff.Nicno).FirstOrDefault();
+                var exStaffNo = db.StaffMembers.Where(e => e.StaffNumber == staff.StaffNumber).FirstOrDefault();
+                if (exStaffNo != null)
+                { ModelState.AddModelError("StaffNumber", "Staff Number Already Exists."); }
 
-                if (existingTeacher != null)
-                { ModelState.AddModelError("NICNo", "Staff NIC Already Exists"); }
+                var exSchoolEmail = db.StaffMembers.Where(e => e.SchoolEmail == staff.SchoolEmail).FirstOrDefault();
+                if (exSchoolEmail != null)
+                { ModelState.AddModelError("SchoolEmail", $"Email Already Assinged to - {exSchoolEmail.StaffNumber}."); }
+
+                if (staff.IsTeacher && staff.TeacherSectionId == null)
+                    ModelState.AddModelError("TeacherSectionId", "Teacher section is required.");
+
+                var svm = (StaffMemberVM)Session[sskCrtdObj];
 
                 if (ModelState.IsValid)
                 {
@@ -67,17 +75,28 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                     if (!imgPath.IsBlank())
                     {
                         objStaff.ImagePath = imgPath;
-                        db.SaveChanges();
                     }
+
+                    if (staff.IsTeacher)
+                        objStaff.Teacher = new Data.Models.Teacher() { StaffId = objStaff.Id, SectionId = staff.TeacherSectionId.Value, CreatedBy = objStaff.CreatedBy, CreatedDate = DateTime.Now };
+
+                    db.SaveChanges();
+                    dbTrans.Commit();
 
                     AddAlert(AlertStyles.success, "Staff Member Created Successfully.");
                     return RedirectToAction("Index");
                 }
             }
             catch (DbEntityValidationException dbEx)
-            { this.ShowEntityErrors(dbEx); }
+            {
+                dbTrans.Rollback();
+                this.ShowEntityErrors(dbEx);
+            }
             catch (Exception ex)
-            { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
+            {
+                dbTrans.Rollback();
+                AddAlert(AlertStyles.danger, ex.GetInnerException().Message);
+            }
 
             return View(staff);
         }
@@ -107,11 +126,18 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             byte[] curRowVersion = null;
             try
             {
-                var svm = (StaffMemberVM)Session[sskCrtdObj];
-                var existingTeacher = db.Teachers.Where(e => e.Nicno == staff.Nicno && e.Id != staff.Id).FirstOrDefault();
+                var exStaffNo = db.StaffMembers.Where(e => e.Id != staff.Id && e.StaffNumber == staff.StaffNumber).FirstOrDefault();
+                if (exStaffNo != null)
+                { ModelState.AddModelError("StaffNumber", "Staff Number Already Exists."); }
 
-                if (existingTeacher != null)
-                { ModelState.AddModelError("NICNo", "Staff NIC Already Exist"); }
+                var exSchoolEmail = db.StaffMembers.Where(e => e.Id != staff.Id && !string.IsNullOrEmpty(e.SchoolEmail) && e.SchoolEmail == staff.SchoolEmail).FirstOrDefault();
+                if (exSchoolEmail != null)
+                { ModelState.AddModelError("SchoolEmail", $"Email Already Assinged to - {exSchoolEmail.StaffNumber}."); }
+
+                if (staff.IsTeacher && staff.TeacherSectionId == null)
+                    ModelState.AddModelError("TeacherSectionId", "Teacher section is required.");
+
+                var svm = (StaffMemberVM)Session[sskCrtdObj];
 
                 if (ModelState.IsValid)
                 {
@@ -121,13 +147,29 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = staff.GetEntity();
-                    modObj.CopyContent(obj, "StaffNumber,Gender,Title,FullName,Initials,LastName,Address1,Address2,City,MobileNo,SchoolEmail,Nicno,TelHome,ImmeContactName,ImmeContactNo,Status,TeacherId,ImagePath,JoinedDate,RetiredDate");
+                    modObj.CopyContent(obj, "StaffNumber,Gender,Title,FullName,Initials,LastName,Address1,Address2,City,MobileNo,SchoolEmail,Nicno,TelHome,ImmeContactName,ImmeContactNo,Status,ImagePath,JoinedDate,RetiredDate,IsTeacher,TeacherSectionId");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;
                     obj.ImagePath = SaveImage(obj.Id, obj.ImagePath);
 
                     db.Entry(obj).OriginalValues["RowVersion"] = staff.RowVersion;
+
+                    if (!staff.IsTeacher)
+                    {
+                        if (obj.Teacher != null)
+                            db.Teachers.Remove(obj.Teacher);
+                    }
+                    else if (obj.Teacher == null)
+                        obj.Teacher = new Data.Models.Teacher() { StaffId = obj.Id, SectionId = staff.TeacherSectionId.Value, CreatedBy = obj.CreatedBy, CreatedDate = DateTime.Now };
+                    else
+                    {
+                        obj.Teacher.StaffId = obj.Id;
+                        obj.Teacher.SectionId = staff.TeacherSectionId.Value;
+                        obj.Teacher.ModifiedBy = this.GetCurrUser();
+                        obj.Teacher.ModifiedDate = DateTime.Now;
+                    }
+
                     db.SaveChanges();
 
                     AddAlert(AlertStyles.success, "Staff Member Modified Successfully.");
@@ -153,13 +195,15 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
         {
             try
             {
-                var obj = db.Teachers.Find(teacher.Id);
+                var obj = db.StaffMembers.Find(teacher.Id);
                 if (obj == null)
                 { throw new DbUpdateConcurrencyException(""); }
-                db.Detach(obj);
 
-                var entry = db.Entry(teacher.GetEntity());
+                var entry = db.Entry(obj);
                 entry.State = EntityState.Unchanged;
+                entry.Reference(x => x.Teacher).Load();
+                if (entry.Entity.Teacher != null)
+                    db.Teachers.Remove(entry.Entity.Teacher);
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
 

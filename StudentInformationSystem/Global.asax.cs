@@ -41,7 +41,7 @@ namespace StudentInformationSystem
 
             if (dct == null)
             { return; }
-            Context.User = new GenericPrincipal(new GenericIdentity(dct["userName"].ToString(), "Forms"), ((ArrayList)dct["roles"]).Cast<string>().ToArray());
+            Context.User = new GenericPrincipal(new GenericIdentity(dct["userName"].ToString(), "Forms"), ((ArrayList)dct["permissions"]).Cast<string>().ToArray());
         }
 
         protected void Application_Error(Object sender, EventArgs e)

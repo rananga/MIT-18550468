@@ -33,6 +33,6 @@ namespace StudentInformationSystem.Areas.Student.Models
 
         public virtual Class Class { get; set; }
         //public virtual PeriodSetup PeriodSetup { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public virtual Data.Models.Teacher Teacher { get; set; }
     }
 }
