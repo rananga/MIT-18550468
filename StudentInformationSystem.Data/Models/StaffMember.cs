@@ -11,8 +11,9 @@ namespace StudentInformationSystem.Data.Models
         {
             HeadingSections = new HashSet<SectionHead>();
             HeadingGrades = new HashSet<GradeHead>();
-            ClassTeachers = new HashSet<ClassTeacher>();
-            ClassSubjects = new HashSet<ClassSubject>();
+            ClassTeachers = new HashSet<CR_Teacher>();
+            ClassSubjects = new HashSet<CR_Subject>();
+            OCR_Teachers = new HashSet<OCR_Teacher>();
         }
 
         [DisplayName("Staff Number"), Required]
@@ -61,7 +62,8 @@ namespace StudentInformationSystem.Data.Models
         public virtual Teacher Teacher { get; set; }
         public virtual ICollection<SectionHead> HeadingSections { get; set; }
         public virtual ICollection<GradeHead> HeadingGrades { get; set; }
-        public virtual ICollection<ClassTeacher> ClassTeachers { get; set; }
-        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }        
+        public virtual ICollection<CR_Teacher> ClassTeachers { get; set; }
+        public virtual ICollection<CR_Subject> ClassSubjects { get; set; }
+        public virtual ICollection<OCR_Teacher> OCR_Teachers { get; set; }
     }
 }

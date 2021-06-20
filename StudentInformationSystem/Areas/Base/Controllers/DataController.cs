@@ -155,6 +155,47 @@ namespace StudentInformationSystem.Areas.Base
             }
         }
 
+        public ActionResult GetGradeClasses(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false)
+        {
+            using (dbNalandaContext dbctx = new dbNalandaContext())
+            {
+                var qry = dbctx.GradeClasses.AsQueryable();
+
+                if (!filter.IsBlank())
+                {
+                    //qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.GradeId.ToString() + (x.GradeHead.Initials + x.GradeHead.LastName).ToString()).ToLower().Contains(filter.ToLower()));
+                    //qry = qry.Where(searchForKey ? "StudID.ToString().Contains(@0)" : "(IndexNo+FullName).ToLower().Contains(@0)", filter.ToLower());
+                }
+
+                int rowCount = qry.Count();
+                if (pageSize <= 0)
+                {
+                    pageSize = 10;
+                    startIndex = 0;
+                }
+
+                if (startIndex > rowCount)
+                { startIndex = 0; }
+
+                if (sortBy.IsBlank())
+                { sortBy = "Grade"; }
+
+                var lstSortColMap = new Dictionary<string, string>()
+                {
+                    { "Id", "Id" } ,
+                    { "Grade", "GradeId" }
+                };
+
+                return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
+                    x => new
+                    {
+                        x.Id,
+                        Grade = x.Grade.GradeNo.ToEnumChar(),
+                        Code = x.Code
+                    });
+            }
+        }
+
         public ActionResult GetSubjects(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int? sectionId = null)
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
@@ -230,13 +271,13 @@ namespace StudentInformationSystem.Areas.Base
                 var lstSortColMap = new Dictionary<string, string>()
                 {
                     { "Id", "Id" } ,
-                    { "Teacher_Name", "Lname" }
+                    { "Teacher_Name", "StaffMember.LastName" }
                 };
 
                 return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
                     x => new
                     {
-                        x.Id,
+                        Id = x.StaffId,
                         Teacher_Name = x.StaffMember.Title + ". " + x.StaffMember.Initials + " " + x.StaffMember.LastName
                     });
             }
@@ -338,7 +379,7 @@ namespace StudentInformationSystem.Areas.Base
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
-                var qry = dbctx.Classes.AsQueryable();
+                var qry = dbctx.ClassRooms.AsQueryable();
 
                 if (PeriodID != 0)
                 {

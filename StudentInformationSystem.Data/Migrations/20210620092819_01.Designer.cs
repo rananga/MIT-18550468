@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentInformationSystem.Data;
 
 namespace StudentInformationSystem.Data.Migrations
 {
     [DbContext(typeof(dbNalandaContext))]
-    partial class dbNalandaContextModelSnapshot : ModelSnapshot
+    [Migration("20210620092819_01")]
+    partial class _01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1887,8 +1889,6 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("SubjectId");
-
                     b.ToTable("StudentBasketSubjects");
                 });
 
@@ -2945,7 +2945,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
                         .WithMany("StudentBasketSubjects")
-                        .HasForeignKey("SubjectId")
+                        .HasForeignKey("StudentId")
                         .HasConstraintName("FK_Subject_StudentBasketSubjects")
                         .IsRequired();
                 });

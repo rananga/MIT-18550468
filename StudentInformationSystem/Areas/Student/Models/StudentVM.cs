@@ -15,15 +15,18 @@ namespace StudentInformationSystem.Areas.Student.Models
             Acheivements = new List<StudentExtraActivityAcheivementVM>();
             Positions = new List<StudentExtraActivityPositionVM>();
             mappings = new ObjMappings<StudentInformationSystem.Data.Models.Student, StudentVM>();
+            BasketSubjects = new List<StudentBasketSubjectVM>();
 
             mappings.Add(x => x.Initials + " " + x.LastName, x => x.NameWithInt);
             mappings.Add(x => x.StudentSiblings.Select(y => new StudSiblingsVM(y)).ToList(), x => x.Siblings);
             mappings.Add(x => x.StudentFamilies.Select(y => new StudFamilyVM(y)).ToList(), x => x.FamilyMembers);
             mappings.Add(x => x.ActivityAcheivements.Select(y => new StudentExtraActivityAcheivementVM(y)).ToList(), x => x.Acheivements);
             mappings.Add(x => x.ActivityPositions.Select(y => new StudentExtraActivityPositionVM(y)).ToList(), x => x.Positions);
+            mappings.Add(x => x.StudentBasketSubjects.Select(y => new StudentBasketSubjectVM(y)).ToList(), x => x.BasketSubjects);
+            mappings.Add(x => x.StudentBasketSubjects.Select(y => y.Subject.Code).AggregateOrDefault((y, z) => y + " | " + z), x => x.AggrBasketSubjects);
         }
 
-        public StudentVM(StudentInformationSystem.Data.Models.Student obj) :this()
+        public StudentVM(StudentInformationSystem.Data.Models.Student obj) : this()
         {
             this.SetEntity(obj);
         }
@@ -32,11 +35,14 @@ namespace StudentInformationSystem.Areas.Student.Models
 
         [DisplayName("Student name")]
         public string NameWithInt { get; set; }
+        [DisplayName("Basket Subjects")]
+        public string AggrBasketSubjects { get; set; }
 
         public HttpPostedFileBase ProfilePic { get; set; }
         public virtual ICollection<StudSiblingsVM> Siblings { get; set; }
         public virtual ICollection<StudFamilyVM> FamilyMembers { get; set; }
         public virtual ICollection<StudentExtraActivityAcheivementVM> Acheivements { get; set; }
         public virtual ICollection<StudentExtraActivityPositionVM> Positions { get; set; }
+        public virtual ICollection<StudentBasketSubjectVM> BasketSubjects { get; set; }
     }
 }

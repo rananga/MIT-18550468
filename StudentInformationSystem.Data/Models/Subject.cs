@@ -10,11 +10,12 @@ namespace StudentInformationSystem.Data.Models
         {
             GradeSubjects = new HashSet<GradeSubject>();
             GradeClassSubjects = new HashSet<GradeClassSubject>();
-            StudentSubjects = new HashSet<ClassStudentSubject>();
+            StudentSubjects = new HashSet<CR_StudentSubject>();
             TeacherPreferedSubjects = new HashSet<TeacherPreferedSubject>();
             TeacherQualificationSubjects = new HashSet<TeacherQualificationSubject>();
-            ClassSubjects = new HashSet<ClassSubject>();
+            ClassSubjects = new HashSet<CR_Subject>();
             StudentBasketSubjects = new HashSet<StudentBasketSubject>();
+            OnlineClassRooms = new HashSet<OnlineClassRoom>();
         }
 
         [DisplayName("Section"), Required]
@@ -33,10 +34,11 @@ namespace StudentInformationSystem.Data.Models
 
         public virtual ICollection<GradeSubject> GradeSubjects { get; set; }
         public virtual ICollection<GradeClassSubject> GradeClassSubjects { get; set; }
-        public virtual ICollection<ClassStudentSubject> StudentSubjects { get; set; }
+        public virtual ICollection<CR_StudentSubject> StudentSubjects { get; set; }
         public virtual ICollection<TeacherPreferedSubject> TeacherPreferedSubjects { get; set; }
         public virtual ICollection<TeacherQualificationSubject> TeacherQualificationSubjects { get; set; }
-        public virtual ICollection<ClassSubject> ClassSubjects { get; set; }
+        public virtual ICollection<CR_Subject> ClassSubjects { get; set; }
         public virtual ICollection<StudentBasketSubject> StudentBasketSubjects { get; set; }
+        public virtual ICollection<OnlineClassRoom> OnlineClassRooms { get; set; }
     }
 }

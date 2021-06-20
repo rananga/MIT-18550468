@@ -9,10 +9,10 @@ namespace StudentInformationSystem.Data.Models
     {
         public Student()
         {
-            ClassStudents = new HashSet<ClassStudent>();
+            ClassStudents = new HashSet<CR_Student>();
             StudentFamilies = new HashSet<StudentFamily>();
             StudentSiblings = new HashSet<StudentSibling>();
-            ClassMonitors = new HashSet<ClassMonitor>();
+            ClassMonitors = new HashSet<CR_Monitor>();
             StudentBasketSubjects = new HashSet<StudentBasketSubject>();
 
             ActivityPositions = new HashSet<StudentExtraActivityPosition>();
@@ -62,10 +62,10 @@ namespace StudentInformationSystem.Data.Models
         [DisplayName("Admitted Class")]
         public int AdmittedClassId { get; set; }
 
-        public virtual ICollection<ClassStudent> ClassStudents { get; set; }
+        public virtual ICollection<CR_Student> ClassStudents { get; set; }
         public virtual ICollection<StudentFamily> StudentFamilies { get; set; }
         public virtual ICollection<StudentSibling> StudentSiblings { get; set; }
-        public virtual ICollection<ClassMonitor> ClassMonitors { get; set; }
+        public virtual ICollection<CR_Monitor> ClassMonitors { get; set; }
         public virtual ICollection<StudentBasketSubject> StudentBasketSubjects { get; set; }
 
         public virtual ICollection<StudentExtraActivityPosition> ActivityPositions { get; set; }

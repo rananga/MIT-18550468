@@ -67,6 +67,8 @@ namespace StudentInformationSystem.Data
         ElderBrother = 0,
         [Description("Younger Brother")]
         YoungerBrother = 1,
+        [Description("Twin Brother")]
+        TwinBrother = 2
     }
     public enum Grades
     {

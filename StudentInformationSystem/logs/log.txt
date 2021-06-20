@@ -1247,3 +1247,17 @@
   
 2021-06-19 04:07:15,437 [8] ERROR ASP.global_asax - Error in https://localhost:44380/Report/OnlineSessionsSummary/Process User: rananga Error Message: A public action method 'Process' was not found on controller 'StudentInformationSystem.Areas.Report.Controllers.OnlineSessionsSummaryController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
   
+2021-06-20 15:00:52,371 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Academic/ClassRoom/Create User: rananga Error Message: The model item passed into the dictionary is of type 'System.Collections.Generic.HashSet`1[StudentInformationSystem.Areas.Academic.Models.CR_SubjectVM]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[StudentInformationSystem.Areas.Academic.Models.CR_TeacherVM]'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-06-20 22:18:47,026 [103] ERROR ASP.global_asax - Error in https://localhost:44380/Academic/Class/Delete User: rananga Error Message: The controller for path '/Academic/Class/Delete' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-20 22:21:39,147 [97] ERROR ASP.global_asax - Error in https://localhost:44380/Student/BasketSubject User: rananga Error Message: The controller for path '/Student/BasketSubject' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-20 23:52:41,708 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/BasketSubject/Create User: rananga Error Message: A public action method 'Create' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.BasketSubjectController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-20 23:56:03,680 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/BasketSubject/Details/1 User: rananga Error Message: The model item passed into the dictionary is of type 'System.Collections.Generic.List`1[StudentInformationSystem.Areas.Student.Models.StudentBasketSubjectVM]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[StudentInformationSystem.Areas.Academic.Models.CR_SubjectVM]'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-06-20 23:57:22,072 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/BasketSubject/Edit/1 User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Student\Views\BasketSubject\Edit.cshtml(23): error CS1061: 'StudentVM' does not contain a definition for 'Code' and no accessible extension method 'Code' accepting a first argument of type 'StudentVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-21 00:10:31,307 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentAttendance User: rananga Error Message: The controller for path '/Report/StudentAttendance' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  

@@ -16,7 +16,7 @@ namespace StudentInformationSystem.Areas.Admin.Models
         {
             DetailsList = new List<UserPermissionVM>();
             mappings = new ObjMappings<User, UserVM>();
-            mappings.Add(x => $"{x.StaffMember.Title.ToEnumChar("")}. {x.StaffMember.Initials.Trim()} {x.StaffMember.LastName}", x => x.SatffName);
+            mappings.Add(x => x.StaffMember == null ? "" : $"{x.StaffMember.Title.ToEnumChar("")}. {x.StaffMember.Initials.Trim()} {x.StaffMember.LastName}", x => x.SatffName);
             mappings.Add(x => x.UserPermissions.Select(y => new UserPermissionVM(y)).ToList(), x => x.DetailsList);
         }
         public UserVM(User obj)

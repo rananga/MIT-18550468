@@ -1,0 +1,53 @@
+﻿@model IEnumerable<StudentInformationSystem.Areas.Student.Models.StudentBasketSubjectVM>
+
+<hr />
+<h3>Class Subjects</h3>
+
+<table class="mGrid">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectName)
+            </th>
+            @{
+                if (ViewBag.IsToEdit)
+                {
+                    <th class="btn-1">
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus' style='color:white'></span>", "Add", "SubjectCreate", routeValues: new { id = ViewBag.StudentId }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-primary pull-right btn-xs", data_title = "Add Basket Subject" })
+                    </th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectName)
+            </td>
+            @{
+                if (ViewBag.IsToEdit)
+                {
+                    <td class="btn-3" style="width:10px">
+                        <div class="btn-toolbar pull-right">
+                            @using (Html.BeginForm("SubjectDelete", "BasketSubject", new { id = item.Id }))
+                            {
+                                @Html.AntiForgeryToken()                                
+                                @Html.ConfirmSubmitButton("<span class='glyphicon glyphicon-trash'></span>", "Are you sure you want to delete?", "Confirm basket subject deletion", "<span class='glyphicon glyphicon-trash'></span> Delete", new { data_popup_delete = "", @class = "btn btn-danger btn-xs" })
+                            }
+                        </div>
+                    </td>
+                }
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+
+@if (ViewBag.IsToEdit)
+{
+    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
+}
+
+

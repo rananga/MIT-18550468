@@ -9,7 +9,7 @@ namespace StudentInformationSystem.Data.Models
         public Teacher()
         {
             HeadingGrades = new HashSet<Grade>();
-            ClassTeachers = new HashSet<Class>();
+            ClassTeachers = new HashSet<ClassRoom>();
             TeacherQualifications = new HashSet<TeacherQualification>();
             TeacherPreferedSubjects = new HashSet<TeacherPreferedSubject>();
         }
@@ -22,7 +22,7 @@ namespace StudentInformationSystem.Data.Models
         public virtual StaffMember StaffMember { get; set; }
         public virtual Section Section { get; set; }
         public virtual ICollection<Grade> HeadingGrades { get; set; }
-        public virtual ICollection<Class> ClassTeachers { get; set; }
+        public virtual ICollection<ClassRoom> ClassTeachers { get; set; }
         public virtual ICollection<TeacherQualification> TeacherQualifications { get; set; }
         public virtual ICollection<TeacherPreferedSubject> TeacherPreferedSubjects { get; set; }
     }
