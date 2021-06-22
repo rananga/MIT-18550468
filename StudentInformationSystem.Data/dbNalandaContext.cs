@@ -95,17 +95,16 @@ namespace StudentInformationSystem.Data
                 new Menu { MenuId = 16, ParentMenuId = 2, DisplaySeq = 20, Text = "Subjects", Type = "I", Area = "Academic", Controller = "Subject", Action = "Index" },
                 new Menu { MenuId = 17, ParentMenuId = 2, DisplaySeq = 30, Text = "Grade Subjects", Type = "I", Area = "Academic", Controller = "GradeSubject", Action = "Index" },
                 new Menu { MenuId = 18, ParentMenuId = 2, DisplaySeq = 40, Text = "Grade Classes", Type = "I", Area = "Academic", Controller = "GradeClass", Action = "Index" },
-                new Menu { MenuId = 19, ParentMenuId = 2, DisplaySeq = 50, Text = "Class Rooms", Type = "I", Area = "Academic", Controller = "ClassRoom", Action = "Index" },
+                new Menu { MenuId = 19, ParentMenuId = 2, DisplaySeq = 50, Text = "Physical Class Rooms", Type = "I", Area = "Academic", Controller = "ClassRoom", Action = "Index" },
                 new Menu { MenuId = 20, ParentMenuId = 3, DisplaySeq = 20, Text = "Teacher Information", Type = "I", Area = "Teacher", Controller = "Teacher", Action = "Index" },
                 new Menu { MenuId = 21, ParentMenuId = 4, DisplaySeq = 10, Text = "Student Maintenance", Type = "I", Area = "Student", Controller = "Student", Action = "Index" },
                 new Menu { MenuId = 22, ParentMenuId = 4, DisplaySeq = 20, Text = "Student Basket Subjects", Type = "I", Area = "Student", Controller = "BasketSubject", Action = "Index" },
                 new Menu { MenuId = 23, ParentMenuId = 4, DisplaySeq = 30, Text = "Student Marks", Type = "I", Area = "Student", Controller = "StudentMark", Action = "Index" },
                 new Menu { MenuId = 24, ParentMenuId = 5, DisplaySeq = 30, Text = "Online Class Rooms", Type = "I", Area = "Student", Controller = "StudentMark", Action = "Index" },
                 new Menu { MenuId = 25, ParentMenuId = 5, DisplaySeq = 30, Text = "Online Time Table", Type = "I", Area = "Student", Controller = "StudentMark", Action = "Index" },
-                new Menu { MenuId = 26, ParentMenuId = 6, DisplaySeq = 30, Text = "Student Attendance", Type = "I", Area = "Report", Controller = "StudentAttendance", Action = "Index" },
-                new Menu { MenuId = 27, ParentMenuId = 6, DisplaySeq = 30, Text = "Attendance By Duration", Type = "I", Area = "Report", Controller = "AttendanceByDuration", Action = "Index" },
-                new Menu { MenuId = 28, ParentMenuId = 6, DisplaySeq = 30, Text = "Term Wise Student Marks", Type = "I", Area = "Report", Controller = "StudentMarks", Action = "Process" },
-                new Menu { MenuId = 29, ParentMenuId = 6, DisplaySeq = 30, Text = "Online Sessions Summary", Type = "I", Area = "Report", Controller = "OnlineSessionsSummary", Action = "Process" });
+                new Menu { MenuId = 26, ParentMenuId = 6, DisplaySeq = 30, Text = "Student Attendance", Type = "I", Area = "Report", Controller = "StudentAttendance", Action = "Process" },
+                new Menu { MenuId = 27, ParentMenuId = 6, DisplaySeq = 30, Text = "Term Wise Student Marks", Type = "I", Area = "Report", Controller = "StudentMarks", Action = "Process" },
+                new Menu { MenuId = 28, ParentMenuId = 6, DisplaySeq = 30, Text = "Online Sessions Summary", Type = "I", Area = "Report", Controller = "OnlineSessionsSummary", Action = "Process" });
 
             modelBuilder.Entity<PermissionMenuAccess>().HasData(
                 new PermissionMenuAccess { MenuId = 1, PermissionId = 1 }
@@ -141,6 +140,112 @@ namespace StudentInformationSystem.Data
                new Subject { Id = 3, Code = "Geography", SectionId = 3, SubjectCategoryId = 2, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
                new Subject { Id = 4, Code = "Dancing", SectionId = 3, SubjectCategoryId = 3, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
                new Subject { Id = 5, Code = "ICT", SectionId = 3, SubjectCategoryId = 4, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
+
+            modelBuilder.Entity<Student>().HasData(
+               new Student { Id = 1, IndexNo = 29013, FullName = "A J M T A Jayasundara", Initials = "A J M T A", LastName = "Jayasundara", SchoolEmail = "29013@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-17"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 2, IndexNo = 28953, FullName = "A U N De Silva", Initials = "A U N De", LastName = "Silva", SchoolEmail = "28953@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 3, IndexNo = 28948, FullName = "B L R Abedeera", Initials = "B L R", LastName = "Abedeera", SchoolEmail = "28948@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-15"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 4, IndexNo = 29043, FullName = "B M T Silva", Initials = "B M T", LastName = "Silva", SchoolEmail = "29043@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 5, IndexNo = 29028, FullName = "B W K M Peeris", Initials = "B W K M", LastName = "Peeris", SchoolEmail = "29028@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 6, IndexNo = 29049, FullName = "Chenuk Manthila P S", Initials = "Chenuk", LastName = "Manthila P S", SchoolEmail = "29049@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-10"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 7, IndexNo = 29023, FullName = "D C A Dias", Initials = "D C A", LastName = "Dias", SchoolEmail = "29023@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 8, IndexNo = 28988, FullName = "D J M K N Serasingha", Initials = "D J M K N", LastName = "Serasingha", SchoolEmail = "28988@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 9, IndexNo = 28941, FullName = "D M K S Liyanage", Initials = "D M K S", LastName = "Liyanage", SchoolEmail = "28941@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 10, IndexNo = 28926, FullName = "D M L Dasanayake", Initials = "D M L", LastName = "Dasanayake", SchoolEmail = "28926@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-05-11"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 11, IndexNo = 28963, FullName = "D N Gunasena", Initials = "D N", LastName = "Gunasena", SchoolEmail = "28963@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-16"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 12, IndexNo = 28983, FullName = "D W O D De Silva", Initials = "D W O D De", LastName = "Silva", SchoolEmail = "28983@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-14"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 13, IndexNo = 28921, FullName = "E H H Nethsara", Initials = "E H H", LastName = "Nethsara", SchoolEmail = "28921@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-05-29"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 14, IndexNo = 28896, FullName = "H A S Asmitha", Initials = "H A S", LastName = "Asmitha", SchoolEmail = "28896@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-11"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 15, IndexNo = 28911, FullName = "H L S Dulsara", Initials = "H L S", LastName = "Dulsara", SchoolEmail = "28911@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-05-16"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 16, IndexNo = 29018, FullName = "I U Roopasingha", Initials = "I U", LastName = "Roopasingha", SchoolEmail = "29018@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 17, IndexNo = 28998, FullName = "K A D Sanketh", Initials = "K A D", LastName = "Sanketh", SchoolEmail = "28998@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-17"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 18, IndexNo = 28916, FullName = "K A M Menath", Initials = "K A M", LastName = "Menath", SchoolEmail = "28916@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 19, IndexNo = 28891, FullName = "L G T S Samarasingha", Initials = "L G T S", LastName = "Samarasingha", SchoolEmail = "28891@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-14"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 20, IndexNo = 29033, FullName = "M K G Darmasiri", Initials = "M K G", LastName = "Darmasiri", SchoolEmail = "29033@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-07"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 21, IndexNo = 29038, FullName = "N H E De Silava", Initials = "N H E De", LastName = "Silava", SchoolEmail = "29038@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 22, IndexNo = 28901, FullName = "R V D R R Perera", Initials = "R V D R R", LastName = "Perera", SchoolEmail = "28901@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-05-19"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 23, IndexNo = 29008, FullName = "S A J Pathirana", Initials = "S A J", LastName = "Pathirana", SchoolEmail = "29008@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-16"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 24, IndexNo = 29003, FullName = "S H V Sanith", Initials = "S H V", LastName = "Sanith", SchoolEmail = "29003@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-20"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 25, IndexNo = 28973, FullName = "S I Kiriwandeniya", Initials = "S I", LastName = "Kiriwandeniya", SchoolEmail = "28973@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-15"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 26, IndexNo = 28931, FullName = "S L D Karunathilaka", Initials = "S L D", LastName = "Karunathilaka", SchoolEmail = "28931@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-12"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 27, IndexNo = 28958, FullName = "S O Leelarathna", Initials = "S O", LastName = "Leelarathna", SchoolEmail = "28958@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-05-31"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 28, IndexNo = 28968, FullName = "S T Ranwala", Initials = "S T", LastName = "Ranwala", SchoolEmail = "28968@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 29, IndexNo = 28978, FullName = "T D A Gunawardana", Initials = "T D A", LastName = "Gunawardana", SchoolEmail = "28978@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 30, IndexNo = 28993, FullName = "V A D Dilsara", Initials = "V A D", LastName = "Dilsara", SchoolEmail = "28993@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-05-07"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 31, IndexNo = 28906, FullName = "V K Almeda", Initials = "V K", LastName = "Almeda", SchoolEmail = "28906@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-11"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new Student { Id = 32, IndexNo = 28936, FullName = "W G T M Gamage", Initials = "W G T M", LastName = "Gamage", SchoolEmail = "28936@nalandacollege.info", AdmissionDate = DateTime.Parse("2021-06-18"), CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) });
+
+            modelBuilder.Entity<GradeClass>().HasData(
+               new GradeClass { Id = 1, GradeId = 1, Name = Classes.A, Code = "1.A", CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) });
+
+            modelBuilder.Entity<ClassRoom>().HasData(
+               new ClassRoom { Id = 1, Year = 2021, GradeClassId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) });
+
+            modelBuilder.Entity<CR_Student>().HasData(
+               new CR_Student { Id = 1, CR_Id = 1, StudentId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 2, CR_Id = 1, StudentId = 2, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 3, CR_Id = 1, StudentId = 3, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 4, CR_Id = 1, StudentId = 4, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 5, CR_Id = 1, StudentId = 5, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 6, CR_Id = 1, StudentId = 6, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 7, CR_Id = 1, StudentId = 7, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 8, CR_Id = 1, StudentId = 8, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 9, CR_Id = 1, StudentId = 9, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 10, CR_Id = 1, StudentId = 10, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 11, CR_Id = 1, StudentId = 11, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 12, CR_Id = 1, StudentId = 12, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 13, CR_Id = 1, StudentId = 13, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 14, CR_Id = 1, StudentId = 14, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 15, CR_Id = 1, StudentId = 15, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 16, CR_Id = 1, StudentId = 16, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 17, CR_Id = 1, StudentId = 17, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 18, CR_Id = 1, StudentId = 18, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 19, CR_Id = 1, StudentId = 19, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 20, CR_Id = 1, StudentId = 20, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 21, CR_Id = 1, StudentId = 21, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 22, CR_Id = 1, StudentId = 22, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 23, CR_Id = 1, StudentId = 23, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 24, CR_Id = 1, StudentId = 24, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 25, CR_Id = 1, StudentId = 25, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 26, CR_Id = 1, StudentId = 26, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 27, CR_Id = 1, StudentId = 27, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 28, CR_Id = 1, StudentId = 28, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 29, CR_Id = 1, StudentId = 29, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 30, CR_Id = 1, StudentId = 30, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 31, CR_Id = 1, StudentId = 31, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new CR_Student { Id = 32, CR_Id = 1, StudentId = 32, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) });
+
+            modelBuilder.Entity<OnlineClassRoom>().HasData(
+               new OnlineClassRoom { Id = 1, Year = 2021, GradeId = 1, SubjectId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) });
+
+            modelBuilder.Entity<OCR_ClassRoom>().HasData(
+               new OCR_ClassRoom { Id = 1, OCR_Id = 1, CR_Id = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) });
+
+            modelBuilder.Entity<OCR_Teacher>().HasData(
+               new OCR_Teacher { Id = 1, OCR_Id = 1, StaffId = 1, IsOwner = true, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) });
+
+            modelBuilder.Entity<OnlineClass>().HasData(
+               new OnlineClass { Id = 1, OCR_Id = 1, Date = new DateTime(2021, 6, 1), FromTime = new TimeSpan(17, 00, 0), ToTime = new TimeSpan(18, 30, 0), OCR_TeacherId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OnlineClass { Id = 2, OCR_Id = 1, Date = new DateTime(2021, 6, 3), FromTime = new TimeSpan(17, 00, 0), ToTime = new TimeSpan(18, 30, 0), OCR_TeacherId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OnlineClass { Id = 3, OCR_Id = 1, Date = new DateTime(2021, 6, 4), FromTime = new TimeSpan(17, 00, 0), ToTime = new TimeSpan(18, 30, 0), OCR_TeacherId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OnlineClass { Id = 4, OCR_Id = 1, Date = new DateTime(2021, 6, 7), FromTime = new TimeSpan(17, 00, 0), ToTime = new TimeSpan(18, 30, 0), OCR_TeacherId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OnlineClass { Id = 5, OCR_Id = 1, Date = new DateTime(2021, 6, 8), FromTime = new TimeSpan(17, 00, 0), ToTime = new TimeSpan(18, 30, 0), OCR_TeacherId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OnlineClass { Id = 6, OCR_Id = 1, Date = new DateTime(2021, 6, 10), FromTime = new TimeSpan(17, 00, 0), ToTime = new TimeSpan(18, 30, 0), OCR_TeacherId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OnlineClass { Id = 7, OCR_Id = 1, Date = new DateTime(2021, 6, 11), FromTime = new TimeSpan(17, 00, 0), ToTime = new TimeSpan(18, 30, 0), OCR_TeacherId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OnlineClass { Id = 8, OCR_Id = 1, Date = new DateTime(2021, 6, 14), FromTime = new TimeSpan(17, 00, 0), ToTime = new TimeSpan(18, 30, 0), OCR_TeacherId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OnlineClass { Id = 9, OCR_Id = 1, Date = new DateTime(2021, 6, 15), FromTime = new TimeSpan(17, 00, 0), ToTime = new TimeSpan(18, 30, 0), OCR_TeacherId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OnlineClass { Id = 10, OCR_Id = 1, Date = new DateTime(2021, 6, 17), FromTime = new TimeSpan(17, 00, 0), ToTime = new TimeSpan(18, 30, 0), OCR_TeacherId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OnlineClass { Id = 11, OCR_Id = 1, Date = new DateTime(2021, 6, 18), FromTime = new TimeSpan(17, 00, 0), ToTime = new TimeSpan(18, 30, 0), OCR_TeacherId = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) });
+
+            modelBuilder.Entity<OC_Meeting>().HasData(
+               new OC_Meeting { Id = 1, OC_Id = 1, MeetingCode = "MYEWAPPSOO", CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OC_Meeting { Id = 2, OC_Id = 2, MeetingCode = "ASQWCRTUFF", CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OC_Meeting { Id = 3, OC_Id = 3, MeetingCode = "IGIPEICFEK", CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) });
+
+            modelBuilder.Entity<OC_MeetingAttendee>().HasData(
+               new OC_MeetingAttendee { Id = 1, OC_MeetingId = 1, StudentId = 1, Duration = 5110, TimesVisited = 1, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OC_MeetingAttendee { Id = 2, OC_MeetingId = 2, StudentId = 11, Duration = 4879, TimesVisited = 2, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) },
+               new OC_MeetingAttendee { Id = 3, OC_MeetingId = 3, StudentId = 21, Duration = 4805, TimesVisited = 4, CreatedBy = "System", CreatedDate = new DateTime(2021, 7, 1) });
         }
 
         public override int SaveChanges()

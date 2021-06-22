@@ -1,0 +1,58 @@
+﻿@model List<StudentInformationSystem.Data.Models.Grade>
+
+<style type="text/css">
+    ul.tree, ul.tree ul {
+        list-style-type: none;
+        background: url(/Content/Images/vline.png) repeat-y;
+        margin: 0;
+        padding: 0;
+    }
+
+        ul.tree ul {
+            margin-left: 10px;
+        }
+
+        ul.tree li {
+            margin: 5px 0 5px 0;
+            padding: 0 12px;
+            line-height: 20px;
+            background: url(/Content/Images/node.png) no-repeat;
+            color: #369;
+            font-weight: bold;
+        }
+
+            ul.tree li:last-child {
+                background: #fff url(/Content/Images/lastnode.png) no-repeat;
+            }
+
+        ul.tree span.glyphicon {
+            cursor: pointer;
+        }
+</style>
+
+<hr />
+<h3>Grades</h3>
+
+<p>
+    <div class="btn-toolbar">
+        @if (ViewBag.IsToEdit)
+        {
+            <button id="btnCheckAllGrades" type="button" class="btn btn-default">Check All</button>
+            <button id="btnUnchkAllGrades" type="button" class="btn btn-default">Uncheck All</button>
+        }
+    </div>
+</p>
+
+<div>
+    <ul class="tree" id="tree_grade">
+        @foreach (var grade in Model)
+        {
+            <li data-grade-id="@grade.Id"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span> @grade.GradeNo.ToEnumChar()</li>
+        }
+    </ul>
+</div>
+
+@if (ViewBag.IsToEdit)
+{
+    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
+}

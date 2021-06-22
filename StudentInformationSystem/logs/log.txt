@@ -1261,3 +1261,39 @@
   
 2021-06-21 00:10:31,307 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentAttendance User: rananga Error Message: The controller for path '/Report/StudentAttendance' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
   
+2021-06-22 10:57:29,425 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentAttendance/Process User: rananga Error Message: The view 'Process' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Report/Views/StudentAttendance/Process.aspx
+~/Areas/Report/Views/StudentAttendance/Process.ascx
+~/Areas/Report/Views/Shared/Process.aspx
+~/Areas/Report/Views/Shared/Process.ascx
+~/Views/StudentAttendance/Process.aspx
+~/Views/StudentAttendance/Process.ascx
+~/Views/Shared/Process.aspx
+~/Views/Shared/Process.ascx
+~/Areas/Report/Views/StudentAttendance/Process.cshtml
+~/Areas/Report/Views/StudentAttendance/Process.vbhtml
+~/Areas/Report/Views/Shared/Process.cshtml
+~/Areas/Report/Views/Shared/Process.vbhtml
+~/Views/StudentAttendance/Process.cshtml
+~/Views/StudentAttendance/Process.vbhtml
+~/Views/Shared/Process.cshtml
+~/Views/Shared/Process.vbhtml Line:    at System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+  
+2021-06-22 13:17:37,902 [5] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentAttendance/ByDuration User: rananga Error Message: The view 'ByDuration' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Report/Views/StudentAttendance/ByDuration.aspx
+~/Areas/Report/Views/StudentAttendance/ByDuration.ascx
+~/Areas/Report/Views/Shared/ByDuration.aspx
+~/Areas/Report/Views/Shared/ByDuration.ascx
+~/Views/StudentAttendance/ByDuration.aspx
+~/Views/StudentAttendance/ByDuration.ascx
+~/Views/Shared/ByDuration.aspx
+~/Views/Shared/ByDuration.ascx
+~/Areas/Report/Views/StudentAttendance/ByDuration.cshtml
+~/Areas/Report/Views/StudentAttendance/ByDuration.vbhtml
+~/Areas/Report/Views/Shared/ByDuration.cshtml
+~/Areas/Report/Views/Shared/ByDuration.vbhtml
+~/Views/StudentAttendance/ByDuration.cshtml
+~/Views/StudentAttendance/ByDuration.vbhtml
+~/Views/Shared/ByDuration.cshtml
+~/Views/Shared/ByDuration.vbhtml Line:    at System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+  

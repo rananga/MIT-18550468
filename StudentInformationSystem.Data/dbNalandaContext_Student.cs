@@ -92,6 +92,13 @@ namespace StudentInformationSystem.Data
                     .IsRequired()
                     .IsRowVersion()
                     .IsConcurrencyToken();
+
+                entity.Property(e => e.DOB).IsRequired(false);
+                entity.Property(e => e.Address1).IsRequired(false);
+                entity.Property(e => e.City).IsRequired(false);
+                entity.Property(e => e.EmergContactName).IsRequired(false);
+                entity.Property(e => e.EmergContactNo).IsRequired(false);
+                entity.Property(e => e.EmergContactNo).IsRequired(false);
             });
 
             modelBuilder.Entity<StudentBasketSubject>(entity =>

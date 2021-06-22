@@ -6,10 +6,12 @@
 
   <ItemGroup>
     <None Remove="Reports\OnlineSessionsSummary.rdlc" />
+    <None Remove="Reports\StudentAttendance.rdlc" />
     <None Remove="Reports\StudentMarks.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Reports\StudentAttendance.rdlc" />
     <EmbeddedResource Include="Reports\OnlineSessionsSummary.rdlc" />
   </ItemGroup>
 

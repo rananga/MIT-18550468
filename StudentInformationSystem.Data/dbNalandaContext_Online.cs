@@ -11,12 +11,99 @@ namespace StudentInformationSystem.Data
 {
     public partial class dbNalandaContext : DbContext
     {
-        public virtual DbSet<OnlineClassRoom> OnlineClassRooms { get; set; }
+        public virtual DbSet<OC_Meeting> OC_Meetings { get; set; }
+        public virtual DbSet<OC_MeetingAttendee> OC_MeetingAttendees { get; set; }
         public virtual DbSet<OCR_ClassRoom> OCR_ClassRooms { get; set; }
         public virtual DbSet<OCR_Teacher> OCR_Teachers { get; set; }
+        public virtual DbSet<OnlineClassRoom> OnlineClassRooms { get; set; }
+        public virtual DbSet<OnlineClass> OnlineClasses { get; set; }
 
         partial void OnModelCreatingPartial_Online(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<OC_Meeting>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.OnlineClass)
+                    .WithMany(p => p.OC_Meetings)
+                    .HasForeignKey(d => d.OC_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OnlineClass_OC_Meetings");
+            });
+
+            modelBuilder.Entity<OC_MeetingAttendee>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.OC_Meeting)
+                    .WithMany(p => p.OC_MeetingAttendees)
+                    .HasForeignKey(d => d.OC_MeetingId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OC_Meeting_OC_MeetingAttendees");
+            });
+
+            modelBuilder.Entity<OCR_ClassRoom>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.OnlineClassRoom)
+                    .WithMany(p => p.OCR_ClassRooms)
+                    .HasForeignKey(d => d.OCR_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OnlineClassRoom_OCR_ClassRooms");
+
+                entity.HasOne(d => d.ClassRoom)
+                    .WithMany(p => p.OCR_ClassRooms)
+                    .HasForeignKey(d => d.CR_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ClassRoom_OCR_ClassRooms");
+            });
+
+            modelBuilder.Entity<OCR_Teacher>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.OnlineClassRoom)
+                    .WithMany(p => p.ClassTeachers)
+                    .HasForeignKey(d => d.OCR_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OnlineClassRoom_ClassTeachers");
+
+                entity.HasOne(d => d.ClassTeacher)
+                    .WithMany(p => p.OCR_Teachers)
+                    .HasForeignKey(d => d.StaffId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ClassTeacher_OCR_Teachers");
+            });
+
             modelBuilder.Entity<OnlineClassRoom>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -41,7 +128,7 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_Subject_OnlineClassRooms");
             });
 
-            modelBuilder.Entity<OCR_ClassRoom>(entity =>
+            modelBuilder.Entity<OnlineClass>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -52,29 +139,17 @@ namespace StudentInformationSystem.Data
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
-                entity.HasOne(d => d.ClassRoom)
-                    .WithMany(p => p.OCR_ClassRooms)
-                    .HasForeignKey(d => d.CR_Id)
+                entity.HasOne(d => d.OnlineClassRoom)
+                    .WithMany(p => p.OnlineClasses)
+                    .HasForeignKey(d => d.OCR_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ClassRoom_OCR_ClassRooms");
-            });
+                    .HasConstraintName("FK_OnlineClassRoom_OnlineClasses");
 
-            modelBuilder.Entity<OCR_Teacher>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.CreatedBy).IsRequired();
-
-                entity.Property(e => e.RowVersion)
-                    .IsRequired()
-                    .IsRowVersion()
-                    .IsConcurrencyToken();
-
-                entity.HasOne(d => d.StaffMember)
-                    .WithMany(p => p.OCR_Teachers)
-                    .HasForeignKey(d => d.StaffId)
+                entity.HasOne(d => d.OCR_Teacher)
+                    .WithMany(p => p.OnlineClasses)
+                    .HasForeignKey(d => d.OCR_TeacherId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_StaffMember_OCR_Teachers");
+                    .HasConstraintName("FK_OCR_Teacher_OnlineClasses");
             });
         }
     }

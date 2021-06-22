@@ -1,0 +1,32 @@
+﻿@model StudentInformationSystem.Areas.Report.Models.ReportParameterVM
+
+@{
+    ViewBag.Title = "Term Wise Student Marks";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmReport" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <br />
+        <p>
+            @Html.ConfirmSubmitButton("Generate PDF", "PDF Document will be downloaded to your computer. Please find it once the download is completed.",
+                                        "Confirm Generate PDF", "<span class='bi bi-hand-thumbs-up'></span> Generate",
+                                        new { @class = "btn btn-primary", style = "min-width:75px" }, "btn-success")
+
+            @Html.ConfirmSubmitButton("Generate Excel Sheet", "Excel Sheet will be downloaded to your computer. Please find once the download is completed.",
+                                                 "Confirm Generate Excel Sheet", "<span class='bi bi-hand-thumbs-up'></span> Generate",
+                                                 new { @class = "btn btn-success", style = "min-width:75px" }, "btn-success", "Excel")
+        </p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ByDuration, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.ByDuration, new { htmlAttributes = new { @class = "form-checkbox" } })
+                @Html.ValidationMessageFor(model => model.ByDuration, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+}
+

@@ -15,6 +15,7 @@
         </p>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.MenusJson)
+        @Html.HiddenFor(model => model.GradesJson)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -22,8 +23,8 @@
                 @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
             </div>
-        </div> 
-         <div class="form-group">
+        </div>
+        <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
@@ -33,8 +34,13 @@
     </div>
 }
 
-<div class="ChildContent">
-    @{ Html.RenderAction("ChildIndex", new { id = Model.PermissionId, isToEdit = true }); }
+<div class="row">
+    <div class="ChildContent col-md-6">
+        @{ Html.RenderAction("ChildIndex", new { id = Model.PermissionId, isToEdit = true }); }
+    </div>
+    <div class="ChildContent col-md-6">
+        @{ Html.RenderAction("GradeIndex", new { id = Model.PermissionId, isToEdit = true }); }
+    </div>
 </div>
 
 <div>

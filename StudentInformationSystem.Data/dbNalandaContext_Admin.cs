@@ -11,6 +11,7 @@ namespace StudentInformationSystem.Data
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<GradeHead> GradeHeads { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<PermissionGradeAccess> PermissionGradeAccesses { get; set; }
         public virtual DbSet<PermissionMenuAccess> PermissionMenuAccesses { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Section> Sections { get; set; }
@@ -128,6 +129,23 @@ namespace StudentInformationSystem.Data
                     .WithMany(p => p.InverseParentMenu)
                     .HasForeignKey(d => d.ParentMenuId)
                     .HasConstraintName("FK_MenuMenu");
+            });
+
+            modelBuilder.Entity<PermissionGradeAccess>(entity =>
+            {
+                entity.HasKey(e => new { e.GradeId, e.PermissionId });
+
+                entity.HasOne(d => d.Grade)
+                    .WithMany(p => p.PermissionGradeAccesses)
+                    .HasForeignKey(d => d.GradeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Grade_PermissionGradeAccesses");
+
+                entity.HasOne(d => d.Permission)
+                    .WithMany(p => p.PermissionGradeAccesses)
+                    .HasForeignKey(d => d.PermissionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Permission_PermissionGradeAccesses");
             });
 
             modelBuilder.Entity<PermissionMenuAccess>(entity =>

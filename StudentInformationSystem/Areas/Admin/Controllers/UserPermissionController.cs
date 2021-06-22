@@ -67,6 +67,14 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                     {
                         obj.PermissionMenuAccesses.Add(new PermissionMenuAccess() { PermissionId = obj.PermissionId, MenuId = det });
                     }
+
+                    var grdLst = permission.GradesJson.DeserializeJson<List<int>>();
+
+                    foreach (var det in grdLst)
+                    {
+                        obj.PermissionGradeAccesses.Add(new PermissionGradeAccess() { PermissionId = obj.PermissionId, GradeId = det });
+                    }
+
                     db.SaveChanges();
 
                     AddAlert(AlertStyles.success, "User permission created successfully.");
@@ -131,6 +139,15 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                         obj.PermissionMenuAccesses.Add(new PermissionMenuAccess() { PermissionId = obj.PermissionId, MenuId = det });
                     }
 
+                    var grdLst = permission.GradesJson.DeserializeJson<List<int>>();
+
+                    db.PermissionGradeAccesses.RemoveRange(obj.PermissionGradeAccesses.Where(x => !grdLst.Contains(x.GradeId)));
+                    grdLst = grdLst.Except(obj.PermissionGradeAccesses.Select(x => x.GradeId)).ToList();
+                    foreach (var det in grdLst)
+                    {
+                        obj.PermissionGradeAccesses.Add(new PermissionGradeAccess() { PermissionId = obj.PermissionId, GradeId = det });
+                    }
+
                     db.SaveChanges();
 
                     AddAlert(AlertStyles.success, "User Permission modified successfully.");
@@ -165,6 +182,8 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 entry.State = EntityState.Unchanged;
                 entry.Collection(x => x.PermissionMenuAccesses).Load();
                 db.PermissionMenuAccesses.RemoveRange(entry.Entity.PermissionMenuAccesses);
+                entry.Collection(x => x.PermissionGradeAccesses).Load();
+                db.PermissionGradeAccesses.RemoveRange(entry.Entity.PermissionGradeAccesses);
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
@@ -207,6 +226,32 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             ViewBag.IsToEdit = isToEdit;
             ViewBag.PermissionID = obj.PermissionId;
             return PartialView("_ChildIndex", obj.MenusList);
+        }
+
+        public ActionResult GradeIndex(int? id, bool isToEdit = false)
+        {
+            PermissionVM obj;
+
+            if (isToEdit && Session[sskCrtdObj] is PermissionVM)
+            { obj = (PermissionVM)Session[sskCrtdObj]; }
+            else
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Permission permission = db.Permissions.Where(x => x.PermissionId == id).FirstOrDefault();
+                if (permission == null)
+                {
+                    return HttpNotFound();
+                }
+                obj = new PermissionVM(permission);
+            }
+            var gradesList = db.Grades.ToList();
+
+            ViewBag.IsToEdit = isToEdit;
+            ViewBag.PermissionID = obj.PermissionId;
+            return PartialView("_GradeIndex", gradesList);
         }
     }
 }

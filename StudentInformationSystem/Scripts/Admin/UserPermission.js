@@ -3,24 +3,34 @@
     var btnColapsAll = $('#btnColapsAll');
     var btnCheckAll = $('#btnCheckAll');
     var btnUnchkAll = $('#btnUnchkAll');
+    var btnCheckAllGrades = $('#btnCheckAllGrades');
+    var btnUnchkAllGrades = $('#btnUnchkAllGrades');
     var btnSave = $('#btnSave');
     var menusJson = $('#MenusJson');
+    var gradesJson = $('#GradesJson');
+    var ulTreeMenu = $('ul.tree#tree_menu');
+    var ulTreeGrade = $('ul.tree#tree_grade');
 
     btnSave.click(function () {
         event.preventDefault();
         var menus = [];
+        var grades = [];
 
-        $('.glyphicon-check,.glyphicon-expand', ulTree).each(function () {
+        $('.glyphicon-check,.glyphicon-expand', ulTreeMenu).each(function () {
             menus.push($(this).parent('li').data('menu-id'));
         });
         menusJson.val(JSON.stringify(menus));
 
+        $('.glyphicon-check,.glyphicon-expand', ulTreeGrade).each(function () {
+            grades.push($(this).parent('li').data('grade-id'));
+        });
+        gradesJson.val(JSON.stringify(grades));
+
         $(this).closest('form').submit();
     });
 
-    var ulTree = $('ul.tree');
 
-    $('.glyphicon', ulTree).each(function () {
+    $('.glyphicon', ulTreeMenu).add('.glyphicon', ulTreeGrade).each(function () {
         var icn = $(this);
         var li = icn.parent('li');
         icn.click(function () {
@@ -42,19 +52,27 @@
     });
 
     btnExpAll.click(function () {
-        ulTree.children('li').each(function () { exapndNode($(this)) });
+        ulTreeMenu.children('li').each(function () { exapndNode($(this)) });
     });
 
     btnColapsAll.click(function () {
-        ulTree.children('li').each(function () { collapseNode($(this)) });
+        ulTreeMenu.children('li').each(function () { collapseNode($(this)) });
     });
 
     btnCheckAll.click(function () {
-        ulTree.children('li').each(function () { checkNode($(this)) });
+        ulTreeMenu.children('li').each(function () { checkNode($(this)) });
     });
 
     btnUnchkAll.click(function () {
-        ulTree.children('li').each(function () { uncheckNode($(this)) });
+        ulTreeMenu.children('li').each(function () { uncheckNode($(this)) });
+    });
+
+    btnCheckAllGrades.click(function () {
+        ulTreeGrade.children('li').each(function () { checkNode($(this)) });
+    });
+
+    btnUnchkAllGrades.click(function () {
+        ulTreeGrade.children('li').each(function () { uncheckNode($(this)) });
     });
 
     function exapndNode(node) {
@@ -140,27 +158,48 @@
         setIndeterminate(prnt);
     }
 
-    function setFromJson() {
-        var val = $('#MenusJson').val();
+    function setMenusFromJson() {
+        var val = menusJson.val();
         if (!IsJson(val)) {
             return;
         }
         var jsn = JSON.parse(val);
 
-        ulTree.children('li').each(function () { checkNode($(this)) });
+        ulTreeMenu.children('li').each(function () { checkNode($(this)) });
 
-        $('li[data-menu-id]', ulTree).each(function () {
+        $('li[data-menu-id]', ulTreeMenu).each(function () {
             var li = $(this);
             if (li.children('ul').length > 0)
             { return;}
 
-            if ($.inArray(li.data('menu-id'), jsn) > 0)
+            if ($.inArray(li.data('menu-id'), jsn) >= 0)
             { checkNode(li); }
             else
             { uncheckNode(li); }
         });
 
-        $('ul > li:first-child', ulTree).each(function () { setIndeterminate($(this)) });
+        $('ul > li:first-child', ulTreeMenu).each(function () { setIndeterminate($(this)) });
     }
-    setFromJson();
+
+    function setGradesFromJson() {
+        var val = gradesJson.val();
+        if (!IsJson(val)) {
+            return;
+        }
+        var jsn = JSON.parse(val);
+
+        ulTreeGrade.children('li').each(function () { checkNode($(this)) });
+
+        $('li[data-grade-id]', ulTreeGrade).each(function () {
+            var li = $(this);
+            if (li.children('ul').length > 0) { return; }
+
+            if ($.inArray(li.data('grade-id'), jsn) >= 0) { checkNode(li); }
+            else { uncheckNode(li); }
+        });
+
+        $('ul > li:first-child', ulTreeGrade).each(function () { setIndeterminate($(this)) });
+    }
+    setMenusFromJson();
+    setGradesFromJson();
 });

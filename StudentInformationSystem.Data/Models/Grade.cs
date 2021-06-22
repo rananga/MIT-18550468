@@ -12,6 +12,7 @@ namespace StudentInformationSystem.Data.Models
             GradeSubjects = new HashSet<GradeSubject>();
             GradeClasses = new HashSet<GradeClass>();
             OnlineClassRooms = new HashSet<OnlineClassRoom>();
+            PermissionGradeAccesses = new HashSet<PermissionGradeAccess>();
         }
 
         [DisplayName("Section"), Required]
@@ -26,5 +27,6 @@ namespace StudentInformationSystem.Data.Models
         public virtual ICollection<GradeSubject> GradeSubjects { get; set; }
         public virtual ICollection<GradeClass> GradeClasses { get; set; }
         public virtual ICollection<OnlineClassRoom> OnlineClassRooms { get; set; }
+        public virtual ICollection<PermissionGradeAccess> PermissionGradeAccesses { get; set; }
     }
 }

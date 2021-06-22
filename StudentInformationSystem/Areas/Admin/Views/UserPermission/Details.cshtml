@@ -11,6 +11,7 @@
         @Html.HiddenFor(model => model.PermissionId)
         @Html.HiddenFor(model => model.RowVersion)
         @Html.HiddenFor(model => model.MenusJson)
+        @Html.HiddenFor(model => model.GradesJson)
         @Html.AntiForgeryToken()
         <p>
             <div class="btn-toolbar">
@@ -37,8 +38,15 @@
     </div>
 </div>
 
-<div class="ChildContent">
-    @{ Html.RenderAction("ChildIndex", new { id = Model.PermissionId }); }
+
+
+<div class="row">
+    <div class="ChildContent col-md-6">
+        @{ Html.RenderAction("ChildIndex", new { id = Model.PermissionId }); }
+    </div>
+    <div class="ChildContent col-md-6">
+        @{ Html.RenderAction("GradeIndex", new { id = Model.PermissionId }); }
+    </div>
 </div>
 
 <p>

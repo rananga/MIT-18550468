@@ -15,6 +15,7 @@ namespace StudentInformationSystem.Areas.Admin.Models
             mappings = new ObjMappings<Permission, PermissionVM>();
             mappings.Add(x => x.PermissionMenuAccesses.Select(y => y.Menu).ToList(), x => x.MenusList);
             mappings.Add(x => x.PermissionMenuAccesses.Select(y => y.MenuId).SerializeToJson(), x => x.MenusJson);
+            mappings.Add(x => x.PermissionGradeAccesses.Select(y => y.GradeId).SerializeToJson(), x => x.GradesJson);
         }
         public PermissionVM(Permission obj)
             : this()
@@ -26,5 +27,6 @@ namespace StudentInformationSystem.Areas.Admin.Models
 
         public List<Menu> MenusList { get; set; }
         public string MenusJson { get; set; }
+        public string GradesJson { get; set; }
     }
 }

@@ -340,6 +340,7 @@
     <Compile Include="Areas\Admin\Models\GradeHeadVM.cs" />
     <Compile Include="Areas\Admin\Models\SectionHeadVM.cs" />
     <Compile Include="Areas\Report\Controllers\OnlineSessionsSummaryController.cs" />
+    <Compile Include="Areas\Report\Controllers\StudentAttendanceController.cs" />
     <Compile Include="Areas\Report\Controllers\StudentMarksController.cs" />
     <Compile Include="Areas\Online\OnlineAreaRegistration.cs" />
     <Compile Include="Areas\Report\Models\ReportParameterVM.cs" />
@@ -624,6 +625,8 @@
     <Content Include="Areas\Student\Views\BasketSubject\_SubjectCreate.cshtml" />
     <Content Include="Areas\Student\Views\BasketSubject\_SubjectIndex.cshtml" />
     <Content Include="Areas\Student\Views\BasketSubject\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UserPermission\_GradeIndex.cshtml" />
+    <Content Include="Areas\Report\Views\StudentAttendance\Process.cshtml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - Web Deploy.pubxml" />

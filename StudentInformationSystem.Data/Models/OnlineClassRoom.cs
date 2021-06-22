@@ -8,8 +8,10 @@ namespace StudentInformationSystem.Data.Models
     {
         public OnlineClassRoom()
         {
-            ClassRooms = new HashSet<OCR_ClassRoom>();
+            PhysicalClassRooms = new HashSet<OCR_ClassRoom>();
             ClassTeachers = new HashSet<OCR_Teacher>();
+            OCR_ClassRooms = new HashSet<OCR_ClassRoom>();
+            OnlineClasses = new HashSet<OnlineClass>();
         }
 
         [Required]
@@ -23,7 +25,9 @@ namespace StudentInformationSystem.Data.Models
         public virtual Grade Grade { get; set; }
         public virtual Subject Subject { get; set; }
 
-        public virtual ICollection<OCR_ClassRoom> ClassRooms { get; set; }
+        public virtual ICollection<OCR_ClassRoom> PhysicalClassRooms { get; set; }
         public virtual ICollection<OCR_Teacher> ClassTeachers { get; set; }
+        public virtual ICollection<OCR_ClassRoom> OCR_ClassRooms { get; set; }
+        public virtual ICollection<OnlineClass> OnlineClasses { get; set; }
     }
 }

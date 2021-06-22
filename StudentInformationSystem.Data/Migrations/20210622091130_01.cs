@@ -103,16 +103,16 @@ namespace StudentInformationSystem.Data.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
                     IndexNo = table.Column<int>(nullable: false),
-                    DOB = table.Column<DateTime>(type: "datetime", nullable: false),
+                    DOB = table.Column<DateTime>(type: "datetime", nullable: true),
                     FullName = table.Column<string>(nullable: false),
                     Initials = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
                     SchoolEmail = table.Column<string>(nullable: true),
-                    Address1 = table.Column<string>(nullable: false),
+                    Address1 = table.Column<string>(nullable: true),
                     Address2 = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: false),
-                    EmergContactName = table.Column<string>(nullable: false),
-                    EmergContactNo = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: true),
+                    EmergContactName = table.Column<string>(nullable: true),
+                    EmergContactNo = table.Column<string>(nullable: true),
                     Medium = table.Column<int>(nullable: false),
                     ImagePath = table.Column<string>(nullable: true),
                     AdmissionDate = table.Column<DateTime>(nullable: false),
@@ -593,7 +593,7 @@ namespace StudentInformationSystem.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Subject_StudentBasketSubjects",
-                        column: x => x.StudentId,
+                        column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -720,6 +720,30 @@ namespace StudentInformationSystem.Data.Migrations
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PermissionGradeAccesses",
+                columns: table => new
+                {
+                    GradeId = table.Column<int>(nullable: false),
+                    PermissionId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PermissionGradeAccesses", x => new { x.GradeId, x.PermissionId });
+                    table.ForeignKey(
+                        name: "FK_Grade_PermissionGradeAccesses",
+                        column: x => x.GradeId,
+                        principalTable: "Grades",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Permission_PermissionGradeAccesses",
+                        column: x => x.PermissionId,
+                        principalTable: "Permissions",
+                        principalColumn: "PermissionId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -931,21 +955,21 @@ namespace StudentInformationSystem.Data.Migrations
                     ModifiedBy = table.Column<string>(nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
+                    OCR_Id = table.Column<int>(nullable: false),
                     StaffId = table.Column<int>(nullable: false),
-                    IsOwner = table.Column<bool>(nullable: false),
-                    OnlineClassRoomId = table.Column<int>(nullable: true)
+                    IsOwner = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OCR_Teachers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OCR_Teachers_OnlineClassRooms_OnlineClassRoomId",
-                        column: x => x.OnlineClassRoomId,
+                        name: "FK_OnlineClassRoom_ClassTeachers",
+                        column: x => x.OCR_Id,
                         principalTable: "OnlineClassRooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_StaffMember_OCR_Teachers",
+                        name: "FK_ClassTeacher_OCR_Teachers",
                         column: x => x.StaffId,
                         principalTable: "StaffMembers",
                         principalColumn: "Id",
@@ -1124,6 +1148,7 @@ namespace StudentInformationSystem.Data.Migrations
                     ModifiedBy = table.Column<string>(nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
+                    OCR_Id = table.Column<int>(nullable: false),
                     CR_Id = table.Column<int>(nullable: false),
                     OnlineClassRoomId = table.Column<int>(nullable: true)
                 },
@@ -1137,9 +1162,52 @@ namespace StudentInformationSystem.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_OnlineClassRoom_OCR_ClassRooms",
+                        column: x => x.OCR_Id,
+                        principalTable: "OnlineClassRooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_OCR_ClassRooms_OnlineClassRooms_OnlineClassRoomId",
                         column: x => x.OnlineClassRoomId,
                         principalTable: "OnlineClassRooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OnlineClasses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<string>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: true),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
+                    OCR_Id = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    FromTime = table.Column<TimeSpan>(nullable: false),
+                    ToTime = table.Column<TimeSpan>(nullable: false),
+                    OCR_TeacherId = table.Column<int>(nullable: false),
+                    Subject = table.Column<string>(nullable: true),
+                    Lesson = table.Column<string>(nullable: true),
+                    CalendarEvent = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OnlineClasses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OnlineClassRoom_OnlineClasses",
+                        column: x => x.OCR_Id,
+                        principalTable: "OnlineClassRooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_OCR_Teacher_OnlineClasses",
+                        column: x => x.OCR_TeacherId,
+                        principalTable: "OCR_Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1176,6 +1244,31 @@ namespace StudentInformationSystem.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OC_Meetings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<string>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: true),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
+                    OC_Id = table.Column<int>(nullable: false),
+                    MeetingCode = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OC_Meetings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OnlineClass_OC_Meetings",
+                        column: x => x.OC_Id,
+                        principalTable: "OnlineClasses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CR_StudentSubjectMarks",
                 columns: table => new
                 {
@@ -1197,6 +1290,33 @@ namespace StudentInformationSystem.Data.Migrations
                         name: "FK_ClassStudentSubject_ClassStudentSubjectMarks",
                         column: x => x.CR_StudentSubjectId,
                         principalTable: "CR_StudentSubjects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OC_MeetingAttendees",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<string>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: true),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
+                    OC_MeetingId = table.Column<int>(nullable: false),
+                    StudentId = table.Column<int>(nullable: false),
+                    Duration = table.Column<long>(nullable: false),
+                    TimesVisited = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OC_MeetingAttendees", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OC_Meeting_OC_MeetingAttendees",
+                        column: x => x.OC_MeetingId,
+                        principalTable: "OC_Meetings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -1228,12 +1348,12 @@ namespace StudentInformationSystem.Data.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "ModifiedBy", "ModifiedDate" },
                 values: new object[,]
                 {
-                    { 6, "AL-Technology", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", null, null },
-                    { 5, "AL-Art & Commerce", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", null, null },
-                    { 4, "AL-Science", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", null, null },
-                    { 3, "Senior", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", null, null },
+                    { 1, "Primary", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", null, null },
                     { 2, "Junior", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", null, null },
-                    { 1, "Primary", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", null, null }
+                    { 3, "Senior", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", null, null },
+                    { 4, "AL-Science", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", null, null },
+                    { 5, "AL-Art & Commerce", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", null, null },
+                    { 6, "AL-Technology", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1241,8 +1361,47 @@ namespace StudentInformationSystem.Data.Migrations
                 columns: new[] { "Id", "Address1", "Address2", "City", "CreatedBy", "CreatedDate", "FullName", "Gender", "ImagePath", "ImmeContactName", "ImmeContactNo", "Initials", "JoinedDate", "LastName", "MobileNo", "ModifiedBy", "ModifiedDate", "Nicno", "RetiredDate", "SchoolEmail", "StaffNumber", "Status", "TeacherId", "TelHome", "Title" },
                 values: new object[,]
                 {
-                    { 1, "24/3, Udyana Avenue", "Pepiliyana Road", "Nugegoda", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Piumali Manorika Suraweera", 1, null, "Malith", "0773411392", "P M", null, "Suraweera", "0714479648", null, null, "880272580V", null, null, 123, 0, null, null, 5 },
-                    { 2, "45C, School Avenue", "Raththanapitiya", "Boralesgamuwa", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Udara Rathnayaka", 0, null, "Umandya", "0773412392", "U", null, "Rathnayaka", "0716669648", null, null, "900272580V", null, null, 456, 0, null, null, 5 }
+                    { 2, "45C, School Avenue", "Raththanapitiya", "Boralesgamuwa", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Udara Rathnayaka", 0, null, "Umandya", "0773412392", "U", null, "Rathnayaka", "0716669648", null, null, "900272580V", null, null, 456, 0, null, null, 5 },
+                    { 1, "24/3, Udyana Avenue", "Pepiliyana Road", "Nugegoda", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Piumali Manorika Suraweera", 1, null, "Malith", "0773411392", "P M", null, "Suraweera", "0714479648", null, null, "880272580V", null, null, 123, 0, null, null, 5 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Students",
+                columns: new[] { "Id", "Address1", "Address2", "AdmissionDate", "AdmittedClassId", "City", "CreatedBy", "CreatedDate", "DOB", "EmergContactName", "EmergContactNo", "FullName", "ImagePath", "IndexNo", "Initials", "IsLeavingIssued", "LastClassId", "LastName", "LeavingDate", "Medium", "ModifiedBy", "ModifiedDate", "SchoolEmail", "Status" },
+                values: new object[,]
+                {
+                    { 18, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "K A M Menath", null, 28916, "K A M", false, 0, "Menath", null, 0, null, null, "28916@nalandacollege.info", 0 },
+                    { 19, null, null, new DateTime(2021, 6, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "L G T S Samarasingha", null, 28891, "L G T S", false, 0, "Samarasingha", null, 0, null, null, "28891@nalandacollege.info", 0 },
+                    { 20, null, null, new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "M K G Darmasiri", null, 29033, "M K G", false, 0, "Darmasiri", null, 0, null, null, "29033@nalandacollege.info", 0 },
+                    { 21, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "N H E De Silava", null, 29038, "N H E De", false, 0, "Silava", null, 0, null, null, "29038@nalandacollege.info", 0 },
+                    { 22, null, null, new DateTime(2021, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "R V D R R Perera", null, 28901, "R V D R R", false, 0, "Perera", null, 0, null, null, "28901@nalandacollege.info", 0 },
+                    { 23, null, null, new DateTime(2021, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "S A J Pathirana", null, 29008, "S A J", false, 0, "Pathirana", null, 0, null, null, "29008@nalandacollege.info", 0 },
+                    { 24, null, null, new DateTime(2021, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "S H V Sanith", null, 29003, "S H V", false, 0, "Sanith", null, 0, null, null, "29003@nalandacollege.info", 0 },
+                    { 25, null, null, new DateTime(2021, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "S I Kiriwandeniya", null, 28973, "S I", false, 0, "Kiriwandeniya", null, 0, null, null, "28973@nalandacollege.info", 0 },
+                    { 27, null, null, new DateTime(2021, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "S O Leelarathna", null, 28958, "S O", false, 0, "Leelarathna", null, 0, null, null, "28958@nalandacollege.info", 0 },
+                    { 28, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "S T Ranwala", null, 28968, "S T", false, 0, "Ranwala", null, 0, null, null, "28968@nalandacollege.info", 0 },
+                    { 29, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "T D A Gunawardana", null, 28978, "T D A", false, 0, "Gunawardana", null, 0, null, null, "28978@nalandacollege.info", 0 },
+                    { 30, null, null, new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "V A D Dilsara", null, 28993, "V A D", false, 0, "Dilsara", null, 0, null, null, "28993@nalandacollege.info", 0 },
+                    { 31, null, null, new DateTime(2021, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "V K Almeda", null, 28906, "V K", false, 0, "Almeda", null, 0, null, null, "28906@nalandacollege.info", 0 },
+                    { 32, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "W G T M Gamage", null, 28936, "W G T M", false, 0, "Gamage", null, 0, null, null, "28936@nalandacollege.info", 0 },
+                    { 26, null, null, new DateTime(2021, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "S L D Karunathilaka", null, 28931, "S L D", false, 0, "Karunathilaka", null, 0, null, null, "28931@nalandacollege.info", 0 },
+                    { 17, null, null, new DateTime(2021, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "K A D Sanketh", null, 28998, "K A D", false, 0, "Sanketh", null, 0, null, null, "28998@nalandacollege.info", 0 },
+                    { 11, null, null, new DateTime(2021, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "D N Gunasena", null, 28963, "D N", false, 0, "Gunasena", null, 0, null, null, "28963@nalandacollege.info", 0 },
+                    { 15, null, null, new DateTime(2021, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "H L S Dulsara", null, 28911, "H L S", false, 0, "Dulsara", null, 0, null, null, "28911@nalandacollege.info", 0 },
+                    { 1, null, null, new DateTime(2021, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "A J M T A Jayasundara", null, 29013, "A J M T A", false, 0, "Jayasundara", null, 0, null, null, "29013@nalandacollege.info", 0 },
+                    { 2, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "A U N De Silva", null, 28953, "A U N De", false, 0, "Silva", null, 0, null, null, "28953@nalandacollege.info", 0 },
+                    { 3, null, null, new DateTime(2021, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "B L R Abedeera", null, 28948, "B L R", false, 0, "Abedeera", null, 0, null, null, "28948@nalandacollege.info", 0 },
+                    { 4, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "B M T Silva", null, 29043, "B M T", false, 0, "Silva", null, 0, null, null, "29043@nalandacollege.info", 0 },
+                    { 5, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "B W K M Peeris", null, 29028, "B W K M", false, 0, "Peeris", null, 0, null, null, "29028@nalandacollege.info", 0 },
+                    { 16, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "I U Roopasingha", null, 29018, "I U", false, 0, "Roopasingha", null, 0, null, null, "29018@nalandacollege.info", 0 },
+                    { 7, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "D C A Dias", null, 29023, "D C A", false, 0, "Dias", null, 0, null, null, "29023@nalandacollege.info", 0 },
+                    { 6, null, null, new DateTime(2021, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "Chenuk Manthila P S", null, 29049, "Chenuk", false, 0, "Manthila P S", null, 0, null, null, "29049@nalandacollege.info", 0 },
+                    { 9, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "D M K S Liyanage", null, 28941, "D M K S", false, 0, "Liyanage", null, 0, null, null, "28941@nalandacollege.info", 0 },
+                    { 10, null, null, new DateTime(2021, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "D M L Dasanayake", null, 28926, "D M L", false, 0, "Dasanayake", null, 0, null, null, "28926@nalandacollege.info", 0 },
+                    { 12, null, null, new DateTime(2021, 6, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "D W O D De Silva", null, 28983, "D W O D De", false, 0, "Silva", null, 0, null, null, "28983@nalandacollege.info", 0 },
+                    { 13, null, null, new DateTime(2021, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "E H H Nethsara", null, 28921, "E H H", false, 0, "Nethsara", null, 0, null, null, "28921@nalandacollege.info", 0 },
+                    { 14, null, null, new DateTime(2021, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "H A S Asmitha", null, 28896, "H A S", false, 0, "Asmitha", null, 0, null, null, "28896@nalandacollege.info", 0 },
+                    { 8, null, null, new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "D J M K N Serasingha", null, 28988, "D J M K N", false, 0, "Serasingha", null, 0, null, null, "28988@nalandacollege.info", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -1250,10 +1409,10 @@ namespace StudentInformationSystem.Data.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "IsBasket", "ModifiedBy", "ModifiedDate" },
                 values: new object[,]
                 {
+                    { 4, "Basket 3", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, null, null },
                     { 1, "Main", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null },
                     { 2, "Basket 1", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, null, null },
-                    { 3, "Basket 2", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, null, null },
-                    { 4, "Basket 3", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, null, null }
+                    { 3, "Basket 2", "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -1266,7 +1425,6 @@ namespace StudentInformationSystem.Data.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "GradeNo", "ModifiedBy", "ModifiedDate", "SectionId", "TeacherId" },
                 values: new object[,]
                 {
-                    { 4, "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 4, null, null, 1, null },
                     { 11, "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 11, null, null, 3, null },
                     { 10, "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 10, null, null, 3, null },
                     { 9, "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 9, null, null, 3, null },
@@ -1274,6 +1432,7 @@ namespace StudentInformationSystem.Data.Migrations
                     { 7, "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 7, null, null, 2, null },
                     { 6, "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 6, null, null, 2, null },
                     { 5, "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 5, null, null, 1, null },
+                    { 4, "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 4, null, null, 1, null },
                     { 3, "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 3, null, null, 1, null },
                     { 2, "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 2, null, null, 1, null },
                     { 1, "System", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, null, null, 1, null }
@@ -1284,13 +1443,12 @@ namespace StudentInformationSystem.Data.Migrations
                 columns: new[] { "MenuId", "Action", "Area", "Controller", "DisplaySeq", "Icon", "IsHidden", "ParentMenuId", "Text", "Type" },
                 values: new object[,]
                 {
-                    { 26, "Index", "Report", "StudentAttendance", 30, null, false, 6, "Student Attendance", "I" },
-                    { 28, "Process", "Report", "StudentMarks", 30, null, false, 6, "Term Wise Student Marks", "I" },
                     { 7, "Index", "Admin", "UserPermission", 10, null, false, 1, "User Permissions", "I" },
+                    { 28, "Process", "Report", "OnlineSessionsSummary", 30, null, false, 6, "Online Sessions Summary", "I" },
+                    { 27, "Process", "Report", "StudentMarks", 30, null, false, 6, "Term Wise Student Marks", "I" },
                     { 25, "Index", "Student", "StudentMark", 30, null, false, 5, "Online Time Table", "I" },
-                    { 29, "Process", "Report", "OnlineSessionsSummary", 30, null, false, 6, "Online Sessions Summary", "I" },
                     { 24, "Index", "Student", "StudentMark", 30, null, false, 5, "Online Class Rooms", "I" },
-                    { 27, "Index", "Report", "AttendanceByDuration", 30, null, false, 6, "Attendance By Duration", "I" },
+                    { 26, "Process", "Report", "StudentAttendance", 30, null, false, 6, "Student Attendance", "I" },
                     { 22, "Index", "Student", "BasketSubject", 20, null, false, 4, "Student Basket Subjects", "I" },
                     { 8, "Index", "Admin", "Users", 20, null, false, 1, "Users", "I" },
                     { 9, "Index", "Admin", "StaffMember", 30, null, false, 1, "Staff Members", "I" },
@@ -1303,7 +1461,7 @@ namespace StudentInformationSystem.Data.Migrations
                     { 13, "Index", "Admin", "GradeHead", 70, null, false, 1, "Grade Heads", "I" },
                     { 17, "Index", "Academic", "GradeSubject", 30, null, false, 2, "Grade Subjects", "I" },
                     { 18, "Index", "Academic", "GradeClass", 40, null, false, 2, "Grade Classes", "I" },
-                    { 19, "Index", "Academic", "ClassRoom", 50, null, false, 2, "Class Rooms", "I" },
+                    { 19, "Index", "Academic", "ClassRoom", 50, null, false, 2, "Physical Class Rooms", "I" },
                     { 20, "Index", "Teacher", "Teacher", 20, null, false, 3, "Teacher Information", "I" },
                     { 21, "Index", "Student", "Student", 10, null, false, 4, "Student Maintenance", "I" },
                     { 16, "Index", "Academic", "Subject", 20, null, false, 2, "Subjects", "I" }
@@ -1330,6 +1488,118 @@ namespace StudentInformationSystem.Data.Migrations
                 table: "UserPermissions",
                 columns: new[] { "UserPermissionId", "PermissionId", "UserId" },
                 values: new object[] { 1, 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "GradeClasses",
+                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "GradeId", "MaxStudentCount", "Medium", "ModifiedBy", "ModifiedDate", "Name" },
+                values: new object[] { 1, "1.A", "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 0, null, null, 1 });
+
+            migrationBuilder.InsertData(
+                table: "OnlineClassRooms",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "GoogleClassRoomId", "GradeId", "Medium", "ModifiedBy", "ModifiedDate", "SubjectId", "Year" },
+                values: new object[] { 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 0, null, null, 1, 2021 });
+
+            migrationBuilder.InsertData(
+                table: "ClassRooms",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "GradeClassId", "Medium", "ModifiedBy", "ModifiedDate", "TeacherId", "Year" },
+                values: new object[] { 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0, null, null, null, 2021 });
+
+            migrationBuilder.InsertData(
+                table: "OCR_Teachers",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "IsOwner", "ModifiedBy", "ModifiedDate", "OCR_Id", "StaffId" },
+                values: new object[] { 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, null, null, 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "CR_Students",
+                columns: new[] { "Id", "CR_Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "StudentId" },
+                values: new object[,]
+                {
+                    { 1, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 1 },
+                    { 32, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 32 },
+                    { 31, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 31 },
+                    { 30, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 30 },
+                    { 29, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 29 },
+                    { 28, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 28 },
+                    { 27, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 27 },
+                    { 26, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 26 },
+                    { 25, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 25 },
+                    { 24, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 24 },
+                    { 23, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 23 },
+                    { 21, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 21 },
+                    { 20, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 20 },
+                    { 19, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 19 },
+                    { 18, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 18 },
+                    { 17, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 17 },
+                    { 22, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 22 },
+                    { 15, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 15 },
+                    { 2, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 2 },
+                    { 16, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 16 },
+                    { 4, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 4 },
+                    { 5, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 5 },
+                    { 6, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 6 },
+                    { 7, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 7 },
+                    { 8, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 8 },
+                    { 3, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 3 },
+                    { 10, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 10 },
+                    { 11, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 11 },
+                    { 12, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 12 },
+                    { 13, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 13 },
+                    { 14, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 14 },
+                    { 9, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 9 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "OCR_ClassRooms",
+                columns: new[] { "Id", "CR_Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "OCR_Id", "OnlineClassRoomId" },
+                values: new object[] { 1, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 1, null });
+
+            migrationBuilder.InsertData(
+                table: "OnlineClasses",
+                columns: new[] { "Id", "CalendarEvent", "CreatedBy", "CreatedDate", "Date", "FromTime", "Lesson", "ModifiedBy", "ModifiedDate", "OCR_Id", "OCR_TeacherId", "Subject", "ToTime" },
+                values: new object[,]
+                {
+                    { 9, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 17, 0, 0, 0), null, null, null, 1, 1, null, new TimeSpan(0, 18, 30, 0, 0) },
+                    { 8, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 6, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 17, 0, 0, 0), null, null, null, 1, 1, null, new TimeSpan(0, 18, 30, 0, 0) },
+                    { 7, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 17, 0, 0, 0), null, null, null, 1, 1, null, new TimeSpan(0, 18, 30, 0, 0) },
+                    { 6, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 17, 0, 0, 0), null, null, null, 1, 1, null, new TimeSpan(0, 18, 30, 0, 0) },
+                    { 2, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 6, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 17, 0, 0, 0), null, null, null, 1, 1, null, new TimeSpan(0, 18, 30, 0, 0) },
+                    { 4, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 17, 0, 0, 0), null, null, null, 1, 1, null, new TimeSpan(0, 18, 30, 0, 0) },
+                    { 3, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 6, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 17, 0, 0, 0), null, null, null, 1, 1, null, new TimeSpan(0, 18, 30, 0, 0) },
+                    { 1, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 17, 0, 0, 0), null, null, null, 1, 1, null, new TimeSpan(0, 18, 30, 0, 0) },
+                    { 10, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 17, 0, 0, 0), null, null, null, 1, 1, null, new TimeSpan(0, 18, 30, 0, 0) },
+                    { 5, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 17, 0, 0, 0), null, null, null, 1, 1, null, new TimeSpan(0, 18, 30, 0, 0) },
+                    { 11, null, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 17, 0, 0, 0), null, null, null, 1, 1, null, new TimeSpan(0, 18, 30, 0, 0) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "OC_Meetings",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "MeetingCode", "ModifiedBy", "ModifiedDate", "OC_Id" },
+                values: new object[] { 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "MYEWAPPSOO", null, null, 1 });
+
+            migrationBuilder.InsertData(
+                table: "OC_Meetings",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "MeetingCode", "ModifiedBy", "ModifiedDate", "OC_Id" },
+                values: new object[] { 2, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ASQWCRTUFF", null, null, 2 });
+
+            migrationBuilder.InsertData(
+                table: "OC_Meetings",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "MeetingCode", "ModifiedBy", "ModifiedDate", "OC_Id" },
+                values: new object[] { 3, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "IGIPEICFEK", null, null, 3 });
+
+            migrationBuilder.InsertData(
+                table: "OC_MeetingAttendees",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Duration", "ModifiedBy", "ModifiedDate", "OC_MeetingId", "StudentId", "TimesVisited" },
+                values: new object[] { 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5110L, null, null, 1, 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "OC_MeetingAttendees",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Duration", "ModifiedBy", "ModifiedDate", "OC_MeetingId", "StudentId", "TimesVisited" },
+                values: new object[] { 2, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4879L, null, null, 2, 11, 2 });
+
+            migrationBuilder.InsertData(
+                table: "OC_MeetingAttendees",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Duration", "ModifiedBy", "ModifiedDate", "OC_MeetingId", "StudentId", "TimesVisited" },
+                values: new object[] { 3, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4805L, null, null, 3, 21, 4 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ClassRooms_GradeClassId",
@@ -1467,9 +1737,24 @@ namespace StudentInformationSystem.Data.Migrations
                 column: "ParentMenuId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OC_MeetingAttendees_OC_MeetingId",
+                table: "OC_MeetingAttendees",
+                column: "OC_MeetingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OC_Meetings_OC_Id",
+                table: "OC_Meetings",
+                column: "OC_Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OCR_ClassRooms_CR_Id",
                 table: "OCR_ClassRooms",
                 column: "CR_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OCR_ClassRooms_OCR_Id",
+                table: "OCR_ClassRooms",
+                column: "OCR_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OCR_ClassRooms_OnlineClassRoomId",
@@ -1477,14 +1762,24 @@ namespace StudentInformationSystem.Data.Migrations
                 column: "OnlineClassRoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OCR_Teachers_OnlineClassRoomId",
+                name: "IX_OCR_Teachers_OCR_Id",
                 table: "OCR_Teachers",
-                column: "OnlineClassRoomId");
+                column: "OCR_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OCR_Teachers_StaffId",
                 table: "OCR_Teachers",
                 column: "StaffId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OnlineClasses_OCR_Id",
+                table: "OnlineClasses",
+                column: "OCR_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OnlineClasses_OCR_TeacherId",
+                table: "OnlineClasses",
+                column: "OCR_TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OnlineClassRooms_GradeId",
@@ -1495,6 +1790,11 @@ namespace StudentInformationSystem.Data.Migrations
                 name: "IX_OnlineClassRooms_SubjectId",
                 table: "OnlineClassRooms",
                 column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PermissionGradeAccesses_PermissionId",
+                table: "PermissionGradeAccesses",
+                column: "PermissionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PermissionMenuAccesses_PermissionId",
@@ -1522,6 +1822,11 @@ namespace StudentInformationSystem.Data.Migrations
                 name: "IX_StudentBasketSubjects_StudentId",
                 table: "StudentBasketSubjects",
                 column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentBasketSubjects_SubjectId",
+                table: "StudentBasketSubjects",
+                column: "SubjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentExtraActivityAcheivements_AcheivementId",
@@ -1645,10 +1950,13 @@ namespace StudentInformationSystem.Data.Migrations
                 name: "LeavingCertificates");
 
             migrationBuilder.DropTable(
+                name: "OC_MeetingAttendees");
+
+            migrationBuilder.DropTable(
                 name: "OCR_ClassRooms");
 
             migrationBuilder.DropTable(
-                name: "OCR_Teachers");
+                name: "PermissionGradeAccesses");
 
             migrationBuilder.DropTable(
                 name: "PermissionMenuAccesses");
@@ -1684,7 +1992,7 @@ namespace StudentInformationSystem.Data.Migrations
                 name: "CR_StudentSubjects");
 
             migrationBuilder.DropTable(
-                name: "OnlineClassRooms");
+                name: "OC_Meetings");
 
             migrationBuilder.DropTable(
                 name: "Menus");
@@ -1708,13 +2016,10 @@ namespace StudentInformationSystem.Data.Migrations
                 name: "CR_Students");
 
             migrationBuilder.DropTable(
-                name: "Subjects");
+                name: "OnlineClasses");
 
             migrationBuilder.DropTable(
                 name: "ExtraActivities");
-
-            migrationBuilder.DropTable(
-                name: "StaffMembers");
 
             migrationBuilder.DropTable(
                 name: "Visitors");
@@ -1726,16 +2031,28 @@ namespace StudentInformationSystem.Data.Migrations
                 name: "Students");
 
             migrationBuilder.DropTable(
-                name: "SubjectCategories");
+                name: "OCR_Teachers");
 
             migrationBuilder.DropTable(
                 name: "GradeClasses");
 
             migrationBuilder.DropTable(
+                name: "OnlineClassRooms");
+
+            migrationBuilder.DropTable(
+                name: "StaffMembers");
+
+            migrationBuilder.DropTable(
                 name: "Grades");
 
             migrationBuilder.DropTable(
+                name: "Subjects");
+
+            migrationBuilder.DropTable(
                 name: "Teachers");
+
+            migrationBuilder.DropTable(
+                name: "SubjectCategories");
 
             migrationBuilder.DropTable(
                 name: "Sections");

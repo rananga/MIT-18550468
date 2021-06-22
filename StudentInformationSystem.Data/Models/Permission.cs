@@ -8,6 +8,7 @@ namespace StudentInformationSystem.Data.Models
         public Permission()
         {
             PermissionMenuAccesses = new HashSet<PermissionMenuAccess>();
+            PermissionGradeAccesses = new HashSet<PermissionGradeAccess>();
             UserPermissions = new HashSet<UserPermission>();
         }
 
@@ -21,6 +22,7 @@ namespace StudentInformationSystem.Data.Models
         public byte[] RowVersion { get; set; }
 
         public virtual ICollection<PermissionMenuAccess> PermissionMenuAccesses { get; set; }
+        public virtual ICollection<PermissionGradeAccess> PermissionGradeAccesses { get; set; }
         public virtual ICollection<UserPermission> UserPermissions { get; set; }
     }
 }

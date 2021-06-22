@@ -17,6 +17,7 @@
         @Html.HiddenFor(model => model.PermissionId)
         @Html.HiddenFor(model => model.RowVersion)
         @Html.HiddenFor(model => model.MenusJson)
+        @Html.HiddenFor(model => model.GradesJson)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -28,14 +29,19 @@
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-               @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
 }
 
-<div class="ChildContent">
-    @{ Html.RenderAction("ChildIndex", new { id = Model.PermissionId, isToEdit = true }); }
+<div class="row">
+    <div class="ChildContent col-md-6">
+        @{ Html.RenderAction("ChildIndex", new { id = Model.PermissionId, isToEdit = true }); }
+    </div>
+    <div class="ChildContent col-md-6">
+        @{ Html.RenderAction("GradeIndex", new { id = Model.PermissionId, isToEdit = true }); }
+    </div>
 </div>
 
 <div>
