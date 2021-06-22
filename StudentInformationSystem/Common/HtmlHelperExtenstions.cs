@@ -122,6 +122,9 @@ namespace System.Web
 
         public static void SetEntity<Tentity, Tmodel>(this IModel<Tentity, Tmodel> mapper, Tentity obj, params string[] properties)
         {
+            if (obj == null)
+                return;
+
             foreach (var prop in obj.GetType().GetProperties())
             {
                 if (!prop.CanRead || (prop.GetIndexParameters().Length > 0))

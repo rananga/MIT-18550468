@@ -1268,7 +1268,7 @@ Iif(Fields!Subject.Value is nothing, "",
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Online Sessions Summary By Grade</Value>
+                      <Value>Online Session Attendance</Value>
                       <Style>
                         <FontSize>14pt</FontSize>
                         <FontWeight>Bold</FontWeight>
@@ -1800,7 +1800,7 @@ rJpQp2tLSahx1vdB3cmD9G/0/ObhTeBPJwQk+AvfCXEGBOnUfzgueGf5mXcY3iJyatjhgnQCAaJrpRsm
     </EmbeddedImage>
     <EmbeddedImage Name="question">
       <MIMEType>image/png</MIMEType>
-      <ImageData>iVBORw0KGgoAAAANSUhEUgAAAFQAAAAcCAYAAAD/YJjAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADaSURBVGhD7dWhCsJgEAfw28Ai2Axidd8cJqMgBoPNYjf4GoLRNzD6GmLwAXwEGSaLb2AyeP6Zp8XkhnDh/4PjbreFcdy+CRERERER0X+lOpSgR8QNkeN6bXfoZ6k2McQrsiJ2nzro0p5wKbbsz0MGEkkb1UbO0RR5VPQjGReZKgq6sg3dWodKC7qwT/8kPW1Zl8rRGAO9Iy4YaGZNt/yeoW/d4iytodrjLM1fTaoAG5rpRDqaWMM1/xuayAx//APedG4d1/wPNJa6VQ3LVFnQvlVERERERPRF5AmPuDbz0z+3zwAAAABJRU5ErkJggg==</ImageData>
+      <ImageData>iVBORw0KGgoAAAANSUhEUgAAAFQAAAAcCAYAAAD/YJjAAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAADCSURBVGhD7dUxCsJQDIDhtOAiuDmIs6+KJxDEwd3NC3gNwcHBGzh6DfEIHkGKk4s3cHIwhhrdrQgZ/g9C0vRNoS8VAAAAAPivQseS9GhxsyjteeNv8LVC2zbEq2W12H/qpEs/EVLuOZ6HjCSTrlVbOWczy5Oqn8m0yvhR0pV/oTvvoLakC7/6Jxlqx7uoR3Mb6N3iYgMdeDOsuDv0rV/t0oZVB9ul5asJhNHTuf+M1t4JLf6Vz6XpVcszAAAAAPyTyBPexDSdkMZzowAAAABJRU5ErkJggg==</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>

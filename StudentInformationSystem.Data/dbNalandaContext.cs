@@ -100,8 +100,8 @@ namespace StudentInformationSystem.Data
                 new Menu { MenuId = 21, ParentMenuId = 4, DisplaySeq = 10, Text = "Student Maintenance", Type = "I", Area = "Student", Controller = "Student", Action = "Index" },
                 new Menu { MenuId = 22, ParentMenuId = 4, DisplaySeq = 20, Text = "Student Basket Subjects", Type = "I", Area = "Student", Controller = "BasketSubject", Action = "Index" },
                 new Menu { MenuId = 23, ParentMenuId = 4, DisplaySeq = 30, Text = "Student Marks", Type = "I", Area = "Student", Controller = "StudentMark", Action = "Index" },
-                new Menu { MenuId = 24, ParentMenuId = 5, DisplaySeq = 30, Text = "Online Class Rooms", Type = "I", Area = "Student", Controller = "StudentMark", Action = "Index" },
-                new Menu { MenuId = 25, ParentMenuId = 5, DisplaySeq = 30, Text = "Online Time Table", Type = "I", Area = "Student", Controller = "StudentMark", Action = "Index" },
+                new Menu { MenuId = 24, ParentMenuId = 5, DisplaySeq = 30, Text = "Online Class Rooms", Type = "I", Area = "Online", Controller = "OnlineClassRoom", Action = "Index" },
+                new Menu { MenuId = 25, ParentMenuId = 5, DisplaySeq = 30, Text = "Online Time Table", Type = "I", Area = "Online", Controller = "OnlineTimeTable", Action = "Index" },
                 new Menu { MenuId = 26, ParentMenuId = 6, DisplaySeq = 30, Text = "Student Attendance", Type = "I", Area = "Report", Controller = "StudentAttendance", Action = "Process" },
                 new Menu { MenuId = 27, ParentMenuId = 6, DisplaySeq = 30, Text = "Term Wise Student Marks", Type = "I", Area = "Report", Controller = "StudentMarks", Action = "Process" },
                 new Menu { MenuId = 28, ParentMenuId = 6, DisplaySeq = 30, Text = "Online Sessions Summary", Type = "I", Area = "Report", Controller = "OnlineSessionsSummary", Action = "Process" });

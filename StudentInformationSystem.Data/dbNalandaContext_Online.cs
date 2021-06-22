@@ -56,7 +56,7 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_OC_Meeting_OC_MeetingAttendees");
             });
 
-            modelBuilder.Entity<OCR_ClassRoom>(entity =>
+            modelBuilder.Entity<OCR_ClassRoom>((Action<Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<OCR_ClassRoom>>)(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -68,7 +68,7 @@ namespace StudentInformationSystem.Data
                     .IsConcurrencyToken();
 
                 entity.HasOne(d => d.OnlineClassRoom)
-                    .WithMany(p => p.OCR_ClassRooms)
+                    .WithMany((System.Linq.Expressions.Expression<Func<OnlineClassRoom, IEnumerable<OCR_ClassRoom>>>)(p => (IEnumerable<OCR_ClassRoom>)p.PhysicalClassRooms))
                     .HasForeignKey(d => d.OCR_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OnlineClassRoom_OCR_ClassRooms");
@@ -78,7 +78,7 @@ namespace StudentInformationSystem.Data
                     .HasForeignKey(d => d.CR_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ClassRoom_OCR_ClassRooms");
-            });
+            }));
 
             modelBuilder.Entity<OCR_Teacher>(entity =>
             {

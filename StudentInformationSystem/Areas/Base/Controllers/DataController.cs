@@ -375,7 +375,7 @@ namespace StudentInformationSystem.Areas.Base
             }
         }
 
-        public ActionResult GetClasses(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int PeriodID = 0)
+        public ActionResult GetClassRooms(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int PeriodID = 0)
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
@@ -403,20 +403,20 @@ namespace StudentInformationSystem.Areas.Base
                 { startIndex = 0; }
 
                 if (sortBy.IsBlank())
-                { sortBy = "Grade"; }
+                { sortBy = "Class"; }
 
                 var lstSortColMap = new Dictionary<string, string>()
                 {
                     { "Grade", "Grade" } ,
-                    { "Class_Description", "ClassDesc" }
+                    { "Class", "GradeClass.Code" }
                 };
 
                 return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
                     x => new
                     {
                         x.Id,
-                        Grade = $"Grade {x.GradeClass.GradeId}",
-                        Class_Description = x.GradeClass.Name
+                        Grade = x.GradeClass.Grade.GradeNo.ToEnumChar(),
+                        Class = x.GradeClass.Code
                     });
             }
         }

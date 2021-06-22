@@ -1149,8 +1149,7 @@ namespace StudentInformationSystem.Data.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     RowVersion = table.Column<byte[]>(rowVersion: true, nullable: false),
                     OCR_Id = table.Column<int>(nullable: false),
-                    CR_Id = table.Column<int>(nullable: false),
-                    OnlineClassRoomId = table.Column<int>(nullable: true)
+                    CR_Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1164,12 +1163,6 @@ namespace StudentInformationSystem.Data.Migrations
                     table.ForeignKey(
                         name: "FK_OnlineClassRoom_OCR_ClassRooms",
                         column: x => x.OCR_Id,
-                        principalTable: "OnlineClassRooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_OCR_ClassRooms_OnlineClassRooms_OnlineClassRoomId",
-                        column: x => x.OnlineClassRoomId,
                         principalTable: "OnlineClassRooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -1446,8 +1439,8 @@ namespace StudentInformationSystem.Data.Migrations
                     { 7, "Index", "Admin", "UserPermission", 10, null, false, 1, "User Permissions", "I" },
                     { 28, "Process", "Report", "OnlineSessionsSummary", 30, null, false, 6, "Online Sessions Summary", "I" },
                     { 27, "Process", "Report", "StudentMarks", 30, null, false, 6, "Term Wise Student Marks", "I" },
-                    { 25, "Index", "Student", "StudentMark", 30, null, false, 5, "Online Time Table", "I" },
-                    { 24, "Index", "Student", "StudentMark", 30, null, false, 5, "Online Class Rooms", "I" },
+                    { 25, "Index", "Online", "OnlineTimeTable", 30, null, false, 5, "Online Time Table", "I" },
+                    { 24, "Index", "Online", "OnlineClassRoom", 30, null, false, 5, "Online Class Rooms", "I" },
                     { 26, "Process", "Report", "StudentAttendance", 30, null, false, 6, "Student Attendance", "I" },
                     { 22, "Index", "Student", "BasketSubject", 20, null, false, 4, "Student Basket Subjects", "I" },
                     { 8, "Index", "Admin", "Users", 20, null, false, 1, "Users", "I" },
@@ -1550,8 +1543,8 @@ namespace StudentInformationSystem.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "OCR_ClassRooms",
-                columns: new[] { "Id", "CR_Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "OCR_Id", "OnlineClassRoomId" },
-                values: new object[] { 1, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 1, null });
+                columns: new[] { "Id", "CR_Id", "CreatedBy", "CreatedDate", "ModifiedBy", "ModifiedDate", "OCR_Id" },
+                values: new object[] { 1, 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 1 });
 
             migrationBuilder.InsertData(
                 table: "OnlineClasses",
@@ -1755,11 +1748,6 @@ namespace StudentInformationSystem.Data.Migrations
                 name: "IX_OCR_ClassRooms_OCR_Id",
                 table: "OCR_ClassRooms",
                 column: "OCR_Id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OCR_ClassRooms_OnlineClassRoomId",
-                table: "OCR_ClassRooms",
-                column: "OnlineClassRoomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OCR_Teachers_OCR_Id",

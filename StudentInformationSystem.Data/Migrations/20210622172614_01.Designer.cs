@@ -10,7 +10,7 @@ using StudentInformationSystem.Data;
 namespace StudentInformationSystem.Data.Migrations
 {
     [DbContext(typeof(dbNalandaContext))]
-    [Migration("20210622091130_01")]
+    [Migration("20210622172614_01")]
     partial class _01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1447,8 +1447,8 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             MenuId = 24,
                             Action = "Index",
-                            Area = "Student",
-                            Controller = "StudentMark",
+                            Area = "Online",
+                            Controller = "OnlineClassRoom",
                             DisplaySeq = 30,
                             IsHidden = false,
                             ParentMenuId = 5,
@@ -1459,8 +1459,8 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             MenuId = 25,
                             Action = "Index",
-                            Area = "Student",
-                            Controller = "StudentMark",
+                            Area = "Online",
+                            Controller = "OnlineTimeTable",
                             DisplaySeq = 30,
                             IsHidden = false,
                             ParentMenuId = 5,
@@ -1534,9 +1534,6 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("OCR_Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OnlineClassRoomId")
-                        .HasColumnType("int");
-
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -1548,8 +1545,6 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasIndex("CR_Id");
 
                     b.HasIndex("OCR_Id");
-
-                    b.HasIndex("OnlineClassRoomId");
 
                     b.ToTable("OCR_ClassRooms");
 
@@ -4065,14 +4060,10 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("StudentInformationSystem.Data.Models.OnlineClassRoom", "OnlineClassRoom")
-                        .WithMany("OCR_ClassRooms")
+                        .WithMany("PhysicalClassRooms")
                         .HasForeignKey("OCR_Id")
                         .HasConstraintName("FK_OnlineClassRoom_OCR_ClassRooms")
                         .IsRequired();
-
-                    b.HasOne("StudentInformationSystem.Data.Models.OnlineClassRoom", null)
-                        .WithMany("PhysicalClassRooms")
-                        .HasForeignKey("OnlineClassRoomId");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.OCR_Teacher", b =>

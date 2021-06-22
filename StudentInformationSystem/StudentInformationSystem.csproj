@@ -339,6 +339,10 @@
     <Compile Include="Areas\Academic\Models\GradeClassVM.cs" />
     <Compile Include="Areas\Admin\Models\GradeHeadVM.cs" />
     <Compile Include="Areas\Admin\Models\SectionHeadVM.cs" />
+    <Compile Include="Areas\Online\Controllers\OnlineClassRoomController.cs" />
+    <Compile Include="Areas\Online\Models\OCR_TeacherVM.cs" />
+    <Compile Include="Areas\Online\Models\OCR_ClassRoomVM.cs" />
+    <Compile Include="Areas\Online\Models\OnlineClassRoomVM.cs" />
     <Compile Include="Areas\Report\Controllers\OnlineSessionsSummaryController.cs" />
     <Compile Include="Areas\Report\Controllers\StudentAttendanceController.cs" />
     <Compile Include="Areas\Report\Controllers\StudentMarksController.cs" />
@@ -627,6 +631,14 @@
     <Content Include="Areas\Student\Views\BasketSubject\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\UserPermission\_GradeIndex.cshtml" />
     <Content Include="Areas\Report\Views\StudentAttendance\Process.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineClassRoom\_PhysicalClassCreate.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineClassRoom\_PhysicalClassIndex.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineClassRoom\Create.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineClassRoom\Details.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineClassRoom\Edit.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineClassRoom\Index.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineClassRoom\_TeacherIndex.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineClassRoom\_TeacherCreate.cshtml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - Web Deploy.pubxml" />
@@ -2151,10 +2163,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Online\Controllers\" />
-    <Folder Include="Areas\Online\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\StudentInformationSystem.Data\StudentInformationSystem.Data.csproj">
       <Project>{601a5258-ee62-4fba-a555-c6de8f85b031}</Project>

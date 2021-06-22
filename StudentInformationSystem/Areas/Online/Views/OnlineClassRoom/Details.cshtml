@@ -1,0 +1,58 @@
+﻿@model StudentInformationSystem.Areas.Online.Models.OnlineClassRoomVM
+
+@{
+    ViewBag.Title = "Online Class Room Details";
+}
+
+<div>
+    <hr />
+    @using (Html.BeginForm("Delete", "OnlineClassRoom"))
+    {
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.RowVersion)
+        @Html.AntiForgeryToken()
+        <p>
+            <div class="btn-toolbar">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary", style = "min-width:75px" })
+                @Html.ConfirmSubmitButton("Delete", "Are you sure you want to delete?", "Confirm online class room deletion",
+                 "<span class='glyphicon glyphicon-trash'></span> Delete", new { @class = "btn btn-danger", style = "min-width:75px" })
+            </div>
+        </p>
+    }
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+            @Html.LabelFor(model => model.GradeName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.GradeName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubjectName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.SubjectName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+            @Html.LabelFor(model => model.Medium, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Medium, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+        <br />
+
+        <div class="ChildContent">
+            @{ Html.RenderAction("PhysicalClassIndex", new { id = Model.Id }); }
+        </div>
+
+        <div class="ChildContent">
+            @{ Html.RenderAction("TeacherIndex", new { id = Model.Id }); }
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

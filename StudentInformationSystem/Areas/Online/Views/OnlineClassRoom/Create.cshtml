@@ -1,0 +1,62 @@
+﻿@using StudentInformationSystem.Data.Models;
+@model StudentInformationSystem.Areas.Online.Models.OnlineClassRoomVM
+
+@{
+    ViewBag.Title = "Create Online Class Room";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <p>
+            <input type="submit" value="Save" class="btn btn-primary" style="min-width:75px" />
+        </p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.GradeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.SelectListFor(model => model.GradeId, (Grade x) => x.Id, (Grade x) => x.Section.Code + " - " + x.GradeNo.ToEnumChar(), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GradeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubjectId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.PopUpSelectorFor(model => model.SubjectId, "Base", "Data", "GetSubjects", new { @class = "form-control" }, "Please select a Subject", null, dspFormat: "{1}", hiddenIndices: "0")
+                @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Medium, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EnumEditorFor(model => model.Medium, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Medium, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+<div class="ChildContent">
+    @{ Html.RenderAction("PhysicalClassIndex", new { id = Model.Id, isToEdit = true }); }
+</div>
+<div class="ChildContent">
+    @{ Html.RenderAction("TeacherIndex", new { id = Model.Id, isToEdit = true }); }
+</div>
+
+<br />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/academic/gradeclass")
+}

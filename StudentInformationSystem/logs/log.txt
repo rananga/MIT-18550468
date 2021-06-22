@@ -1297,3 +1297,21 @@
 ~/Views/Shared/ByDuration.cshtml
 ~/Views/Shared/ByDuration.vbhtml Line:    at System.Web.Mvc.ViewResult.FindView(ControllerContext context)
   
+2021-06-22 19:44:09,856 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentMark User: rananga Error Message: The controller for path '/Student/StudentMark' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-22 19:52:21,728 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentMark User: rananga Error Message: The controller for path '/Student/StudentMark' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-06-22 22:57:44,760 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineClassRoom User: rananga Error Message: Column "Name" does not exist. Line:    at System.Web.Helpers.WebGridRow.get_Item(String name)
+  
+2021-06-22 23:01:48,994 [5] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineClassRoom/Details/1 User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Online\Views\OnlineClassRoom\Details.cshtml(31): error CS0411: The type arguments for method 'LabelExtensions.LabelFor<TModel, TValue>(HtmlHelper<TModel>, Expression<Func<TModel, TValue>>, object)' cannot be inferred from the usage. Try specifying the type arguments explicitly. Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-22 23:56:41,916 [51] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineClassRoom/Details/1 User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Online\Views\OnlineClassRoom\Details.cshtml(31): error CS0411: The type arguments for method 'LabelExtensions.LabelFor<TModel, TValue>(HtmlHelper<TModel>, Expression<Func<TModel, TValue>>, object)' cannot be inferred from the usage. Try specifying the type arguments explicitly. Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-23 00:09:16,568 [43] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineClassRoom/Details/1 User: rananga Error Message: A public action method 'PysicalClassIndex' was not found on controller 'StudentInformationSystem.Areas.Online.Controllers.OnlineClassRoomController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-06-23 00:10:14,416 [43] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineClassRoom/Create User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Online\Views\OnlineClassRoom\Create.cshtml(27): error CS0411: The type arguments for method 'LabelExtensions.LabelFor<TModel, TValue>(HtmlHelper<TModel>, Expression<Func<TModel, TValue>>, object)' cannot be inferred from the usage. Try specifying the type arguments explicitly. Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-23 00:24:27,366 [8] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineClassRoom/Edit/2 User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Online\Views\OnlineClassRoom\Edit.cshtml(29): error CS0411: The type arguments for method 'LabelExtensions.LabelFor<TModel, TValue>(HtmlHelper<TModel>, Expression<Func<TModel, TValue>>, object)' cannot be inferred from the usage. Try specifying the type arguments explicitly. Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-23 00:27:36,944 [11] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineClassRoom/Edit/2 User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Online\Views\OnlineClassRoom\Edit.cshtml(30): error CS0246: The type or namespace name 'Grade' could not be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
