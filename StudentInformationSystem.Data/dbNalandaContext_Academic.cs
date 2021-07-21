@@ -160,6 +160,8 @@ namespace StudentInformationSystem.Data
                     .HasForeignKey(d => d.StaffId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_StaffMember_ClassSubjects");
+
+                entity.Property(e => e.StaffId).IsRequired(false);
             });
 
             modelBuilder.Entity<CR_Teacher>(entity =>

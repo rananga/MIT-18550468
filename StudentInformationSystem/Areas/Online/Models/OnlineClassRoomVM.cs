@@ -18,6 +18,7 @@ namespace StudentInformationSystem.Areas.Online.Models
 
             mappings.Add(x => x.Grade.GradeNo.ToEnumChar(null), x => x.GradeName);
             mappings.Add(x => x.Subject.Code, x => x.SubjectName);
+            mappings.Add(x => x.PhysicalClassRooms.Count == 0 ? x.Grade.GradeNo.ToEnumChar(null) : x.PhysicalClassRooms.Select(y => y.ClassRoom.GradeClass.Code).AggregateOrDefault((y, z) => y + ", " + z), x => x.ClassCode);
             mappings.Add(x => new OCR_TeacherVM(x.ClassTeachers.Where(y => y.IsOwner).FirstOrDefault()).TeacherName, x => x.TeacherName);
             mappings.Add(x => x.PhysicalClassRooms.Select(y => new OCR_ClassRoomVM(y)).ToList(), x => x.ClassRooms);
             mappings.Add(x => x.ClassTeachers.Select(y => new OCR_TeacherVM(y)).ToList(), x => x.Teachers);
@@ -35,6 +36,8 @@ namespace StudentInformationSystem.Areas.Online.Models
         public string SubjectName { get; set; }
         [DisplayName("Class Teacher")]
         public string TeacherName { get; set; }
+        [DisplayName("Class Code")]
+        public string ClassCode { get; set; }
 
         public virtual ICollection<OCR_ClassRoomVM> ClassRooms { get; set; }
         public virtual ICollection<OCR_TeacherVM> Teachers { get; set; }

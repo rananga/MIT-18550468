@@ -26,62 +26,65 @@ namespace StudentInformationSystem.Areas.Base
             var lst = new List<TileData>();
             // tile1 - tile7
 
-            //lst.Add(new TileData()
-            //{
-            //    Text = "Student Admission",
-            //    LandingURL = Url.Action("Index", "Student", new { area = "Student" }),
-            //    DataURL = Url.Action("GetStudentAdmissions", "Home", new { area = "Base" }),
-            //    ColorClass = "tile4",
-            //    IconURL = Url.Content("~/Content/Images/interview.png")
-            //});
-            //lst.Add(new TileData()
-            //{
-            //    Text = "Teacher Management",
-            //    LandingURL = Url.Action("Index", "Teacher", new { area = "Admin" }),
-            //    DataURL = Url.Action("GetTeachers", "Home", new { area = "Base" }),
-            //    ColorClass = "tile2",
-            //    IconURL = Url.Content("~/Content/Images/LecHrs.png")
-            //});
-            //lst.Add(new TileData()
-            //{
-            //    Text = "Class Management",
-            //    LandingURL = Url.Action("Index", "Class", new { area = "Admin" }),
-            //    //DataURL = Url.Action("GetUserLeaveApprovals", "Home", new { area = "Base" }),
-            //    ColorClass = "tile5",
-            //    IconURL = Url.Content("~/Content/Images/studentProgress.png")
-            //});
+            lst.Add(new TileData()
+            {
+                Text = "Student Admission",
+                LandingURL = Url.Action("Index", "Student", new { area = "Student" }),
+                //DataURL = Url.Action("GetStudentAdmissions", "Home", new { area = "Base" }),
+                ColorClass = "tile4",
+                IconURL = "fas fa-user-graduate"
+            });
 
-            //lst.Add(new TileData()
-            //{
-            //    Text = "Student Attendance Management",
-            //    LandingURL = Url.Action("Index", "StudAttendance", new { area = "Student" }),
-            //    //DataURL = Url.Action("GetUserLieuLeaveApprovals", "Home", new { area = "Base" }),
-            //    ColorClass = "tile5",
-            //    IconURL = Url.Content("~/Content/Images/check-list.png")
-            //});
+            lst.Add(new TileData()
+            {
+                Text = "Staff Members",
+                LandingURL = Url.Action("Index", "StaffMember", new { area = "Admin" }),
+                //DataURL = Url.Action("GetTeachers", "Home", new { area = "Base" }),
+                ColorClass = "tile2",
+                IconURL = "fas fa-user-friends"
+            });
 
-            //lst.Add(new TileData()
-            //{
-            //    Text = "Student Promotion",
-            //    LandingURL = Url.Action("Index", "StudentPromotion", new { area = "Student" }),
-            //    //DataURL = Url.Action("GetDailyPerformanceDG", "Home", new { area = "Base" }),
-            //    ColorClass = "tile3",
-            //    IconURL = Url.Content("~/Content/Images/success.png")
-            //});
-            //lst.Add(new TileData()
-            //{
-            //    Text = "Student Club Membership",
-            //    LandingURL = Url.Action("Index", "StudentClubMembership", new { area = "Student" }),
-            //    //DataURL = Url.Action("GetDailyPerformanceDG", "Home", new { area = "Base" }),
-            //    ColorClass = "tile1",
-            //    IconURL = Url.Content("~/Content/Images/restaurant-membership-card-tool.png")
-            //});
+            lst.Add(new TileData()
+            {
+                Text = "Physical Classrooms",
+                LandingURL = Url.Action("Index", "ClassRoom", new { area = "Academic" }),
+                //DataURL = Url.Action("GetUserLeaveApprovals", "Home", new { area = "Base" }),
+                ColorClass = "tile5",
+                IconURL = "fas fa-school"
+            });
+
+            lst.Add(new TileData()
+            {
+                Text = "Online Classrooms",
+                LandingURL = Url.Action("Index", "OnlineClassRoom", new { area = "Online" }),
+                //DataURL = Url.Action("GetUserLieuLeaveApprovals", "Home", new { area = "Base" }),
+                ColorClass = "tile5",
+                IconURL = "fas fa-chalkboard-teacher"
+            });
+
+            lst.Add(new TileData()
+            {
+                Text = "Online Time Table",
+                LandingURL = Url.Action("Index", "OnlineTimeTable", new { area = "Online" }),
+                //DataURL = Url.Action("GetDailyPerformanceDG", "Home", new { area = "Base" }),
+                ColorClass = "tile3",
+                IconURL = "fas fa-calendar-alt"
+            });
+
+            lst.Add(new TileData()
+            {
+                Text = "Weekly Summary By Grade",
+                LandingURL = Url.Action("Process", "WeeklySummary", new { area = "Report" }),
+                //DataURL = Url.Action("GetDailyPerformanceDG", "Home", new { area = "Base" }),
+                ColorClass = "tile1",
+                IconURL = "fas fa-chart-bar"
+            });
 
             //lst.Add(new TileData()
             //{
             //    Text = "Intake Summary Report",
             //    LandingURL = Url.Action("IntakeSummary", "Reports", new { area = "Admin" }),
-            //   // DataURL = Url.Action("GetStudentAdmissions", "Home", new { area = "Base" }),
+            //    // DataURL = Url.Action("GetStudentAdmissions", "Home", new { area = "Base" }),
             //    ColorClass = "tile4",
             //    IconURL = Url.Content("~/Content/Images/interview.png")
             //});

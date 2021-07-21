@@ -20,6 +20,7 @@ namespace StudentInformationSystem.Data.Models
         [Required]
         public Medium Medium { get; set; }
         public string GoogleClassRoomId { get; set; }
+        public string GoogleClassrommLink { get; set; }
 
         public virtual Grade Grade { get; set; }
         public virtual Subject Subject { get; set; }

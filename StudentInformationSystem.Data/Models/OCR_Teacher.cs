@@ -12,7 +12,7 @@ namespace StudentInformationSystem.Data.Models
             OnlineClasses = new HashSet<OnlineClass>();
         }
 
-        [DisplayName("Online Class Room"), Required]
+        [DisplayName("Online Classroom"), Required]
         public int OCR_Id { get; set; }
         [DisplayName("Class Teacher")]
         [Required]

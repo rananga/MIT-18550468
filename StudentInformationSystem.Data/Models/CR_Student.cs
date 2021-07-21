@@ -13,7 +13,7 @@ namespace StudentInformationSystem.Data.Models
         }
 
         [Required]
-        [DisplayName("Class Room")]
+        [DisplayName("Classroom")]
         public int CR_Id { get; set; }
         [Required]
         [DisplayName("Student")]

@@ -156,13 +156,14 @@ namespace StudentInformationSystem.Areas.Academic
                 var existingObj = db.ClassRooms.Where(e => e.Year == vm.Year && e.GradeClassId == vm.GradeClassId).FirstOrDefault();
 
                 if (existingObj != null)
-                { ModelState.AddModelError("", "Class Room already exists for the selected Year and Grade-Class."); }
+                { ModelState.AddModelError("", "Classroom already exists for the selected Year and Grade-Class."); }
 
                 if (ModelState.IsValid)
                 {
                     vm.CreatedBy = this.GetCurrUser();
                     vm.CreatedDate = DateTime.Now;
-                    var objclass = db.ClassRooms.Add(vm.GetEntity()).Entity;
+                    var entry = db.ClassRooms.Add(vm.GetEntity());
+                    var objclass = entry.Entity;
 
                     foreach (var det in svm.Teachers)
                     {
@@ -171,9 +172,19 @@ namespace StudentInformationSystem.Areas.Academic
                         det.CreatedDate = DateTime.Now;
                         objclass.ClassTeachers.Add(det.GetEntity());
                     }
+
+                    entry.Reference(x => x.GradeClass).Load();
+                    var subjects = db.GradeSubjects.Where(x => x.GradeId == objclass.GradeClass.GradeId).Select(x => x.SubjectId)
+                        .Concat(db.GradeClassSubjects.Where(x => x.GradeClassId == objclass.GradeClassId).Select(x => x.SubjectId));
+
+                    foreach (var subId in subjects)
+                    {
+                        objclass.ClassSubjects.Add(new CR_Subject() { SubjectId = subId, CreatedBy = objclass.CreatedBy, CreatedDate = DateTime.Now });
+                    }
+
                     db.SaveChanges();
 
-                    AddAlert(AlertStyles.success, "Class Room Created Successfully.");
+                    AddAlert(AlertStyles.success, "Classroom Created Successfully.");
                     return RedirectToAction("Index");
                 }
             }
@@ -270,7 +281,7 @@ namespace StudentInformationSystem.Areas.Academic
                 if (ModelState.IsValid)
                 {
                     obj = (ClassRoomVM)Session[sskCrtdObj];
-                    vm.Id = Math.Min(obj.Teachers.Select(x => x.Id).MinOrDefault(), 0) - 1;
+                    vm.Id = Math.Min(obj.Subjects.Select(x => x.Id).MinOrDefault(), 0) - 1;
                     vm.SubjectName = db.Subjects.Find(vm.SubjectId).Code;
                     var sm = db.StaffMembers.Find(vm.StaffId);
                     vm.TeacherName = $"{sm.Title.ToEnumChar(null)} {sm.FullName}";
@@ -517,7 +528,7 @@ namespace StudentInformationSystem.Areas.Academic
 
                     db.SaveChanges();
 
-                    AddAlert(AlertStyles.success, "Class Room Modified Successfully.");
+                    AddAlert(AlertStyles.success, "Classroom Modified Successfully.");
                     return RedirectToAction("Index");
                 }
             }
@@ -534,6 +545,46 @@ namespace StudentInformationSystem.Areas.Academic
             return View(vm);
         }
 
+        public ActionResult SubjectEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var vm = ((ClassRoomVM)Session[sskCrtdObj]).Subjects.FirstOrDefault(x => x.Id == id);
+            if (vm == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("_SubjectEdit", vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubjectEdit(CR_SubjectVM vm)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var obj = ((ClassRoomVM)Session[sskCrtdObj]).Subjects.FirstOrDefault(x => x.Id == vm.Id);
+                    vm.CopyContent(obj, "SubjectId,StaffId");
+                    obj.SubjectName = db.Subjects.Find(vm.SubjectId).Code;
+                    var sm = db.StaffMembers.Find(vm.StaffId);
+                    obj.TeacherName = $"{sm.Title.ToEnumChar(null)} {sm.FullName}";
+                    AddAlert(AlertStyles.success, "Class Subject Modified Successfully.");
+                    string url = Url.Action("SubjectIndex", new { id = vm.Id, isToEdit = true });
+                    return Json(new { success = true, url });
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            { this.ShowEntityErrors(dbEx); }
+            catch (Exception ex)
+            { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
+
+            return PartialView("_SubjectEdit", vm);
+        }
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(ClassRoomVM vm)
@@ -543,9 +594,8 @@ namespace StudentInformationSystem.Areas.Academic
                 var obj = db.ClassRooms.Find(vm.Id);
                 if (obj == null)
                 { throw new DbUpdateConcurrencyException(""); }
-                db.Detach(obj);
 
-                var entry = db.Entry(vm.GetEntity());
+                var entry = db.Entry(obj);
                 entry.State = EntityState.Unchanged;
 
                 entry.Collection(x => x.ClassTeachers).Load();
@@ -563,7 +613,7 @@ namespace StudentInformationSystem.Areas.Academic
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
-                AddAlert(AlertStyles.success, "Class Room Deleted Successfully.");
+                AddAlert(AlertStyles.success, "Classroom Deleted Successfully.");
                 return RedirectToAction("Index");
             }
             catch (DbUpdateConcurrencyException ex)

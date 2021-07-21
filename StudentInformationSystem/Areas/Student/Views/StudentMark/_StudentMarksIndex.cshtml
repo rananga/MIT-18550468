@@ -1,0 +1,31 @@
+﻿@model IEnumerable<StudentInformationSystem.Areas.Student.Models.CR_StudentSubjectMarkVM>
+
+@if (Model.Count() > 0)
+{
+    <table class="mGrid">
+        <thead>
+            <tr>
+                <th class="text-center" style="min-width: 120px">Admission No</th>
+                <th class="text-center" style="min-width: 120px">Name</th>
+                <th class="text-center" style="width: 200px">Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stud in Model.OrderBy(x => x.IndexNo))
+            {
+
+                <tr>
+                    <td class="align-middle">@stud.IndexNo</td>
+                    <td class="align-middle">@stud.StudentName</td>
+                    <td class="align-middle">@Html.EditorFor(x => stud.Marks, new { htmlAttributes = new { @class = "marks form-control", data_db_val = stud.Marks, data_stud_id = stud.StudentId } })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@{
+    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
+}
+
+

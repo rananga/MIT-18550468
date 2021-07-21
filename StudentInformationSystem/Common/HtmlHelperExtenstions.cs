@@ -252,7 +252,7 @@ namespace System.Web.Mvc.Html
             return lst;
         }
 
-        public static MvcHtmlString SelectListFor<TEntity, TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, Func<TEntity, TProperty> getValue, Func<TEntity, string> getText, object htmlAttributes = null, Func<TEntity, object> getData = null) where TEntity : class
+        public static MvcHtmlString SelectListFor<TEntity, TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, Func<TEntity, TProperty> getValue, Func<TEntity, string> getText, object htmlAttributes = null, Func<TEntity, object> getData = null, Expression<Func<TEntity, bool>> filter = null) where TEntity : class
         {
             var pi = GetPropertyInfo(expression);
 
@@ -277,7 +277,12 @@ namespace System.Web.Mvc.Html
 
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
-                var lst = dbctx.Set<TEntity>().ToList().Select(x => new { value = getValue(x), text = getText(x), data = getData == null ? null : getData(x) }).ToList();
+                var qry = dbctx.Set<TEntity>().AsQueryable();
+
+                if (filter != null)
+                    qry = qry.Where(filter);
+
+                var lst = qry.ToList().Select(x => new { value = getValue(x), text = getText(x), data = getData == null ? null : getData(x) }).ToList();
 
                 foreach (var itm in lst)
                 {
@@ -538,7 +543,7 @@ namespace System.Web.Mvc.Html
             s.Attributes.Add("data-popup-width", popUpWidth.ToString());
             if (!valueMember.IsBlank())
             { s.Attributes.Add("data-value-member", valueMember); }
-            s.Attributes.Add("data-title", "<span class=\"glyphicon glyphicon-info-sign\" style=\"font-size:x-large;color:blue\"></span> " + title);
+            s.Attributes.Add("data-title", "<span style=\"display:flex;\"><i style=\"font-size:x-large;\" class=\"fas fa-info-circle\"></i><span style=\"line-height:24px;margin-left:6px\">" + title + "</span></span>");
             s.Attributes.Add("data-hidden-indices", hiddenIndices);
             var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
 

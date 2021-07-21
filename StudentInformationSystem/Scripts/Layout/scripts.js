@@ -92,6 +92,7 @@ function initializeJS() {
                 });
                 $container.removeClass("sidebar-closed");
             }
+            SetFooterPosition();
             //$sideBar.getNiceScroll().resize();
         }
         function responsiveViewResize() {
@@ -117,12 +118,13 @@ function initializeJS() {
                 });
                 $container.removeClass("sidebar-closed");
             }
+            SetFooterPosition();
             //$sideBar.getNiceScroll().resize();
         }
         $().ready(responsiveView);
         $window = $(window);
         $window.on('load', responsiveView);
-        $window.on('resize', responsiveViewResize);
+        $window.on('resize', responsiveView);
     });
 
     jQuery('.toggle-nav').click(function () {
@@ -147,6 +149,7 @@ function initializeJS() {
             jQuery("#container").removeClass("sidebar-closed");
             jQuery("#container").removeClass("sidebar-hidden");
         }
+        SetFooterPosition();
     });
 }
 

@@ -10,6 +10,7 @@
     @Styles.Render("~/Content/bootstrap")
     @Styles.Render("~/Content/custom")
     @Styles.Render("~/Content/fontawesome")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     @Styles.Render("~/Content/bootstrapicons")
     @RenderSection("styles", required: false)
 
@@ -168,7 +169,7 @@
                         </div>
                         <br />
                         <footer class="flex-foot">
-                            <p style="font-size:11px;color:maroon">© Digital Education Project powered by <b>Nalanda College OBA</b>, Colombo 10, Sri Lanka.</p>
+                            <p style="font-size:11px;color:maroon">© <b>Nalanda College</b>, Colombo 10, Sri Lanka.</p>
                         </footer>
                     </div>
                 </div>
@@ -204,28 +205,35 @@
         $(function () { setTimeout(function () { objProg.hide(); }, 1000); });
 
 
-        $(function () {
-            var $win = $(window);
-            function SetFooterPosition() {
-                var $foot = $("footer");
-                var windowHeight = $win.height();
-                var contHeight = $("div.body-content").height();
-                var headerHeight = $("header").height();
-                var footHeight = $foot.height();
-                var testHeight = windowHeight - footHeight - headerHeight - 60;
-
-                if (contHeight < testHeight)
-                    $foot.addClass("force-bottom");
-                else
-                    $foot.removeClass("force-bottom");
-            }
-
-            $win.resize(function ()
+        $(function () {     
+            $(window).resize(function ()
             {
                 SetFooterPosition();
             });
             SetFooterPosition();
         });
+
+        function SetFooterPosition() {
+            var $foot = $("footer");
+            var windowHeight = $(window).height();
+            var contHeight = $("#main-content").height();
+            var headerHeight = $("header").height();
+            var footHeight = $foot.height();
+            var testHeight = windowHeight - footHeight - headerHeight;
+
+            if (contHeight < testHeight) {
+                var footLeft = 0;
+                if (!$('#container').hasClass("sidebar-closed"))
+                    footLeft = Math.round($('ul.sidebar-menu').width());
+
+                $foot.addClass("force-bottom");
+                $foot.css("left", footLeft + "px");
+            }
+            else {
+                $foot.removeClass("force-bottom");
+                $foot.css("left", "");
+            }
+        }
     </script>
 
 </body>

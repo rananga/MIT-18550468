@@ -294,6 +294,7 @@ textarea {
 .ui-dialog-titlebar {
     font-family: Verdana,Arial,sans-serif !important;
     font-size: 1.1em !important;
+    color: maroon;
 }
 
 .ui-widget-overlay {

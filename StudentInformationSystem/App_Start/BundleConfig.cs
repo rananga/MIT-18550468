@@ -72,6 +72,9 @@ namespace StudentInformationSystem
             bundles.Add(new ScriptBundle("~/bundles/admin/employee").Include(
                       "~/Scripts/Admin/Employee.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/online/timetable").Include(
+                      "~/Scripts/Online/TimeTable.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/program/course").Include(
                       "~/Scripts/Program/Course.js"));
 

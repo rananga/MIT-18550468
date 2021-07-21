@@ -42,13 +42,14 @@ namespace StudentInformationSystem.Areas.Academic.Controllers
 
             ViewBag.IsToEdit = isToEdit;
             ViewBag.GradeClassId = obj.Id;
+            ViewBag.SectionId = obj.SectionId;
             return PartialView("_SubjectIndex", obj.ClassSubjects);
         }
         public ActionResult Create()
         {
-            var grade = new GradeClassVM();
-            Session[sskCrtdObj] = grade;
-            return View(grade);
+            var vm = new GradeClassVM();
+            Session[sskCrtdObj] = vm;
+            return View(vm);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -90,7 +91,7 @@ namespace StudentInformationSystem.Areas.Academic.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult SubjectCreate(int? gradeClassId)
+        public ActionResult SubjectCreate(int? gradeClassId, int? sectionId)
         {
             if (gradeClassId != 0)
             {
@@ -105,8 +106,12 @@ namespace StudentInformationSystem.Areas.Academic.Controllers
                     return HttpNotFound();
                 }
             }
+            if (sectionId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-            var vm = new GradeClassSubjectVM() { GradeClassId = gradeClassId.Value };
+            var vm = new GradeClassSubjectVM() { GradeClassId = gradeClassId.Value, SectionId = sectionId.Value };
             return PartialView("_SubjectCreate", vm);
         }
 
@@ -118,9 +123,12 @@ namespace StudentInformationSystem.Areas.Academic.Controllers
             GradeClassVM obj;
             try
             {
+                obj = (GradeClassVM)Session[sskCrtdObj];
+                if (obj.ClassSubjects.Where(x => x.SubjectId == vm.SubjectId).Any())
+                    ModelState.AddModelError("SubjectId", "Subject already exists.");
+
                 if (ModelState.IsValid)
                 {
-                    obj = (GradeClassVM)Session[sskCrtdObj];
                     vm.Id = Math.Min(obj.ClassSubjects.Select(x => x.Id).MinOrDefault(), 0) - 1;
                     var objSubject = db.Subjects.Find(vm.SubjectId);
                     vm.SubjectName = objSubject.Code;

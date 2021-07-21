@@ -18,6 +18,7 @@ namespace StudentInformationSystem.Areas.Academic.Models
             //mappings.Add(x => x.Class.Grade.GradeId + x.Class.Name, x => x.ClassName);
             mappings.Add(x => x.Student.IndexNo, x => x.StudentIndex);
             mappings.Add(x => x.Student.FullName, x => x.StudentName);
+            mappings.Add(x => x.Student.Medium, x => x.StudentMedium);
             mappings.Add(x => x.Student.StudentBasketSubjects.Where(y => y.Subject.SectionId == x.ClassRoom.GradeClass.Grade.SectionId).Select(y=> y.Subject.Code).Aggregate((y, z) => y + "," + z), x => x.BasketSubjects);
         }
 
@@ -31,6 +32,7 @@ namespace StudentInformationSystem.Areas.Academic.Models
         public int StudentIndex { get; set; }
         [DisplayName("Name")]
         public string StudentName { get; set; }
+        public Medium StudentMedium { get; set; }
         [DisplayName("Basket Subjects")]
         public string BasketSubjects { get; set; }
     }

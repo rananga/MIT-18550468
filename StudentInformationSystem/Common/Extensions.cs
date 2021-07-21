@@ -538,6 +538,10 @@ namespace System
         {
             return Serializer.Deserialize<T>(src);
         }
+        public static dynamic DeserializeToDynamic<T>(this T src)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject(Convert.ToString(src));
+        }
         public static List<string> GetNicList(this string src)
         {
             src = src?.Trim()?.ToUpper() ?? "";

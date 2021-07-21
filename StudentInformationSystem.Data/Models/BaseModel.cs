@@ -18,5 +18,7 @@ namespace StudentInformationSystem.Data.Models
         [Column("ModifiedDate", TypeName = "datetime")]
         public DateTime? ModifiedDate { get; set; }
         public byte[] RowVersion { get; set; }
+        [NotMapped]
+        public string JsonData { get; set; }
     }
 }

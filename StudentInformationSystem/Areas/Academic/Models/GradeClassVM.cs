@@ -15,6 +15,7 @@ namespace StudentInformationSystem.Areas.Academic.Models
             mappings = new ObjMappings<GradeClass, GradeClassVM>();
             ClassSubjects = new HashSet<GradeClassSubjectVM>();
 
+            mappings.Add(x => x.Grade.SectionId, x => x.SectionId);
             mappings.Add(x => x.Grade.GradeNo.ToEnumChar(null), x => x.GradeName);
             mappings.Add(x => x.GradeClassSubjects.Select(y => new GradeClassSubjectVM(y)).ToList(), x => x.ClassSubjects);
         }
@@ -25,6 +26,7 @@ namespace StudentInformationSystem.Areas.Academic.Models
         }
         public ObjMappings<GradeClass, GradeClassVM> mappings { get; set; }
 
+        public int SectionId { get; set; }
         [DisplayName("Grade")]
         public string GradeName { get; set; }
 

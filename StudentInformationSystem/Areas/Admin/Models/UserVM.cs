@@ -17,6 +17,7 @@ namespace StudentInformationSystem.Areas.Admin.Models
             DetailsList = new List<UserPermissionVM>();
             mappings = new ObjMappings<User, UserVM>();
             mappings.Add(x => x.StaffMember == null ? "" : $"{x.StaffMember.Title.ToEnumChar("")}. {x.StaffMember.Initials.Trim()} {x.StaffMember.LastName}", x => x.SatffName);
+            mappings.Add(x => x.Visitor == null ? "" : $"{x.Visitor.Title.ToEnumChar("")}. {x.Visitor.Initials.Trim()} {x.Visitor.LastName}", x => x.VisitorName);
             mappings.Add(x => x.UserPermissions.Select(y => new UserPermissionVM(y)).ToList(), x => x.DetailsList);
         }
         public UserVM(User obj)
@@ -30,6 +31,9 @@ namespace StudentInformationSystem.Areas.Admin.Models
 
         [DisplayName("Staff Member")]
         public string SatffName { get; set; }
+
+        [DisplayName("Visitor")]
+        public string VisitorName { get; set; }
 
         public virtual ICollection<UserPermissionVM> DetailsList { get; set; }
     }

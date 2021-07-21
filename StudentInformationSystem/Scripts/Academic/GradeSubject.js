@@ -9,7 +9,8 @@ $(function () {
             objSubject.prop("disabled", false);
             var dat = $("#GradeId option:selected").data("info");
 
-            var obj = { sectionId: dat.SectionId };
+            var obj = objSubject.data("para-json");
+            obj.sectionId = dat.SectionId;
             objSubject.data("para-json", obj);
         }
         else {

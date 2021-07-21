@@ -5,18 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Reports\OnlineSessionsSummary.rdlc" />
-    <None Remove="Reports\StudentAttendance.rdlc" />
-    <None Remove="Reports\StudentMarks.rdlc" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Reports\StudentAttendance.rdlc" />
+    <EmbeddedResource Include="Reports\ApplicationForm.rdlc" />
     <EmbeddedResource Include="Reports\OnlineSessionsSummary.rdlc" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <EmbeddedResource Include="Reports\StudentAttendance.rdlc" />
     <EmbeddedResource Include="Reports\StudentMarks.rdlc" />
+    <EmbeddedResource Include="Reports\WeeklySummary.rdlc" />
   </ItemGroup>
 
 </Project>

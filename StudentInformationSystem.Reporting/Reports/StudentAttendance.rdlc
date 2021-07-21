@@ -1351,7 +1351,7 @@ Iif(Fields!Subject.Value is nothing, "",
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>© Digital Education Project powered by </Value>
+                      <Value>© </Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>

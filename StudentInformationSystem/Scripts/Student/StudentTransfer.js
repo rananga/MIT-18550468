@@ -2,40 +2,18 @@
 
 $(function () {
 
-    var objLastClass = $('#LastProClassID');
-    var objNewClass = $('#NewProClassID');
-    var objStudent = $('#ClStdID');
-    var objLastTeacherInCharge = $('#LastTeacherInCharge');
-    var objNewTeacherInCharge = $('#NewTeacherInCharge');
+    var objYear = $('#Year');
+    var objStudent = $('#StudentId');
+    var objStudErr = $('#errStudentId');
     
-
-    objLastClass.change(function () {
-        var para = objStudent.data("para-json");
-        para.promoteClassID = Number(objLastClass.val());
-        objStudent.attr("data-para-json", JSON.stringify(para));
-        objStudent.empty().append('<option selected="selected" value="">' + objStudent.data("empty-text") + '</option>');
-
-        $.getJSON(AppRoot + "Student/StudentTransfers/GetClassTeacherDetails", { ProClassID: Number(objLastClass.val()) }, function (jsn) {
-            objLastTeacherInCharge.val(jsn.TeacherName);
-        }).error(function (data, status, jqXHR) {
-            if (IsJson(data.responseText)) { AlertIt("ERROR: " + JSON.parse(data.responseText).Message); }
-            else { AlertIt("ERROR: " + data.statusText); }
-        });
-
-    });
-    objNewClass.change(function () {
-        $.getJSON(AppRoot + "Student/StudentTransfers/GetClassTeacherDetails", { ProClassID: Number(objNewClass.val()) }, function (jsn) {
-            objNewTeacherInCharge.val(jsn.TeacherName);
-        }).error(function (data, status, jqXHR) {
-            if (IsJson(data.responseText)) { AlertIt("ERROR: " + JSON.parse(data.responseText).Message); }
-            else { AlertIt("ERROR: " + data.statusText); }
-        });
-    });
-
-    objStudent.change(function () {
-        $.getJSON(AppRoot + "Student/StudDropouts/GetStudentDetails", { StudID: Number(objStudent.val()) }, function (jsn) {
-            var jsnIndexNo = jsn.IndexNo;
-            $('#IndexNo').val(jsnIndexNo);
+    objYear.add(objStudent).change(function () {
+        objStudErr.text('');
+        $.getJSON(AppRoot + "Student/TransferStudent/GetStudentLastClassInfo", { year: Number(objYear.val()), studentId: Number(objStudent.val()) }, function (jsn) {
+            if (jsn.errmsg)
+                objStudErr.text(jsn.errmsg);
+            else {
+                $('#FromCR_Id').empty().append('<option selected="selected" value="' + jsn.Id + '">' + jsn.Code + '</option>');
+            }
         }).error(function (data, status, jqXHR) {
             if (IsJson(data.responseText)) { AlertIt("ERROR: " + JSON.parse(data.responseText).Message); }
             else { AlertIt("ERROR: " + data.statusText); }

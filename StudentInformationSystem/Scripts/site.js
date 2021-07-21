@@ -55,16 +55,14 @@ function SetDatePicker(ctrl, fmt, mxdt) {
 
     ctrl.blur(function () {
         var v = ctrl.val();
-        if (isNaN(parseInt(v)) || !isFinite(v))
-        { return; }
+        if (isNaN(parseInt(v)) || !isFinite(v)) { return; }
 
         if (v.length == 6) {
             y = v.substring(4);
             y = y > 49 ? ("19" + y) : ("20" + y);
             v = y + "-" + v.substring(2, 4) + "-" + v.substring(0, 2);
         }
-        else if (v.length == 8)
-        { v = v.substring(4) + "-" + v.substring(2, 4) + "-" + v.substring(0, 2); }
+        else if (v.length == 8) { v = v.substring(4) + "-" + v.substring(2, 4) + "-" + v.substring(0, 2); }
 
         if (!isNaN(Date.parse(v))) {
             ctrl.val(v);
@@ -130,8 +128,7 @@ function SetGridSortIconAndFirstCol() {
 
     var fth = $("thead tr th", tbl).eq(0);
     if (tbl.find('tbody > tr').length == 0) {
-        if (!$.trim(fth.html()))
-        { fth.hide(); }
+        if (!$.trim(fth.html())) { fth.hide(); }
     }
     else { fth.show(); }
 }
@@ -190,10 +187,8 @@ function IsJson(str) {
 function dlgOnResize(dlg, w) {
     var h = dlg.dialog("option", "height");
     if (!w) {
-        if (window.curPopUpSelector && dlg.attr('id') == window.curPopUpSelector.data("dlgid"))
-        { w = window.curPopUpSelector.data("popup-width"); }
-        if (!w)
-        { w = 500; }
+        if (window.curPopUpSelector && dlg.attr('id') == window.curPopUpSelector.data("dlgid")) { w = window.curPopUpSelector.data("popup-width"); }
+        if (!w) { w = 500; }
     }
 
     var mh = $(window).height() - 50;
@@ -208,18 +203,14 @@ function dlgOnResize(dlg, w) {
 }
 
 function closeDialogModal(obj, FireCloseEvent) {
-    if (!obj)
-    { return; }
+    if (!obj) { return; }
 
     var dlg;
-    if (obj instanceof $)
-    { dlg = obj; }
-    else
-    { dlg = $(obj).parents(".popDlgMdlCont"); }
+    if (obj instanceof $) { dlg = obj; }
+    else { dlg = $(obj).parents(".popDlgMdlCont"); }
 
     if (IsDilogOpen(dlg)) {
-        if (!FireCloseEvent)
-        { dlg.off("dialogclose"); }
+        if (!FireCloseEvent) { dlg.off("dialogclose"); }
         dlg.dialog("close");
     }
     return false;
@@ -234,8 +225,7 @@ function AlertIt(msg) {
     }
     var dlg = $('#' + dlgId);
 
-    function winResFunc()
-    { dlgOnResize(dlg, 300); }
+    function winResFunc() { dlgOnResize(dlg, 300); }
 
     dlg.dialog({
         height: "auto",
@@ -283,8 +273,7 @@ function AlertIt(msg) {
         closeDialogModal(dlg);
     });
 
-    if (objProg.length > 0)
-    { objProg.hide(); }
+    if (objProg.length > 0) { objProg.hide(); }
 
     dlg.dialog("option", "title", "Alert");
     dlgOnResize(dlg, 300);
@@ -292,14 +281,10 @@ function AlertIt(msg) {
 }
 
 function ConfirmIt(msg, title, posButText, negButText, showCancel, funcSuccess, funcCancel, hideNegBut) {
-    if (!msg)
-    { msg = "Please click ok to confirm."; }
-    if (!title)
-    { title = "Please confirm"; }
-    if (!posButText)
-    { posButText = "Ok"; }
-    if (!negButText)
-    { negButText = "Cancel"; }
+    if (!msg) { msg = "Please click ok to confirm."; }
+    if (!title) { title = "Please confirm"; }
+    if (!posButText) { posButText = "Ok"; }
+    if (!negButText) { negButText = "Cancel"; }
 
     var dlgId = $(window).confirmDialogId;
     if (!dlgId) {
@@ -310,8 +295,7 @@ function ConfirmIt(msg, title, posButText, negButText, showCancel, funcSuccess, 
     var dlg = $('#' + dlgId);
     dlg.data("is-pos", 0);
 
-    function winResFunc()
-    { dlgOnResize(dlg, 300); }
+    function winResFunc() { dlgOnResize(dlg, 300); }
 
     dlg.dialog({
         height: "auto",
@@ -341,12 +325,10 @@ function ConfirmIt(msg, title, posButText, negButText, showCancel, funcSuccess, 
         },
         close: function (event, ui) {
             if (dlg.data("is-pos") == 1) {
-                if (funcSuccess)
-                { funcSuccess(); }
+                if (funcSuccess) { funcSuccess(); }
             }
             else {
-                if (funcCancel)
-                { funcCancel(); }
+                if (funcCancel) { funcCancel(); }
             }
         }
     });
@@ -376,8 +358,7 @@ function ConfirmIt(msg, title, posButText, negButText, showCancel, funcSuccess, 
         closeDialogModal(dlg);
     });
 
-    if (objProg.length > 0)
-    { objProg.hide(); }
+    if (objProg.length > 0) { objProg.hide(); }
 
     dlg.dialog("option", "title", title);
     dlgOnResize(dlg, 300);
@@ -455,8 +436,7 @@ function DocReadyFunc() {
         var $this = $(this);
         var dlg = GetDialogObj($this);
 
-        function winResFunc()
-        { dlgOnResize(dlg); }
+        function winResFunc() { dlgOnResize(dlg); }
 
         dlg.dialog({
             height: "auto",
@@ -565,8 +545,7 @@ function DocReadyFunc() {
         var $this = $(this);
         var dlg = GetDialogObj($this);
 
-        function winResFunc()
-        { dlgOnResize(dlg, $this.data("popup-width")); }
+        function winResFunc() { dlgOnResize(dlg, $this.data("popup-width")); }
 
         dlg.dialog({
             height: "auto",
@@ -603,8 +582,7 @@ function DocReadyFunc() {
             e.preventDefault();
             e.stopPropagation();
 
-            if ($this.prop('readOnly') || $this.prop('disabled') || $this.is('[readOnly]') || $this.is('[disabled]'))
-            { return; }
+            if ($this.prop('readOnly') || $this.prop('disabled') || $this.is('[readOnly]') || $this.is('[disabled]')) { return; }
 
             var url = $this.data("url") + "&dlgID=" + $this.data("dlgid");
             var title = $this.data("title");
@@ -623,8 +601,7 @@ function DocReadyFunc() {
         $this.on("mousedown.PopUpSelector", onclick);
         $this.on("keydown.PopUpSelector", function (e) {
             if (e.keyCode) {
-                if (e.altKey || e.ctrlKey || e.metaKey)
-                { return; }
+                if (e.altKey || e.ctrlKey || e.metaKey) { return; }
 
                 if ((e.keyCode < 48 || e.keyCode > 90) && //Pass numbers and characters
                     (e.keyCode < 96 || e.keyCode > 111) && //Pass numpad numbers
@@ -641,8 +618,7 @@ function DocReadyFunc() {
         var $this = $(this);
         var dlg = GetDialogObj($this);
 
-        function winResFunc()
-        { dlgOnResize(dlg); }
+        function winResFunc() { dlgOnResize(dlg); }
 
         dlg.dialog({
             height: "auto",
@@ -717,8 +693,7 @@ function DocReadyFunc() {
         var $this = $(this);
         var prevVal = $this.data("prev-val");
 
-        if ($this.val() == prevVal)
-        { return; }
+        if ($this.val() == prevVal) { return; }
 
         var frm = $this.closest("form");
         if ($this.val() == "0" && $this.is("[data-warn-show-all]")) {
@@ -763,7 +738,8 @@ function PopupDocReadyFunc() {
                     overflow: 'hidden'
                 });
 
-                $(".ui-widget-overlay").bind('click', function () { dlg.dialog("close"); });
+                if (!$this.data("no-auto-close"))
+                    $(".ui-widget-overlay").bind('click', function () { dlg.dialog("close"); });
 
                 winResFunc();
                 window.addEventListener("resize", winResFunc);
@@ -781,21 +757,29 @@ function PopupDocReadyFunc() {
                     type: this.method,
                     data: $(this).serialize(),
                     success: function (result) {
-                        console.log(776);
                         if (result.success) {
                             closeDialogModal(dlg);
-                            $this.parents('.ChildContent').load(result.url, function (response, status, xhr) {
-                                if (status == "error") {
-                                    AlertIt("ERROR: " + xhr.status + "-" + xhr.statusText);
-                                }
-                                else { PopupDocReadyFunc(); }
-                            });
+
+                            var fnRefresh = window[$this.data('refresh-function')];
+                            if (typeof fnRefresh === "function")
+                                fnRefresh();
+                            else {
+                                $this.parents('.ChildContent').load(result.url, function (response, status, xhr) {
+                                    if (status == "error") {
+                                        AlertIt("ERROR: " + xhr.status + "-" + xhr.statusText);
+                                    }
+                                    else { PopupDocReadyFunc(); }
+                                });
+                            }
                             PopupDocReadyFunc();
                             //SetHeaderValues(result.hdrData);
                         } else {
                             dlg.html(result);
                             PopupDocReadyFunc();
                             bindDlgEvents();
+                            if (typeof CustomPopupBinder === 'function') {
+                                CustomPopupBinder(dlg);
+                            }
                         }
                     }
                 });
@@ -817,6 +801,9 @@ function PopupDocReadyFunc() {
                 else {
                     PopupDocReadyFunc();
                     bindDlgEvents();
+                    if (typeof CustomPopupBinder === 'function') {
+                        CustomPopupBinder(dlg);
+                    }
 
                     dlg.dialog("option", "title", $this.data("title"));
                     dlgOnResize(dlg, $this.data("popup-width"));
@@ -976,3 +963,13 @@ $(document).ready(function () {
         };
     });
 })(jQuery);
+
+Date.prototype.yyyymmdd = function (seperator) {
+    var mm = this.getMonth() + 1;
+    var dd = this.getDate();
+
+    return [this.getFullYear(),
+    (mm > 9 ? '' : '0') + mm,
+    (dd > 9 ? '' : '0') + dd
+    ].join(seperator || '');
+};

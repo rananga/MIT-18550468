@@ -33,6 +33,8 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            Session.Remove(sskTempPic);
+            Session.Remove(sskTempPicName);
             return View(new StaffMemberVM(staff));
         }
 
@@ -40,6 +42,8 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
         {
             var teacher = new StaffMemberVM() { Status = ActiveStatus.Active };
             Session[sskCrtdObj] = teacher;
+            Session.Remove(sskTempPic);
+            Session.Remove(sskTempPicName);
 
             return View(teacher);
         }
@@ -115,6 +119,8 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
             var obj = new StaffMemberVM(staff);
             Session[sskCrtdObj] = obj;
+            Session.Remove(sskTempPic);
+            Session.Remove(sskTempPicName);
 
             return View(obj);
         }
@@ -260,7 +266,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             if (id == null)
             { return new HttpStatusCodeResult(HttpStatusCode.BadRequest); }
 
-            StudentInformationSystem.Data.Models.Student student = db.Students.Find(id);
+            var staff = db.StaffMembers.Find(id);
 
             var basePath = ConfigurationManager.AppSettings["StaffImagePath"];
             if (basePath.StartsWith("\\") && !basePath.StartsWith("\\\\"))
@@ -268,9 +274,9 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             var defFilePath = Path.Combine(basePath, "Default.png");
             var filePath = defFilePath;
 
-            if (student != null && !student.ImagePath.IsBlank())
+            if (staff != null && !staff.ImagePath.IsBlank())
             {
-                var tempPath = Path.Combine(basePath, student.ImagePath);
+                var tempPath = Path.Combine(basePath, staff.ImagePath);
                 if (System.IO.File.Exists(tempPath))
                 { filePath = tempPath; }
             }
@@ -282,7 +288,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             return base.File(ms.ToArray(), MimeMapping.GetMimeMapping(filePath));
         }
 
-        private string SaveImage(int EnrolId, string curPath)
+        private string SaveImage(int Id, string curPath)
         {
             if (!(Session[sskTempPic] is string))
             { return curPath; }
@@ -293,7 +299,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 if (basePath.StartsWith("\\") && !basePath.StartsWith("\\\\"))
                 { basePath = Server.MapPath("~" + basePath); }
 
-                var fnam = EnrolId + Path.GetExtension(Session[sskTempPicName].ToString());
+                var fnam = Id + Path.GetExtension(Session[sskTempPicName].ToString());
                 var path = Path.Combine(basePath, fnam);
 
                 if (!Directory.Exists(basePath))

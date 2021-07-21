@@ -1111,7 +1111,7 @@ IIF (Parameters!OrderBy.Value = 3, "Term 3 Marks", "Average Marks")))</Value>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>© Digital Education Project powered by </Value>
+                      <Value>© </Value>
                       <Style>
                         <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>

@@ -7,7 +7,7 @@ namespace StudentInformationSystem.Data.Models
 {
     public partial class CR_Monitor : BaseModel
     {
-        [DisplayName("Class Room"), Required]
+        [DisplayName("Classroom"), Required]
         public int CR_Id { get; set; }
         [DisplayName("Student")]
         [Required]

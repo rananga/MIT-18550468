@@ -1,4 +1,5 @@
 ﻿using StudentInformationSystem.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace StudentInformationSystem.Areas.Student.Models
             mappings.Add(x => x.ActivityPositions.Select(y => new StudentExtraActivityPositionVM(y)).ToList(), x => x.Positions);
             mappings.Add(x => x.StudentBasketSubjects.Select(y => new StudentBasketSubjectVM(y)).ToList(), x => x.BasketSubjects);
             mappings.Add(x => x.StudentBasketSubjects.Select(y => y.Subject.Code).AggregateOrDefault((y, z) => y + " | " + z), x => x.AggrBasketSubjects);
+            mappings.Add(x => x.AdmittedGrade.Section.Code + " - " + x.AdmittedGrade.GradeNo.ToEnumChar(null), x => x.AdmittedGradeName);
         }
 
         public StudentVM(StudentInformationSystem.Data.Models.Student obj) : this()
@@ -37,6 +39,8 @@ namespace StudentInformationSystem.Areas.Student.Models
         public string NameWithInt { get; set; }
         [DisplayName("Basket Subjects")]
         public string AggrBasketSubjects { get; set; }
+        [DisplayName("Admitted Grade")]
+        public string AdmittedGradeName { get; set; }
 
         public HttpPostedFileBase ProfilePic { get; set; }
         public virtual ICollection<StudSiblingsVM> Siblings { get; set; }

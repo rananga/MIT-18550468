@@ -13,6 +13,11 @@ namespace StudentInformationSystem.Data.Models
             ClassSubjects = new HashSet<CR_Subject>();
             ClassStudents = new HashSet<CR_Student>();
             OCR_ClassRooms = new HashSet<OCR_ClassRoom>();
+            LastClassStudents = new HashSet<Student>();
+            FromTransfers = new HashSet<StudentTransfer>();
+            ToTransfers = new HashSet<StudentTransfer>();
+            FromClassPromotionDetails = new HashSet<ClassPromotionDetail>();
+            ToClassPromotionDetails = new HashSet<ClassPromotionDetail>();
         }
 
         [Required]
@@ -28,5 +33,10 @@ namespace StudentInformationSystem.Data.Models
         public virtual ICollection<CR_Subject> ClassSubjects { get; set; }
         public virtual ICollection<CR_Student> ClassStudents { get; set; }
         public virtual ICollection<OCR_ClassRoom> OCR_ClassRooms { get; set; }
+        public virtual ICollection<Student> LastClassStudents { get; set; }
+        public virtual ICollection<StudentTransfer> FromTransfers { get; set; }
+        public virtual ICollection<StudentTransfer> ToTransfers { get; set; }
+        public virtual ICollection<ClassPromotionDetail> FromClassPromotionDetails { get; set; }
+        public virtual ICollection<ClassPromotionDetail> ToClassPromotionDetails { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace StudentInformationSystem.Data.Models
 {
     public partial class CR_Teacher : BaseModel
     {
-        [DisplayName("Class Room"), Required]
+        [DisplayName("Classroom"), Required]
         public int CR_Id { get; set; }
         [DisplayName("Class Teacher")]
         [Required]

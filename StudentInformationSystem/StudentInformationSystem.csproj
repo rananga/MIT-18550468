@@ -228,6 +228,7 @@
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
@@ -335,14 +336,20 @@
     <Compile Include="Areas\Admin\Controllers\SectionHeadController.cs" />
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
     <Compile Include="Areas\Academic\Controllers\SubjectController.cs" />
+    <Compile Include="Areas\Admin\Controllers\VisitorController.cs" />
     <Compile Include="Areas\Admin\Controllers\StaffMemberController.cs" />
     <Compile Include="Areas\Academic\Models\GradeClassVM.cs" />
     <Compile Include="Areas\Admin\Models\GradeHeadVM.cs" />
     <Compile Include="Areas\Admin\Models\SectionHeadVM.cs" />
+    <Compile Include="Areas\Admin\Models\VisitorVM.cs" />
+    <Compile Include="Areas\Online\Controllers\OnlineTimeTableController.cs" />
     <Compile Include="Areas\Online\Controllers\OnlineClassRoomController.cs" />
     <Compile Include="Areas\Online\Models\OCR_TeacherVM.cs" />
     <Compile Include="Areas\Online\Models\OCR_ClassRoomVM.cs" />
+    <Compile Include="Areas\Online\Models\OnlineClassVM.cs" />
+    <Compile Include="Areas\Online\Models\OnlineTimeTableVM.cs" />
     <Compile Include="Areas\Online\Models\OnlineClassRoomVM.cs" />
+    <Compile Include="Areas\Report\Controllers\WeeklySummaryController.cs" />
     <Compile Include="Areas\Report\Controllers\OnlineSessionsSummaryController.cs" />
     <Compile Include="Areas\Report\Controllers\StudentAttendanceController.cs" />
     <Compile Include="Areas\Report\Controllers\StudentMarksController.cs" />
@@ -350,6 +357,16 @@
     <Compile Include="Areas\Report\Models\ReportParameterVM.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
     <Compile Include="Areas\Student\Controllers\BasketSubjectController.cs" />
+    <Compile Include="Areas\Student\Controllers\ClassPromotionController.cs" />
+    <Compile Include="Areas\Student\Controllers\TransferStudentController.cs" />
+    <Compile Include="Areas\Student\Controllers\StudentAdmitController.cs" />
+    <Compile Include="Areas\Student\Controllers\StudentMarkController.cs" />
+    <Compile Include="Areas\Student\Models\ClassPromotionDetailVM.cs" />
+    <Compile Include="Areas\Student\Models\CR_StudentSubjectMarkVM.cs" />
+    <Compile Include="Areas\Student\Models\ClassPromotionVM.cs" />
+    <Compile Include="Areas\Student\Models\StudentTransferVM.cs" />
+    <Compile Include="Areas\Student\Models\StudentAdmitVM.cs" />
+    <Compile Include="Areas\Student\Models\StudentMarkVM.cs" />
     <Compile Include="Areas\Student\Models\StudentBasketSubjectVM.cs" />
     <Compile Include="Areas\Teacher\Controllers\TeacherController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserPermissionController.cs" />
@@ -415,6 +432,7 @@
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\Images\background_sms3.png" />
+    <Content Include="Content\Images\classroom.png" />
     <Content Include="Content\Images\dharma_chakra.png" />
     <Content Include="Content\Images\arrow-first.png" />
     <Content Include="Content\Images\arrow-last.png" />
@@ -551,6 +569,7 @@
     <Content Include="Scripts\Academic\GradeSubject.js" />
     <Content Include="Scripts\Academic\GradeClass.js" />
     <Content Include="Scripts\Admin\StaffMeetingAttendance.js" />
+    <Content Include="Scripts\Admin\Visitor.js" />
     <Content Include="Scripts\Admin\StaffMember.js" />
     <Content Include="Scripts\Admin\UserPermission.js" />
     <Content Include="Scripts\Admin\User.js" />
@@ -639,6 +658,28 @@
     <Content Include="Areas\Online\Views\OnlineClassRoom\Index.cshtml" />
     <Content Include="Areas\Online\Views\OnlineClassRoom\_TeacherIndex.cshtml" />
     <Content Include="Areas\Online\Views\OnlineClassRoom\_TeacherCreate.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineTimeTable\Index.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineTimeTable\_TimeTableIndex.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineTimeTable\_TimeTableCreate.cshtml" />
+    <Content Include="Areas\Report\Views\WeeklySummary\Process.cshtml" />
+    <Content Include="Areas\Online\Views\OnlineTimeTable\_TimeTableEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Visitor\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Visitor\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Visitor\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Visitor\Index.cshtml" />
+    <Content Include="Areas\Student\Views\StudentMark\_StudentMarksIndex.cshtml" />
+    <Content Include="Areas\Student\Views\StudentMark\Index.cshtml" />
+    <Content Include="Areas\Academic\Views\ClassRoom\_SubjectEdit.cshtml" />
+    <Content Include="Areas\Student\Views\StudentAdmit\_StudentClassIndex.cshtml" />
+    <Content Include="Areas\Student\Views\StudentAdmit\Index.cshtml" />
+    <Content Include="Areas\Student\Views\TransferStudent\Create.cshtml" />
+    <Content Include="Areas\Student\Views\TransferStudent\Details.cshtml" />
+    <Content Include="Areas\Student\Views\TransferStudent\Edit.cshtml" />
+    <Content Include="Areas\Student\Views\TransferStudent\Index.cshtml" />
+    <Content Include="Areas\Student\Views\ClassPromotion\Create.cshtml" />
+    <Content Include="Areas\Student\Views\ClassPromotion\Details.cshtml" />
+    <Content Include="Areas\Student\Views\ClassPromotion\Edit.cshtml" />
+    <Content Include="Areas\Student\Views\ClassPromotion\Index.cshtml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - Web Deploy.pubxml" />
@@ -661,10 +702,13 @@
     <Content Include="Scripts\Layout\jquery.placeholder.js" />
     <Content Include="Scripts\Layout\scripts.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Online\TimeTable.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Student\ClassAdmit.js" />
+    <Content Include="Scripts\Student\StudentMarks.js" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

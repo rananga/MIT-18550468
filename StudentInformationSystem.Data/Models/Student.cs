@@ -14,10 +14,12 @@ namespace StudentInformationSystem.Data.Models
             StudentSiblings = new HashSet<StudentSibling>();
             ClassMonitors = new HashSet<CR_Monitor>();
             StudentBasketSubjects = new HashSet<StudentBasketSubject>();
+            StudentTransfers = new HashSet<StudentTransfer>();
 
             ActivityPositions = new HashSet<StudentExtraActivityPosition>();
             ActivityAcheivements = new HashSet<StudentExtraActivityAcheivement>();
             LeavingCertificates = new HashSet<LeavingCertificate>();
+            ClassPromotionDetails = new HashSet<ClassPromotionDetail>();
         }
 
         [DisplayName("Admission No")]
@@ -58,18 +60,23 @@ namespace StudentInformationSystem.Data.Models
         [DisplayName("Is Leaving Certificate Issued")]
         public bool IsLeavingIssued { get; set; }
         [DisplayName("Last Class")]
-        public int LastClassId { get; set; }
-        [DisplayName("Admitted Class")]
-        public int AdmittedClassId { get; set; }
+        public int? LastClassId { get; set; }
+        [Required]
+        [DisplayName("Admitted Grade")]
+        public int? AdmittedGradeId { get; set; }
 
+        public virtual Grade AdmittedGrade { get; set; }
+        public virtual ClassRoom LastClass { get; set; }
         public virtual ICollection<CR_Student> ClassStudents { get; set; }
         public virtual ICollection<StudentFamily> StudentFamilies { get; set; }
         public virtual ICollection<StudentSibling> StudentSiblings { get; set; }
         public virtual ICollection<CR_Monitor> ClassMonitors { get; set; }
         public virtual ICollection<StudentBasketSubject> StudentBasketSubjects { get; set; }
+        public virtual ICollection<StudentTransfer> StudentTransfers { get; set; }
 
         public virtual ICollection<StudentExtraActivityPosition> ActivityPositions { get; set; }
         public virtual ICollection<StudentExtraActivityAcheivement> ActivityAcheivements { get; set; }
         public virtual ICollection<LeavingCertificate> LeavingCertificates { get; set; }
+        public virtual ICollection<ClassPromotionDetail> ClassPromotionDetails { get; set; }
     }
 }

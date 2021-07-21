@@ -1315,3 +1315,106 @@
   
 2021-06-23 00:27:36,944 [11] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineClassRoom/Edit/2 User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Online\Views\OnlineClassRoom\Edit.cshtml(30): error CS0246: The type or namespace name 'Grade' could not be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
   
+2021-06-23 23:39:39,670 [7] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineTimeTable/Index User: rananga Error Message: Cannot convert null to 'bool' because it is a non-nullable value type Line:    at CallSite.Target(Closure , CallSite , Object )
+  
+2021-06-23 23:40:32,191 [20] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineTimeTable/Index User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Online\Views\OnlineTimeTable\_TimeTableIndex.cshtml(67): error CS1503: Argument 1: cannot convert from 'void' to 'System.Web.WebPages.HelperResult' Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-23 23:41:45,040 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineTimeTable/Index User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Online\Views\OnlineTimeTable\_TimeTableIndex.cshtml(67): error CS1503: Argument 1: cannot convert from 'void' to 'System.Web.WebPages.HelperResult' Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-06-23 23:43:09,888 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Online/OnlineTimeTable/Index User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Online\Views\OnlineTimeTable\_TimeTableIndex.cshtml(67): error CS1503: Argument 1: cannot convert from 'void' to 'System.Web.WebPages.HelperResult' Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-07-02 14:05:10,431 [10] ERROR ASP.global_asax - Error in https://localhost:44380/Report/WeeklySummary/Process?viewIt=true User: rananga Error Message: Input string was not in a correct format. Line:    at System.Globalization.TimeSpanFormat.FormatCustomized(TimeSpan value, String format, DateTimeFormatInfo dtfi)
+  
+2021-07-02 14:48:07,855 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Report/WeeklySummary/Process?viewIt=true User: rananga Error Message: Input string was not in a correct format. Line:    at System.Globalization.TimeSpanFormat.FormatCustomized(TimeSpan value, String format, DateTimeFormatInfo dtfi)
+  
+2021-07-02 14:49:58,624 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Report/WeeklySummary/Process?viewIt=true User: rananga Error Message: Cannot create a data reader for dataset 'OnlineSessionsSummary'. Line:    at Microsoft.ReportingServices.OnDemandProcessing.RuntimeLiveQueryExecutor.ExecuteReader(IJobContext jobContext, DataSourceErrorInspector errorInspector, String commandText)
+  
+2021-07-03 12:04:53,251 [8] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentMark User: rananga Error Message: The controller for path '/Student/StudentMark' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-07-03 12:06:30,587 [14] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentMark User: rananga Error Message: The controller for path '/Student/StudentMark' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-07-04 23:48:41,104 [48] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentMark User: rananga Error Message: The controller for path '/Student/StudentMark' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-07-05 00:19:19,834 [72] ERROR ASP.global_asax - Error in https://localhost:44380/Admin/Users/Details/1 User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Admin\Views\Users\Details.cshtml(39): error CS1061: 'UserVM' does not contain a definition for 'VisitorName' and no accessible extension method 'VisitorName' accepting a first argument of type 'UserVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-07-11 23:51:17,545 [40] ERROR ASP.global_asax - Error in https://localhost:44380/Student/Student/PrintAdmissionSheet/6 User: rananga Error Message: Could not find a part of the path 'D:\GitHub\MIT18550468\StudentInformationSystem\Reports\ApplicationForm.rdlc'. Line:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+  
+2021-07-12 01:07:48,581 [57] ERROR ASP.global_asax - Error in https://localhost:44380/Student/Student/Edit/24 User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Student\Views\Student\Edit.cshtml(117): error CS0246: The type or namespace name 'Grade' could not be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-07-12 01:07:52,706 [60] ERROR ASP.global_asax - Error in https://localhost:44380/Student/Student/Edit/24 User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Student\Views\Student\Edit.cshtml(117): error CS0246: The type or namespace name 'Grade' could not be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+  
+2021-07-12 01:10:05,417 [60] ERROR ASP.global_asax - Error in https://localhost:44380/Student/Student/Edit/24 User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Student\Views\Student\Edit.cshtml(117): error CS0246: The type or namespace name 'Grade' could not be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-07-14 18:50:17,220 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit User: rananga Error Message: The model item passed into the dictionary is of type 'System.Collections.Generic.List`1[StudentInformationSystem.Areas.Academic.Models.CR_StudentVM]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[StudentInformationSystem.Areas.Student.Models.CR_StudentSubjectMarkVM]'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-07-14 19:18:20,563 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Student\Views\StudentAdmit\_StudentClassIndex.cshtml(14): error CS1061: 'CR_StudentVM' does not contain a definition for 'IndexNo' and no accessible extension method 'IndexNo' accepting a first argument of type 'CR_StudentVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-07-15 00:58:13,789 [24] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdate User: rananga Error Message: A public action method 'StudentClassUpdate' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-07-15 00:59:55,366 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdate User: rananga Error Message: A public action method 'StudentClassUpdate' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-07-15 01:04:21,675 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdate User: rananga Error Message: A public action method 'StudentClassUpdate' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-07-15 01:07:03,932 [53] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdate User: rananga Error Message: A public action method 'StudentClassUpdate' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-07-15 01:08:29,273 [41] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdate User: rananga Error Message: A public action method 'StudentClassUpdate' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-07-15 01:10:32,639 [41] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdate User: rananga Error Message: A public action method 'StudentClassUpdate' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-07-15 01:14:13,779 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdate User: rananga Error Message: A public action method 'StudentClassUpdate' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-07-15 02:04:27,570 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentTransfer/Index User:  Error Message: The controller for path '/Student/StudentTransfer/Index' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-07-15 02:04:38,976 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Base/Home/Error/ User:  Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\StudentInformationSystem\Common\HtmlHelperExtenstions.cs:line 240
+  
+2021-07-15 02:04:39,591 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Base/Home/Error/ User:  Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\StudentInformationSystem\Common\HtmlHelperExtenstions.cs:line 240
+  
+2021-07-15 02:04:40,124 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Base/Home/Error/ User:  Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\StudentInformationSystem\Common\HtmlHelperExtenstions.cs:line 240
+  
+2021-07-15 02:04:40,667 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Base/Home/Error/ User:  Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\StudentInformationSystem\Common\HtmlHelperExtenstions.cs:line 240
+  
+2021-07-15 02:04:41,146 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Base/Home/Error/ User:  Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\StudentInformationSystem\Common\HtmlHelperExtenstions.cs:line 240
+  
+2021-07-15 02:04:41,626 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Base/Home/Error/ User:  Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\StudentInformationSystem\Common\HtmlHelperExtenstions.cs:line 240
+  
+2021-07-15 02:04:42,170 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Base/Home/Error/ User:  Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\StudentInformationSystem\Common\HtmlHelperExtenstions.cs:line 240
+  
+2021-07-15 02:04:43,251 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Base/Home/Error/ User:  Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\StudentInformationSystem\Common\HtmlHelperExtenstions.cs:line 240
+  
+2021-07-15 02:04:43,749 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Base/Home/Error/ User:  Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\StudentInformationSystem\Common\HtmlHelperExtenstions.cs:line 240
+  
+2021-07-15 02:04:43,859 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Base/Home/Error/ User:  Error Message: Object reference not set to an instance of an object. Line:    at System.Web.Mvc.Html.MvcHtmlHelpers.GetAccessibleMenus(HtmlHelper htmlHelper) in D:\GitHub\MIT18550468\StudentInformationSystem\Common\HtmlHelperExtenstions.cs:line 240
+  
+2021-07-15 02:05:55,630 [8] ERROR ASP.global_asax - Error in https://localhost:44380/Student/TransferStudent User: rananga Error Message: The view 'Index' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Student/Views/TransferStudent/Index.aspx
+~/Areas/Student/Views/TransferStudent/Index.ascx
+~/Areas/Student/Views/Shared/Index.aspx
+~/Areas/Student/Views/Shared/Index.ascx
+~/Views/TransferStudent/Index.aspx
+~/Views/TransferStudent/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Areas/Student/Views/TransferStudent/Index.cshtml
+~/Areas/Student/Views/TransferStudent/Index.vbhtml
+~/Areas/Student/Views/Shared/Index.cshtml
+~/Areas/Student/Views/Shared/Index.vbhtml
+~/Views/TransferStudent/Index.cshtml
+~/Views/TransferStudent/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml Line:    at System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+  
+2021-07-15 02:07:59,823 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/TransferStudent/Create User: rananga Error Message: D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Student\Views\TransferStudent\Create.cshtml(19): error CS1061: 'StudentTransferVM' does not contain a definition for 'GradeNo' and no accessible extension method 'GradeNo' accepting a first argument of type 'StudentTransferVM' could be found (are you missing a using directive or an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-07-15 23:26:33,616 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentCharacter/Process User: rananga Error Message: The controller for path '/Report/StudentCharacter/Process' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-07-17 13:40:51,024 [32] ERROR ASP.global_asax - Error in https://localhost:44380/Base/Home User: rananga Error Message: The foreach block is missing a closing "}" character.  Make sure you have a matching "}" character for all the "{" characters within this block, and that none of the "}" characters are being interpreted as markup.
+ Line:    at System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+  
+2021-07-17 17:51:31,350 [36] ERROR ASP.global_asax - Error in https://localhost:44380/Admin/Teacher User: rananga Error Message: The controller for path '/Admin/Teacher' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-07-17 18:47:49,837 [19] ERROR ASP.global_asax - Error in https://localhost:44380/Academic/ClassRoom User: rananga Error Message: Instance property 'GradeClassDesc' is not defined for type 'StudentInformationSystem.Data.Models.ClassRoom' Line:    at System.Linq.Expressions.Expression.Property(Expression expression, String propertyName)
+  
+2021-07-17 18:48:29,933 [19] ERROR ASP.global_asax - Error in https://localhost:44380/Academic/ClassRoom User: rananga Error Message: Instance property 'GradeClassDesc' is not defined for type 'StudentInformationSystem.Data.Models.ClassRoom' Line:    at System.Linq.Expressions.Expression.Property(Expression expression, String propertyName)
+  
+2021-07-17 18:50:33,321 [58] ERROR ASP.global_asax - Error in https://localhost:44380/Academic/ClassRoom User: rananga Error Message: Instance property 'GradeClassDesc' is not defined for type 'StudentInformationSystem.Data.Models.ClassRoom' Line:    at System.Linq.Expressions.Expression.Property(Expression expression, String propertyName)
+  

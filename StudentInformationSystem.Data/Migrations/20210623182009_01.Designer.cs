@@ -10,7 +10,7 @@ using StudentInformationSystem.Data;
 namespace StudentInformationSystem.Data.Migrations
 {
     [DbContext(typeof(dbNalandaContext))]
-    [Migration("20210622172614_01")]
+    [Migration("20210623182009_01")]
     partial class _01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1968,6 +1968,9 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("GoogleClassRoomId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GoogleClassrommLink")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("GradeId")

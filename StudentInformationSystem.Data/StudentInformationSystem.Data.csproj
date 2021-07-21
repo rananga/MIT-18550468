@@ -5,41 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20210616174805_01.cs" />
-    <Compile Remove="Migrations\20210616174805_01.Designer.cs" />
-    <Compile Remove="Migrations\20210618220650_01.cs" />
-    <Compile Remove="Migrations\20210618220650_01.Designer.cs" />
-    <Compile Remove="Migrations\20210618223331_01.cs" />
-    <Compile Remove="Migrations\20210618223331_01.Designer.cs" />
-    <Compile Remove="Migrations\20210618223357_01.cs" />
-    <Compile Remove="Migrations\20210618223357_01.Designer.cs" />
-    <Compile Remove="Migrations\20210620042946_01.cs" />
-    <Compile Remove="Migrations\20210620042946_01.Designer.cs" />
-    <Compile Remove="Migrations\20210620043133_01.cs" />
-    <Compile Remove="Migrations\20210620043133_01.Designer.cs" />
-    <Compile Remove="Migrations\20210620092819_01.cs" />
-    <Compile Remove="Migrations\20210620092819_01.Designer.cs" />
-    <Compile Remove="Migrations\20210620183849_02.cs" />
-    <Compile Remove="Migrations\20210620183849_02.Designer.cs" />
-    <Compile Remove="Migrations\20210621030054_01.cs" />
-    <Compile Remove="Migrations\20210621030054_01.Designer.cs" />
-    <Compile Remove="Migrations\20210621192707_01.cs" />
-    <Compile Remove="Migrations\20210621192707_01.Designer.cs" />
-    <Compile Remove="Migrations\20210622022942_01.cs" />
-    <Compile Remove="Migrations\20210622022942_01.Designer.cs" />
-    <Compile Remove="Migrations\20210622023059_01.cs" />
-    <Compile Remove="Migrations\20210622023059_01.Designer.cs" />
-    <Compile Remove="Migrations\20210622024002_01.cs" />
-    <Compile Remove="Migrations\20210622024002_01.Designer.cs" />
-    <Compile Remove="Migrations\20210622034645_01.cs" />
-    <Compile Remove="Migrations\20210622034645_01.Designer.cs" />
-    <Compile Remove="Migrations\20210622091056_01.cs" />
-    <Compile Remove="Migrations\20210622091056_01.Designer.cs" />
-    <Compile Remove="Migrations\20210622091130_01.cs" />
-    <Compile Remove="Migrations\20210622091130_01.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.15" />
@@ -47,10 +12,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

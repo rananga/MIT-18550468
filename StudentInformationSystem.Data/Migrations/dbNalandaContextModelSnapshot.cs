@@ -434,8 +434,8 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("CreatedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("Marks")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Marks")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -492,7 +492,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int>("StaffId")
+                    b.Property<int?>("StaffId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectId")
@@ -1278,11 +1278,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 10,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "Section",
+                            Controller = "Visitor",
                             DisplaySeq = 40,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Sections",
+                            Text = "Visitors",
                             Type = "I"
                         },
                         new
@@ -1290,11 +1290,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 11,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "SectionHead",
+                            Controller = "Section",
                             DisplaySeq = 50,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Section Heads",
+                            Text = "Sections",
                             Type = "I"
                         },
                         new
@@ -1302,11 +1302,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 12,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "Grade",
+                            Controller = "SectionHead",
                             DisplaySeq = 60,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Grades",
+                            Text = "Section Heads",
                             Type = "I"
                         },
                         new
@@ -1314,11 +1314,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 13,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "GradeHead",
+                            Controller = "Grade",
                             DisplaySeq = 70,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Grade Heads",
+                            Text = "Grades",
                             Type = "I"
                         },
                         new
@@ -1326,8 +1326,20 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 14,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "ExtraActivity",
+                            Controller = "GradeHead",
                             DisplaySeq = 80,
+                            IsHidden = false,
+                            ParentMenuId = 1,
+                            Text = "Grade Heads",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 15,
+                            Action = "Index",
+                            Area = "Admin",
+                            Controller = "ExtraActivity",
+                            DisplaySeq = 90,
                             IsHidden = false,
                             ParentMenuId = 1,
                             Text = "Extra Activities",
@@ -1335,7 +1347,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 15,
+                            MenuId = 16,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "SubjectCategory",
@@ -1347,7 +1359,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 16,
+                            MenuId = 17,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "Subject",
@@ -1359,7 +1371,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 17,
+                            MenuId = 18,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "GradeSubject",
@@ -1371,7 +1383,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 18,
+                            MenuId = 19,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "GradeClass",
@@ -1383,23 +1395,23 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 19,
+                            MenuId = 20,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "ClassRoom",
                             DisplaySeq = 50,
                             IsHidden = false,
                             ParentMenuId = 2,
-                            Text = "Physical Class Rooms",
+                            Text = "Physical Classrooms",
                             Type = "I"
                         },
                         new
                         {
-                            MenuId = 20,
+                            MenuId = 21,
                             Action = "Index",
                             Area = "Teacher",
                             Controller = "Teacher",
-                            DisplaySeq = 20,
+                            DisplaySeq = 10,
                             IsHidden = false,
                             ParentMenuId = 3,
                             Text = "Teacher Information",
@@ -1407,7 +1419,19 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 21,
+                            MenuId = 22,
+                            Action = "Index",
+                            Area = "Teacher",
+                            Controller = "TeacherAvailability",
+                            DisplaySeq = 20,
+                            IsHidden = false,
+                            ParentMenuId = 3,
+                            Text = "Teacher Availability",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 23,
                             Action = "Index",
                             Area = "Student",
                             Controller = "Student",
@@ -1419,7 +1443,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 22,
+                            MenuId = 24,
                             Action = "Index",
                             Area = "Student",
                             Controller = "BasketSubject",
@@ -1431,11 +1455,23 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 23,
+                            MenuId = 25,
+                            Action = "Index",
+                            Area = "Student",
+                            Controller = "StudentAdmit",
+                            DisplaySeq = 30,
+                            IsHidden = false,
+                            ParentMenuId = 4,
+                            Text = "Admit Student",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 26,
                             Action = "Index",
                             Area = "Student",
                             Controller = "StudentMark",
-                            DisplaySeq = 30,
+                            DisplaySeq = 40,
                             IsHidden = false,
                             ParentMenuId = 4,
                             Text = "Student Marks",
@@ -1443,23 +1479,59 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 24,
+                            MenuId = 27,
                             Action = "Index",
-                            Area = "Online",
-                            Controller = "OnlineClassRoom",
-                            DisplaySeq = 30,
+                            Area = "Student",
+                            Controller = "TransferStudent",
+                            DisplaySeq = 50,
                             IsHidden = false,
-                            ParentMenuId = 5,
-                            Text = "Online Class Rooms",
+                            ParentMenuId = 4,
+                            Text = "Transfer Student",
                             Type = "I"
                         },
                         new
                         {
-                            MenuId = 25,
+                            MenuId = 28,
+                            Action = "Index",
+                            Area = "Student",
+                            Controller = "ClassPromotion",
+                            DisplaySeq = 50,
+                            IsHidden = false,
+                            ParentMenuId = 4,
+                            Text = "Class Promotion",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 29,
+                            Action = "Index",
+                            Area = "Student",
+                            Controller = "StudentExtraActivities",
+                            DisplaySeq = 60,
+                            IsHidden = false,
+                            ParentMenuId = 4,
+                            Text = "Student Extra Activities",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 30,
+                            Action = "Index",
+                            Area = "Online",
+                            Controller = "OnlineClassRoom",
+                            DisplaySeq = 10,
+                            IsHidden = false,
+                            ParentMenuId = 5,
+                            Text = "Online Classrooms",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 31,
                             Action = "Index",
                             Area = "Online",
                             Controller = "OnlineTimeTable",
-                            DisplaySeq = 30,
+                            DisplaySeq = 20,
                             IsHidden = false,
                             ParentMenuId = 5,
                             Text = "Online Time Table",
@@ -1467,11 +1539,23 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 26,
+                            MenuId = 32,
+                            Action = "Process",
+                            Area = "Report",
+                            Controller = "StudentCharacter",
+                            DisplaySeq = 10,
+                            IsHidden = false,
+                            ParentMenuId = 6,
+                            Text = "Student Character",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 33,
                             Action = "Process",
                             Area = "Report",
                             Controller = "StudentAttendance",
-                            DisplaySeq = 30,
+                            DisplaySeq = 20,
                             IsHidden = false,
                             ParentMenuId = 6,
                             Text = "Student Attendance",
@@ -1479,7 +1563,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 27,
+                            MenuId = 34,
                             Action = "Process",
                             Area = "Report",
                             Controller = "StudentMarks",
@@ -1491,14 +1575,26 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 28,
+                            MenuId = 35,
                             Action = "Process",
                             Area = "Report",
                             Controller = "OnlineSessionsSummary",
-                            DisplaySeq = 30,
+                            DisplaySeq = 40,
                             IsHidden = false,
                             ParentMenuId = 6,
                             Text = "Online Sessions Summary",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 36,
+                            Action = "Process",
+                            Area = "Report",
+                            Controller = "WeeklySummary",
+                            DisplaySeq = 50,
+                            IsHidden = false,
+                            ParentMenuId = 6,
+                            Text = "Weekly Summary",
                             Type = "I"
                         });
                 });
@@ -1805,6 +1901,9 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("OCR_TeacherId")
                         .HasColumnType("int");
 
+                    b.Property<string>("RepeatPattern")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -1966,6 +2065,9 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("GoogleClassRoomId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GoogleClassrommLink")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("GradeId")
@@ -2417,7 +2519,7 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<DateTime>("AdmissionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("AdmittedClassId")
+                    b.Property<int?>("AdmittedGradeId")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -2457,7 +2559,7 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<bool>("IsLeavingIssued")
                         .HasColumnType("bit");
 
-                    b.Property<int>("LastClassId")
+                    b.Property<int?>("LastClassId")
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
@@ -2491,6 +2593,10 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AdmittedGradeId");
+
+                    b.HasIndex("LastClassId");
+
                     b.ToTable("Students");
 
                     b.HasData(
@@ -2498,14 +2604,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 1,
                             AdmissionDate = new DateTime(2021, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "A J M T A Jayasundara",
                             IndexNo = 29013,
                             Initials = "A J M T A",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Jayasundara",
                             Medium = 0,
                             SchoolEmail = "29013@nalandacollege.info",
@@ -2515,14 +2619,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 2,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "A U N De Silva",
                             IndexNo = 28953,
                             Initials = "A U N De",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Silva",
                             Medium = 0,
                             SchoolEmail = "28953@nalandacollege.info",
@@ -2532,14 +2634,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 3,
                             AdmissionDate = new DateTime(2021, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "B L R Abedeera",
                             IndexNo = 28948,
                             Initials = "B L R",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Abedeera",
                             Medium = 0,
                             SchoolEmail = "28948@nalandacollege.info",
@@ -2549,14 +2649,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 4,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "B M T Silva",
                             IndexNo = 29043,
                             Initials = "B M T",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Silva",
                             Medium = 0,
                             SchoolEmail = "29043@nalandacollege.info",
@@ -2566,14 +2664,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 5,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "B W K M Peeris",
                             IndexNo = 29028,
                             Initials = "B W K M",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Peeris",
                             Medium = 0,
                             SchoolEmail = "29028@nalandacollege.info",
@@ -2583,14 +2679,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 6,
                             AdmissionDate = new DateTime(2021, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "Chenuk Manthila P S",
                             IndexNo = 29049,
                             Initials = "Chenuk",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Manthila P S",
                             Medium = 0,
                             SchoolEmail = "29049@nalandacollege.info",
@@ -2600,14 +2694,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 7,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "D C A Dias",
                             IndexNo = 29023,
                             Initials = "D C A",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Dias",
                             Medium = 0,
                             SchoolEmail = "29023@nalandacollege.info",
@@ -2617,14 +2709,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 8,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "D J M K N Serasingha",
                             IndexNo = 28988,
                             Initials = "D J M K N",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Serasingha",
                             Medium = 0,
                             SchoolEmail = "28988@nalandacollege.info",
@@ -2634,14 +2724,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 9,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "D M K S Liyanage",
                             IndexNo = 28941,
                             Initials = "D M K S",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Liyanage",
                             Medium = 0,
                             SchoolEmail = "28941@nalandacollege.info",
@@ -2651,14 +2739,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 10,
                             AdmissionDate = new DateTime(2021, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "D M L Dasanayake",
                             IndexNo = 28926,
                             Initials = "D M L",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Dasanayake",
                             Medium = 0,
                             SchoolEmail = "28926@nalandacollege.info",
@@ -2668,14 +2754,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 11,
                             AdmissionDate = new DateTime(2021, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "D N Gunasena",
                             IndexNo = 28963,
                             Initials = "D N",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Gunasena",
                             Medium = 0,
                             SchoolEmail = "28963@nalandacollege.info",
@@ -2685,14 +2769,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 12,
                             AdmissionDate = new DateTime(2021, 6, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "D W O D De Silva",
                             IndexNo = 28983,
                             Initials = "D W O D De",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Silva",
                             Medium = 0,
                             SchoolEmail = "28983@nalandacollege.info",
@@ -2702,14 +2784,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 13,
                             AdmissionDate = new DateTime(2021, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "E H H Nethsara",
                             IndexNo = 28921,
                             Initials = "E H H",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Nethsara",
                             Medium = 0,
                             SchoolEmail = "28921@nalandacollege.info",
@@ -2719,14 +2799,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 14,
                             AdmissionDate = new DateTime(2021, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "H A S Asmitha",
                             IndexNo = 28896,
                             Initials = "H A S",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Asmitha",
                             Medium = 0,
                             SchoolEmail = "28896@nalandacollege.info",
@@ -2736,14 +2814,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 15,
                             AdmissionDate = new DateTime(2021, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "H L S Dulsara",
                             IndexNo = 28911,
                             Initials = "H L S",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Dulsara",
                             Medium = 0,
                             SchoolEmail = "28911@nalandacollege.info",
@@ -2753,14 +2829,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 16,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "I U Roopasingha",
                             IndexNo = 29018,
                             Initials = "I U",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Roopasingha",
                             Medium = 0,
                             SchoolEmail = "29018@nalandacollege.info",
@@ -2770,14 +2844,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 17,
                             AdmissionDate = new DateTime(2021, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "K A D Sanketh",
                             IndexNo = 28998,
                             Initials = "K A D",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Sanketh",
                             Medium = 0,
                             SchoolEmail = "28998@nalandacollege.info",
@@ -2787,14 +2859,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 18,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "K A M Menath",
                             IndexNo = 28916,
                             Initials = "K A M",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Menath",
                             Medium = 0,
                             SchoolEmail = "28916@nalandacollege.info",
@@ -2804,14 +2874,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 19,
                             AdmissionDate = new DateTime(2021, 6, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "L G T S Samarasingha",
                             IndexNo = 28891,
                             Initials = "L G T S",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Samarasingha",
                             Medium = 0,
                             SchoolEmail = "28891@nalandacollege.info",
@@ -2821,14 +2889,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 20,
                             AdmissionDate = new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "M K G Darmasiri",
                             IndexNo = 29033,
                             Initials = "M K G",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Darmasiri",
                             Medium = 0,
                             SchoolEmail = "29033@nalandacollege.info",
@@ -2838,14 +2904,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 21,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "N H E De Silava",
                             IndexNo = 29038,
                             Initials = "N H E De",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Silava",
                             Medium = 0,
                             SchoolEmail = "29038@nalandacollege.info",
@@ -2855,14 +2919,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 22,
                             AdmissionDate = new DateTime(2021, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "R V D R R Perera",
                             IndexNo = 28901,
                             Initials = "R V D R R",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Perera",
                             Medium = 0,
                             SchoolEmail = "28901@nalandacollege.info",
@@ -2872,14 +2934,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 23,
                             AdmissionDate = new DateTime(2021, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "S A J Pathirana",
                             IndexNo = 29008,
                             Initials = "S A J",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Pathirana",
                             Medium = 0,
                             SchoolEmail = "29008@nalandacollege.info",
@@ -2889,14 +2949,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 24,
                             AdmissionDate = new DateTime(2021, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "S H V Sanith",
                             IndexNo = 29003,
                             Initials = "S H V",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Sanith",
                             Medium = 0,
                             SchoolEmail = "29003@nalandacollege.info",
@@ -2906,14 +2964,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 25,
                             AdmissionDate = new DateTime(2021, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "S I Kiriwandeniya",
                             IndexNo = 28973,
                             Initials = "S I",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Kiriwandeniya",
                             Medium = 0,
                             SchoolEmail = "28973@nalandacollege.info",
@@ -2923,14 +2979,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 26,
                             AdmissionDate = new DateTime(2021, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "S L D Karunathilaka",
                             IndexNo = 28931,
                             Initials = "S L D",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Karunathilaka",
                             Medium = 0,
                             SchoolEmail = "28931@nalandacollege.info",
@@ -2940,14 +2994,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 27,
                             AdmissionDate = new DateTime(2021, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "S O Leelarathna",
                             IndexNo = 28958,
                             Initials = "S O",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Leelarathna",
                             Medium = 0,
                             SchoolEmail = "28958@nalandacollege.info",
@@ -2957,14 +3009,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 28,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "S T Ranwala",
                             IndexNo = 28968,
                             Initials = "S T",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Ranwala",
                             Medium = 0,
                             SchoolEmail = "28968@nalandacollege.info",
@@ -2974,14 +3024,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 29,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "T D A Gunawardana",
                             IndexNo = 28978,
                             Initials = "T D A",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Gunawardana",
                             Medium = 0,
                             SchoolEmail = "28978@nalandacollege.info",
@@ -2991,14 +3039,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 30,
                             AdmissionDate = new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "V A D Dilsara",
                             IndexNo = 28993,
                             Initials = "V A D",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Dilsara",
                             Medium = 0,
                             SchoolEmail = "28993@nalandacollege.info",
@@ -3008,14 +3054,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 31,
                             AdmissionDate = new DateTime(2021, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "V K Almeda",
                             IndexNo = 28906,
                             Initials = "V K",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Almeda",
                             Medium = 0,
                             SchoolEmail = "28906@nalandacollege.info",
@@ -3025,14 +3069,12 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 32,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AdmittedClassId = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FullName = "W G T M Gamage",
                             IndexNo = 28936,
                             Initials = "W G T M",
                             IsLeavingIssued = false,
-                            LastClassId = 0,
                             LastName = "Gamage",
                             Medium = 0,
                             SchoolEmail = "28936@nalandacollege.info",
@@ -3303,6 +3345,61 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("StudentSiblings");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentTransfer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("FromCR_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ToCR_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FromCR_Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("ToCR_Id");
+
+                    b.ToTable("StudentTransfers");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Subject", b =>
@@ -3806,6 +3903,9 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Initials")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -3909,8 +4009,7 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
                         .WithMany("ClassSubjects")
                         .HasForeignKey("StaffId")
-                        .HasConstraintName("FK_StaffMember_ClassSubjects")
-                        .IsRequired();
+                        .HasConstraintName("FK_StaffMember_ClassSubjects");
 
                     b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
                         .WithMany("ClassSubjects")
@@ -4179,6 +4278,19 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasForeignKey("StudentInformationSystem.Data.Models.StaffMember", "TeacherId");
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.Student", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Grade", "AdmittedGrade")
+                        .WithMany("GradeAdmissions")
+                        .HasForeignKey("AdmittedGradeId")
+                        .HasConstraintName("FK_AdmittedGrade_GradeAdmissions");
+
+                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "LastClass")
+                        .WithMany("LastClassStudents")
+                        .HasForeignKey("LastClassId")
+                        .HasConstraintName("FK_LastClass_LastClassStudents");
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentBasketSubject", b =>
                 {
                     b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
@@ -4239,6 +4351,27 @@ namespace StudentInformationSystem.Data.Migrations
                         .WithMany("StudentSiblings")
                         .HasForeignKey("StudentId")
                         .HasConstraintName("FK_Stud_StudSibling")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentTransfer", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "FromClass")
+                        .WithMany("FromTransfers")
+                        .HasForeignKey("FromCR_Id")
+                        .HasConstraintName("FK_FromClass_FromTransfers")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
+                        .WithMany("StudentTransfers")
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("FK_Student_StudentTransfers")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "ToClass")
+                        .WithMany("ToTransfers")
+                        .HasForeignKey("ToCR_Id")
+                        .HasConstraintName("FK_ToClass_ToTransfers")
                         .IsRequired();
                 });
 

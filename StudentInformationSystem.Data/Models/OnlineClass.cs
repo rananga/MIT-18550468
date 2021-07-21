@@ -12,9 +12,10 @@ namespace StudentInformationSystem.Data.Models
             OC_Meetings = new HashSet<OC_Meeting>();
         }
 
-        [DisplayName("Online Class Room"), Required]
+        [DisplayName("Online Classroom"), Required]
         public int OCR_Id { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
         [DisplayName("From Time"), Required]
         public TimeSpan FromTime { get; set; }
@@ -25,6 +26,7 @@ namespace StudentInformationSystem.Data.Models
         public string Subject { get; set; }
         public string Lesson { get; set; }
         public string CalendarEvent { get; set; }
+        public string RepeatPattern { get; set; }
 
         public virtual OnlineClassRoom OnlineClassRoom { get; set; }
         public virtual OCR_Teacher OCR_Teacher { get; set; }

@@ -704,7 +704,8 @@ namespace StudentInformationSystem.Data.Migrations
                     GradeId = table.Column<int>(nullable: false),
                     SubjectId = table.Column<int>(nullable: false),
                     Medium = table.Column<int>(nullable: false),
-                    GoogleClassRoomId = table.Column<string>(nullable: true)
+                    GoogleClassRoomId = table.Column<string>(nullable: true),
+                    GoogleClassrommLink = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1489,8 +1490,8 @@ namespace StudentInformationSystem.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "OnlineClassRooms",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "GoogleClassRoomId", "GradeId", "Medium", "ModifiedBy", "ModifiedDate", "SubjectId", "Year" },
-                values: new object[] { 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, 1, 0, null, null, 1, 2021 });
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "GoogleClassRoomId", "GoogleClassrommLink", "GradeId", "Medium", "ModifiedBy", "ModifiedDate", "SubjectId", "Year" },
+                values: new object[] { 1, "System", new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 1, 0, null, null, 1, 2021 });
 
             migrationBuilder.InsertData(
                 table: "ClassRooms",

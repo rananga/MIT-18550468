@@ -192,13 +192,13 @@ namespace StudentInformationSystem.Data
         Satisfactory = 2
     }
 
-    public enum EnvelopType
+    public enum PromotingCriteria
     {
-        [Description("Student Wise")]
-        StudentWise = 1,
-        [Description("Class Wise")]
-        ClassWise = 2,
-
+        ContinueTheSameClass = 0,
+        ShuffleByAdmissionNo = 1,
+        ShuffleByTerm1Marks = 2,
+        ShuffleByTerm2Marks = 3,
+        ShuffleByTerm3Marks = 4,
+        ShuffleByAllMarks = 5
     }
-
 }

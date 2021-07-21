@@ -28,6 +28,7 @@ namespace StudentInformationSystem.Data.Models
         public string SchoolEmail { get; set; }
         [DisplayName("NIC No")]
         public string Nicno { get; set; }
+        public string ImagePath { get; set; }
 
         public virtual User User { get; set; }
     }

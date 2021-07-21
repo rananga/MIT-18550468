@@ -112,7 +112,7 @@ namespace StudentInformationSystem.Areas.Online.Controllers
 
                     db.SaveChanges();
 
-                    AddAlert(AlertStyles.success, "Online class room created successfully.");
+                    AddAlert(AlertStyles.success, "Online classroom created successfully.");
                     return RedirectToAction("Index");
                 }
             }
@@ -316,7 +316,7 @@ namespace StudentInformationSystem.Areas.Online.Controllers
 
                     db.SaveChanges();
 
-                    AddAlert(AlertStyles.success, "Online class room modified successfully.");
+                    AddAlert(AlertStyles.success, "Online classroom modified successfully.");
                     return RedirectToAction("Index");
                 }
             }
@@ -352,7 +352,7 @@ namespace StudentInformationSystem.Areas.Online.Controllers
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
-                AddAlert(AlertStyles.success, "Online class room deleted successfully.");
+                AddAlert(AlertStyles.success, "Online classroom deleted successfully.");
                 return RedirectToAction("Index");
             }
             catch (DbUpdateConcurrencyException ex)

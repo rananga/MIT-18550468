@@ -15,7 +15,7 @@ namespace StudentInformationSystem.Areas.Academic.Models
         {
             mappings = new ObjMappings<CR_Subject, CR_SubjectVM>();
             mappings.Add(x => x.Subject.Code, x => x.SubjectName);
-            mappings.Add(x => $"{x.StaffMember.Title} {x.StaffMember.FullName}", x => x.TeacherName);
+            mappings.Add(x => x.StaffMember == null ? "" : $"{x.StaffMember.Title} {x.StaffMember.FullName}", x => x.TeacherName);
         }
 
         public CR_SubjectVM(CR_Subject obj, params string[] properties) : this()

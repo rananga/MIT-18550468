@@ -71,7 +71,7 @@
 @{
     var idx = 0;
 }
-<body>
+<div id="homeDiv">
 
     @{
         var Day = DateTime.Now.Day;
@@ -89,11 +89,11 @@
 
     }
 
-    <div class="container tiles-container" style="padding-top:30px">
+    <div class="container tiles-container" style="padding-top:30px;width:100%">
         @foreach (var tile in (List<HomeController.TileData>)ViewBag.Tiles)
         {
             idx++;
-            <div class="col-md-4 col-sm-4 col-xs-12" style="padding:0;min-width:220px" data-id="@idx">
+            <div class="col-md-4 col-sm-6 col-xs-12" style="padding:0;min-width:220px" data-id="@idx">
                 <div class="tile" data-url="@tile.DataURL" title='@(tile.LandingURL.IsBlank() ? "" :  "Click To View")'>
                     <div class="@tile.ColorClass" style="width:100%;height:100%;border: 4px solid transparent;">
                         @if (!tile.LandingURL.IsBlank())
@@ -101,8 +101,7 @@
                             @Html.Raw("<a class='' href='" + tile.LandingURL + "'" + (tile.OpenInNewTab ? " data-in-new-tab='1'" : "") + ">")
                         }
 
-                        @*<div class="tileLabelNo">0</div>*@
-                        <div style="text-align:center;margin-top:25px"><i class="tileIcon" style="background-image: url('@tile.IconURL'); "></i></div>
+                        <div style="text-align:center;margin-top:25px"><span style="color:white;font-size:xx-large;padding:5px"><i class="@tile.IconURL" style="padding-bottom:15px"></i></span></div>
 
                         <div style="margin-left: 10px;margin-right:10px;text-align:center;">
                             <span class="tileLabel">@tile.Text</span>
@@ -118,7 +117,7 @@
         }
     </div>
 
-</body>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/notification")

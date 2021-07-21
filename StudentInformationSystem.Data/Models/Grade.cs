@@ -8,11 +8,13 @@ namespace StudentInformationSystem.Data.Models
     {
         public Grade()
         {
+            GradeAdmissions = new HashSet<Student>();
             GradeHeads = new HashSet<GradeHead>();
             GradeSubjects = new HashSet<GradeSubject>();
             GradeClasses = new HashSet<GradeClass>();
             OnlineClassRooms = new HashSet<OnlineClassRoom>();
             PermissionGradeAccesses = new HashSet<PermissionGradeAccess>();
+            ClassPromotions = new HashSet<ClassPromotion>();
         }
 
         [DisplayName("Section"), Required]
@@ -23,10 +25,12 @@ namespace StudentInformationSystem.Data.Models
 
         public virtual Section Section { get; set; }
 
+        public virtual ICollection<Student> GradeAdmissions { get; set; }
         public virtual ICollection<GradeHead> GradeHeads { get; set; }
         public virtual ICollection<GradeSubject> GradeSubjects { get; set; }
         public virtual ICollection<GradeClass> GradeClasses { get; set; }
         public virtual ICollection<OnlineClassRoom> OnlineClassRooms { get; set; }
         public virtual ICollection<PermissionGradeAccess> PermissionGradeAccesses { get; set; }
+        public virtual ICollection<ClassPromotion> ClassPromotions { get; set; }
     }
 }

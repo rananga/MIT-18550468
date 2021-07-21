@@ -1,0 +1,64 @@
+﻿@using StudentInformationSystem.Data.Models;
+@model StudentInformationSystem.Areas.Student.Models.StudentMarkVM
+@{
+    ViewBag.Title = "Online Time Table";
+}
+
+<style>
+    .marksChanged {
+        border-style: solid;
+        border-width: 5px;
+        border-color: orange;
+    }
+</style>
+
+<div id="ttIndex">
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.CR_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.PopUpSelectorFor(model => model.CR_Id, "Base", "Data", "GetClassrooms", new { @class = "form-control" }, "Please select a classroom", null, dspFormat: "{2}", hiddenIndices: "0")
+                @Html.ValidationMessageFor(model => model.CR_Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SubjectId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.PopUpSelectorFor(model => model.SubjectId, "Base", "Data", "GetSubjects", new { @class = "form-control" }, "Please select a subject", null, dspFormat: "{1}", hiddenIndices: "0")
+                @Html.ValidationMessageFor(model => model.SubjectId, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Term, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EnumEditorFor(model => model.Term, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Term, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-8" style="padding-left:15px">
+                <div class="btn-toolbar float-right">
+                    <a id="btnSearch" class="btn btn-primary" style="margin-right:5px; min-width:80px">Search</a>
+                    <button id="btnSave" class="btn btn-success" style="margin-right:5px; min-width:80px; display:none" disabled><i style="display:none" class="fa fa-refresh fa-spin"></i> Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div id="ChildContent">
+        @{ Html.RenderAction("StudentMarksIndex", new { Model.Year, Model.CR_Id, Model.SubjectId, Model.Term }); }
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/Student/StudentMarks.js")
+}

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<StudentInformationSystem.Areas.Academic.Models.CR_StudentVM>
+
+<table class="mGrid">
+    <thead>
+        <tr>
+            <th class="text-center" style="min-width: 120px">Admission No</th>
+            <th class="text-center" style="min-width: 120px">Name</th>
+            <th class="text-center" style="min-width: 120px">Medium</th>
+            <th class="text-center" style="min-width: 180px">Suggested Class</th>
+            <th class="text-center" style="min-width: 100px">Admit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stud in Model.OrderBy(x => x.StudentIndex))
+        {
+            <tr>
+                <td class="align-middle">@stud.StudentIndex</td>
+                <td class="align-middle">@stud.StudentName</td>
+                <td class="align-middle">@stud.StudentMedium.ToEnumChar()</td>
+                <td class="align-middle">
+                    <select class="form-control" name="CR_Id" style="max-width:100%">
+                        @foreach (var cls in stud.StudentMedium == StudentInformationSystem.Data.Medium.Sinhala ? ViewBag.smClasses : ViewBag.emClasses)
+                        {
+                            <option data-info="null" value="@cls.Key" @(cls.Key == stud.CR_Id ? "selected" : "")>@cls.Value</option>
+                        }
+                    </select>
+                </td>
+                <td class="text-center">
+                    @Html.NoEncodeActionLink("Admit", "Admit", "StudentClassUpdate", htmlAttributes: new { name = "btnAdmit", @class = "btn btn-primary", style = "min-width:80px", data_stud_id = stud.StudentId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
+}
+
+

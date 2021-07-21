@@ -115,17 +115,14 @@ namespace StudentInformationSystem.Areas.Base
             }
         }
 
-        public ActionResult GetGrades(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false)
+        public ActionResult GetVisitors(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false)
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
-                var qry = dbctx.Grades.AsQueryable();
+                var qry = dbctx.Visitors.AsQueryable();
 
                 if (!filter.IsBlank())
-                {
-                    //qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.GradeId.ToString() + (x.GradeHead.Initials + x.GradeHead.LastName).ToString()).ToLower().Contains(filter.ToLower()));
-                    //qry = qry.Where(searchForKey ? "StudID.ToString().Contains(@0)" : "(IndexNo+FullName).ToLower().Contains(@0)", filter.ToLower());
-                }
+                { qry = qry.Where(searchForKey ? "Id.ToString().Contains(@0)" : "FullName.ToLower().Contains(@0) || Nicno.ToString().ToLower().Contains(@0)", filter.ToLower()); }
 
                 int rowCount = qry.Count();
                 if (pageSize <= 0)
@@ -138,19 +135,20 @@ namespace StudentInformationSystem.Areas.Base
                 { startIndex = 0; }
 
                 if (sortBy.IsBlank())
-                { sortBy = "Grade"; }
+                { sortBy = "Full_Name"; }
 
                 var lstSortColMap = new Dictionary<string, string>()
                 {
-                    { "Id", "Id" } ,
-                    { "Grade", "GradeId" }
+                    { "NIC_No", "Nicno" },
+                    { "Full_Name", "FullName" }
                 };
 
                 return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
                     x => new
                     {
                         x.Id,
-                        Grade = "Grade " + x.GradeNo
+                        NIC_No = x.Nicno,
+                        Full_Name = x.FullName
                     });
             }
         }
@@ -163,8 +161,7 @@ namespace StudentInformationSystem.Areas.Base
 
                 if (!filter.IsBlank())
                 {
-                    //qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.GradeId.ToString() + (x.GradeHead.Initials + x.GradeHead.LastName).ToString()).ToLower().Contains(filter.ToLower()));
-                    //qry = qry.Where(searchForKey ? "StudID.ToString().Contains(@0)" : "(IndexNo+FullName).ToLower().Contains(@0)", filter.ToLower());
+                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Grade.GradeNo.ToEnumChar(null) + x.Code).ToLower().Contains(filter.ToLower()));
                 }
 
                 int rowCount = qry.Count();
@@ -196,7 +193,7 @@ namespace StudentInformationSystem.Areas.Base
             }
         }
 
-        public ActionResult GetSubjects(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int? sectionId = null)
+        public ActionResult GetSubjects(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int? sectionId = null, bool? isBasket = null)
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
@@ -206,11 +203,14 @@ namespace StudentInformationSystem.Areas.Base
                 {
                     qry = qry.Where(x => x.SectionId == sectionId);
                 }
+                if (isBasket != null)
+                {
+                    qry = qry.Where(x => x.SubjectCategory.IsBasket == isBasket);
+                }
 
                 if (!filter.IsBlank())
                 {
                     qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : x.Code.ToLower().Contains(filter.ToLower()));
-                    //qry = qry.Where(searchForKey ? "StudID.ToString().Contains(@0)" : "(IndexNo+FullName).ToLower().Contains(@0)", filter.ToLower());
                 }
 
                 int rowCount = qry.Count();
@@ -252,7 +252,6 @@ namespace StudentInformationSystem.Areas.Base
                 if (!filter.IsBlank())
                 {
                     qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.StaffMember.Title.ToString() + (x.StaffMember.Initials + x.StaffMember.LastName).ToString()).ToLower().Contains(filter.ToLower()));
-                    //qry = qry.Where(searchForKey ? "StudID.ToString().Contains(@0)" : "(IndexNo+FullName).ToLower().Contains(@0)", filter.ToLower());
                 }
 
                 int rowCount = qry.Count();
@@ -283,50 +282,6 @@ namespace StudentInformationSystem.Areas.Base
             }
         }
 
-        //public ActionResult GetTeacherSubjects(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int grade = 0)
-        //{
-        //    using (dbSISContext dbctx = new dbSISContext())
-        //    {
-        //        var qry = dbctx.TeacherSubjects.Where(x => grade == 0 || x.Grade.GradeId == grade).AsQueryable();
-
-        //        if (!filter.IsBlank())
-        //        {
-        //            qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Grade.GradeId.ToString() + x.Subject.Name).ToLower().Contains(filter.ToLower()));
-        //            //qry = qry.Where(searchForKey ? "StudID.ToString().Contains(@0)" : "(IndexNo+FullName).ToLower().Contains(@0)", filter.ToLower());
-        //        }
-
-        //        int rowCount = qry.Count();
-        //        if (pageSize <= 0)
-        //        {
-        //            pageSize = 10;
-        //            startIndex = 0;
-        //        }
-
-        //        if (startIndex > rowCount)
-        //        { startIndex = 0; }
-
-        //        if (sortBy.IsBlank())
-        //        { sortBy = "Subject"; }
-
-        //        var lstSortColMap = new Dictionary<string, string>()
-        //        {
-        //            { "Id", "Id" },
-        //            { "Grade", "Grade" },
-        //            { "Subject", "Subject" },
-        //            { "Medium", "Medium" }
-        //        };
-
-        //        return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
-        //            x => new
-        //            {
-        //                x.Id,
-        //                Grade = "Grade " + x.Grade.GradeId,
-        //                Subject = x.Subject.Name,
-        //                Medium = x.Medium == 0 ? "Sinhala" : "English"
-        //            });
-        //    }
-        //}
-
         public ActionResult GetStudents(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, bool isOldStudent = false, bool allStudents = false)
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
@@ -341,9 +296,7 @@ namespace StudentInformationSystem.Areas.Base
                 if (!filter.IsBlank())
                 {
                     qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.IndexNo + (x.Initials + x.LastName).ToString()).ToLower().Contains(filter.ToLower()));
-                    //qry = qry.Where(searchForKey ? "StudID.ToString().Contains(@0)" : "(IndexNo+FullName).ToLower().Contains(@0)", filter.ToLower());
                 }
-
 
                 int rowCount = qry.Count();
                 if (pageSize <= 0)
@@ -375,21 +328,20 @@ namespace StudentInformationSystem.Areas.Base
             }
         }
 
-        public ActionResult GetClassRooms(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int PeriodID = 0)
+        public ActionResult GetClassRooms(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int? year = null)
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
                 var qry = dbctx.ClassRooms.AsQueryable();
 
-                if (PeriodID != 0)
+                if (year != null)
                 {
-                    // qry = qry.Where(x => x.PromotionClasses.Select(y => y.PeriodId).ToList().Contains(PeriodID));
+                    qry = qry.Where(x => x.Year == year);
                 }
 
                 if (!filter.IsBlank())
                 {
-                    //qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Name + x.Grade.ToString()).Contains(filter.ToLower()));
-                    //qry = qry.Where(searchForKey ? "ClassID.ToString().Contains(@0)" : "(ClassDesc).Contains(@0)", filter.ToLower());
+                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.GradeClass.Code + x.GradeClass.Grade.GradeNo.ToEnumChar(null)).Contains(filter.ToLower()));
                 }
 
                 int rowCount = qry.Count();
@@ -417,6 +369,97 @@ namespace StudentInformationSystem.Areas.Base
                         x.Id,
                         Grade = x.GradeClass.Grade.GradeNo.ToEnumChar(),
                         Class = x.GradeClass.Code
+                    });
+            }
+        }
+
+        public ActionResult GetOnliceClassRooms(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int Year = 0, int GradeID = 0)
+        {
+            using (dbNalandaContext dbctx = new dbNalandaContext())
+            {
+                var qry = dbctx.OnlineClassRooms.AsQueryable();
+
+                if (Year != 0)
+                    qry = qry.Where(x => x.Year == Year);
+
+                if (GradeID != 0)
+                    qry = qry.Where(x => x.GradeId == GradeID);
+
+                if (!filter.IsBlank())
+                {
+                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Year + x.PhysicalClassRooms.Select(y => y.ClassRoom.GradeClass.Code).Aggregate((y, z) => y + ", " + z)).Contains(filter.ToLower()));
+                }
+
+                int rowCount = qry.Count();
+                if (pageSize <= 0)
+                {
+                    pageSize = 10;
+                    startIndex = 0;
+                }
+
+                if (startIndex > rowCount)
+                { startIndex = 0; }
+
+                if (sortBy.IsBlank())
+                { sortBy = "Year"; }
+
+                var lstSortColMap = new Dictionary<string, string>()
+                {
+                    { "Year", "Year" }
+                };
+
+                return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
+                    x => new
+                    {
+                        x.Id,
+                        x.Year,
+                        Class = x.PhysicalClassRooms.Select(y => y.ClassRoom.GradeClass.Code).Aggregate((y, z) => y + ", " + z),
+                        Class_Teacher = x.ClassTeachers.Where(y => y.IsOwner).FirstOrDefault()?.ClassTeacher?.FullName,
+                        Class_Teacher_Id = x.ClassTeachers.Where(y => y.IsOwner).FirstOrDefault()?.Id
+                    });
+            }
+        }
+
+        public ActionResult GetOnliceClassRoomTeachers(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, int OCR_ID = 0)
+        {
+            using (dbNalandaContext dbctx = new dbNalandaContext())
+            {
+                var qry = dbctx.OCR_Teachers.AsQueryable();
+
+                if (OCR_ID != 0)
+                    qry = qry.Where(x => x.OCR_Id == OCR_ID);
+
+                if (!filter.IsBlank())
+                {
+                    //qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Name + x.Grade.ToString()).Contains(filter.ToLower()));
+                    //qry = qry.Where(searchForKey ? "ClassID.ToString().Contains(@0)" : "(ClassDesc).Contains(@0)", filter.ToLower());
+                }
+
+                int rowCount = qry.Count();
+                if (pageSize <= 0)
+                {
+                    pageSize = 10;
+                    startIndex = 0;
+                }
+
+                if (startIndex > rowCount)
+                { startIndex = 0; }
+
+                if (sortBy.IsBlank())
+                { sortBy = "Staff_Number"; }
+
+                var lstSortColMap = new Dictionary<string, string>()
+                {
+                    { "Staff_Number", "ClassTeacher.StaffNumber" },
+                    { "Full_Name", "ClassTeacher.FullName" }
+                };
+
+                return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
+                    x => new
+                    {
+                        x.Id,
+                        Staff_Number = x.ClassTeacher.StaffNumber,
+                        Full_Name = x.ClassTeacher.FullName
                     });
             }
         }
