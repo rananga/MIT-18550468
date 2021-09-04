@@ -1,22 +1,27 @@
-﻿@model StudentInformationSystem.Areas.Student.Models.StudentTransferVM
+﻿@model StudentInformationSystem.Areas.Student.Models.ClassPromotionVM
 @{
-    ViewBag.Title = "Student Transfer Details";
+    ViewBag.Title = "Class Promotion Details";
 }
 
 <div>
     <hr />
-    @using (Html.BeginForm("Delete", "TransferStudent"))
+    @using (Html.BeginForm("Delete", "ClassPromotion"))
     {
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.RowVersion)
         @Html.AntiForgeryToken()
-        <p>
-            <div class="btn-toolbar">
-                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary", style = "min-width:75px" })
-                @Html.ConfirmSubmitButton("Revert", "Are you sure you want to revert transfer?", "Confirm transfer reversal",
-                 "<span class='glyphicon glyphicon-trash'></span> Revert", new { @class = "btn btn-danger", style = "min-width:75px" })
-            </div>
-        </p>
+        if (Model.IsFinalized == false)
+        {
+            <p>
+                <div class="btn-toolbar">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary", style = "min-width:75px" })
+                    @Html.ConfirmSubmitButton("Delete", "Are you sure you want to delete the drafted promotion?", "Confirm class promotion deletion",
+                          "<span class='glyphicon glyphicon-trash'></span> Delete", new { @class = "btn btn-danger", style = "min-width:75px" })
+                    @Html.ConfirmSubmitButton("Finalize", "Are you sure you want to finalize the drafted promotion? You cannot perform any modifications once finalized.", "Confirm class promotion finalization",
+                          "<span class='glyphicon glyphicon-thumbs-up'></span> Finalize", new { @class = "btn btn-success", style = "min-width:75px" }, "btn-success", "Finalize")
+                </div>
+            </p>
+        }
     }
     <div class="form-horizontal">
         <div class="form-group">
@@ -24,38 +29,30 @@
             <div class="col-md-4">
                 @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StudentName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.GradeDesc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.StudentName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.GradeDesc, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.FromClassName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PromotingCriteria, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.FromClassName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.PromotingCriteria, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <span style="font-size: large; font-weight: bold; color: @(Model.IsFinalized?"Red":"Green")">@Model.Status</span>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ToClassName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.ToClassName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Reason, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.TextAreaFor(model => model.Reason, 3, 2, new { @class = "form-control", @readonly = "readonly" })
-            </div>
-        </div>
-        <br />
     </div>
 </div>
+
+<br />
+
+<div id="ChildContent">
+    @{ Html.RenderAction("StudentClassIndex", new { promotionId = Model.Id }); }
+</div>
+
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>

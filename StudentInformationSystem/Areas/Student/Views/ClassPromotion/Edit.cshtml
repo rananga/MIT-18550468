@@ -1,71 +1,65 @@
-﻿@using StudentInformationSystem.Data.Models;
-@model StudentInformationSystem.Areas.Student.Models.StudentTransferVM
+﻿@model StudentInformationSystem.Areas.Student.Models.ClassPromotionVM
 
 @{
-    ViewBag.Title = "Edit Student Transfer";
+    ViewBag.Title = "Manage Class Promotion";
 }
 
-@using (Html.BeginForm())
-{
-
+<div id="ttIndex">
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(model => model.Year)
-    @Html.HiddenFor(model => model.StudentId)
-    @Html.HiddenFor(model => model.FromCR_Id)
-    @Html.HiddenFor(model => model.ToCR_Id)
+    @Html.HiddenFor(model => model.GradeId)
+    @Html.HiddenFor(model => model.PromotingCriteria)
     @Html.HiddenFor(x => x.RowVersion)
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         <hr />
-        <p>
-            <input type="submit" value="Save" class="btn btn-primary" style="min-width:75px" />
-        </p>
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
                 @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StudentName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.GradeDesc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.StudentName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.GradeDesc, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FromClassName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CriteriaDesc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-4">
-                @Html.EditorFor(model => model.FromClassName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.CriteriaDesc, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <span style="font-size: large; font-weight: bold; color: @(Model.IsFinalized?"Red":"Green")">@Model.Status</span>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ToClassName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.ToClassName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Reason, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.TextAreaFor(model => model.Reason, 3, 2, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
+            <div class="col-md-offset-8" style="padding-left:15px">
+                <div class="btn-toolbar float-right">
+                    <button id="btnSave" class="btn btn-success" style="margin-right:5px; min-width:80px; display:none" disabled><i style="display:none" class="fa fa-refresh fa-spin"></i> Save</button>
+                </div>
             </div>
         </div>
     </div>
-}
 
-<br />
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <br />
+
+    <div id="ChildContent">
+        @{ Html.RenderAction("StudentClassIndex", new { promotionId = Model.Id, isToEdit = true }); }
+    </div>
+
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Student/StudentPromotion.js"></script>
 }
 

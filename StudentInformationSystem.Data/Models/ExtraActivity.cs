@@ -11,6 +11,7 @@ namespace StudentInformationSystem.Data.Models
         {
             Acheivements = new HashSet<ExtraActivityAcheivement>();
             Positions = new HashSet<ExtraActivityPosition>();
+            Incharges = new HashSet<ExtraActivityIncharge>();
         }
 
         [Required]
@@ -20,5 +21,6 @@ namespace StudentInformationSystem.Data.Models
 
         public virtual ICollection<ExtraActivityAcheivement> Acheivements { get; set; }
         public virtual ICollection<ExtraActivityPosition> Positions { get; set; }
+        public virtual ICollection<ExtraActivityIncharge> Incharges { get; set; }
     }
 }

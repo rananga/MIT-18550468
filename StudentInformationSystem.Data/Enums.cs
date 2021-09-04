@@ -194,11 +194,17 @@ namespace StudentInformationSystem.Data
 
     public enum PromotingCriteria
     {
+        [Description("Continue The Same Class")]
         ContinueTheSameClass = 0,
+        [Description("Shuffle By Admission No")]
         ShuffleByAdmissionNo = 1,
+        [Description("Shuffle By Term-1 Marks")]
         ShuffleByTerm1Marks = 2,
+        [Description("Shuffle By Term-2 Marks")]
         ShuffleByTerm2Marks = 3,
+        [Description("Shuffle By Term-3 Marks")]
         ShuffleByTerm3Marks = 4,
+        [Description("Shuffle By All Marks")]
         ShuffleByAllMarks = 5
     }
 }

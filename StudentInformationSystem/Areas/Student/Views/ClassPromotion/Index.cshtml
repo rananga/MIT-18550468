@@ -1,14 +1,15 @@
-﻿@model StudentInformationSystem.Common.BaseViewModel<StudentInformationSystem.Areas.Student.Models.StudentTransferVM>
+﻿@model StudentInformationSystem.Common.BaseViewModel<StudentInformationSystem.Areas.Student.Models.ClassPromotionVM>
 
 @{
-    ViewBag.Title = "Student Tarnsfer Information";
+    ViewBag.Title = "Class Promotions";
     var grid = Model.GetGrid();
 }
 
 @{
     var srchOpts = new List<SelectListItem>();
-    srchOpts.Add(new SelectListItem { Text = "Admission No", Value = "IndexNo" });
-    srchOpts.Add(new SelectListItem { Text = "Student Name", Value = "StudentName" });
+    srchOpts.Add(new SelectListItem { Text = "Year", Value = "Year" });
+    srchOpts.Add(new SelectListItem { Text = "Grade", Value = "GradeDesc" });
+    srchOpts.Add(new SelectListItem { Text = "Status", Value = "Status" });
 }
 
 <p>
@@ -45,11 +46,10 @@
         mode: WebGridPagerModes.All,
         columns: grid.Columns(
             grid.Column(null, null, format: (item) => Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open' style='color:black'></span>", "View Details", "Details", routeValues: new { id = item.Id }, htmlAttributes: new { @class = "btn btn-warning btn-xs" }), style: "btn-1"),
-            grid.SortColumn(columnName: "IndexNo", header: "Admission No"),
-            grid.SortColumn(columnName: "StudentName", header: "Student Name"),
-            grid.SortColumn(columnName: "FromClassName", header: "From Class"),
-            grid.SortColumn(columnName: "ToClassName", header: "To Class"),
-            grid.SortColumn(columnName: "Reason", header: "Reason")))
+            grid.SortColumn(columnName: "Year", header: "Year"),
+            grid.SortColumn(columnName: "GradeDesc", header: "Grade"),
+            grid.SortColumn(columnName: "CriteriaDesc", header: "Promoting Criteria"),
+            grid.SortColumn(columnName: "Status", header: "Status")))
 
         <div id="content-footer">
             @grid.PagerList(WebGridPagerModes.All, Model.PageSize, Model.TotalRecords)

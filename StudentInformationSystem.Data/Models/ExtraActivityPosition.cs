@@ -10,6 +10,8 @@ namespace StudentInformationSystem.Data.Models
         public int ActivityId { get; set; }
         [Required]
         public string Name { get; set; }
+        [Required]
+        public int HierarchyOrder { get; set; }
 
         public virtual ExtraActivity Activity { get; set; }
         public virtual ICollection<StudentExtraActivityPosition> Students { get; set; }

@@ -12,8 +12,7 @@ namespace StudentInformationSystem.Data.Models
         public int StudentId { get; set; }
         [Required]
         public int FromClassId { get; set; }
-        [Required]
-        public int ToClassId { get; set; }
+        public int? ToClassId { get; set; }
 
         public virtual ClassPromotion ClassPromotion { get; set; }
         public virtual Student Student { get; set; }

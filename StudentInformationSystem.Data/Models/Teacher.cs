@@ -10,6 +10,7 @@ namespace StudentInformationSystem.Data.Models
         {
             HeadingGrades = new HashSet<Grade>();
             ClassTeachers = new HashSet<ClassRoom>();
+            TeacherOffTimes = new HashSet<TeacherOffTime>();
             TeacherQualifications = new HashSet<TeacherQualification>();
             TeacherPreferedSubjects = new HashSet<TeacherPreferedSubject>();
         }
@@ -23,6 +24,7 @@ namespace StudentInformationSystem.Data.Models
         public virtual Section Section { get; set; }
         public virtual ICollection<Grade> HeadingGrades { get; set; }
         public virtual ICollection<ClassRoom> ClassTeachers { get; set; }
+        public virtual ICollection<TeacherOffTime> TeacherOffTimes { get; set; }
         public virtual ICollection<TeacherQualification> TeacherQualifications { get; set; }
         public virtual ICollection<TeacherPreferedSubject> TeacherPreferedSubjects { get; set; }
     }

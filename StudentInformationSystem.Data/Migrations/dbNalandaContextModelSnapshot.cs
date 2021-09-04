@@ -559,6 +559,108 @@ namespace StudentInformationSystem.Data.Migrations
                     b.ToTable("CR_Teachers");
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassPromotion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsFinalized")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("PromotingCriteria")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GradeId");
+
+                    b.ToTable("ClassPromotions");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassPromotionDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("FromClassId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("PromotionId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ToClassId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FromClassId");
+
+                    b.HasIndex("PromotionId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("ToClassId");
+
+                    b.ToTable("ClassPromotionDetails");
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassRoom", b =>
                 {
                     b.Property<int>("Id")
@@ -707,6 +809,56 @@ namespace StudentInformationSystem.Data.Migrations
                     b.ToTable("ExtraActivityAcheivements");
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.ExtraActivityIncharge", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ActivityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("StaffId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.HasIndex("StaffId");
+
+                    b.ToTable("ExtraActivityIncharges");
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ExtraActivityPosition", b =>
                 {
                     b.Property<int>("Id")
@@ -725,6 +877,9 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnName("CreatedDate")
                         .HasColumnType("datetime");
+
+                    b.Property<int>("HierarchyOrder")
+                        .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -805,6 +960,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 1,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Primary Section Grade 1",
                             GradeNo = 1,
                             SectionId = 1
                         },
@@ -813,6 +969,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 2,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Primary Section Grade 2",
                             GradeNo = 2,
                             SectionId = 1
                         },
@@ -821,6 +978,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 3,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Primary Section Grade 3",
                             GradeNo = 3,
                             SectionId = 1
                         },
@@ -829,6 +987,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 4,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Primary Section Grade 4",
                             GradeNo = 4,
                             SectionId = 1
                         },
@@ -837,6 +996,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Primary Section Grade 5",
                             GradeNo = 5,
                             SectionId = 1
                         },
@@ -845,6 +1005,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 6,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Junior Section Grade 6",
                             GradeNo = 6,
                             SectionId = 2
                         },
@@ -853,6 +1014,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 7,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Junior Section Grade 7",
                             GradeNo = 7,
                             SectionId = 2
                         },
@@ -861,6 +1023,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 8,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Junior Section Grade 8",
                             GradeNo = 8,
                             SectionId = 2
                         },
@@ -869,6 +1032,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 9,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Senior Section Grade 9",
                             GradeNo = 9,
                             SectionId = 3
                         },
@@ -877,6 +1041,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 10,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Senior Section Grade 10",
                             GradeNo = 10,
                             SectionId = 3
                         },
@@ -885,6 +1050,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Id = 11,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Senior Section Grade 11",
                             GradeNo = 11,
                             SectionId = 3
                         });
@@ -1242,11 +1408,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 7,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "UserPermission",
+                            Controller = "Section",
                             DisplaySeq = 10,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "User Permissions",
+                            Text = "Sections",
                             Type = "I"
                         },
                         new
@@ -1254,11 +1420,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 8,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "Users",
+                            Controller = "Grade",
                             DisplaySeq = 20,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Users",
+                            Text = "Grades",
                             Type = "I"
                         },
                         new
@@ -1290,11 +1456,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 11,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "Section",
+                            Controller = "UserPermission",
                             DisplaySeq = 50,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Sections",
+                            Text = "User Permissions",
                             Type = "I"
                         },
                         new
@@ -1302,11 +1468,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 12,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "SectionHead",
+                            Controller = "Users",
                             DisplaySeq = 60,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Section Heads",
+                            Text = "Users",
                             Type = "I"
                         },
                         new
@@ -1314,11 +1480,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 13,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "Grade",
+                            Controller = "SectionHead",
                             DisplaySeq = 70,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Grades",
+                            Text = "Section Heads",
                             Type = "I"
                         },
                         new
@@ -1414,7 +1580,7 @@ namespace StudentInformationSystem.Data.Migrations
                             DisplaySeq = 10,
                             IsHidden = false,
                             ParentMenuId = 3,
-                            Text = "Teacher Information",
+                            Text = "Teacher Subjects",
                             Type = "I"
                         },
                         new
@@ -1422,16 +1588,28 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 22,
                             Action = "Index",
                             Area = "Teacher",
-                            Controller = "TeacherAvailability",
+                            Controller = "TeacherQualification",
                             DisplaySeq = 20,
                             IsHidden = false,
                             ParentMenuId = 3,
-                            Text = "Teacher Availability",
+                            Text = "Teacher Qualifications",
                             Type = "I"
                         },
                         new
                         {
                             MenuId = 23,
+                            Action = "Index",
+                            Area = "Teacher",
+                            Controller = "TeacherOffTime",
+                            DisplaySeq = 30,
+                            IsHidden = false,
+                            ParentMenuId = 3,
+                            Text = "Teacher Off Times",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 24,
                             Action = "Index",
                             Area = "Student",
                             Controller = "Student",
@@ -1443,7 +1621,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 24,
+                            MenuId = 25,
                             Action = "Index",
                             Area = "Student",
                             Controller = "BasketSubject",
@@ -1455,7 +1633,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 25,
+                            MenuId = 26,
                             Action = "Index",
                             Area = "Student",
                             Controller = "StudentAdmit",
@@ -1467,7 +1645,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 26,
+                            MenuId = 27,
                             Action = "Index",
                             Area = "Student",
                             Controller = "StudentMark",
@@ -1479,7 +1657,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 27,
+                            MenuId = 28,
                             Action = "Index",
                             Area = "Student",
                             Controller = "TransferStudent",
@@ -1491,7 +1669,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 28,
+                            MenuId = 29,
                             Action = "Index",
                             Area = "Student",
                             Controller = "ClassPromotion",
@@ -1503,7 +1681,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 29,
+                            MenuId = 30,
                             Action = "Index",
                             Area = "Student",
                             Controller = "StudentExtraActivities",
@@ -1515,7 +1693,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 30,
+                            MenuId = 31,
                             Action = "Index",
                             Area = "Online",
                             Controller = "OnlineClassRoom",
@@ -1527,7 +1705,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 31,
+                            MenuId = 32,
                             Action = "Index",
                             Area = "Online",
                             Controller = "OnlineTimeTable",
@@ -1539,7 +1717,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 32,
+                            MenuId = 33,
                             Action = "Process",
                             Area = "Report",
                             Controller = "StudentCharacter",
@@ -1551,7 +1729,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 33,
+                            MenuId = 34,
                             Action = "Process",
                             Area = "Report",
                             Controller = "StudentAttendance",
@@ -1563,7 +1741,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 34,
+                            MenuId = 35,
                             Action = "Process",
                             Area = "Report",
                             Controller = "StudentMarks",
@@ -1575,7 +1753,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 35,
+                            MenuId = 36,
                             Action = "Process",
                             Area = "Report",
                             Controller = "OnlineSessionsSummary",
@@ -1587,7 +1765,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 36,
+                            MenuId = 37,
                             Action = "Process",
                             Area = "Report",
                             Controller = "WeeklySummary",
@@ -2256,7 +2434,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Code = "Primary",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = ""
+                            Description = "Primary Section"
                         },
                         new
                         {
@@ -2264,7 +2442,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Code = "Junior",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = ""
+                            Description = "Junior Section"
                         },
                         new
                         {
@@ -2272,7 +2450,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Code = "Senior",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = ""
+                            Description = "Senior Section"
                         },
                         new
                         {
@@ -2280,7 +2458,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Code = "AL-Science",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = ""
+                            Description = "AL Science Section"
                         },
                         new
                         {
@@ -2288,7 +2466,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Code = "AL-Art & Commerce",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = ""
+                            Description = "AL Art & Commerce Section"
                         },
                         new
                         {
@@ -2296,7 +2474,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Code = "AL-Technology",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = ""
+                            Description = "AL Technology Section"
                         });
                 });
 
@@ -3631,6 +3809,54 @@ namespace StudentInformationSystem.Data.Migrations
                     b.ToTable("Teachers");
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.TeacherOffTime", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("FromTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ToTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherOffTimes");
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.TeacherPreferedSubject", b =>
                 {
                     b.Property<int>("Id")
@@ -3708,8 +3934,8 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("QualificationType")
                         .HasColumnType("int");
 
-                    b.Property<int>("Remarks")
-                        .HasColumnType("int");
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
@@ -4033,6 +4259,41 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassPromotion", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Grade", "Grade")
+                        .WithMany("ClassPromotions")
+                        .HasForeignKey("GradeId")
+                        .HasConstraintName("FK_Grade_ClassPromotions")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassPromotionDetail", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "FromClass")
+                        .WithMany("FromClassPromotionDetails")
+                        .HasForeignKey("FromClassId")
+                        .HasConstraintName("FK_FromClass_FromClassPromotionDetails")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.ClassPromotion", "ClassPromotion")
+                        .WithMany("PromotionDetails")
+                        .HasForeignKey("PromotionId")
+                        .HasConstraintName("FK_ClassPromotion_PromotionDetails")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
+                        .WithMany("ClassPromotionDetails")
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("FK_Student_ClassPromotionDetails")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "ToClass")
+                        .WithMany("ToClassPromotionDetails")
+                        .HasForeignKey("ToClassId")
+                        .HasConstraintName("FK_ToClass_ToClassPromotionDetails");
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassRoom", b =>
                 {
                     b.HasOne("StudentInformationSystem.Data.Models.GradeClass", "GradeClass")
@@ -4052,6 +4313,21 @@ namespace StudentInformationSystem.Data.Migrations
                         .WithMany("Acheivements")
                         .HasForeignKey("ActivityId")
                         .HasConstraintName("FK_Activity_Acheivements")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.ExtraActivityIncharge", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.ExtraActivity", "Activity")
+                        .WithMany("Incharges")
+                        .HasForeignKey("ActivityId")
+                        .HasConstraintName("FK_Activity_Incharges")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
+                        .WithMany("ExtraActivityIncharges")
+                        .HasForeignKey("StaffId")
+                        .HasConstraintName("FK_StaffMember_ExtraActivityIncharges")
                         .IsRequired();
                 });
 
@@ -4396,6 +4672,15 @@ namespace StudentInformationSystem.Data.Migrations
                         .WithMany("Teachers")
                         .HasForeignKey("SectionId")
                         .HasConstraintName("FK_Section_Teachers")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.TeacherOffTime", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Teacher", "Teacher")
+                        .WithMany("TeacherOffTimes")
+                        .HasForeignKey("TeacherId")
+                        .HasConstraintName("FK_Teacher_OffTimes")
                         .IsRequired();
                 });
 

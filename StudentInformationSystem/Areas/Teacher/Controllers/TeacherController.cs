@@ -4,6 +4,7 @@ using StudentInformationSystem.Areas.Teacher.Models;
 using StudentInformationSystem.Common;
 using StudentInformationSystem.Data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,92 +14,59 @@ namespace StudentInformationSystem.Areas.Teacher.Controllers
 {
     public class TeacherController : BaseController
     {
-        public ActionResult Index(BaseViewModel<TeacherVM> vm)
+        public ActionResult Index()
         {
-            vm.SetList(db.Teachers.AsQueryable(), "TeacherName");
-            return View(vm);
+            return View(new TeacherVM());
         }
 
-        [AllowAnonymous]
-        public ActionResult PrefSubjectIndex(int? id, bool isToEdit = false)
+        public ActionResult PrefSubjectIndex(int? id)
         {
-            TeacherVM obj;
+            ViewBag.IsToEdit = id > 0;
 
-            if (isToEdit && Session[sskCrtdObj] is TeacherVM)
-            { obj = (TeacherVM)Session[sskCrtdObj]; }
-            else
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                var teacher = db.Teachers.Where(x => x.Id == id).FirstOrDefault();
-                if (teacher == null)
-                {
-                    return HttpNotFound();
-                }
-                obj = new TeacherVM(teacher);
-            }
+            if ((id ?? 0) == 0)
+                return PartialView("_PrefSubjectIndex", new List<TeacherPreferedSubjectVM>());
 
-            ViewBag.IsToEdit = isToEdit;
+            var teacher = db.Teachers.Where(x => x.Id == id).FirstOrDefault();
+            if (teacher == null)
+                return HttpNotFound();
+            var obj = new TeacherVM(teacher);
+
             ViewBag.TeacherId = obj.Id;
             return PartialView("_PrefSubjectIndex", obj.PreferedSubjects);
         }
 
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Data.Models.Teacher teacher = db.Teachers.Find(id);
-            if (teacher == null)
-            {
-                return HttpNotFound();
-            }
-            return View(new TeacherVM(teacher));
-        }
-
-        [AllowAnonymous]
         public ActionResult PrefSubjectCreate(int? teacherId)
         {
-            if (teacherId != 0)
-            {
-                if (teacherId == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                var cls = db.Teachers.Find(teacherId);
+            if ((teacherId ?? 0) == 0)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-                if (cls == null)
-                {
-                    return HttpNotFound();
-                }
-            }
+            var ent = db.Teachers.Find(teacherId);
 
-            var vm = new TeacherPreferedSubjectVM() { TeacherId = teacherId.Value };
+            if (ent == null)
+                return HttpNotFound();
+
+            var vm = new TeacherPreferedSubjectVM() { TeacherId = ent.Id };
             return PartialView("_PrefSubjectCreate", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AllowAnonymous]
         public ActionResult PrefSubjectCreate(TeacherPreferedSubjectVM vm)
         {
-            TeacherVM obj;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    obj = (TeacherVM)Session[sskCrtdObj];
-                    vm.Id = Math.Min(obj.PreferedSubjects.Select(x => x.Id).MinOrDefault(), 0) - 1;
-                    var objSubject = db.Subjects.Find(vm.SubjectId);
-                    vm.SubjectName = objSubject.Code;
-                    vm.SectionName = objSubject.Section.Code;
-                    obj.PreferedSubjects.Add(vm);
+                    var obj = db.Teachers.Find(vm.TeacherId);
+
+                    vm.CreatedBy = this.GetCurrUser();
+                    vm.CreatedDate = DateTime.Now;
+                    obj.TeacherPreferedSubjects.Add(vm.GetEntity());
+
+                    db.SaveChanges();
 
                     AddAlert(AlertStyles.success, "Teacher Prefered Subject Added Successfully.");
-                    string url = Url.Action("PrefSubjectIndex", new { id = vm.Id, isToEdit = true });
+                    string url = Url.Action("PrefSubjectIndex", new { id = vm.TeacherId });
                     return Json(new { success = true, url });
                 }
 
@@ -108,116 +76,7 @@ namespace StudentInformationSystem.Areas.Teacher.Controllers
             catch (Exception ex)
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
-            obj = (TeacherVM)Session[sskCrtdObj];
-
             return PartialView("_PrefSubjectCreate", vm);
-        }
-
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Data.Models.Teacher teacher = db.Teachers.Find(id);
-            if (teacher == null)
-            {
-                return HttpNotFound();
-            }
-
-            var obj = new TeacherVM(teacher);
-            Session[sskCrtdObj] = obj;
-
-            return View(obj);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(TeacherVM teacher)
-        {
-            byte[] curRowVersion = null;
-            try
-            {
-                var svm = (TeacherVM)Session[sskCrtdObj];
-
-                if (ModelState.IsValid)
-                {
-                    var obj = db.Teachers.Find(teacher.Id);
-                    if (obj == null)
-                    { throw new DbUpdateConcurrencyException(); }
-
-                    curRowVersion = obj.RowVersion;
-                    var modObj = teacher.GetEntity();
-
-                    obj.ModifiedBy = this.GetCurrUser();
-                    obj.ModifiedDate = DateTime.Now;
-
-                    db.Entry(obj).OriginalValues["RowVersion"] = teacher.RowVersion;
-
-                    db.TeacherPreferedSubjects.RemoveRange(obj.TeacherPreferedSubjects.Where(x =>
-                        !svm.PreferedSubjects.Select(y => y.Id).ToList().Contains(x.Id)));
-
-                    foreach (var det in svm.PreferedSubjects)
-                    {
-                        var objDet = db.TeacherPreferedSubjects.Find(det.Id);
-                        if (objDet == null)
-                        {
-                            det.CreatedBy = this.GetCurrUser();
-                            det.CreatedDate = DateTime.Now;
-                            obj.TeacherPreferedSubjects.Add(det.GetEntity());
-                        }
-                    }
-
-                    db.SaveChanges();
-
-                    AddAlert(AlertStyles.success, "Teacher Modified Successfully.");
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                this.ShowConcurrencyErrors(ex);
-                teacher.RowVersion = curRowVersion;
-            }
-            catch (DbEntityValidationException dbEx)
-            { this.ShowEntityErrors(dbEx); }
-            catch (Exception ex)
-            { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
-
-            return View(teacher);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(TeacherVM teacher)
-        {
-            try
-            {
-                var obj = db.Teachers.Find(teacher.Id);
-                if (obj == null)
-                { throw new DbUpdateConcurrencyException(""); }
-
-                var entry = db.Entry(obj);
-                entry.State = EntityState.Unchanged;
-                entry.Collection(x => x.TeacherPreferedSubjects).Load();
-                db.TeacherPreferedSubjects.RemoveRange(entry.Entity.TeacherPreferedSubjects);
-                entry.State = EntityState.Deleted;
-                db.SaveChanges();
-
-                AddAlert(AlertStyles.success, "Teacher Deleted Successfully.");
-                return RedirectToAction("Index");
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                this.ShowConcurrencyErrors(ex, true);
-                if (ex.Message == "")
-                { return RedirectToAction("Index"); }
-            }
-            catch (Exception ex)
-            {
-                AddAlert(AlertStyles.danger, ex.GetInnerException().Message);
-            }
-            return RedirectToAction("Details", new { id = teacher.Id });
         }
 
         [HttpPost, ActionName("PrefSubjectDelete")]
@@ -225,22 +84,30 @@ namespace StudentInformationSystem.Areas.Teacher.Controllers
         public ActionResult PrefSubjectDeleteConfirmed(int id)
         {
             string msg = string.Empty;
+            var teacherId = 0;
+
             try
             {
-                var lst = ((TeacherVM)Session[sskCrtdObj]).PreferedSubjects;
-                var obj = lst.FirstOrDefault(x => x.Id == id);
-                lst.Remove(obj);
+                var obj = db.TeacherPreferedSubjects.Find(id);
+                if (obj == null)
+                { throw new DbUpdateConcurrencyException(""); }
 
-                AddAlert(AlertStyles.success, "Subject Removed Successfully.");
+                teacherId = obj.TeacherId;
+                var entry = db.Entry(obj);
+                entry.State = EntityState.Deleted;
+                db.SaveChanges();
+
+                AddAlert(AlertStyles.success, "Teacher Prefered Subject Deleted Successfully.");
             }
             catch (Exception ex)
             {
                 msg = ex.GetInnerException().Message;
                 AddAlert(AlertStyles.danger, msg);
             }
+
             string url = "";
             if (msg.IsBlank())
-            { url = Url.Action("PrefSubjectIndex", new { isToEdit = true }); }
+            { url = Url.Action("PrefSubjectIndex", new { id = teacherId }); }
             return Json(new { success = true, url, msg });
         }
     }

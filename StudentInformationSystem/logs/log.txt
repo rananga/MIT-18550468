@@ -1418,3 +1418,64 @@
   
 2021-07-17 18:50:33,321 [58] ERROR ASP.global_asax - Error in https://localhost:44380/Academic/ClassRoom User: rananga Error Message: Instance property 'GradeClassDesc' is not defined for type 'StudentInformationSystem.Data.Models.ClassRoom' Line:    at System.Linq.Expressions.Expression.Property(Expression expression, String propertyName)
   
+2021-07-22 18:02:00,655 [134] ERROR ASP.global_asax - Error in https://localhost:44380/Student/Student User: rananga Error Message: Invalid object name 'ClassPromotionDetails'. Line:    at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction) in H:\tsaagent4\_work\2\s\src\Microsoft.Data.SqlClient\netfx\src\Microsoft\Data\SqlClient\SqlConnection.cs:line 2117
+  
+2021-07-22 18:02:47,884 [134] ERROR ASP.global_asax - Error in https://localhost:44380/Student/Student User: rananga Error Message: Invalid object name 'ClassPromotionDetails'. Line:    at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction) in H:\tsaagent4\_work\2\s\src\Microsoft.Data.SqlClient\netfx\src\Microsoft\Data\SqlClient\SqlConnection.cs:line 2117
+  
+2021-07-25 18:44:22,390 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentExtraActivities User: rananga Error Message: The controller for path '/Student/StudentExtraActivities' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-07-25 18:45:07,204 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion User: rananga Error Message: The model item passed into the dictionary is of type 'StudentInformationSystem.Common.BaseViewModel`1[StudentInformationSystem.Areas.Student.Models.ClassPromotionVM]', but this dictionary requires a model item of type 'StudentInformationSystem.Common.BaseViewModel`1[StudentInformationSystem.Areas.Student.Models.StudentTransferVM]'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-07-25 23:39:58,193 [133] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Index User: rananga Error Message: The model item passed into the dictionary is of type 'StudentInformationSystem.Common.BaseViewModel`1[StudentInformationSystem.Areas.Student.Models.ClassPromotionVM]', but this dictionary requires a model item of type 'StudentInformationSystem.Common.BaseViewModel`1[StudentInformationSystem.Areas.Student.Models.StudentTransferVM]'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-07-26 00:21:34,225 [74] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Create User: rananga Error Message: The model item passed into the dictionary is of type 'StudentInformationSystem.Areas.Student.Models.ClassPromotionVM', but this dictionary requires a model item of type 'StudentInformationSystem.Areas.Student.Models.StudentTransferVM'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-08-21 18:37:17,920 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentExtraActivities User: rananga Error Message: The controller for path '/Student/StudentExtraActivities' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-08-21 18:38:32,708 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Teacher/TeacherAvailability User: rananga Error Message: The controller for path '/Teacher/TeacherAvailability' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-08-21 18:38:46,820 [7] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentCharacter/Process User: rananga Error Message: The controller for path '/Report/StudentCharacter/Process' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-08-24 23:54:15,704 [34] ERROR ASP.global_asax - Error in https://localhost:44380/Teacher/TeacherAvailability User: rananga Error Message: The controller for path '/Teacher/TeacherAvailability' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-08-28 22:15:59,792 [7] ERROR ASP.global_asax - Error in https://localhost:44380/Teacher/Teacher User: rananga Error Message: Ambiguous match found. Line:    at System.RuntimeType.GetPropertyImpl(String name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers)
+  
+2021-08-29 22:56:20,651 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Teacher/TeacherQualification User: rananga Error Message: The controller for path '/Teacher/TeacherQualification' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-08-31 19:16:11,910 [44] ERROR ASP.global_asax - Error in https://localhost:44380/Teacher/TeacherQualification User: rananga Error Message: The controller for path '/Teacher/TeacherQualification' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-09-01 01:39:49,171 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Teacher/TeacherQualification/Index User: rananga Error Message: A public action method 'OffTimeIndex' was not found on controller 'StudentInformationSystem.Areas.Teacher.Controllers.TeacherQualificationController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-09-01 19:47:45,937 [69] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentExtraActivities User: rananga Error Message: The controller for path '/Student/StudentExtraActivities' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-09-01 20:00:12,420 [93] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentCharacter/Process User: rananga Error Message: The controller for path '/Report/StudentCharacter/Process' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-09-05 00:25:25,642 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Edit/10 User: rananga Error Message: A public action method 'StudentsIndex' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.ClassPromotionController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-09-05 01:41:40,568 [21] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Details/10 User: rananga Error Message: The model item passed into the dictionary is of type 'StudentInformationSystem.Areas.Student.Models.ClassPromotionVM', but this dictionary requires a model item of type 'StudentInformationSystem.Areas.Student.Models.StudentTransferVM'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-09-05 01:41:55,447 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Details/10 User: rananga Error Message: The model item passed into the dictionary is of type 'StudentInformationSystem.Areas.Student.Models.ClassPromotionVM', but this dictionary requires a model item of type 'StudentInformationSystem.Areas.Student.Models.StudentTransferVM'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-09-05 01:42:16,365 [11] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Details/10 User: rananga Error Message: The model item passed into the dictionary is of type 'StudentInformationSystem.Areas.Student.Models.ClassPromotionVM', but this dictionary requires a model item of type 'StudentInformationSystem.Areas.Student.Models.StudentTransferVM'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-09-05 01:43:11,565 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Details/10 User: rananga Error Message: The model item passed into the dictionary is of type 'StudentInformationSystem.Areas.Student.Models.ClassPromotionVM', but this dictionary requires a model item of type 'StudentInformationSystem.Areas.Student.Models.StudentTransferVM'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-09-05 01:43:24,773 [11] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Details/10 User: rananga Error Message: The model item passed into the dictionary is of type 'StudentInformationSystem.Areas.Student.Models.ClassPromotionVM', but this dictionary requires a model item of type 'StudentInformationSystem.Areas.Student.Models.StudentTransferVM'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-09-05 01:43:38,958 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Details/10 User: rananga Error Message: The model item passed into the dictionary is of type 'StudentInformationSystem.Areas.Student.Models.ClassPromotionVM', but this dictionary requires a model item of type 'StudentInformationSystem.Areas.Student.Models.StudentTransferVM'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-09-05 01:49:35,416 [23] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Details/10 User: rananga Error Message: The model item passed into the dictionary is of type 'StudentInformationSystem.Areas.Student.Models.ClassPromotionVM', but this dictionary requires a model item of type 'StudentInformationSystem.Areas.Student.Models.StudentTransferVM'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-09-05 02:06:18,894 [66] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Details/10 User: rananga Error Message: Unexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
+ Line:    at System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+  
+2021-09-05 02:06:49,957 [66] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Details/10 User: rananga Error Message: Unexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
+ Line:    at System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+  
+2021-09-05 02:07:34,660 [100] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Details/10 User: rananga Error Message: Unexpected "if" keyword after "@" character.  Once inside code, you do not need to prefix constructs like "if" with "@".
+ Line:    at System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+  
+2021-09-05 02:08:34,827 [100] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Edit/10 User: rananga Error Message: The model item passed into the dictionary is of type 'System.Collections.Generic.HashSet`1[StudentInformationSystem.Data.Models.ClassPromotionDetail]', but this dictionary requires a model item of type 'System.Collections.Generic.IEnumerable`1[StudentInformationSystem.Areas.Student.Models.ClassPromotionDetailVM]'. Line:    at System.Web.Mvc.ViewDataDictionary`1.SetModel(Object value)
+  
+2021-09-05 02:30:48,135 [24] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Edit/11 User: rananga Error Message: Object reference not set to an instance of an object. Line:    at ASP._Page_Areas_Student_Views_ClassPromotion__StudentClassIndex_cshtml.Execute() in D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Student\Views\ClassPromotion\_StudentClassIndex.cshtml:line 24
+  

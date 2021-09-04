@@ -1,0 +1,59 @@
+﻿@model IEnumerable<StudentInformationSystem.Areas.Teacher.Models.TeacherQualificationSubjectVM>
+
+<h4>Qualification Subjects</h4>
+
+<table id="tblLecturers" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SectionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectMedium)
+            </th>
+            @if (ViewBag.IsToEdit)
+            {
+                <th class="btn-2">
+                    @Html.NoEncodeActionLink("<span class='fa fa-plus' style='color:white'></span>", "Add", "SubjectCreate", routeValues: new { TeacherQualificationId = ViewBag.TeacherQualificationId }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-primary pull-right btn-sm", data_title = "Add Qualification Subject" })
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-pid="@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.SectionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectMedium)
+                </td>
+                @if (ViewBag.IsToEdit)
+                {
+                    <td class="btn-1">
+                        <div class="pull-right">
+                            @using (Html.BeginForm("SubjectDelete", "TeacherQualification", new { id = item.Id }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ConfirmSubmitButton("<span class='bi bi-trash'></span>", "Are you sure you want to delete?", "Confirm subject deletion",
+                                    "<span class='bi bi-trash'></span> Delete", new { data_popup_delete = "", @class = "btn btn-danger btn-sm" })
+                            }
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (ViewBag.IsToEdit)
+{
+    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
+}

@@ -23,7 +23,7 @@ namespace StudentInformationSystem.Data.Models
         [Required]
         [DisplayName("Awarded Year")]
         public int AwardedYear { get; set; }
-        public int Remarks { get; set; }
+        public string Remarks { get; set; }
 
         public virtual Teacher Teacher { get; set; }
         public virtual ICollection<TeacherQualificationSubject> TeacherQualificationSubjects { get; set; }

@@ -8,20 +8,22 @@ namespace StudentInformationSystem.Data.Models
     {
         public ClassPromotion()
         {
-            PromotionDetails = new HashSet<ClassPromotionDetail>();
+            ClassPromotionDetails = new HashSet<ClassPromotionDetail>();
         }
 
         [Required]
         public int Year { get; set; }
         [Required]
+        [DisplayName("From Grade")]
         public int GradeId { get; set; }
         [Required]
         public bool IsFinalized { get; set; }
         [Required]
+        [DisplayName("Promoting Criteria")]
         public PromotingCriteria PromotingCriteria { get; set; }
 
         public virtual Grade Grade { get; set; }
 
-        public virtual ICollection<ClassPromotionDetail> PromotionDetails { get; set; }
+        public virtual ICollection<ClassPromotionDetail> ClassPromotionDetails { get; set; }
     }
 }

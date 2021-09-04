@@ -7,6 +7,7 @@ namespace StudentInformationSystem.Data
     {
         public virtual DbSet<ExtraActivity> ExtraActivities { get; set; }
         public virtual DbSet<ExtraActivityAcheivement> ExtraActivityAcheivements { get; set; }
+        public virtual DbSet<ExtraActivityIncharge> ExtraActivityIncharges { get; set; }
         public virtual DbSet<ExtraActivityPosition> ExtraActivityPositions { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<GradeHead> GradeHeads { get; set; }
@@ -51,6 +52,30 @@ namespace StudentInformationSystem.Data
                     .HasForeignKey(d => d.ActivityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Activity_Acheivements");
+            });
+
+            modelBuilder.Entity<ExtraActivityIncharge>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.Activity)
+                    .WithMany(p => p.Incharges)
+                    .HasForeignKey(d => d.ActivityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Activity_Incharges");
+
+                entity.HasOne(d => d.StaffMember)
+                    .WithMany(p => p.ExtraActivityIncharges)
+                    .HasForeignKey(d => d.StaffId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_StaffMember_ExtraActivityIncharges");
             });
 
             modelBuilder.Entity<ExtraActivityPosition>(entity =>

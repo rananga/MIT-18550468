@@ -13,7 +13,7 @@
             }
         },
         dateFormat: dfmt,
-        timeFormat: "hh:mm:ss TT",
+        timeFormat: "HH:mm",
         showSecond: false,
         changeMonth: true,
         changeYear: true,
@@ -760,15 +760,26 @@ function PopupDocReadyFunc() {
                         if (result.success) {
                             closeDialogModal(dlg);
 
+                            if (typeof window.popupChangeNotify === "function")
+                                window.popupChangeNotify();
+
                             var fnRefresh = window[$this.data('refresh-function')];
                             if (typeof fnRefresh === "function")
                                 fnRefresh();
                             else {
-                                $this.parents('.ChildContent').load(result.url, function (response, status, xhr) {
+                                var $containerDiv = $this.closest('.ChildContent');
+                                $containerDiv.load(result.url, function (response, status, xhr) {
                                     if (status == "error") {
                                         AlertIt("ERROR: " + xhr.status + "-" + xhr.statusText);
                                     }
-                                    else { PopupDocReadyFunc(); }
+                                    else {
+                                        PopupDocReadyFunc();
+                                        if ($containerDiv.data('local-binding-fn')) {
+                                            var fnCustomBinder = window[$containerDiv.data('local-binding-fn')];
+                                            if (typeof fnCustomBinder === "function")
+                                                fnCustomBinder();
+                                        }
+                                    }
                                 });
                             }
                             PopupDocReadyFunc();
@@ -824,16 +835,26 @@ function PopupDocReadyFunc() {
                 type: this.method,
                 data: $(this).serialize(),
                 success: function (result) {
-                    console.log($this.parents('.ChildContent'));
                     closeDialogModal(dlg);
+
+                    if (typeof window.popupChangeNotify === "function")
+                        window.popupChangeNotify();
+
                     if (result.url) {
-                        $this.parents('.ChildContent').load(result.url, function (response, status, xhr) {
+                        var $containerDiv = $this.closest('.ChildContent');
+                        $containerDiv.load(result.url, function (response, status, xhr) {
                             if (status == "error") {
                                 AlertIt("ERROR: " + xhr.status + "-" + xhr.statusText);
                             }
-                            else { PopupDocReadyFunc(); }
+                            else {
+                                PopupDocReadyFunc();
+                                if ($containerDiv.data('local-binding-fn')) {
+                                    var fnCustomBinder = window[$containerDiv.data('local-binding-fn')];
+                                    if (typeof fnCustomBinder === "function")
+                                        fnCustomBinder();
+                                }
+                            }
                         });
-                        //SetHeaderValues(result.hdrData);
                     }
                     else { AlertIt("ERROR: " + result.msg); }
                 },

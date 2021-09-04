@@ -15,7 +15,7 @@ namespace StudentInformationSystem.Data
         public dbNalandaContext()
         {
             ConnectionString = "Server=(localdb)\\mssqllocaldb;Database=dbNalanda;Trusted_Connection=True;MultipleActiveResultSets=true";
-            //ConnectionString = "Server=tcp:enalanda.database.windows.net,1433;Initial Catalog=dbNalanda;Persist Security Info=False;User ID=admindbenalanda;Password=Pass@123!;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            //ConnectionString = "Data Source=dbnibm.southeastasia.cloudapp.azure.com;User Id=sa;Password=sdf^749(03vGhs@;Initial Catalog=dbSIS;MultipleActiveResultSets=True;";
         }
 
         public dbNalandaContext(DbContextOptions<dbNalandaContext> options)
@@ -52,25 +52,25 @@ namespace StudentInformationSystem.Data
         private void SeedData(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Section>().HasData(
-                new Section { Id = 1, Code = "Primary", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Section { Id = 2, Code = "Junior", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Section { Id = 3, Code = "Senior", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Section { Id = 4, Code = "AL-Science", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Section { Id = 5, Code = "AL-Art & Commerce", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Section { Id = 6, Code = "AL-Technology", Description = "", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
+                new Section { Id = 1, Code = "Primary", Description = "Primary Section", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Section { Id = 2, Code = "Junior", Description = "Junior Section", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Section { Id = 3, Code = "Senior", Description = "Senior Section", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Section { Id = 4, Code = "AL-Science", Description = "AL Science Section", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Section { Id = 5, Code = "AL-Art & Commerce", Description = "AL Art & Commerce Section", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Section { Id = 6, Code = "AL-Technology", Description = "AL Technology Section", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
 
             modelBuilder.Entity<Grade>().HasData(
-                new Grade { Id = 1, SectionId = 1, GradeNo = Data.Grades.Grade1, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 2, SectionId = 1, GradeNo = Data.Grades.Grade2, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 3, SectionId = 1, GradeNo = Data.Grades.Grade3, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 4, SectionId = 1, GradeNo = Data.Grades.Grade4, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 5, SectionId = 1, GradeNo = Data.Grades.Grade5, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 6, SectionId = 2, GradeNo = Data.Grades.Grade6, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 7, SectionId = 2, GradeNo = Data.Grades.Grade7, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 8, SectionId = 2, GradeNo = Data.Grades.Grade8, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 9, SectionId = 3, GradeNo = Data.Grades.Grade9, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 10, SectionId = 3, GradeNo = Data.Grades.Grade10, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
-                new Grade { Id = 11, SectionId = 3, GradeNo = Data.Grades.Grade11, CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
+                new Grade { Id = 1, SectionId = 1, GradeNo = Data.Grades.Grade1, Description = "Primary Section Grade 1", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 2, SectionId = 1, GradeNo = Data.Grades.Grade2, Description = "Primary Section Grade 2", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 3, SectionId = 1, GradeNo = Data.Grades.Grade3, Description = "Primary Section Grade 3", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 4, SectionId = 1, GradeNo = Data.Grades.Grade4, Description = "Primary Section Grade 4", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 5, SectionId = 1, GradeNo = Data.Grades.Grade5, Description = "Primary Section Grade 5", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 6, SectionId = 2, GradeNo = Data.Grades.Grade6, Description = "Junior Section Grade 6", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 7, SectionId = 2, GradeNo = Data.Grades.Grade7, Description = "Junior Section Grade 7", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 8, SectionId = 2, GradeNo = Data.Grades.Grade8, Description = "Junior Section Grade 8", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 9, SectionId = 3, GradeNo = Data.Grades.Grade9, Description = "Senior Section Grade 9", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 10, SectionId = 3, GradeNo = Data.Grades.Grade10, Description = "Senior Section Grade 10", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
+                new Grade { Id = 11, SectionId = 3, GradeNo = Data.Grades.Grade11, Description = "Senior Section Grade 11", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) });
 
             modelBuilder.Entity<Permission>().HasData(
                 new Permission { PermissionId = 1, Code = "Admin", Name = "Administrator", CreatedBy = "System", CreatedDate = new DateTime(2021, 1, 1) },
@@ -83,13 +83,13 @@ namespace StudentInformationSystem.Data
                 new Menu { MenuId = 4, ParentMenuId = null, DisplaySeq = 40, Text = "Student", Type = "M", Area = null, Controller = null, Action = null, IsHidden = false, Icon = "fas fa-user-graduate" },
                 new Menu { MenuId = 5, ParentMenuId = null, DisplaySeq = 50, Text = "Online", Type = "M", Area = null, Controller = null, Action = null, IsHidden = false, Icon = "fas fa-laptop-code" },
                 new Menu { MenuId = 6, ParentMenuId = null, DisplaySeq = 60, Text = "Report", Type = "M", Area = null, Controller = null, Action = null, IsHidden = false, Icon = "fas fa-chart-bar" },
-                new Menu { MenuId = 7, ParentMenuId = 1, DisplaySeq = 10, Text = "User Permissions", Type = "I", Area = "Admin", Controller = "UserPermission", Action = "Index" },
-                new Menu { MenuId = 8, ParentMenuId = 1, DisplaySeq = 20, Text = "Users", Type = "I", Area = "Admin", Controller = "Users", Action = "Index" },
+                new Menu { MenuId = 7, ParentMenuId = 1, DisplaySeq = 10, Text = "Sections", Type = "I", Area = "Admin", Controller = "Section", Action = "Index" },
+                new Menu { MenuId = 8, ParentMenuId = 1, DisplaySeq = 20, Text = "Grades", Type = "I", Area = "Admin", Controller = "Grade", Action = "Index" },
                 new Menu { MenuId = 9, ParentMenuId = 1, DisplaySeq = 30, Text = "Staff Members", Type = "I", Area = "Admin", Controller = "StaffMember", Action = "Index" },
                 new Menu { MenuId = 10, ParentMenuId = 1, DisplaySeq = 40, Text = "Visitors", Type = "I", Area = "Admin", Controller = "Visitor", Action = "Index" },
-                new Menu { MenuId = 11, ParentMenuId = 1, DisplaySeq = 50, Text = "Sections", Type = "I", Area = "Admin", Controller = "Section", Action = "Index" },
-                new Menu { MenuId = 12, ParentMenuId = 1, DisplaySeq = 60, Text = "Section Heads", Type = "I", Area = "Admin", Controller = "SectionHead", Action = "Index" },
-                new Menu { MenuId = 13, ParentMenuId = 1, DisplaySeq = 70, Text = "Grades", Type = "I", Area = "Admin", Controller = "Grade", Action = "Index" },
+                new Menu { MenuId = 11, ParentMenuId = 1, DisplaySeq = 50, Text = "User Permissions", Type = "I", Area = "Admin", Controller = "UserPermission", Action = "Index" },
+                new Menu { MenuId = 12, ParentMenuId = 1, DisplaySeq = 60, Text = "Users", Type = "I", Area = "Admin", Controller = "Users", Action = "Index" },
+                new Menu { MenuId = 13, ParentMenuId = 1, DisplaySeq = 70, Text = "Section Heads", Type = "I", Area = "Admin", Controller = "SectionHead", Action = "Index" },
                 new Menu { MenuId = 14, ParentMenuId = 1, DisplaySeq = 80, Text = "Grade Heads", Type = "I", Area = "Admin", Controller = "GradeHead", Action = "Index" },
                 new Menu { MenuId = 15, ParentMenuId = 1, DisplaySeq = 90, Text = "Extra Activities", Type = "I", Area = "Admin", Controller = "ExtraActivity", Action = "Index" },
                 new Menu { MenuId = 16, ParentMenuId = 2, DisplaySeq = 10, Text = "Subject Categories", Type = "I", Area = "Academic", Controller = "SubjectCategory", Action = "Index" },
@@ -97,22 +97,23 @@ namespace StudentInformationSystem.Data
                 new Menu { MenuId = 18, ParentMenuId = 2, DisplaySeq = 30, Text = "Grade Subjects", Type = "I", Area = "Academic", Controller = "GradeSubject", Action = "Index" },
                 new Menu { MenuId = 19, ParentMenuId = 2, DisplaySeq = 40, Text = "Grade Classes", Type = "I", Area = "Academic", Controller = "GradeClass", Action = "Index" },
                 new Menu { MenuId = 20, ParentMenuId = 2, DisplaySeq = 50, Text = "Physical Classrooms", Type = "I", Area = "Academic", Controller = "ClassRoom", Action = "Index" },
-                new Menu { MenuId = 21, ParentMenuId = 3, DisplaySeq = 10, Text = "Teacher Information", Type = "I", Area = "Teacher", Controller = "Teacher", Action = "Index" },
-                new Menu { MenuId = 22, ParentMenuId = 3, DisplaySeq = 20, Text = "Teacher Availability", Type = "I", Area = "Teacher", Controller = "TeacherAvailability", Action = "Index" },
-                new Menu { MenuId = 23, ParentMenuId = 4, DisplaySeq = 10, Text = "Student Maintenance", Type = "I", Area = "Student", Controller = "Student", Action = "Index" },
-                new Menu { MenuId = 24, ParentMenuId = 4, DisplaySeq = 20, Text = "Student Basket Subjects", Type = "I", Area = "Student", Controller = "BasketSubject", Action = "Index" },
-                new Menu { MenuId = 25, ParentMenuId = 4, DisplaySeq = 30, Text = "Admit Student", Type = "I", Area = "Student", Controller = "StudentAdmit", Action = "Index" },
-                new Menu { MenuId = 26, ParentMenuId = 4, DisplaySeq = 40, Text = "Student Marks", Type = "I", Area = "Student", Controller = "StudentMark", Action = "Index" },
-                new Menu { MenuId = 27, ParentMenuId = 4, DisplaySeq = 50, Text = "Transfer Student", Type = "I", Area = "Student", Controller = "TransferStudent", Action = "Index" },
-                new Menu { MenuId = 28, ParentMenuId = 4, DisplaySeq = 50, Text = "Class Promotion", Type = "I", Area = "Student", Controller = "ClassPromotion", Action = "Index" },
-                new Menu { MenuId = 29, ParentMenuId = 4, DisplaySeq = 60, Text = "Student Extra Activities", Type = "I", Area = "Student", Controller = "StudentExtraActivities", Action = "Index" },
-                new Menu { MenuId = 30, ParentMenuId = 5, DisplaySeq = 10, Text = "Online Classrooms", Type = "I", Area = "Online", Controller = "OnlineClassRoom", Action = "Index" },
-                new Menu { MenuId = 31, ParentMenuId = 5, DisplaySeq = 20, Text = "Online Time Table", Type = "I", Area = "Online", Controller = "OnlineTimeTable", Action = "Index" },
-                new Menu { MenuId = 32, ParentMenuId = 6, DisplaySeq = 10, Text = "Student Character", Type = "I", Area = "Report", Controller = "StudentCharacter", Action = "Process" },
-                new Menu { MenuId = 33, ParentMenuId = 6, DisplaySeq = 20, Text = "Student Attendance", Type = "I", Area = "Report", Controller = "StudentAttendance", Action = "Process" },
-                new Menu { MenuId = 34, ParentMenuId = 6, DisplaySeq = 30, Text = "Term Wise Student Marks", Type = "I", Area = "Report", Controller = "StudentMarks", Action = "Process" },
-                new Menu { MenuId = 35, ParentMenuId = 6, DisplaySeq = 40, Text = "Online Sessions Summary", Type = "I", Area = "Report", Controller = "OnlineSessionsSummary", Action = "Process" },
-                new Menu { MenuId = 36, ParentMenuId = 6, DisplaySeq = 50, Text = "Weekly Summary", Type = "I", Area = "Report", Controller = "WeeklySummary", Action = "Process" });
+                new Menu { MenuId = 21, ParentMenuId = 3, DisplaySeq = 10, Text = "Teacher Subjects", Type = "I", Area = "Teacher", Controller = "Teacher", Action = "Index" },
+                new Menu { MenuId = 22, ParentMenuId = 3, DisplaySeq = 20, Text = "Teacher Qualifications", Type = "I", Area = "Teacher", Controller = "TeacherQualification", Action = "Index" },
+                new Menu { MenuId = 23, ParentMenuId = 3, DisplaySeq = 30, Text = "Teacher Off Times", Type = "I", Area = "Teacher", Controller = "TeacherOffTime", Action = "Index" },
+                new Menu { MenuId = 24, ParentMenuId = 4, DisplaySeq = 10, Text = "Student Maintenance", Type = "I", Area = "Student", Controller = "Student", Action = "Index" },
+                new Menu { MenuId = 25, ParentMenuId = 4, DisplaySeq = 20, Text = "Student Basket Subjects", Type = "I", Area = "Student", Controller = "BasketSubject", Action = "Index" },
+                new Menu { MenuId = 26, ParentMenuId = 4, DisplaySeq = 30, Text = "Admit Student", Type = "I", Area = "Student", Controller = "StudentAdmit", Action = "Index" },
+                new Menu { MenuId = 27, ParentMenuId = 4, DisplaySeq = 40, Text = "Student Marks", Type = "I", Area = "Student", Controller = "StudentMark", Action = "Index" },
+                new Menu { MenuId = 28, ParentMenuId = 4, DisplaySeq = 50, Text = "Transfer Student", Type = "I", Area = "Student", Controller = "TransferStudent", Action = "Index" },
+                new Menu { MenuId = 29, ParentMenuId = 4, DisplaySeq = 50, Text = "Class Promotion", Type = "I", Area = "Student", Controller = "ClassPromotion", Action = "Index" },
+                new Menu { MenuId = 30, ParentMenuId = 4, DisplaySeq = 60, Text = "Student Extra Activities", Type = "I", Area = "Student", Controller = "StudentExtraActivities", Action = "Index" },
+                new Menu { MenuId = 31, ParentMenuId = 5, DisplaySeq = 10, Text = "Online Classrooms", Type = "I", Area = "Online", Controller = "OnlineClassRoom", Action = "Index" },
+                new Menu { MenuId = 32, ParentMenuId = 5, DisplaySeq = 20, Text = "Online Time Table", Type = "I", Area = "Online", Controller = "OnlineTimeTable", Action = "Index" },
+                new Menu { MenuId = 33, ParentMenuId = 6, DisplaySeq = 10, Text = "Student Character", Type = "I", Area = "Report", Controller = "StudentCharacter", Action = "Process" },
+                new Menu { MenuId = 34, ParentMenuId = 6, DisplaySeq = 20, Text = "Student Attendance", Type = "I", Area = "Report", Controller = "StudentAttendance", Action = "Process" },
+                new Menu { MenuId = 35, ParentMenuId = 6, DisplaySeq = 30, Text = "Term Wise Student Marks", Type = "I", Area = "Report", Controller = "StudentMarks", Action = "Process" },
+                new Menu { MenuId = 36, ParentMenuId = 6, DisplaySeq = 40, Text = "Online Sessions Summary", Type = "I", Area = "Report", Controller = "OnlineSessionsSummary", Action = "Process" },
+                new Menu { MenuId = 37, ParentMenuId = 6, DisplaySeq = 50, Text = "Weekly Summary", Type = "I", Area = "Report", Controller = "WeeklySummary", Action = "Process" });
 
             modelBuilder.Entity<PermissionMenuAccess>().HasData(
                 new PermissionMenuAccess { MenuId = 1, PermissionId = 1 }

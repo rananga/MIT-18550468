@@ -1,0 +1,104 @@
+﻿@using System.Linq
+@model IEnumerable<StudentInformationSystem.Areas.Teacher.Models.TeacherQualificationVM>
+
+<br />
+<h3>Qualifications</h3>
+
+<table id="tblQualifications" style="width:100%;margin-bottom:5px;">
+    <thead>
+        <tr>
+            <th>
+                <table class="table table-striped" style="margin: 0;">
+                    <thead>
+                        <tr>
+                            @if (Model.Any())
+                            {
+                                <th class="btn-3" style="width:5%">
+                                </th>
+                            }
+                            <th style="width:15%">
+                                @Html.DisplayNameFor(model => model.QualificationType)
+                            </th>
+                            <th style="width:25%">
+                                @Html.DisplayNameFor(model => model.Institute)
+                            </th>
+                            <th style="width:10%">
+                                @Html.DisplayNameFor(model => model.AwardedYear)
+                            </th>
+                            <th style="width:30%">
+                                @Html.DisplayNameFor(model => model.Remarks)
+                            </th>
+                            @{
+                                if (ViewBag.IsToEdit)
+                                {
+                                    <th style="width:15%">
+                                        @Html.NoEncodeActionLink("<span class='fa fa-plus' style='color:white'></span>", "Add", "QualificationCreate", routeValues: new { teacherId = ViewBag.TeacherId }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-primary float-right btn-sm", data_title = "Add Teacher Qualification" })
+                                    </th>
+                                }
+                            }
+                        </tr>
+                    </thead>
+                </table>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-pid="@item.Id">
+                <td id="subject">
+                    @Html.HiddenFor(modelItem => item.Id)
+                    <div>
+                        <table class="table table-striped" style="margin: 0;">
+                            <tbody>
+                                <tr>
+                                    <td class="btn-3" style="width:5%">
+                                        <button type="button" name="toggleLecturers" class="btn btn-default btn-sm" aria-label="Left Align" data-subject-id="@item.Id" data-to-edit="@ViewBag.IsToEdit">
+                                            <span class="bi bi-chevron-down" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                    <td style="width:15%">
+                                        @Html.DisplayFor(modelItem => item.QualificationType)
+                                    </td>
+                                    <td style="width:25%">
+                                        @Html.DisplayFor(modelItem => item.Institute)
+                                    </td>
+                                    <td style="width:10%">
+                                        @Html.DisplayFor(modelItem => item.AwardedYear)
+                                    </td>
+                                    <td style="width:30%">
+                                        @Html.DisplayFor(modelItem => item.Remarks)
+                                    </td>
+                                    @{
+                                        if (ViewBag.IsToEdit)
+                                        {
+                                            <td class="btn-2" style="width:15%">
+                                                <div class="d-grid gap-2 d-md-block pull-right">
+                                                    @using (Html.BeginForm("QualificationDelete", "TeacherQualification", new { id = item.Id }))
+                                                    {
+                                                        @Html.AntiForgeryToken()
+                                                        @Html.NoEncodeActionLink("<span class='bi bi-pencil' style='color:black'></span>", "Edit", "QualificationEdit", routeValues: new { id = item.Id }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-warning btn-sm", data_title = "Edit Teacher Qualification" })                                                        
+                                                        @Html.ConfirmSubmitButton("<span class='bi bi-trash'></span>", "Are you sure you want to delete?", "Confirm teacher qualification deletion", "<span class='bi bi-trash'></span> Delete", new { data_popup_delete = "", @class = "btn btn-danger btn-sm" })
+                                                    }
+                                                </div>
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div name="lecDiv" class="ChildContent" style="width: 75%; margin-left: auto; margin-right: auto;display:none;">
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (ViewBag.IsToEdit)
+{
+    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
+}

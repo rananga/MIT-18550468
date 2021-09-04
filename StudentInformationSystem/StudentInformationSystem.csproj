@@ -368,6 +368,8 @@
     <Compile Include="Areas\Student\Models\StudentAdmitVM.cs" />
     <Compile Include="Areas\Student\Models\StudentMarkVM.cs" />
     <Compile Include="Areas\Student\Models\StudentBasketSubjectVM.cs" />
+    <Compile Include="Areas\Teacher\Controllers\TeacherQualificationController.cs" />
+    <Compile Include="Areas\Teacher\Controllers\TeacherOffTimeController.cs" />
     <Compile Include="Areas\Teacher\Controllers\TeacherController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserPermissionController.cs" />
     <Compile Include="Areas\Academic\Models\CR_StudentVM.cs" />
@@ -380,6 +382,9 @@
     <Compile Include="Areas\Academic\Models\SubjectVM.cs" />
     <Compile Include="Areas\Admin\Models\ExtraActivityVM.cs" />
     <Compile Include="Areas\Academic\Models\SubjectCategoryVM.cs" />
+    <Compile Include="Areas\Teacher\Models\TeacherQualificationSubjectVM.cs" />
+    <Compile Include="Areas\Teacher\Models\TeacherQualificationVM.cs" />
+    <Compile Include="Areas\Teacher\Models\TeacherOffTimeVM.cs" />
     <Compile Include="Areas\Teacher\Models\TeacherPreferedSubjectVM.cs" />
     <Compile Include="Areas\Admin\Models\StaffMemberVM.cs" />
     <Compile Include="Areas\Teacher\Models\TeacherVM.cs" />
@@ -680,6 +685,17 @@
     <Content Include="Areas\Student\Views\ClassPromotion\Details.cshtml" />
     <Content Include="Areas\Student\Views\ClassPromotion\Edit.cshtml" />
     <Content Include="Areas\Student\Views\ClassPromotion\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherOffTime\_OffTimeCreate.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherOffTime\_OffTimeIndex.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherOffTime\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherOffTime\_OffTimeEdit.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherQualification\Index.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherQualification\_QualificationCreate.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherQualification\_QualificationEdit.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherQualification\_QualificationIndex.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherQualification\_SubjectCreate.cshtml" />
+    <Content Include="Areas\Teacher\Views\TeacherQualification\_SubjectIndex.cshtml" />
+    <Content Include="Areas\Student\Views\ClassPromotion\_StudentClassIndex.cshtml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - Web Deploy.pubxml" />
@@ -709,6 +725,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Student\ClassAdmit.js" />
     <Content Include="Scripts\Student\StudentMarks.js" />
+    <Content Include="Scripts\Teacher\Qualification.js" />
+    <Content Include="Scripts\Teacher\PrefSubject.js" />
+    <Content Include="Scripts\Teacher\OffTime.js" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -2095,12 +2114,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Areas\Teacher\Views\Teacher\Index.cshtml" />
-    <Content Include="Areas\Teacher\Views\Teacher\Details.cshtml" />
     <Content Include="Areas\Academic\Views\ClassRoom\Index.cshtml" />
     <Content Include="Areas\Academic\Views\ClassRoom\Create.cshtml" />
     <Content Include="Areas\Academic\Views\ClassRoom\Details.cshtml" />
     <Content Include="Areas\Academic\Views\ClassRoom\Edit.cshtml" />
-    <Content Include="Areas\Teacher\Views\Teacher\Edit.cshtml" />
     <Content Include="Areas\Student\Views\web.config" />
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Student\Views\Student\Index.cshtml" />
@@ -2112,12 +2129,6 @@
     <Content Include="Areas\Student\Views\Student\Details.cshtml" />
     <Content Include="Areas\Student\Views\Student\Edit.cshtml" />
     <Content Include="Areas\Student\Views\Student\_FamilyEdit.cshtml" />
-    <Content Include="Areas\Student\Views\StudentPromotion\Index.cshtml" />
-    <Content Include="Areas\Student\Views\StudentPromotion\Create.cshtml" />
-    <Content Include="Areas\Student\Views\StudentPromotion\_ChildIndex.cshtml" />
-    <Content Include="Areas\Student\Views\StudentPromotion\_ChildCreate.cshtml" />
-    <Content Include="Areas\Student\Views\StudentPromotion\Details.cshtml" />
-    <Content Include="Areas\Student\Views\StudentPromotion\Edit.cshtml" />
     <Content Include="Areas\Student\Views\Reports\StudExCurricularSumReport.cshtml" />
     <Content Include="Areas\Student\Views\Reports\StudentWiseIDCard.cshtml" />
     <Content Include="Areas\Student\Views\Reports\ClassWiseStudentIDCard.cshtml" />

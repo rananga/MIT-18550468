@@ -230,7 +230,9 @@ namespace StudentInformationSystem.Areas.Base
                 {
                     { "Id", "Id" } ,
                     { "Subject_Name", "Code" },
-                    { "Subject_Number", "Number" }
+                    { "Subject_Number", "Number" },
+                    { "Section", "SectionId" },
+                    { "Medium", "Medium" }
                 };
 
                 return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
@@ -238,7 +240,9 @@ namespace StudentInformationSystem.Areas.Base
                     {
                         x.Id,
                         Subject_Name = x.Code,
-                        Subject_Number = x.Number
+                        Subject_Number = x.Number,
+                        Section = x.Section.Code,
+                        Medium = x.Medium == Medium.English ? "English" : "Sinhala"
                     });
             }
         }
@@ -276,7 +280,7 @@ namespace StudentInformationSystem.Areas.Base
                 return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
                     x => new
                     {
-                        Id = x.StaffId,
+                        x.Id,
                         Teacher_Name = x.StaffMember.Title + ". " + x.StaffMember.Initials + " " + x.StaffMember.LastName
                     });
             }

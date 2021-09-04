@@ -1,0 +1,32 @@
+﻿@model StudentInformationSystem.Areas.Teacher.Models.TeacherVM
+
+@{
+    ViewBag.Title = "Teacher Qualifications";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.PopUpSelectorFor(model => model.Id, "Base", "Data", "GetTeachers", new { @class = "form-control" }, "Please select a teacher", null, dspFormat: "{1}", hiddenIndices: "0")
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+<div id="ChildContent" class="ChildContent" data-local-binding-fn="QualificationsGridBinder">
+    @{ Html.RenderAction("QualificationIndex", new { id = Model.Id }); }
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/Teacher/Qualification.js"></script>
+}

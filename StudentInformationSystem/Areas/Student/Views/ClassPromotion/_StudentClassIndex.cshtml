@@ -1,0 +1,53 @@
+﻿@model IEnumerable<StudentInformationSystem.Areas.Student.Models.ClassPromotionDetailVM>
+
+<style>
+    .marksChanged {
+        border-style: solid;
+        border-width: 5px;
+        border-color: orange;
+    }
+</style>
+
+<table class="mGrid">
+    <thead>
+        <tr>
+            <th class="text-center" style="min-width: 120px">Admission No</th>
+            <th class="text-center" style="min-width: 120px">Name</th>
+            <th class="text-center" style="min-width: 120px">Medium</th>
+            <th class="text-center" style="min-width: 180px">Current Class</th>
+            <th class="text-center" style="min-width: 180px">Promoting Class</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stud in Model.OrderBy(x => x.IndexNo))
+        {
+            <tr>
+                <td class="align-middle">@stud.IndexNo</td>
+                <td class="align-middle">@stud.StudentName</td>
+                <td class="align-middle">@stud.StudentMedium.ToEnumChar()</td>
+                <td class="align-middle">@stud.FromClassName</td>
+                @if (ViewBag.IsToEdit)
+                {
+                    <td class="align-middle">
+                        <select class="newClass form-control" name="CR_Id" style="max-width:100%" data-db-val="@stud.ToClassId" data-stud-id="@stud.StudentId">
+                            @foreach (var cls in stud.StudentMedium == StudentInformationSystem.Data.Medium.Sinhala ? ViewBag.smClasses : ViewBag.emClasses)
+                            {
+                                <option data-info="null" value="@cls.Key" @(cls.Key == stud.ToClassId ? "selected" : "")>@cls.Value</option>
+                            }
+                        </select>
+                    </td>
+                }
+                else
+                {
+                    <td class="align-middle">@stud.ToClassName</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
+}
+
+

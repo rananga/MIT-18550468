@@ -6,6 +6,7 @@ namespace StudentInformationSystem.Data
     public partial class dbNalandaContext : DbContext
     {
         public virtual DbSet<Teacher> Teachers { get; set; }
+        public virtual DbSet<TeacherOffTime> TeacherOffTimes { get; set; }
         public virtual DbSet<TeacherQualification> TeacherQualifications { get; set; }
         public virtual DbSet<TeacherQualificationSubject> TeacherQualificationSubjects { get; set; }
         public virtual DbSet<TeacherPreferedSubject> TeacherPreferedSubjects { get; set; }
@@ -30,6 +31,24 @@ namespace StudentInformationSystem.Data
                     .HasForeignKey(d => d.SectionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Section_Teachers");
+            });
+
+            modelBuilder.Entity<TeacherOffTime>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(d => d.Teacher)
+                    .WithMany(p => p.TeacherOffTimes)
+                    .HasForeignKey(d => d.TeacherId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Teacher_OffTimes");
             });
 
             modelBuilder.Entity<TeacherQualification>(entity =>

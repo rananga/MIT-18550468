@@ -34,7 +34,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 var exName = db.Sections.Where(e => e.Code.ToLower().Trim() == section.Code.ToLower().Trim()).FirstOrDefault();
 
                 if (exName != null)
-                { ModelState.AddModelError("Name", "Name Already Exists."); }
+                { ModelState.AddModelError("Code", "Name Already Exists."); }
 
                 if (ModelState.IsValid)
                 {

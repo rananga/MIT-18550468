@@ -48,7 +48,7 @@ namespace StudentInformationSystem.Data
                     .IsConcurrencyToken();
 
                 entity.HasOne(d => d.ClassPromotion)
-                    .WithMany(p => p.PromotionDetails)
+                    .WithMany(p => p.ClassPromotionDetails)
                     .HasForeignKey(d => d.PromotionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ClassPromotion_PromotionDetails");
@@ -61,13 +61,13 @@ namespace StudentInformationSystem.Data
 
                 entity.HasOne(d => d.FromClass)
                     .WithMany(p => p.FromClassPromotionDetails)
-                    .HasForeignKey(d => d.StudentId)
+                    .HasForeignKey(d => d.FromClassId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_FromClass_FromClassPromotionDetails");
 
                 entity.HasOne(d => d.ToClass)
                     .WithMany(p => p.ToClassPromotionDetails)
-                    .HasForeignKey(d => d.StudentId)
+                    .HasForeignKey(d => d.ToClassId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ToClass_ToClassPromotionDetails");
             });

@@ -14,6 +14,7 @@ namespace StudentInformationSystem.Data.Models
             ClassTeachers = new HashSet<CR_Teacher>();
             ClassSubjects = new HashSet<CR_Subject>();
             OCR_Teachers = new HashSet<OCR_Teacher>();
+            ExtraActivityIncharges = new HashSet<ExtraActivityIncharge>();
         }
 
         [DisplayName("Staff Number"), Required]
@@ -65,5 +66,6 @@ namespace StudentInformationSystem.Data.Models
         public virtual ICollection<CR_Teacher> ClassTeachers { get; set; }
         public virtual ICollection<CR_Subject> ClassSubjects { get; set; }
         public virtual ICollection<OCR_Teacher> OCR_Teachers { get; set; }
+        public virtual ICollection<ExtraActivityIncharge> ExtraActivityIncharges { get; set; }
     }
 }

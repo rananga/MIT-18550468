@@ -1,4 +1,5 @@
 ﻿using StudentInformationSystem.Common;
+using StudentInformationSystem.Data;
 using StudentInformationSystem.Data.Models;
 using System;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace StudentInformationSystem.Areas.Student.Models
             mappings.Add(x => x.Student.FullName, x => x.StudentName);
             mappings.Add(x => x.FromClass.GradeClass.Code, x => x.FromClassName);
             mappings.Add(x => x.ToClass.GradeClass.Code, x => x.ToClassName);
+            mappings.Add(x => x.Student.Medium, x => x.StudentMedium);
         }
 
         public ClassPromotionDetailVM(ClassPromotionDetail obj) : this()
@@ -27,6 +29,7 @@ namespace StudentInformationSystem.Areas.Student.Models
         public int IndexNo { get; set; }
         [DisplayName("Student")]
         public string StudentName { get; set; }
+        public Medium StudentMedium { get; set; }
         [DisplayName("From Class")]
         public string FromClassName { get; set; }
         [DisplayName("To Class")]
