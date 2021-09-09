@@ -42,6 +42,13 @@ namespace StudentInformationSystem.Areas.Student.Models
         [DisplayName("Admitted Grade")]
         public string AdmittedGradeName { get; set; }
 
+        [DisplayName("Student")]
+        public new int Id
+        {
+            get { return base.Id; }
+            set { base.Id = value; }
+        }
+
         public HttpPostedFileBase ProfilePic { get; set; }
         public virtual ICollection<StudSiblingsVM> Siblings { get; set; }
         public virtual ICollection<StudFamilyVM> FamilyMembers { get; set; }

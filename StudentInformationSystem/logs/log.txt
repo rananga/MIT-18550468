@@ -1479,3 +1479,41 @@
   
 2021-09-05 02:30:48,135 [24] ERROR ASP.global_asax - Error in https://localhost:44380/Student/ClassPromotion/Edit/11 User: rananga Error Message: Object reference not set to an instance of an object. Line:    at ASP._Page_Areas_Student_Views_ClassPromotion__StudentClassIndex_cshtml.Execute() in D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Student\Views\ClassPromotion\_StudentClassIndex.cshtml:line 24
   
+2021-09-05 10:00:07,682 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentExtraActivities User: rananga Error Message: The controller for path '/Student/StudentExtraActivities' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-09-05 13:57:08,483 [53] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentExtraActivities User: rananga Error Message: The controller for path '/Student/StudentExtraActivities' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-09-07 23:07:28,389 [7] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentExtraActivities/Index User: rananga Error Message: The partial view '_PositionIndex' was not found or no view engine supports the searched locations. The following locations were searched:
+~/Areas/Student/Views/StudentExtraActivities/_PositionIndex.aspx
+~/Areas/Student/Views/StudentExtraActivities/_PositionIndex.ascx
+~/Areas/Student/Views/Shared/_PositionIndex.aspx
+~/Areas/Student/Views/Shared/_PositionIndex.ascx
+~/Views/StudentExtraActivities/_PositionIndex.aspx
+~/Views/StudentExtraActivities/_PositionIndex.ascx
+~/Views/Shared/_PositionIndex.aspx
+~/Views/Shared/_PositionIndex.ascx
+~/Areas/Student/Views/StudentExtraActivities/_PositionIndex.cshtml
+~/Areas/Student/Views/StudentExtraActivities/_PositionIndex.vbhtml
+~/Areas/Student/Views/Shared/_PositionIndex.cshtml
+~/Areas/Student/Views/Shared/_PositionIndex.vbhtml
+~/Views/StudentExtraActivities/_PositionIndex.cshtml
+~/Views/StudentExtraActivities/_PositionIndex.vbhtml
+~/Views/Shared/_PositionIndex.cshtml
+~/Views/Shared/_PositionIndex.vbhtml Line:    at System.Web.Mvc.PartialViewResult.FindView(ControllerContext context)
+  
+2021-09-08 02:47:07,111 [17] ERROR ASP.global_asax - Error in https://localhost:44380/Admin/ExtraActivity/Create User: rananga Error Message: Object reference not set to an instance of an object. Line:    at ASP._Page_Areas_Admin_Views_ExtraActivity__InChargeIndex_cshtml.Execute() in D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Admin\Views\ExtraActivity\_InChargeIndex.cshtml:line 29
+  
+2021-09-08 02:49:07,212 [17] ERROR ASP.global_asax - Error in https://localhost:44380/Admin/ExtraActivity/Create User: rananga Error Message: Object reference not set to an instance of an object. Line:    at ASP._Page_Areas_Admin_Views_ExtraActivity__InChargeIndex_cshtml.Execute() in D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Admin\Views\ExtraActivity\_InChargeIndex.cshtml:line 29
+  
+2021-09-10 00:48:20,675 [5] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdateMultiple User: rananga Error Message: A public action method 'StudentClassUpdateMultiple' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-09-10 00:48:42,489 [5] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdateMultiple User: rananga Error Message: A public action method 'StudentClassUpdateMultiple' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-09-10 00:50:35,472 [5] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdateMultiple User: rananga Error Message: A public action method 'StudentClassUpdateMultiple' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-09-10 00:51:45,732 [5] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdateMultiple User: rananga Error Message: A public action method 'StudentClassUpdateMultiple' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-09-10 00:51:55,765 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit/StudentClassUpdateMultiple User: rananga Error Message: A public action method 'StudentClassUpdateMultiple' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.StudentAdmitController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  
+2021-09-10 01:24:09,424 [7] ERROR ASP.global_asax - Error in https://localhost:44380/Student/BasketSubject/Index User: rananga Error Message: A public action method 'OffTimeIndex' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.BasketSubjectController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+  

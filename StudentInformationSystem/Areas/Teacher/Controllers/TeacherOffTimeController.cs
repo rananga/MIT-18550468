@@ -19,6 +19,7 @@ namespace StudentInformationSystem.Areas.Teacher.Controllers
             return View(new TeacherVM());
         }
 
+        [AllowAnonymous]
         public ActionResult OffTimeIndex(int? id)
         {
             ViewBag.IsToEdit = id > 0;
@@ -35,6 +36,7 @@ namespace StudentInformationSystem.Areas.Teacher.Controllers
             return PartialView("_OffTimeIndex", obj.OffTimes);
         }
 
+        [AllowAnonymous]
         public ActionResult OffTimeCreate(int? teacherId)
         {
             if ((teacherId ?? 0) == 0)
@@ -51,6 +53,7 @@ namespace StudentInformationSystem.Areas.Teacher.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult OffTimeCreate(TeacherOffTimeVM vm)
         {
             try

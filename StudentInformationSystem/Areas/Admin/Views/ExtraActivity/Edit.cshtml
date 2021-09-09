@@ -38,6 +38,10 @@
 </div>
 
 <div class="ChildContent">
+    @{ Html.RenderAction("InChargeIndex", new { id = Model.Id, isToEdit = true }); }
+</div>
+
+<div class="ChildContent">
     @{ Html.RenderAction("AcheivementIndex", new { id = Model.Id, isToEdit = true }); }
 </div>
 

@@ -8,6 +8,10 @@
     }
 </style>
 
+@{
+    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
+}
+
 <table class="mGrid">
     <thead>
         <tr>
@@ -45,9 +49,5 @@
         }
     </tbody>
 </table>
-
-@{
-    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
-}
 
 

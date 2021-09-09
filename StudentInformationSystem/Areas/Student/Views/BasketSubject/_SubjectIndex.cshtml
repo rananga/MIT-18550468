@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<StudentInformationSystem.Areas.Student.Models.StudentBasketSubjectVM>
 
 <hr />
-<h3>Class Subjects</h3>
+<h3>Basket Subjects</h3>
 
 <table class="mGrid">
     <thead>
@@ -13,7 +13,7 @@
                 if (ViewBag.IsToEdit)
                 {
                     <th class="btn-1">
-                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus' style='color:white'></span>", "Add", "SubjectCreate", routeValues: new { id = ViewBag.StudentId }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-primary pull-right btn-xs", data_title = "Add Basket Subject" })
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus' style='color:white'></span>", "Add", "SubjectCreate", routeValues: new { studentId = ViewBag.StudentId }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-primary pull-right btn-xs", data_title = "Add Basket Subject" })
                     </th>
                 }
             }

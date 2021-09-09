@@ -38,7 +38,7 @@
                 <div class="btn-toolbar float-right">
                     <a id="btnPrint" class="btn btn-success" style="margin-right:5px; min-width:80px" asp-controller="Home" asp-action="PrintTimeTable">Print</a>
                     <a id="btnSearch" class="btn btn-warning" style="margin-right:5px; min-width:80px">Search</a>
-                    @Html.NoEncodeActionLink("Create", "Add", "TimeTableCreate", routeValues: new { userID = ViewBag.UserID }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-primary", data_title = "Create Online Class", data_no_auto_close = "1", style = "margin-right:5px; min-width:80px", data_popup_width = "1000", data_refresh_function = "ReloadTimeTable" })
+                    @Html.NoEncodeActionLink("Create", "Add", "TimeTableCreate", routeValues: new { userID = ViewBag.UserID }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-primary", data_title = "Create Online Session", data_no_auto_close = "1", style = "margin-right:5px; min-width:80px", data_popup_width = "1000", data_refresh_function = "ReloadTimeTable" })
                 </div>
             </div>
         </div>

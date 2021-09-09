@@ -339,6 +339,7 @@
     <Compile Include="Areas\Admin\Controllers\VisitorController.cs" />
     <Compile Include="Areas\Admin\Controllers\StaffMemberController.cs" />
     <Compile Include="Areas\Academic\Models\GradeClassVM.cs" />
+    <Compile Include="Areas\Admin\Models\ExtraActivityInchargeVM.cs" />
     <Compile Include="Areas\Admin\Models\GradeHeadVM.cs" />
     <Compile Include="Areas\Admin\Models\SectionHeadVM.cs" />
     <Compile Include="Areas\Admin\Models\VisitorVM.cs" />
@@ -358,6 +359,7 @@
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
     <Compile Include="Areas\Student\Controllers\BasketSubjectController.cs" />
     <Compile Include="Areas\Student\Controllers\ClassPromotionController.cs" />
+    <Compile Include="Areas\Student\Controllers\StudentExtraActivitiesController.cs" />
     <Compile Include="Areas\Student\Controllers\TransferStudentController.cs" />
     <Compile Include="Areas\Student\Controllers\StudentAdmitController.cs" />
     <Compile Include="Areas\Student\Controllers\StudentMarkController.cs" />
@@ -648,11 +650,9 @@
     <Content Include="Areas\Report\Views\OnlineSessionsSummary\Process.cshtml" />
     <Content Include="Areas\Academic\Views\ClassRoom\_MonitorCreate.cshtml" />
     <Content Include="Areas\Academic\Views\ClassRoom\_MonitorIndex.cshtml" />
-    <Content Include="Areas\Student\Views\BasketSubject\Details.cshtml" />
     <Content Include="Areas\Student\Views\BasketSubject\Index.cshtml" />
     <Content Include="Areas\Student\Views\BasketSubject\_SubjectCreate.cshtml" />
     <Content Include="Areas\Student\Views\BasketSubject\_SubjectIndex.cshtml" />
-    <Content Include="Areas\Student\Views\BasketSubject\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\UserPermission\_GradeIndex.cshtml" />
     <Content Include="Areas\Report\Views\StudentAttendance\Process.cshtml" />
     <Content Include="Areas\Online\Views\OnlineClassRoom\_PhysicalClassCreate.cshtml" />
@@ -696,6 +696,16 @@
     <Content Include="Areas\Teacher\Views\TeacherQualification\_SubjectCreate.cshtml" />
     <Content Include="Areas\Teacher\Views\TeacherQualification\_SubjectIndex.cshtml" />
     <Content Include="Areas\Student\Views\ClassPromotion\_StudentClassIndex.cshtml" />
+    <Content Include="Areas\Admin\Views\ExtraActivity\_InChargeIndex.cshtml" />
+    <Content Include="Areas\Admin\Views\ExtraActivity\_InChargeCreate.cshtml" />
+    <Content Include="Areas\Admin\Views\ExtraActivity\_InChargeEdit.cshtml" />
+    <Content Include="Areas\Student\Views\StudentExtraActivities\_AcheivementCreate.cshtml" />
+    <Content Include="Areas\Student\Views\StudentExtraActivities\_AcheivementEdit.cshtml" />
+    <Content Include="Areas\Student\Views\StudentExtraActivities\_AcheivementIndex.cshtml" />
+    <Content Include="Areas\Student\Views\StudentExtraActivities\Index.cshtml" />
+    <Content Include="Areas\Student\Views\StudentExtraActivities\_PositionIndex.cshtml" />
+    <Content Include="Areas\Student\Views\StudentExtraActivities\_PositionCreate.cshtml" />
+    <Content Include="Areas\Student\Views\StudentExtraActivities\_PositionEdit.cshtml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - Web Deploy.pubxml" />
@@ -724,6 +734,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Student\ClassAdmit.js" />
+    <Content Include="Scripts\Student\ExtraActivity.js" />
+    <Content Include="Scripts\Student\BasketSubject.js" />
     <Content Include="Scripts\Student\StudentMarks.js" />
     <Content Include="Scripts\Teacher\Qualification.js" />
     <Content Include="Scripts\Teacher\PrefSubject.js" />
@@ -2092,10 +2104,8 @@
     <Content Include="Areas\Academic\Views\ClassRoom\_TeacherCreate.cshtml" />
     <Content Include="Areas\Academic\Views\ClassRoom\_TeacherIndex.cshtml" />
     <Content Include="Areas\Admin\Views\ExtraActivity\_PositionCreate.cshtml" />
-    <Content Include="Areas\Admin\Views\ExtraActivity\_PositionDetails.cshtml" />
     <Content Include="Areas\Admin\Views\ExtraActivity\_PositionIndex.cshtml" />
     <Content Include="Areas\Admin\Views\ExtraActivity\_AcheivementCreate.cshtml" />
-    <Content Include="Areas\Admin\Views\ExtraActivity\_AcheivementDetails.cshtml" />
     <Content Include="Areas\Admin\Views\ExtraActivity\_AcheivementIndex.cshtml" />
     <Content Include="Areas\Admin\Views\ExtraActivity\Create.cshtml" />
     <Content Include="Areas\Admin\Views\ExtraActivity\Details.cshtml" />

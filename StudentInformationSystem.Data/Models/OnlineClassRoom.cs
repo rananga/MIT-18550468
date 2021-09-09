@@ -15,7 +15,9 @@ namespace StudentInformationSystem.Data.Models
 
         [Required]
         public int Year { get; set; }
+        [DisplayName("Grade")]
         public int GradeId { get; set; }
+        [DisplayName("Subject")]
         public int SubjectId { get; set; }
         [Required]
         public Medium Medium { get; set; }

@@ -101,5 +101,53 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
+
+        [HttpPost]
+        public ActionResult StudentClassUpdateMultiple(string info)
+        {
+            var trans = db.Database.BeginTransaction();
+            try
+            {
+                var data = info.DeserializeToDynamic();
+                foreach (dynamic item in data)
+                {
+                    var cr = db.ClassRooms.Find(int.Parse(item.CR_Id.ToString()));
+                    var stud = db.Students.Find(int.Parse(item.studentId.ToString()));
+
+                    if (cr == null || stud == null)
+                        throw new Exception("Something went wrong. Please try again");
+                    else
+                    {
+                        stud.LastClassId = cr.Id;
+                        stud.ModifiedBy = this.GetCurrUser();
+                        stud.ModifiedDate = DateTime.Now;
+
+                        cr.ClassStudents.Add(new CR_Student()
+                        {
+                            CR_Id = cr.Id,
+                            StudentId = stud.Id,
+                            CreatedBy = this.GetCurrUser(),
+                            CreatedDate = DateTime.Now
+                        });
+
+                        db.SaveChanges();
+                    }
+                }
+                trans.Commit();
+                AddAlert(AlertStyles.success, "Students successfully addmitted.");
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                trans.Rollback();
+                this.ShowEntityErrors(dbEx); 
+            }
+            catch (Exception ex)
+            {
+                trans.Rollback(); 
+                AddAlert(AlertStyles.danger, ex.GetInnerException().Message);
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
     }
 }

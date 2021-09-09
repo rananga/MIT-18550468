@@ -17,9 +17,11 @@ namespace StudentInformationSystem.Areas.Admin.Models
             mappings = new ObjMappings<ExtraActivity, ExtraActivityVM>();
             vmAcheivements = new HashSet<ExtraActivityAcheivementVM>();
             vmPositions = new HashSet<ExtraActivityPositionVM>();
+            vmInCharges = new HashSet<ExtraActivityInchargeVM>();
 
             mappings.Add(x => x.Acheivements.Select(y => new ExtraActivityAcheivementVM(y)).ToList(), x => x.vmAcheivements);
             mappings.Add(x => x.Positions.Select(y => new ExtraActivityPositionVM(y)).ToList(), x => x.vmPositions);
+            mappings.Add(x => x.Incharges.Select(y => new ExtraActivityInchargeVM(y)).ToList(), x => x.vmInCharges);
         }
         public ExtraActivityVM(ExtraActivity obj) : this()
         {
@@ -29,5 +31,6 @@ namespace StudentInformationSystem.Areas.Admin.Models
 
         public virtual ICollection<ExtraActivityAcheivementVM> vmAcheivements { get; set; }
         public virtual ICollection<ExtraActivityPositionVM> vmPositions { get; set; }
+        public virtual ICollection<ExtraActivityInchargeVM> vmInCharges { get; set; }
     }
 }

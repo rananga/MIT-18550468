@@ -1,7 +1,7 @@
 ﻿@model StudentInformationSystem.Areas.Student.Models.StudentVM
 
 @{
-    ViewBag.Title = "Student Basket Subjects";
+    ViewBag.Title = "Student Extra Activities";
 }
 
 
@@ -23,10 +23,14 @@
     </div>
 }
 
-<div class="ChildContent">
-    @{ Html.RenderAction("SubjectIndex", new { id = Model.Id, isToEdit = false }); }
+<div class="ChildContent AcheivementContent">
+    @{ Html.RenderAction("AcheivementIndex", new { id = Model.Id, isToEdit = false }); }
+</div>
+
+<div class="ChildContent PositionContent">
+    @{ Html.RenderAction("PositionIndex", new { id = Model.Id, isToEdit = false }); }
 </div>
 
 @section Scripts {
-    <script src="~/Scripts/Student/BasketSubject.js"></script>
+    <script src="~/Scripts/Student/ExtraActivity.js"></script>
 }

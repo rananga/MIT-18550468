@@ -14,8 +14,8 @@ namespace StudentInformationSystem.Data
 
         public dbNalandaContext()
         {
-            ConnectionString = "Server=(localdb)\\mssqllocaldb;Database=dbNalanda;Trusted_Connection=True;MultipleActiveResultSets=true";
-            //ConnectionString = "Data Source=dbnibm.southeastasia.cloudapp.azure.com;User Id=sa;Password=sdf^749(03vGhs@;Initial Catalog=dbSIS;MultipleActiveResultSets=True;";
+            //ConnectionString = "Server=(localdb)\\mssqllocaldb;Database=dbNalanda;Trusted_Connection=True;MultipleActiveResultSets=true";
+            ConnectionString = "Data Source=dbnibm.southeastasia.cloudapp.azure.com;User Id=sa;Password=sdf^749(03vGhs@;Initial Catalog=dbSIS;MultipleActiveResultSets=True;";
         }
 
         public dbNalandaContext(DbContextOptions<dbNalandaContext> options)

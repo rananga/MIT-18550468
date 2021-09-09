@@ -156,9 +156,12 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                 var obj = db.ClassPromotions.Find(grade.Id);
                 if (obj == null)
                 { throw new DbUpdateConcurrencyException(""); }
-                db.Detach(obj);
 
-                db.Entry(grade.GetEntity()).State = EntityState.Deleted;
+                var entry = db.Entry(obj);
+                entry.State = EntityState.Unchanged;
+                entry.Collection(x => x.ClassPromotionDetails).Load();
+                db.ClassPromotionDetails.RemoveRange(entry.Entity.ClassPromotionDetails);
+                entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
                 AddAlert(AlertStyles.success, "Class promotion deleted successfully.");
@@ -172,7 +175,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             }
             catch (Exception ex)
             {
-                AddAlert(AlertStyles.danger, ex.GetInnerException().Message);
+                AddAlert(AlertStyles.danger, ex.GetInnerException().Message, renderOnTop: true);
             }
             return RedirectToAction("Details", new { id = grade.Id });
         }

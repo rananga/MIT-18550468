@@ -14,7 +14,7 @@
         <p>
             <div class="btn-toolbar">
                 @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary", style = "min-width:75px" })
-                @Html.ConfirmSubmitButton("Delete", "Are you sure you want to delete?", "Confirm class deletion",
+                @Html.ConfirmSubmitButton("Delete", "Are you sure you want to delete?", "Confirm extra activity deletion",
                  "<span class='glyphicon glyphicon-trash'></span> Delete", new { @class = "btn btn-danger", style = "min-width:75px" })
             </div>
         </p>
@@ -38,7 +38,11 @@
             </div>
 
             <div class="ChildContent">
-                @{ Html.RenderAction("AcheivementIndex", new { id = Model.Id}); }
+                @{ Html.RenderAction("InChargeIndex", new { id = Model.Id }); }
+            </div>
+
+            <div class="ChildContent">
+                @{ Html.RenderAction("AcheivementIndex", new { id = Model.Id }); }
             </div>
         </div>
     }

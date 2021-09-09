@@ -738,5 +738,89 @@ namespace StudentInformationSystem.Areas.Base
         //            });
         //    }
         //}
+
+        public ActionResult GetActivityAcheivements(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false)
+        {
+            using (dbNalandaContext dbctx = new dbNalandaContext())
+            {
+                var qry = dbctx.ExtraActivityAcheivements.AsQueryable();
+
+                if (!filter.IsBlank())
+                {
+                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Name + x.Description).ToLower().Contains(filter.ToLower()));
+                }
+
+                int rowCount = qry.Count();
+                if (pageSize <= 0)
+                {
+                    pageSize = 10;
+                    startIndex = 0;
+                }
+
+                if (startIndex > rowCount)
+                { startIndex = 0; }
+
+                if (sortBy.IsBlank())
+                { sortBy = "Acheivement_Name"; }
+
+                var lstSortColMap = new Dictionary<string, string>()
+                {
+                    { "Id", "Id" } ,
+                    { "Activity", "Activity.Name" },
+                    { "Acheivement_Name", "Name" },
+                    { "Acheivement_Description", "Description" }
+                };
+
+                return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
+                    x => new
+                    {
+                        x.Id,
+                        Activity = x.Activity.Name,
+                        Acheivement_Name = x.Name,
+                        Acheivement_Description = x.Description
+                    });
+            }
+        }
+
+        public ActionResult GetActivityPositions(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false)
+        {
+            using (dbNalandaContext dbctx = new dbNalandaContext())
+            {
+                var qry = dbctx.ExtraActivityPositions.AsQueryable();
+
+                if (!filter.IsBlank())
+                {
+                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : x.Name.ToLower().Contains(filter.ToLower()));
+                }
+
+                int rowCount = qry.Count();
+                if (pageSize <= 0)
+                {
+                    pageSize = 10;
+                    startIndex = 0;
+                }
+
+                if (startIndex > rowCount)
+                { startIndex = 0; }
+
+                if (sortBy.IsBlank())
+                { sortBy = "Position"; }
+
+                var lstSortColMap = new Dictionary<string, string>()
+                {
+                    { "Id", "Id" } ,
+                    { "Activity", "Activity.Name" },
+                    { "Position", "Name" }
+                };
+
+                return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
+                    x => new
+                    {
+                        x.Id,
+                        Activity = x.Activity.Name,
+                        Position = x.Name
+                    });
+            }
+        }
     }
 }

@@ -27,6 +27,7 @@ namespace StudentInformationSystem.Areas.Online.Models
         public ObjMappings<OnlineClass, OnlineClassVM> mappings { get; set; }
 
         public int Year { get; set; }
+        [DisplayName("Grade")]
         public int GradeId { get; set; }
 
         public virtual OnlineClassRoomVM ocrVM { get; set; }

@@ -358,7 +358,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = student.GetEntity();
-                    modObj.CopyContent(obj, "Id,AdmissionDate,DOB,FullName,Initials,LastName,SchoolEmail,Address1,Address2,City,EmergContactName,EmergContactNo,Medium");
+                    modObj.CopyContent(obj, "Id,AdmissionDate,DOB,FullName,Initials,LastName,SchoolEmail,Address1,Address2,City,EmergContactName,EmergContactNo,Medium,AdmittedGradeId");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;

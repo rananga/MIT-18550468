@@ -72,18 +72,44 @@ namespace StudentInformationSystem.Areas.Admin
             return PartialView("_PositionIndex", obj.vmPositions);
         }
 
+        [AllowAnonymous]
+        public ActionResult InChargeIndex(int? id, bool isToEdit = false)
+        {
+            ExtraActivityVM obj;
+
+            if (isToEdit && Session[sskCrtdObj] is ExtraActivityVM)
+            { obj = (ExtraActivityVM)Session[sskCrtdObj]; }
+            else
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ExtraActivity cls = db.ExtraActivities.Where(x => x.Id == id).FirstOrDefault();
+                if (cls == null)
+                {
+                    return HttpNotFound();
+                }
+                obj = new ExtraActivityVM(cls);
+            }
+
+            ViewBag.IsToEdit = isToEdit;
+            ViewBag.ActivityId = obj.Id;
+            return PartialView("_InChargeIndex", obj.vmInCharges);
+        }
+
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ExtraActivity classes = db.ExtraActivities.Find(id);
-            if (classes == null)
+            var ent = db.ExtraActivities.Find(id);
+            if (ent == null)
             {
                 return HttpNotFound();
             }
-            return View(new ExtraActivityVM(classes));
+            return View(new ExtraActivityVM(ent));
         }
 
         [AllowAnonymous]
@@ -117,10 +143,10 @@ namespace StudentInformationSystem.Areas.Admin
             try
             {
                 var svm = (ExtraActivityVM)Session[sskCrtdObj];
-                var existingClass = db.ExtraActivities.Where(e => e.Name == activity.Name).FirstOrDefault();
+                var existingEnt = db.ExtraActivities.Where(e => e.Name == activity.Name).FirstOrDefault();
 
-                if (existingClass != null)
-                { ModelState.AddModelError("", "Grade & Class Already Exist"); }
+                if (existingEnt != null)
+                { ModelState.AddModelError("", "Extra activity already exists."); }
 
                 if (ModelState.IsValid)
                 {
@@ -145,7 +171,7 @@ namespace StudentInformationSystem.Areas.Admin
                     }
                     db.SaveChanges();
 
-                    AddAlert(AlertStyles.success, "Class Information Created Successfully.");
+                    AddAlert(AlertStyles.success, "Extra Activity Created Successfully.");
                     return RedirectToAction("Index");
                 }
             }
@@ -259,6 +285,59 @@ namespace StudentInformationSystem.Areas.Admin
             return PartialView("_PositionCreate", vm);
         }
 
+        [AllowAnonymous]
+        public ActionResult InChargeCreate(int? activityId)
+        {
+            if (activityId != 0)
+            {
+                if (activityId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var cls = db.ExtraActivities.Find(activityId);
+
+                if (cls == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+
+            var vm = new ExtraActivityInchargeVM() { ActivityId = activityId.Value, FromDate = DateTime.Now.Date, ToDate = DateTime.Now.Date };
+            return PartialView("_InChargeCreate", vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult InChargeCreate(ExtraActivityInchargeVM vm)
+        {
+            ExtraActivityVM obj;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    obj = (ExtraActivityVM)Session[sskCrtdObj];
+                    vm.Id = Math.Min(obj.vmInCharges.Select(x => x.Id).MinOrDefault(), 0) - 1;
+                    var sm = db.StaffMembers.Find(vm.StaffId);
+                    vm.MasterName = $"{sm.Title.ToEnumChar()} {sm.Initials} {sm.LastName}";
+                    obj.vmInCharges.Add(vm);
+
+                    AddAlert(AlertStyles.success, "Master In Charge Added Successfully.");
+                    string url = Url.Action("InChargeIndex", new { id = vm.Id, isToEdit = true });
+                    return Json(new { success = true, url });
+                }
+
+            }
+            catch (DbEntityValidationException dbEx)
+            { this.ShowEntityErrors(dbEx); }
+            catch (Exception ex)
+            { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
+
+            obj = (ExtraActivityVM)Session[sskCrtdObj];
+
+            return PartialView("_InChargeCreate", vm);
+        }
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -284,9 +363,9 @@ namespace StudentInformationSystem.Areas.Admin
             try
             {
                 var svm = (ExtraActivityVM)Session[sskCrtdObj];
-                var existingClass = db.ExtraActivities.Where(e => e.Id != activity.Id && e.Name == activity.Name).FirstOrDefault();
+                var existingEnt = db.ExtraActivities.Where(e => e.Id != activity.Id && e.Name == activity.Name).FirstOrDefault();
 
-                if (existingClass != null)
+                if (existingEnt != null)
                 { ModelState.AddModelError("", "Activity Name Already Exist"); }
 
                 if (ModelState.IsValid)
@@ -319,7 +398,7 @@ namespace StudentInformationSystem.Areas.Admin
                         else
                         {
                             var modObjDet = det.GetEntity();
-                            modObjDet.CopyContent(objDet, "TeacherSubjectId");
+                            modObjDet.CopyContent(objDet, "Name,Description");
 
                             objDet.ModifiedBy = this.GetCurrUser();
                             objDet.ModifiedDate = DateTime.Now;
@@ -341,7 +420,29 @@ namespace StudentInformationSystem.Areas.Admin
                         else
                         {
                             var modObjDet = det.GetEntity();
-                            modObjDet.CopyContent(objDet, "StudentId");
+                            modObjDet.CopyContent(objDet, "Name,HierarchyOrder");
+
+                            objDet.ModifiedBy = this.GetCurrUser();
+                            objDet.ModifiedDate = DateTime.Now;
+                        }
+                    }
+
+                    db.ExtraActivityIncharges.RemoveRange(obj.Incharges.Where(x =>
+                        !svm.vmInCharges.Select(y => y.Id).ToList().Contains(x.Id)));
+
+                    foreach (var det in svm.vmInCharges)
+                    {
+                        var objDet = db.ExtraActivityIncharges.Find(det.Id);
+                        if (objDet == null)
+                        {
+                            det.CreatedBy = this.GetCurrUser();
+                            det.CreatedDate = DateTime.Now;
+                            obj.Incharges.Add(det.GetEntity());
+                        }
+                        else
+                        {
+                            var modObjDet = det.GetEntity();
+                            modObjDet.CopyContent(objDet, "StaffId,FromDate,ToDate");
 
                             objDet.ModifiedBy = this.GetCurrUser();
                             objDet.ModifiedDate = DateTime.Now;
@@ -350,7 +451,7 @@ namespace StudentInformationSystem.Areas.Admin
 
                     db.SaveChanges();
 
-                    AddAlert(AlertStyles.success, "Class Modified Successfully.");
+                    AddAlert(AlertStyles.success, "Extra Activity Modified Successfully.");
                     return RedirectToAction("Index");
                 }
             }
@@ -365,6 +466,43 @@ namespace StudentInformationSystem.Areas.Admin
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
             return View(activity);
+        }
+
+        public ActionResult InChargeEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var vm = ((ExtraActivityVM)Session[sskCrtdObj]).vmInCharges.FirstOrDefault(x => x.Id == id);
+            if (vm == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView("_InChargeEdit", vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult InChargeEdit(ExtraActivityInchargeVM vm)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var obj = ((ExtraActivityVM)Session[sskCrtdObj]).vmInCharges.FirstOrDefault(x => x.Id == vm.Id);
+                    vm.CopyContent(obj, "StaffId,FromDate,ToDate");
+                    AddAlert(AlertStyles.success, "Master In Charge Modified Successfully.");
+                    string url = Url.Action("InChargeIndex", new { id = vm.Id, isToEdit = true });
+                    return Json(new { success = true, url });
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            { this.ShowEntityErrors(dbEx); }
+            catch (Exception ex)
+            { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
+
+            return PartialView("_InChargeEdit", vm);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -387,7 +525,7 @@ namespace StudentInformationSystem.Areas.Admin
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
-                AddAlert(AlertStyles.success, "Class Deleted Successfully.");
+                AddAlert(AlertStyles.success, "Extra Activity Deleted Successfully.");
                 return RedirectToAction("Index");
             }
             catch (DbUpdateConcurrencyException ex)
@@ -448,6 +586,30 @@ namespace StudentInformationSystem.Areas.Admin
             string url = "";
             if (msg.IsBlank())
             { url = Url.Action("PositionIndex", new { isToEdit = true }); }
+            return Json(new { success = true, url, msg });
+        }
+
+        [HttpPost, ActionName("InChargeDelete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult InChargeDeleteConfirmed(int id)
+        {
+            string msg = string.Empty;
+            try
+            {
+                var lst = ((ExtraActivityVM)Session[sskCrtdObj]).vmInCharges;
+                var obj = lst.FirstOrDefault(x => x.Id == id);
+                lst.Remove(obj);
+
+                AddAlert(AlertStyles.success, "Master In Charge Removed Successfully.");
+            }
+            catch (Exception ex)
+            {
+                msg = ex.GetInnerException().Message;
+                AddAlert(AlertStyles.danger, msg);
+            }
+            string url = "";
+            if (msg.IsBlank())
+            { url = Url.Action("InChargeIndex", new { isToEdit = true }); }
             return Json(new { success = true, url, msg });
         }
     }

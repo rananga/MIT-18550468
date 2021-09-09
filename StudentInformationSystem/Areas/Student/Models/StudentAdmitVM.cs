@@ -14,6 +14,7 @@ namespace StudentInformationSystem.Areas.Student.Models
     public class StudentAdmitVM
     {
         public int Year { get; set; }
+        [DisplayName("Grade")]
         public int GradeId { get; set; }
     }
 }

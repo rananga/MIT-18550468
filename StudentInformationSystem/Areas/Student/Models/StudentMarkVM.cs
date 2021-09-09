@@ -14,6 +14,7 @@ namespace StudentInformationSystem.Areas.Student.Models
     public class StudentMarkVM
     {
         public int Year { get; set; }
+        [DisplayName("Classroom")]
         public int CR_Id { get; set; }
         [DisplayName("Subject")]
         public int SubjectId { get; set; }

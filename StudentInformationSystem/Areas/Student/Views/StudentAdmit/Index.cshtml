@@ -25,7 +25,7 @@
             <div class="col-md-offset-8" style="padding-left:15px">
                 <div class="btn-toolbar float-right">
                     <a id="btnSearch" class="btn btn-success" style="margin-right:5px; min-width:80px">Search</a>
-                    <a id="btnAdmitAll" class="btn btn-primary" style="margin-right:5px; min-width:80px;display:none">Admit All</a>
+                    @Html.NoEncodeActionLink("Admit All", "Admit All", "StudentClassUpdateMultiple", htmlAttributes: new { id = "btnAdmitAll", @class = "btn btn-primary", style = "margin-right:5px;min-width:80px;display:none" })
                 </div>
             </div>
         </div>
