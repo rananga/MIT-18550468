@@ -1517,3 +1517,11 @@
   
 2021-09-10 01:24:09,424 [7] ERROR ASP.global_asax - Error in https://localhost:44380/Student/BasketSubject/Index User: rananga Error Message: A public action method 'OffTimeIndex' was not found on controller 'StudentInformationSystem.Areas.Student.Controllers.BasketSubjectController'. Line:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
   
+2021-09-16 01:35:11,189 [8] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentCharacter/Process User: rananga Error Message: The controller for path '/Report/StudentCharacter/Process' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-09-17 19:07:57,960 [7] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentAttendance/Process User: rananga Error Message: Object reference not set to an instance of an object. Line:    at ASP._Page_Areas_Report_Views_StudentAttendance_Process_cshtml.Execute() in D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Report\Views\StudentAttendance\Process.cshtml:line 44
+  
+2021-09-17 19:11:15,732 [9] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentAttendance/Process User: rananga Error Message: Object reference not set to an instance of an object. Line:    at ASP._Page_Areas_Report_Views_StudentAttendance_Process_cshtml.Execute() in D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Report\Views\StudentAttendance\Process.cshtml:line 44
+  
+2021-09-17 19:11:53,401 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentAttendance/Process User: rananga Error Message: Object reference not set to an instance of an object. Line:    at ASP._Page_Areas_Report_Views_StudentAttendance_Process_cshtml.Execute() in D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Report\Views\StudentAttendance\Process.cshtml:line 44
+  

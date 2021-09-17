@@ -55,6 +55,11 @@ namespace StudentInformationSystem.Areas.Teacher.Controllers
         {
             try
             {
+                var exObj = db.TeacherPreferedSubjects.Where(e => e.TeacherId == vm.TeacherId && e.SubjectId == vm.SubjectId).FirstOrDefault();
+
+                if (exObj != null)
+                { ModelState.AddModelError("SubjectId", "Subject Already Exists."); }
+
                 if (ModelState.IsValid)
                 {
                     var obj = db.Teachers.Find(vm.TeacherId);

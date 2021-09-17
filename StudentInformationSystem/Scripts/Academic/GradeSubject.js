@@ -1,21 +1,18 @@
 ﻿$.ajaxSetup({ cache: false });
 
 $(function () {
-    var objGradeId = $('#GradeId');
-    var objSubject = $('#SubjectId');
+    var $teacher = $('#Id');
 
-    objGradeId.change(function () {
-        if (objGradeId.val()) {
-            objSubject.prop("disabled", false);
-            var dat = $("#GradeId option:selected").data("info");
+    $teacher.change(function () {
+        var $this = $(this);
+        if (!$this.val())
+            return;
 
-            var obj = objSubject.data("para-json");
-            obj.sectionId = dat.SectionId;
-            objSubject.data("para-json", obj);
-        }
-        else {
-            objSubject.prop("disabled", true);
-        }
+        $('div.ChildContent').load(AppRoot + "Academic/GradeSubject/SubjectIndex?id=" + $this.val(), function (response, status, xhr) {
+            if (status == "error") {
+                AlertIt("ERROR: " + xhr.status + "-" + xhr.statusText);
+            }
+            else { PopupDocReadyFunc(); }
+        });
     });
-    objGradeId.trigger('change');
 });

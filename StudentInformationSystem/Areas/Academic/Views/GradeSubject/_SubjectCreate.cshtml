@@ -1,4 +1,4 @@
-﻿@model StudentInformationSystem.Areas.Student.Models.StudentBasketSubjectVM
+﻿@model StudentInformationSystem.Areas.Academic.Models.GradeSubjectVM
 
 @{ Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml"); }
 
@@ -10,7 +10,7 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.StudentId)
+        @Html.HiddenFor(model => model.GradeId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.SubjectId, htmlAttributes: new { @class = "control-label col-md-4" })

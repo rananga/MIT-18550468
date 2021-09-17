@@ -523,6 +523,9 @@ function DocReadyFunc() {
                     }
                     if (submitAction) {
                         var act = frm.attr('action');
+                        if (!frm.data('org-action-url'))
+                            frm.data('org-action-url', act);
+                        frm.data('new-action', submitAction);
                         act = act.substring(0, act.lastIndexOf("/") + 1) + submitAction + (act.indexOf("?") == -1 ? "" : act.substring(act.indexOf("?")));
                         frm.attr('action', act);
                     }
@@ -939,25 +942,35 @@ $(document).ready(function () {
 
     $("form#frmReport").submit(function (e) {
         var frm = $(this);
+        if (frm.data('ignore'))
+            return;
+        e.preventDefault();
 
         $.ajax({
             type: "POST",
-            url: frm[0].action,
+            url: frm.data('org-action-url'),
             data: frm.serialize(),
             success: function (data, textStatus, jqXHR) {
                 var ct = jqXHR.getResponseHeader("content-type") || "";
-                if (ct.indexOf('ms-excel') > -1) {
-                    objProg.hide();
-                    var win = window.open(frm[0].action + '?' + frm.serialize(), '_blank');
-                    if (win) {
-                        win.focus();
+                if (ct.indexOf('json') > -1) {
+                    if (frm.data('new-action') == 'Excel') {
+                        objProg.hide();
+                        const win = window.open(frm[0].action + '?' + frm.serialize(), '_blank');
+                        if (win) win.focus();
                     }
-                }
-                else if (ct.indexOf('json') > -1) {
-                    objProg.hide();
-                    var win = window.open(frm[0].action + '?' + $.param(data), '_blank');
-                    if (win) {
-                        win.focus();
+                    else {
+                        $(":input", frm).removeClass('field-validation-error').next('span[data-valmsg-for]').removeClass("field-validation-error").addClass("field-validation-valid").html("");
+                        var targ = new Date().getTime().toString();
+                        objProg.hide();
+
+                        const win = window.open('', targ);
+                        frm.attr('target', targ);
+                        frm.data('ignore', true);
+                        frm.submit();
+                        frm.removeAttr('target');
+                        frm.removeData('ignore');
+
+                        if (win) win.focus();
                     }
                 }
                 else {
@@ -970,8 +983,6 @@ $(document).ready(function () {
                 AlertIt(textStatus);
             }
         });
-
-        e.preventDefault();
     });
 });
 

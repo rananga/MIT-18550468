@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.Areas.Academic.Models;
+using StudentInformationSystem.Areas.Admin.Models;
 using StudentInformationSystem.Areas.Base;
 using StudentInformationSystem.Common;
 using StudentInformationSystem.Data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,88 +15,104 @@ namespace StudentInformationSystem.Areas.Academic.Controllers
 {
     public class GradeSubjectController : BaseController
     {
-        public ActionResult Index(BaseViewModel<GradeSubjectVM> vm)
+        public ActionResult Index()
         {
-            vm.SetList(db.GradeSubjects.AsQueryable(), "GradeId");
-            return View(vm);
+            return View(new GradeVM());
         }
-        public ActionResult Create()
-        {
-            var grade = new GradeSubjectVM();
 
-            return View(grade);
+        [AllowAnonymous]
+        public ActionResult SubjectIndex(int? id)
+        {
+            ViewBag.IsToEdit = id > 0;
+
+            if ((id ?? 0) == 0)
+                return PartialView("_SubjectIndex", new List<GradeSubjectVM>());
+
+            var ent = db.Grades.Where(x => x.Id == id).FirstOrDefault();
+            if (ent == null)
+                return HttpNotFound();
+            var obj = new GradeVM(ent);
+
+            ViewBag.GradeId = obj.Id;
+            return PartialView("_SubjectIndex", obj.Subjects);
         }
+
+        [AllowAnonymous]
+        public ActionResult SubjectCreate(int? gradeId)
+        {
+            if ((gradeId ?? 0) == 0)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var ent = db.Students.Find(gradeId);
+
+            if (ent == null)
+                return HttpNotFound();
+
+            var vm = new GradeSubjectVM() { GradeId = ent.Id };
+            return PartialView("_SubjectCreate", vm);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(GradeSubjectVM grade)
+        [AllowAnonymous]
+        public ActionResult SubjectCreate(GradeSubjectVM vm)
         {
             try
             {
-                var exClass = db.GradeSubjects.Where(e => e.GradeId == grade.GradeId && e.SubjectId == grade.SubjectId).FirstOrDefault();
-                if (exClass != null)
-                { ModelState.AddModelError("", "Subject already exists for the grade."); }
-
                 if (ModelState.IsValid)
                 {
-                    grade.CreatedBy = this.GetCurrUser();
-                    grade.CreatedDate = DateTime.Now;
-                    db.GradeSubjects.Add(grade.GetEntity());
+                    var obj = db.Grades.Find(vm.GradeId);
+
+                    vm.CreatedBy = this.GetCurrUser();
+                    vm.CreatedDate = DateTime.Now;
+                    obj.GradeSubjects.Add(vm.GetEntity());
+
                     db.SaveChanges();
 
-                    AddAlert(AlertStyles.success, "Grade subject created successfully.");
-                    return RedirectToAction("Index");
+                    AddAlert(AlertStyles.success, "Grade Subject Added Successfully.");
+                    string url = Url.Action("SubjectIndex", new { id = vm.GradeId });
+                    return Json(new { success = true, url });
                 }
+
             }
             catch (DbEntityValidationException dbEx)
             { this.ShowEntityErrors(dbEx); }
             catch (Exception ex)
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
-            return View(grade);
+            return PartialView("_SubjectCreate", vm);
         }
 
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var obj = db.GradeSubjects.Find(id);
-            if (obj == null)
-            {
-                return HttpNotFound();
-            }
-            return View(new GradeSubjectVM(obj));
-        }
-
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("SubjectDelete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(GradeSubjectVM grade)
+        public ActionResult SubjectDeleteConfirmed(int id)
         {
+            string msg = string.Empty;
+            var studentId = 0;
+
             try
             {
-                var obj = db.GradeSubjects.Find(grade.Id);
+                var obj = db.GradeSubjects.Find(id);
                 if (obj == null)
                 { throw new DbUpdateConcurrencyException(""); }
-                db.Detach(obj);
 
-                db.Entry(grade.GetEntity()).State = EntityState.Deleted;
+                studentId = obj.GradeId;
+                var entry = db.Entry(obj);
+                entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
-                AddAlert(AlertStyles.success, "Grade subject deleted successfully.");
-                return RedirectToAction("Index");
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                this.ShowConcurrencyErrors(ex, true);
-                if (ex.Message == "")
-                { return RedirectToAction("Index"); }
+                AddAlert(AlertStyles.success, "Grade Subject Deleted Successfully.");
             }
             catch (Exception ex)
             {
-                AddAlert(AlertStyles.danger, ex.GetInnerException().Message);
+                msg = ex.GetInnerException().Message;
+                AddAlert(AlertStyles.danger, msg);
             }
-            return RedirectToAction("Details", new { id = grade.Id });
+
+            string url = "";
+            if (msg.IsBlank())
+            { url = Url.Action("SubjectIndex", new { id = studentId }); }
+            return Json(new { success = true, url, msg });
         }
     }
 }

@@ -12,48 +12,50 @@ namespace StudentInformationSystem.Areas.Report.Controllers
 {
     public class StudentAttendanceController : BaseController
     {
-        public ActionResult Process(bool? byDuration)
+        public ActionResult Process()
         {
-            if (byDuration == null)
+            var para = new ReportParameterVM()
             {
-                return View();
-            }
+                Year = DateTime.Now.Year,
+                FromDate = DateTime.Now.Date.AddMonths(-1),
+                ToDate = DateTime.Now.Date
+            };
 
-            return GetPdfStream(byDuration.Value);
+            return View(para);
         }
 
         [HttpPost]
         public ActionResult Process(ReportParameterVM para)
         {
-            return Json(new { byDuration = para.ByDuration });
+            Session.Remove(sskCrtdObj);
+
+            if (para.FromDate == null)
+            { ModelState.AddModelError("FromDate", "From date must be selected"); }
+            if (para.ToDate == null)
+            { ModelState.AddModelError("ToDate", "To date must be selected"); }
+            if (para.FromDate > para.ToDate)
+            { ModelState.AddModelError("ToDate", "To date must be greater than or equal to from date"); }
+
+            if (!ModelState.IsValid)
+                return View(para);
+
+            return Json(new { formValid = true });
         }
 
-        [HttpPost]
+        public ActionResult Pdf(ReportParameterVM para)
+        {
+            return GetPdfStream(para);
+        }
+
         public ActionResult Excel(ReportParameterVM para)
         {
-            return Json(new { viewIt = true });
+            return GetExcelStream(para);
         }
 
-        public ActionResult ByDuration(bool? viewIt)
+        private List<StudentAttendance> GetStudentAttendance(ReportParameterVM para)
         {
-            if (viewIt != true)
-            {
-                return View();
-            }
-
-            return GetPdfStream(true);
-        }
-
-        [HttpPost]
-        public ActionResult ByDuration(ReportParameterVM para)
-        {
-            return Json(new { viewIt = true });
-        }
-
-        private List<StudentAttendance> GetStudentAttendance(bool WithDuration)
-        {
-            var fdate = new DateTime(2021, 6, 1);
-            var tdate = DateTime.Now;
+            var fdate = para.FromDate;
+            var tdate = para.ToDate;
 
             var ocqry = db.OnlineClasses.Where(x => x.Date >= fdate && x.Date <= tdate);
 
@@ -94,7 +96,7 @@ namespace StudentInformationSystem.Areas.Report.Controllers
                            cmid = g.Max(x => x.cm.Id)
                        };
 
-            Func<long, string> getDuration = (duration) => 
+            Func<long, string> getDuration = (duration) =>
             {
                 if (duration == 0)
                     return "X";
@@ -119,7 +121,7 @@ namespace StudentInformationSystem.Areas.Report.Controllers
             var qry = from q1 in qry1
                       from q2 in qry2.Where(x => x.Id == q1.Id && x.StudentId == q1.StudentId).DefaultIfEmpty()
                       from q3 in qry3.Where(x => x.Id == q1.Id)
-                      select new 
+                      select new
                       {
                           q1.Id,
                           q1.Date,
@@ -131,39 +133,47 @@ namespace StudentInformationSystem.Areas.Report.Controllers
                           q1.StudentClass
                       };
 
-            return qry.ToList().Select(x=> new StudentAttendance()
+            return qry.ToList().Select(x => new StudentAttendance()
             {
                 OC_Id = x.Id,
                 MeetingDate = x.Date,
                 AdmissionNo = x.IndexNo,
                 StudentName = x.FullName,
-                Duration = x.cmid == 0 ? "" : WithDuration ? getDuration(x.Duration) : x.Duration == 0 ? "X" : "C",
+                Duration = x.cmid == 0 ? "" : para.ByDuration ? getDuration(x.Duration) : x.Duration == 0 ? "X" : "C",
                 Subject = x.Subject,
                 StudentClass = x.StudentClass
             }).ToList();
         }
 
-        private FileStreamResult GetPdfStream(bool WithDuration)
+        private FileStreamResult GetPdfStream(ReportParameterVM para)
         {
             LocalReport report = new LocalReport();
             report.LoadReportDefinition(Shared.GetReportStream("StudentAttendance"));
 
-            report.SetParameters(new ReportParameter("Year", "2021"));
-            report.SetParameters(new ReportParameter("Grade", "1"));
+            report.SetParameters(new ReportParameter("Year", para.Year.ToString()));
+            report.SetParameters(new ReportParameter("Grade", para.GradeId.ToString()));
             report.SetParameters(new ReportParameter("FromDate", DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd")));
             report.SetParameters(new ReportParameter("ToDate", DateTime.Now.ToString("yyyy-MM-dd")));
             report.SetParameters(new ReportParameter("Class", "Grade 1A"));
             report.SetParameters(new ReportParameter("Teacher", "Subeda Nawarathna"));
+            report.SetParameters(new ReportParameter("WithDuration", para.ByDuration.ToString()));
 
             ReportDataSource rds = new ReportDataSource();
             rds.Name = "StudentAttendance";
-            rds.Value = GetStudentAttendance(WithDuration);
+            rds.Value = GetStudentAttendance(para);
             report.DataSources.Add(rds);
 
             byte[] mybytes = report.Render("PDF");
 
             Response.AppendHeader("content-disposition", "inline; filename=file.pdf");
             return new FileStreamResult(new MemoryStream(mybytes), "application/pdf");
+        }
+
+        private FileStreamResult GetExcelStream(ReportParameterVM para)
+        {
+            var ms = new MemoryStream();
+            Response.AppendHeader("content-disposition", "inline; filename=file.xls");
+            return new FileStreamResult(ms, "application/ms-excel");
         }
     }
 }

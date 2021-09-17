@@ -627,8 +627,6 @@
     <Content Include="Areas\Academic\Views\SubjectCategory\Details.cshtml" />
     <Content Include="Areas\Academic\Views\SubjectCategory\Edit.cshtml" />
     <Content Include="Areas\Academic\Views\SubjectCategory\Index.cshtml" />
-    <Content Include="Areas\Academic\Views\GradeSubject\Create.cshtml" />
-    <Content Include="Areas\Academic\Views\GradeSubject\Details.cshtml" />
     <Content Include="Areas\Academic\Views\GradeSubject\Index.cshtml" />
     <Content Include="Areas\Admin\Views\SectionHead\Create.cshtml" />
     <Content Include="Areas\Admin\Views\SectionHead\Details.cshtml" />
@@ -706,6 +704,8 @@
     <Content Include="Areas\Student\Views\StudentExtraActivities\_PositionIndex.cshtml" />
     <Content Include="Areas\Student\Views\StudentExtraActivities\_PositionCreate.cshtml" />
     <Content Include="Areas\Student\Views\StudentExtraActivities\_PositionEdit.cshtml" />
+    <Content Include="Areas\Academic\Views\GradeSubject\_SubjectCreate.cshtml" />
+    <Content Include="Areas\Academic\Views\GradeSubject\_SubjectIndex.cshtml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - Web Deploy.pubxml" />
@@ -729,6 +729,7 @@
     <Content Include="Scripts\Layout\scripts.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Online\TimeTable.js" />
+    <Content Include="Scripts\Report\ReportForm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
