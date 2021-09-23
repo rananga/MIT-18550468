@@ -12,6 +12,7 @@ using System.Net;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using StudentInformationSystem.Reporting.Models;
 
 namespace StudentInformationSystem.Areas.Student.Controllers
 {
@@ -159,7 +160,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                     var objStudent = db.Students.Add(student.GetEntity()).Entity;
                     db.SaveChanges();
 
-                    objStudent.SchoolEmail = $"{objStudent.IndexNo}@collge.info";
+                    objStudent.SchoolEmail = $"{objStudent.IndexNo}@nalandacollge.info";
 
                     var imgPath = SaveImage(objStudent.Id, student.ImagePath);
                     if (!imgPath.IsBlank())
@@ -714,7 +715,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             { return HttpNotFound(); }
 
             LocalReport report = new LocalReport();
-            report.ReportPath = System.Web.HttpContext.Current.Server.MapPath("~/Reports/ApplicationForm.rdlc");
+            report.LoadReportDefinition(Shared.GetReportStream("ApplicationForm"));
 
             ReportDataSource rds = new ReportDataSource();
             rds.Name = "dsStudent";

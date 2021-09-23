@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentInformationSystem.Data;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,5 +22,9 @@ namespace StudentInformationSystem.Areas.Report.Models
         public DateTime ToDate { get; set; }
         [DisplayName("By Duration")]
         public bool ByDuration { get; set; }
+        [DisplayName("order By")]
+        public MarksReportOrderBy MarksReportOrderBy { get; set; }
+        [DisplayName("Student")]
+        public int StudentId { get; set; }
     }
 }

@@ -207,4 +207,16 @@ namespace StudentInformationSystem.Data
         [Description("Shuffle By All Marks")]
         ShuffleByAllMarks = 5
     }
+
+    public enum MarksReportOrderBy
+    {
+        [Description("Average Marks")]
+        Average = 0,
+        [Description("Term 1 Marks")]
+        Term1 = 1,
+        [Description("Term 2 Marks")]
+        Term2 = 2,
+        [Description("Term 3 Marks")]
+        Term3 = 3,
+    }
 }

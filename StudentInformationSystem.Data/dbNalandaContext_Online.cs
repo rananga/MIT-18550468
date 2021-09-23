@@ -11,6 +11,7 @@ namespace StudentInformationSystem.Data
 {
     public partial class dbNalandaContext : DbContext
     {
+        public virtual DbSet<AuditTemp> AuditTemp { get; set; }
         public virtual DbSet<OC_Meeting> OC_Meetings { get; set; }
         public virtual DbSet<OC_MeetingAttendee> OC_MeetingAttendees { get; set; }
         public virtual DbSet<OCR_ClassRoom> OCR_ClassRooms { get; set; }
@@ -20,6 +21,25 @@ namespace StudentInformationSystem.Data
 
         partial void OnModelCreatingPartial_Online(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AuditTemp>(entity =>
+            {
+                entity.HasKey(e => new { e.MeetingDate, e.CustomerId, e.ParticipantEmail, e.UniqueQualifier });
+
+                entity.Property(e => e.MeetingDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ParticipantEmail).HasMaxLength(30);
+
+                entity.Property(e => e.CalendarEventId).HasMaxLength(50);
+
+                entity.Property(e => e.ConferenceId)
+                    .HasColumnName("ConferenceID")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.MeetingCode).HasMaxLength(30);
+
+                entity.Property(e => e.OrganizerEmail).HasMaxLength(30);
+            });
+
             modelBuilder.Entity<OC_Meeting>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -97,7 +117,7 @@ namespace StudentInformationSystem.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OnlineClassRoom_ClassTeachers");
 
-                entity.HasOne(d => d.ClassTeacher)
+                entity.HasOne(d => d.StaffMember)
                     .WithMany(p => p.OCR_Teachers)
                     .HasForeignKey(d => d.StaffId)
                     .OnDelete(DeleteBehavior.ClientSetNull)

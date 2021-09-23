@@ -432,6 +432,36 @@ function DocReadyFunc() {
     });
     $("input[readonly]").each(function () { $(this).attr('tabindex', '-1'); });
 
+    $('.btnSubmitToAction').each(function () {
+        var $this = $(this);
+        $this.off(".SubmitToAction");
+        $this.on("click.SubmitToAction", function (e) {
+
+            e.preventDefault();
+
+            var submitAction = $this.data('submit-action');
+            var jsFunction = $this.data('js-function');
+
+            if (jsFunction) {
+                window.curSubmitter = $this;
+                var fn = window[jsFunction];
+                if (typeof fn === "function") fn();
+            }
+            else {
+                var frm = $this.closest("form");
+                if (submitAction) {
+                    var act = frm.attr('action');
+                    if (!frm.data('org-action-url'))
+                        frm.data('org-action-url', act);
+                    frm.data('new-action', submitAction);
+                    act = act.substring(0, act.lastIndexOf("/") + 1) + submitAction + (act.indexOf("?") == -1 ? "" : act.substring(act.indexOf("?")));
+                    frm.attr('action', act);
+                }
+                frm.submit();
+            }
+        });
+    });
+
     $('.dlgConfirmSubmit').each(function () {
         var $this = $(this);
         var dlg = GetDialogObj($this);
@@ -953,25 +983,25 @@ $(document).ready(function () {
             success: function (data, textStatus, jqXHR) {
                 var ct = jqXHR.getResponseHeader("content-type") || "";
                 if (ct.indexOf('json') > -1) {
+                    $(":input", frm).removeClass('field-validation-error').next('span[data-valmsg-for]').removeClass("field-validation-error").addClass("field-validation-valid").html("");
+                    objProg.hide();
+                    frm.data('ignore', true);
+
                     if (frm.data('new-action') == 'Excel') {
-                        objProg.hide();
-                        const win = window.open(frm[0].action + '?' + frm.serialize(), '_blank');
-                        if (win) win.focus();
+                        frm.submit();
+                        frm.removeData('ignore');
                     }
                     else {
-                        $(":input", frm).removeClass('field-validation-error').next('span[data-valmsg-for]').removeClass("field-validation-error").addClass("field-validation-valid").html("");
                         var targ = new Date().getTime().toString();
-                        objProg.hide();
-
                         const win = window.open('', targ);
                         frm.attr('target', targ);
-                        frm.data('ignore', true);
                         frm.submit();
                         frm.removeAttr('target');
-                        frm.removeData('ignore');
 
                         if (win) win.focus();
                     }
+                    frm.removeData('ignore');
+                    setTimeout(function () { objProg.hide(); }, 100);
                 }
                 else {
                     var w = document.open("text/html", "replace");

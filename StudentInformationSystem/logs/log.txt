@@ -1525,3 +1525,11 @@
   
 2021-09-17 19:11:53,401 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentAttendance/Process User: rananga Error Message: Object reference not set to an instance of an object. Line:    at ASP._Page_Areas_Report_Views_StudentAttendance_Process_cshtml.Execute() in D:\GitHub\MIT18550468\StudentInformationSystem\Areas\Report\Views\StudentAttendance\Process.cshtml:line 44
   
+2021-09-20 00:20:54,459 [19] ERROR ASP.global_asax - Error in https://localhost:44380/Student/Student/PrintAdmissionSheet/36 User: rananga Error Message: Could not find a part of the path 'D:\GitHub\MIT18550468\StudentInformationSystem\Reports\ApplicationForm.rdlc'. Line:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+  
+2021-09-21 00:27:09,800 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Student/Student/PrintAdmissionSheet/36 User: rananga Error Message: Could not find a part of the path 'D:\GitHub\MIT18550468\StudentInformationSystem\Reports\ApplicationForm.rdlc'. Line:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+  
+2021-09-21 00:45:55,452 [8] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentCharacter/Process User: rananga Error Message: The controller for path '/Report/StudentCharacter/Process' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  
+2021-09-21 23:58:15,758 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentCharacter/Process User: rananga Error Message: The controller for path '/Report/StudentCharacter/Process' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+  

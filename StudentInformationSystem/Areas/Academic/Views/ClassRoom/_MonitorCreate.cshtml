@@ -15,7 +15,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.StudentId, htmlAttributes: new { @class = "control-label col-md-4" })
         <div class="col-md-8">
-            @Html.PopUpSelectorFor(model => model.StudentId, "Base", "Data", "GetStudents", new { @class = "form-control" }, "Please select a teacher subjects", null, dspFormat: "{1}", hiddenIndices: "0")
+            @Html.PopUpSelectorFor(model => model.StudentId, "Base", "Data", "GetStudents", new { @class = "form-control" }, "Please select a student", null, dspFormat: "{1}", hiddenIndices: "0")
             @Html.ValidationMessageFor(model => model.StudentId, "", new { @class = "text-danger" })
         </div>
     </div>

@@ -286,7 +286,7 @@ namespace StudentInformationSystem.Areas.Base
             }
         }
 
-        public ActionResult GetStudents(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, bool isOldStudent = false, bool allStudents = false)
+        public ActionResult GetStudents(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, bool allStudents = false)
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
@@ -418,7 +418,7 @@ namespace StudentInformationSystem.Areas.Base
                         x.Id,
                         x.Year,
                         Class = x.PhysicalClassRooms.Select(y => y.ClassRoom.GradeClass.Code).Aggregate((y, z) => y + ", " + z),
-                        Class_Teacher = x.ClassTeachers.Where(y => y.IsOwner).FirstOrDefault()?.ClassTeacher?.FullName,
+                        Class_Teacher = x.ClassTeachers.Where(y => y.IsOwner).FirstOrDefault()?.StaffMember?.FullName,
                         Class_Teacher_Id = x.ClassTeachers.Where(y => y.IsOwner).FirstOrDefault()?.Id
                     });
             }
@@ -462,8 +462,8 @@ namespace StudentInformationSystem.Areas.Base
                     x => new
                     {
                         x.Id,
-                        Staff_Number = x.ClassTeacher.StaffNumber,
-                        Full_Name = x.ClassTeacher.FullName
+                        Staff_Number = x.StaffMember.StaffNumber,
+                        Full_Name = x.StaffMember.FullName
                     });
             }
         }

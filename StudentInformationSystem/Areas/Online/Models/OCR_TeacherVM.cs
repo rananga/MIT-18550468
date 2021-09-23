@@ -12,7 +12,7 @@ namespace StudentInformationSystem.Areas.Online.Models
         {
             mappings = new ObjMappings<OCR_Teacher, OCR_TeacherVM>();
 
-            mappings.Add(x => $"{x.ClassTeacher.Title.ToEnumChar(null)} {x.ClassTeacher.FullName}", x => x.TeacherName);
+            mappings.Add(x => $"{x.StaffMember.Title.ToEnumChar(null)} {x.StaffMember.FullName}", x => x.TeacherName);
         }
 
         public OCR_TeacherVM(OCR_Teacher obj) : this()

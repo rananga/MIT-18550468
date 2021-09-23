@@ -27,8 +27,8 @@ namespace StudentInformationSystem.Areas.Report.Controllers
         [HttpPost]
         public ActionResult Process(ReportParameterVM para)
         {
-            Session.Remove(sskCrtdObj);
-
+            if (para.Year < DateTime.Now.Year - 25 || para.Year > DateTime.Now.Year + 1)
+            { ModelState.AddModelError("Year", "Year is invalid"); }
             if (para.FromDate == null)
             { ModelState.AddModelError("FromDate", "From date must be selected"); }
             if (para.ToDate == null)

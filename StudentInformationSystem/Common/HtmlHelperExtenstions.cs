@@ -463,6 +463,32 @@ namespace System.Web.Mvc.Html
             return new MvcHtmlString(t.ToString());
         }
 
+        public static MvcHtmlString SubmitToDifferentAction(this HtmlHelper htmlHelper, string btnText, object htmlAttributes = null, string submitAction = null, string jsFunction = null)
+        {
+            var inp = new TagBuilder("button");
+            inp.Attributes.Add("type", "submit");
+            inp.Attributes.Add("data-submit-action", submitAction);
+            inp.Attributes.Add("data-js-function", jsFunction);
+            inp.InnerHtml = btnText;
+
+            object attrs = htmlAttributes.ToDynamic();
+            string cls = attrs.GetDynamicValue("class", "btnSubmitToAction").ToString();
+            cls = cls + (cls == "btnSubmitToAction" || cls.Contains(" btnSubmitToAction") || cls.Contains("btnSubmitToAction ") ? "" : (cls.IsBlank() ? "" : " ") + "btnSubmitToAction");
+
+            inp.Attributes.Add("class", cls);
+
+            foreach (KeyValuePair<string, object> kvp in (ExpandoObject)attrs)
+            {
+                var ky = kvp.Key;
+                if (ky.ToLower().StartsWith("data_"))
+                { ky = ky.Replace("_", "-"); }
+
+                if (kvp.Key != "class")
+                { inp.Attributes.Add(ky, kvp.Value.ToString()); }
+            }
+            return new MvcHtmlString(inp.ToString());
+        }
+
         public static MvcHtmlString ConfirmSubmitButton(this HtmlHelper htmlHelper, string btnText, string message = "Are you sure you want to continue?",
             string title = "Please confirm", string buttonText = "Yes", object htmlAttributes = null, string buttonClass = "btn-danger", string submitAction = null, string jsFunction = null)
         {

@@ -11,25 +11,44 @@ namespace StudentInformationSystem.Areas.Report.Controllers
 {
     public class OnlineSessionsSummaryController : BaseController
     {
-        public ActionResult Process(bool? viewIt)
+        public ActionResult Process()
         {
-            if (viewIt != true)
+            var para = new ReportParameterVM()
             {
-                return View();
-            }
+                Year = DateTime.Now.Year,
+                FromDate = DateTime.Now.Date.AddMonths(-1),
+                ToDate = DateTime.Now.Date
+            };
 
-            return GetPdfStream();
+            return View(para);
         }
 
         [HttpPost]
         public ActionResult Process(ReportParameterVM para)
         {
-            return Json(new { viewIt = true });
+            if (para.Year < DateTime.Now.Year - 25 || para.Year > DateTime.Now.Year + 1)
+            { ModelState.AddModelError("Year", "Year is invalid"); }
+            if (para.FromDate == null)
+            { ModelState.AddModelError("FromDate", "From date must be selected"); }
+            if (para.ToDate == null)
+            { ModelState.AddModelError("ToDate", "To date must be selected"); }
+            if (para.FromDate > para.ToDate)
+            { ModelState.AddModelError("ToDate", "To date must be greater than or equal to from date"); }
+
+            if (!ModelState.IsValid)
+                return View(para);
+
+            return Json(new { formValid = true });
         }
-        [HttpPost]
+
+        public ActionResult Pdf(ReportParameterVM para)
+        {
+            return GetPdfStream(para);
+        }
+
         public ActionResult Excel(ReportParameterVM para)
         {
-            return Json(new { viewIt = true });
+            return GetExcelStream(para);
         }
 
         private List<OnlineSessionsSummary> GetOnlineSessionsSummary()
@@ -106,7 +125,7 @@ namespace StudentInformationSystem.Areas.Report.Controllers
             return lst;
         }
 
-        private FileStreamResult GetPdfStream()
+        private FileStreamResult GetPdfStream(ReportParameterVM para)
         {
             LocalReport report = new LocalReport();
             report.LoadReportDefinition(Shared.GetReportStream("OnlineSessionsSummary"));
@@ -125,6 +144,13 @@ namespace StudentInformationSystem.Areas.Report.Controllers
 
             Response.AppendHeader("content-disposition", "inline; filename=file.pdf");
             return new FileStreamResult(new MemoryStream(mybytes), "application/pdf");
+        }
+
+        private FileStreamResult GetExcelStream(ReportParameterVM para)
+        {
+            var ms = new MemoryStream();
+            Response.AppendHeader("content-disposition", "inline; filename=file.xls");
+            return new FileStreamResult(ms, "application/ms-excel");
         }
     }
 }

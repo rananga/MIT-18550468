@@ -2,6 +2,7 @@
 using StudentInformationSystem.Areas.Base;
 using StudentInformationSystem.Areas.Report.Models;
 using StudentInformationSystem.Reporting.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
@@ -10,28 +11,41 @@ namespace StudentInformationSystem.Areas.Report.Controllers
 {
     public class StudentMarksController : BaseController
     {
-        public ActionResult Process(bool? viewIt)
+        public ActionResult Process()
         {
-            if (viewIt != true)
+            var para = new ReportParameterVM()
             {
-                return View();
-            }
+                Year = DateTime.Now.Year,
+                FromDate = DateTime.Now.Date.AddMonths(-1),
+                ToDate = DateTime.Now.Date
+            };
 
-            return GetPdfStream();
+            return View(para);
         }
 
         [HttpPost]
         public ActionResult Process(ReportParameterVM para)
         {
-            return Json(new { viewIt = true });
-        }
-        [HttpPost]
-        public ActionResult Excel(ReportParameterVM para)
-        {
-            return Json(new { viewIt = true });
+            if (para.Year < DateTime.Now.Year - 25 || para.Year > DateTime.Now.Year + 1 )
+            { ModelState.AddModelError("Year", "Year is invalid"); }
+
+            if (!ModelState.IsValid)
+                return View(para);
+
+            return Json(new { formValid = true });
         }
 
-        private List<StudentMarks> GetStudentMarks()
+        public ActionResult Pdf(ReportParameterVM para)
+        {
+            return GetPdfStream(para);
+        }
+
+        public ActionResult Excel(ReportParameterVM para)
+        {
+            return GetExcelStream(para);
+        }
+
+        private List<StudentMarks> GetStudentMarks(ReportParameterVM para)
         {
             var lst = new List<StudentMarks>()
             {
@@ -76,24 +90,31 @@ namespace StudentInformationSystem.Areas.Report.Controllers
             return lst;
         }
 
-        private FileStreamResult GetPdfStream()
+        private FileStreamResult GetPdfStream(ReportParameterVM para)
         {
             LocalReport report = new LocalReport();
             report.LoadReportDefinition(Shared.GetReportStream("StudentMarks"));
 
-            report.SetParameters(new ReportParameter("Year", "2021"));
-            report.SetParameters(new ReportParameter("Grade", "6"));
-            report.SetParameters(new ReportParameter("OrderBy", "2"));
+            report.SetParameters(new ReportParameter("Year", para.Year.ToString()));
+            report.SetParameters(new ReportParameter("Grade", para.GradeId.ToString()));
+            report.SetParameters(new ReportParameter("OrderBy", ((int)para.MarksReportOrderBy).ToString()));
 
             ReportDataSource rds = new ReportDataSource();
             rds.Name = "StudentMarks";
-            rds.Value = GetStudentMarks();
+            rds.Value = GetStudentMarks(para);
             report.DataSources.Add(rds);
 
             byte[] mybytes = report.Render("PDF");
 
             Response.AppendHeader("content-disposition", "inline; filename=file.pdf");
             return new FileStreamResult(new MemoryStream(mybytes), "application/pdf");
+        }
+
+        private FileStreamResult GetExcelStream(ReportParameterVM para)
+        {
+            var ms = new MemoryStream();
+            Response.AppendHeader("content-disposition", "inline; filename=file.xls");
+            return new FileStreamResult(ms, "application/ms-excel");
         }
     }
 }

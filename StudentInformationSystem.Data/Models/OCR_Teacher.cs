@@ -21,7 +21,7 @@ namespace StudentInformationSystem.Data.Models
         public bool IsOwner { get; set; }
 
         public virtual OnlineClassRoom OnlineClassRoom { get; set; }
-        public virtual StaffMember ClassTeacher { get; set; }
+        public virtual StaffMember StaffMember { get; set; }
 
         public virtual ICollection<OnlineClass> OnlineClasses { get; set; }
     }

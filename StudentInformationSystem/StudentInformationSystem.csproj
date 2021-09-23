@@ -350,6 +350,7 @@
     <Compile Include="Areas\Online\Models\OnlineClassVM.cs" />
     <Compile Include="Areas\Online\Models\OnlineTimeTableVM.cs" />
     <Compile Include="Areas\Online\Models\OnlineClassRoomVM.cs" />
+    <Compile Include="Areas\Report\Controllers\StudentCharacterController.cs" />
     <Compile Include="Areas\Report\Controllers\WeeklySummaryController.cs" />
     <Compile Include="Areas\Report\Controllers\OnlineSessionsSummaryController.cs" />
     <Compile Include="Areas\Report\Controllers\StudentAttendanceController.cs" />
@@ -706,6 +707,7 @@
     <Content Include="Areas\Student\Views\StudentExtraActivities\_PositionEdit.cshtml" />
     <Content Include="Areas\Academic\Views\GradeSubject\_SubjectCreate.cshtml" />
     <Content Include="Areas\Academic\Views\GradeSubject\_SubjectIndex.cshtml" />
+    <Content Include="Areas\Report\Views\StudentCharacter\Process.cshtml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\nibmapp1-sis - Web Deploy.pubxml" />

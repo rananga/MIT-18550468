@@ -10,32 +10,17 @@ using System.Web.Mvc;
 
 namespace StudentInformationSystem.Areas.Report.Controllers
 {
-    public class WeeklySummaryController : BaseController
+    public class StudentCharacterController : BaseController
     {
         public ActionResult Process()
         {
-            var para = new ReportParameterVM()
-            {
-                Year = DateTime.Now.Year,
-                FromDate = DateTime.Now.Date.AddMonths(-1),
-                ToDate = DateTime.Now.Date
-            };
-
+            var para = new ReportParameterVM();
             return View(para);
         }
 
         [HttpPost]
         public ActionResult Process(ReportParameterVM para)
         {
-            if (para.Year < DateTime.Now.Year - 25 || para.Year > DateTime.Now.Year + 1)
-            { ModelState.AddModelError("Year", "Year is invalid"); }
-            if (para.FromDate == null)
-            { ModelState.AddModelError("FromDate", "From date must be selected"); }
-            if (para.ToDate == null)
-            { ModelState.AddModelError("ToDate", "To date must be selected"); }
-            if (para.FromDate > para.ToDate)
-            { ModelState.AddModelError("ToDate", "To date must be greater than or equal to from date"); }
-
             if (!ModelState.IsValid)
                 return View(para);
 

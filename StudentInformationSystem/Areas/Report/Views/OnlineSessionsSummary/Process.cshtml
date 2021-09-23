@@ -1,6 +1,8 @@
-﻿
+﻿@using StudentInformationSystem.Data.Models;
+@model StudentInformationSystem.Areas.Report.Models.ReportParameterVM
+
 @{
-    ViewBag.Title = "Term Wise Student Marks";
+    ViewBag.Title = "Online Sessions Summary By Grade";
 }
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmReport" }))
@@ -9,15 +11,38 @@
     <div class="form-horizontal">
         <br />
         <p>
-            @Html.ConfirmSubmitButton("Generate PDF", "PDF Document will be downloaded to your computer. Please find it once the download is completed.",
-                                        "Confirm Generate PDF", "<span class='bi bi-hand-thumbs-up'></span> Generate",
-                                        new { @class = "btn btn-primary", style = "min-width:75px" }, "btn-success")
-
-            @Html.ConfirmSubmitButton("Generate Excel Sheet", "Excel Sheet will be downloaded to your computer. Please find once the download is completed.",
-                                                 "Confirm Generate Excel Sheet", "<span class='bi bi-hand-thumbs-up'></span> Generate",
-                                                 new { @class = "btn btn-success", style = "min-width:75px" }, "btn-success", "Excel")
+            @Html.SubmitToDifferentAction("Generate PDF", new { @class = "btn btn-primary", style = "min-width:75px" }, "Pdf")
+            @Html.SubmitToDifferentAction("Generate Excel Sheet", new { @class = "btn btn-success", style = "min-width:75px" }, "Excel")
         </p>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", type = "JQ-date" } })
+                @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.GradeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.SelectListFor(model => model.GradeId, (Grade x) => x.Id, (Grade x) => x.Section.Code + " - " + x.GradeNo.ToEnumChar(), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GradeId, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", type = "JQ-date" } })
+                @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
     </div>
 }
 
+@section Scripts {
+    <script src="~/Scripts/Report/ReportForm.js"></script>
+}

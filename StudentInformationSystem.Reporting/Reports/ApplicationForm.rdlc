@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
-
     <ReportItems>
       <Textbox Name="Textbox17">
         <CanGrow>true</CanGrow>
@@ -75,7 +74,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Title.Value, "dsStudent")+" "+First(Fields!Initials.Value, "dsStudent")+" "+First(Fields!LastName.Value, "dsStudent")</Value>
+                <Value>=First(Fields!Initials.Value, "dsStudent")+" "+First(Fields!LastName.Value, "dsStudent")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                 </Style>
@@ -1320,14 +1319,16 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
         <Top>6.90211in</Top>
-        <Left>5.75163in</Left>
+        <Left>5.05162in</Left>
         <Height>0.23334in</Height>
-        <Width>1.06666in</Width>
+        <Width>2.23657in</Width>
         <ZIndex>29</ZIndex>
         <Style>
           <Border>
@@ -1353,7 +1354,9 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
@@ -2451,7 +2454,7 @@
     <Height>7.76254in</Height>
     <Style />
   </Body>
-  <Width>7.70708in</Width>
+  <Width>7.68625in</Width>
   <Page>
     <PageHeader>
       <Height>1.62499in</Height>
@@ -2548,9 +2551,17 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>School Name</Value>
+                  <Value>නාලන්දා විද්‍යාලය, </Value>
                   <Style>
-                    <FontSize>30pt</FontSize>
+                    <FontSize>24pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <Color>Maroon</Color>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>කොළඹ 10</Value>
+                  <Style>
+                    <FontSize>14pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                     <Color>Maroon</Color>
                   </Style>

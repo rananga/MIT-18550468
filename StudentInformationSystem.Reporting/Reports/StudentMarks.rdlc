@@ -1119,7 +1119,7 @@ IIF (Parameters!OrderBy.Value = 3, "Term 3 Marks", "Average Marks")))</Value>
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value>Nalanda College OBA</Value>
+                      <Value>Nalanda College</Value>
                       <Style>
                         <FontSize>14pt</FontSize>
                         <FontWeight>Bold</FontWeight>
