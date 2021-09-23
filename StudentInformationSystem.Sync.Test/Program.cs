@@ -1,4 +1,4 @@
-﻿using System;
+﻿using StudentInformationSystem.Data;
 
 namespace StudentInformationSystem.Sync.Test
 {
@@ -6,7 +6,7 @@ namespace StudentInformationSystem.Sync.Test
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            SyncAttendance.RunIt(null, new dbNalandaContext());
         }
     }
 }
