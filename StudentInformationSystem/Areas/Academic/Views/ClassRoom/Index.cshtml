@@ -1,4 +1,4 @@
-﻿@model StudentInformationSystem.Common.BaseViewModel<StudentInformationSystem.Areas.Academic.Models.ClassRoomVM>
+﻿@model StudentInformationSystem.Common.BaseViewModel<StudentInformationSystem.Areas.Academic.Models.PhysicalClassRoomVM>
 
 @{
     ViewBag.Title = "Physical Classroom Information";
@@ -22,7 +22,7 @@
     <div class="form-horizontal row">
         <div class="col-md-4">
             <div class="form-group">
-                @Html.Label("Search By", htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.Label("Search&nbsp;By", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
                     @Html.DropDownList("FilterBy", new SelectList(srchOpts, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
                 </div>

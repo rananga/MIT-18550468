@@ -23,11 +23,14 @@ namespace StudentInformationSystem.Data.Models
         [DisplayName("Mobile No"), Required]
         [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
         public string MobileNo { get; set; }
-        [DisplayName("School Email")]
+        [DisplayName("School Email - Google")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        public string SchoolEmail { get; set; }
+        public string SchoolEmail_Google { get; set; }
+        [DisplayName("School Email - Microsoft")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
+        public string SchoolEmail_MS { get; set; }
         [DisplayName("NIC No")]
-        public string Nicno { get; set; }
+        public string NicNo { get; set; }
         public string ImagePath { get; set; }
 
         public virtual User User { get; set; }

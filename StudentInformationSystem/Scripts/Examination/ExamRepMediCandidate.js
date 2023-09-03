@@ -37,7 +37,7 @@ $(function () {
 
     objClassStudID.change(function () {
         $.getJSON(AppRoot + "Examination/MediRepeatCandidate/GetStudInfo", { classStudID: Number(objClassStudID.val()) }, function (jsn) {
-            $('#IndexNo').val(jsn.IndexNo);
+            $('#AdmissionNo').val(jsn.AdmissionNo);
         }).error(function (data, status, jqXHR) {
             if (IsJson(data.responseText)) { AlertIt("ERROR: " + JSON.parse(data.responseText).Message); }
             else { AlertIt("ERROR: " + data.statusText); }

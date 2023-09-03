@@ -16,7 +16,7 @@ namespace StudentInformationSystem.Data.Models
 
         public virtual ClassPromotion ClassPromotion { get; set; }
         public virtual Student Student { get; set; }
-        public virtual ClassRoom FromClass { get; set; }
-        public virtual ClassRoom ToClass { get; set; }
+        public virtual PhysicalClassRoom FromClass { get; set; }
+        public virtual PhysicalClassRoom ToClass { get; set; }
     }
 }

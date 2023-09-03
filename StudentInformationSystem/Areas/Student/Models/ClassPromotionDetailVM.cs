@@ -12,7 +12,7 @@ namespace StudentInformationSystem.Areas.Student.Models
         public ClassPromotionDetailVM()
         {
             mappings = new ObjMappings<ClassPromotionDetail, ClassPromotionDetailVM>();
-            mappings.Add(x => x.Student.IndexNo, x => x.IndexNo);
+            mappings.Add(x => x.Student.AdmissionNo, x => x.AdmissionNo);
             mappings.Add(x => x.Student.FullName, x => x.StudentName);
             mappings.Add(x => x.FromClass.GradeClass.Code, x => x.FromClassName);
             mappings.Add(x => x.ToClass.GradeClass.Code, x => x.ToClassName);
@@ -26,7 +26,7 @@ namespace StudentInformationSystem.Areas.Student.Models
         public ObjMappings<ClassPromotionDetail, ClassPromotionDetailVM> mappings { get; set; }
 
         [DisplayName("Admission No")]
-        public int IndexNo { get; set; }
+        public int AdmissionNo { get; set; }
         [DisplayName("Student")]
         public string StudentName { get; set; }
         public Medium StudentMedium { get; set; }

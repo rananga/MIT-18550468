@@ -63,8 +63,8 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
         private void ProcessPromotion(ClassPromotion ent)
         {
-            var lst = db.ClassRooms.Where(x => x.Year == ent.Year - 1 && x.GradeClass.GradeId == ent.GradeId).SelectMany(x => x.ClassStudents).ToList();
-            var lstNew = db.ClassRooms.Where(x => x.Year == ent.Year && x.GradeClass.GradeId == ent.GradeId + 1).ToList();
+            var lst = db.PhysicalClassRooms.Where(x => x.Year == ent.Year - 1 && x.GradeClass.GradeId == ent.GradeId).SelectMany(x => x.ClassStudents).ToList();
+            var lstNew = db.PhysicalClassRooms.Where(x => x.Year == ent.Year && x.GradeClass.GradeId == ent.GradeId + 1).ToList();
 
             foreach (var stud in lst)
             {
@@ -72,7 +72,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                 {
                     StudentId = stud.StudentId,
                     FromClassId = stud.CR_Id,
-                    ToClassId = lstNew.FirstOrDefault(x => x.GradeClass.Name == stud.ClassRoom.GradeClass.Name)?.Id,
+                    ToClassId = lstNew.FirstOrDefault(x => x.GradeClass.Name == stud.PhysicalClassRoom.GradeClass.Name)?.Id,
                     CreatedBy = GetCurrUser(),
                     CreatedDate = DateTime.Now
                 });
@@ -223,9 +223,9 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             }
 
             ViewBag.IsToEdit = isToEdit;
-            ViewBag.smClasses = db.ClassRooms.Where(x => x.Year == objPromo.Year && x.GradeClass.GradeId == objPromo.GradeId + 1 && x.Medium == Medium.Sinhala)
+            ViewBag.smClasses = db.PhysicalClassRooms.Where(x => x.Year == objPromo.Year && x.GradeClass.GradeId == objPromo.GradeId + 1 && x.Medium == Medium.Sinhala)
                 .Select(x => new KeyValuePair<int, string>(x.Id, x.GradeClass.Code)).ToList();
-            ViewBag.emClasses = db.ClassRooms.Where(x => x.Year == objPromo.Year && x.GradeClass.GradeId == objPromo.GradeId + 1 && x.Medium == Medium.English)
+            ViewBag.emClasses = db.PhysicalClassRooms.Where(x => x.Year == objPromo.Year && x.GradeClass.GradeId == objPromo.GradeId + 1 && x.Medium == Medium.English)
                 .Select(x => new KeyValuePair<int, string>(x.Id, x.GradeClass.Code)).ToList();
 
             var lst = objPromo.ClassPromotionDetails.Select(x => new ClassPromotionDetailVM(x)).ToList();

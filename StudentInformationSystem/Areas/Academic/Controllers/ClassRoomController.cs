@@ -14,31 +14,31 @@ namespace StudentInformationSystem.Areas.Academic
 {
     public class ClassRoomController : BaseController
     {
-        public ActionResult Index(BaseViewModel<ClassRoomVM> vm)
+        public ActionResult Index(BaseViewModel<PhysicalClassRoomVM> vm)
         {
-            vm.SetList(db.ClassRooms.AsQueryable(), "GradeClassDesc");
+            vm.SetList(db.PhysicalClassRooms.AsQueryable(), "GradeClassDesc");
             return View(vm);
         }
 
         [AllowAnonymous]
         public ActionResult TeacherIndex(int? id, bool isToEdit = false)
         {
-            ClassRoomVM obj;
+            PhysicalClassRoomVM obj;
 
-            if (isToEdit && Session[sskCrtdObj] is ClassRoomVM)
-            { obj = (ClassRoomVM)Session[sskCrtdObj]; }
+            if (isToEdit && Session[sskCrtdObj] is PhysicalClassRoomVM)
+            { obj = (PhysicalClassRoomVM)Session[sskCrtdObj]; }
             else
             {
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                var entity = db.ClassRooms.Where(x => x.Id == id).FirstOrDefault();
+                var entity = db.PhysicalClassRooms.Where(x => x.Id == id).FirstOrDefault();
                 if (entity == null)
                 {
                     return HttpNotFound();
                 }
-                obj = new ClassRoomVM(entity);
+                obj = new PhysicalClassRoomVM(entity);
             }
 
             ViewBag.IsToEdit = isToEdit;
@@ -49,22 +49,22 @@ namespace StudentInformationSystem.Areas.Academic
         [AllowAnonymous]
         public ActionResult SubjectIndex(int? id, bool isToEdit = false)
         {
-            ClassRoomVM obj;
+            PhysicalClassRoomVM obj;
 
-            if (isToEdit && Session[sskCrtdObj] is ClassRoomVM)
-            { obj = (ClassRoomVM)Session[sskCrtdObj]; }
+            if (isToEdit && Session[sskCrtdObj] is PhysicalClassRoomVM)
+            { obj = (PhysicalClassRoomVM)Session[sskCrtdObj]; }
             else
             {
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                var entity = db.ClassRooms.Where(x => x.Id == id).FirstOrDefault();
+                var entity = db.PhysicalClassRooms.Where(x => x.Id == id).FirstOrDefault();
                 if (entity == null)
                 {
                     return HttpNotFound();
                 }
-                obj = new ClassRoomVM(entity);
+                obj = new PhysicalClassRoomVM(entity);
             }
 
             ViewBag.IsToEdit = isToEdit;
@@ -75,22 +75,22 @@ namespace StudentInformationSystem.Areas.Academic
         [AllowAnonymous]
         public ActionResult MonitorIndex(int? id, bool isToEdit = false)
         {
-            ClassRoomVM obj;
+            PhysicalClassRoomVM obj;
 
-            if (isToEdit && Session[sskCrtdObj] is ClassRoomVM)
-            { obj = (ClassRoomVM)Session[sskCrtdObj]; }
+            if (isToEdit && Session[sskCrtdObj] is PhysicalClassRoomVM)
+            { obj = (PhysicalClassRoomVM)Session[sskCrtdObj]; }
             else
             {
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                var entity = db.ClassRooms.Where(x => x.Id == id).FirstOrDefault();
+                var entity = db.PhysicalClassRooms.Where(x => x.Id == id).FirstOrDefault();
                 if (entity == null)
                 {
                     return HttpNotFound();
                 }
-                obj = new ClassRoomVM(entity);
+                obj = new PhysicalClassRoomVM(entity);
             }
 
             ViewBag.IsToEdit = isToEdit;
@@ -101,22 +101,22 @@ namespace StudentInformationSystem.Areas.Academic
         [AllowAnonymous]
         public ActionResult StudentIndex(int? id, bool isToEdit = false)
         {
-            ClassRoomVM obj;
+            PhysicalClassRoomVM obj;
 
-            if (isToEdit && Session[sskCrtdObj] is ClassRoomVM)
-            { obj = (ClassRoomVM)Session[sskCrtdObj]; }
+            if (isToEdit && Session[sskCrtdObj] is PhysicalClassRoomVM)
+            { obj = (PhysicalClassRoomVM)Session[sskCrtdObj]; }
             else
             {
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                var entity = db.ClassRooms.Where(x => x.Id == id).FirstOrDefault();
+                var entity = db.PhysicalClassRooms.Where(x => x.Id == id).FirstOrDefault();
                 if (entity == null)
                 {
                     return HttpNotFound();
                 }
-                obj = new ClassRoomVM(entity);
+                obj = new PhysicalClassRoomVM(entity);
             }
 
             ViewBag.IsToEdit = isToEdit;
@@ -130,17 +130,17 @@ namespace StudentInformationSystem.Areas.Academic
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var entity = db.ClassRooms.Find(id);
+            var entity = db.PhysicalClassRooms.Find(id);
             if (entity == null)
             {
                 return HttpNotFound();
             }
-            return View(new ClassRoomVM(entity));
+            return View(new PhysicalClassRoomVM(entity));
         }
 
         public ActionResult Create()
         {
-            var cls = new ClassRoomVM() { Year = DateTime.Now.Year };
+            var cls = new PhysicalClassRoomVM() { Year = DateTime.Now.Year };
 
             Session[sskCrtdObj] = cls;
             return View(cls);
@@ -148,12 +148,12 @@ namespace StudentInformationSystem.Areas.Academic
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ClassRoomVM vm)
+        public ActionResult Create(PhysicalClassRoomVM vm)
         {
             try
             {
-                var svm = (ClassRoomVM)Session[sskCrtdObj];
-                var existingObj = db.ClassRooms.Where(e => e.Year == vm.Year && e.GradeClassId == vm.GradeClassId).FirstOrDefault();
+                var svm = (PhysicalClassRoomVM)Session[sskCrtdObj];
+                var existingObj = db.PhysicalClassRooms.Where(e => e.Year == vm.Year && e.GradeClassId == vm.GradeClassId).FirstOrDefault();
 
                 if (existingObj != null)
                 { ModelState.AddModelError("", "Classroom already exists for the selected Year and Grade-Class."); }
@@ -162,7 +162,7 @@ namespace StudentInformationSystem.Areas.Academic
                 {
                     vm.CreatedBy = this.GetCurrUser();
                     vm.CreatedDate = DateTime.Now;
-                    var entry = db.ClassRooms.Add(vm.GetEntity());
+                    var entry = db.PhysicalClassRooms.Add(vm.GetEntity());
                     var objclass = entry.Entity;
 
                     foreach (var det in svm.Teachers)
@@ -179,7 +179,7 @@ namespace StudentInformationSystem.Areas.Academic
 
                     foreach (var subId in subjects)
                     {
-                        objclass.ClassSubjects.Add(new CR_Subject() { SubjectId = subId, CreatedBy = objclass.CreatedBy, CreatedDate = DateTime.Now });
+                        objclass.ClassSubjects.Add(new PCR_Subject() { SubjectId = subId, CreatedBy = objclass.CreatedBy, CreatedDate = DateTime.Now });
                     }
 
                     db.SaveChanges();
@@ -205,7 +205,7 @@ namespace StudentInformationSystem.Areas.Academic
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                var entity = db.ClassRooms.Find(id);
+                var entity = db.PhysicalClassRooms.Find(id);
 
                 if (entity == null)
                 {
@@ -213,21 +213,21 @@ namespace StudentInformationSystem.Areas.Academic
                 }
             }
 
-            var vm = new CR_TeacherVM() { CR_Id = id.Value, FromDate = new DateTime(DateTime.Now.Year, 1,1), ToDate = new DateTime(DateTime.Now.Year, 12, 31) };
+            var vm = new PCR_TeacherVM() { CR_Id = id.Value, FromDate = new DateTime(DateTime.Now.Year, 1,1), ToDate = new DateTime(DateTime.Now.Year, 12, 31) };
             return PartialView("_TeacherCreate", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult TeacherCreate(CR_TeacherVM vm)
+        public ActionResult TeacherCreate(PCR_TeacherVM vm)
         {
-            ClassRoomVM obj;
+            PhysicalClassRoomVM obj;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    obj = (ClassRoomVM)Session[sskCrtdObj];
+                    obj = (PhysicalClassRoomVM)Session[sskCrtdObj];
                     vm.Id = Math.Min(obj.Teachers.Select(x => x.Id).MinOrDefault(), 0) - 1;
                     var sm = db.StaffMembers.Find(vm.StaffId);
                     vm.TeacherName = $"{sm.Title.ToEnumChar(null)} {sm.FullName}";
@@ -244,7 +244,7 @@ namespace StudentInformationSystem.Areas.Academic
             catch (Exception ex)
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
-            obj = (ClassRoomVM)Session[sskCrtdObj];
+            obj = (PhysicalClassRoomVM)Session[sskCrtdObj];
 
             return PartialView("_TeacherCreate", vm);
         }
@@ -258,7 +258,7 @@ namespace StudentInformationSystem.Areas.Academic
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                var entity = db.ClassRooms.Find(id);
+                var entity = db.PhysicalClassRooms.Find(id);
 
                 if (entity == null)
                 {
@@ -266,21 +266,24 @@ namespace StudentInformationSystem.Areas.Academic
                 }
             }
 
-            var vm = new CR_SubjectVM() { CR_Id = id.Value };
+            var vm = new PCR_SubjectVM() { CR_Id = id.Value };
             return PartialView("_SubjectCreate", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult SubjectCreate(CR_SubjectVM vm)
+        public ActionResult SubjectCreate(PCR_SubjectVM vm)
         {
-            ClassRoomVM obj;
+            PhysicalClassRoomVM obj;
             try
             {
+                if (vm.StaffId == null)
+                { ModelState.AddModelError("StaffId", "Subject teacher is required."); }
+
                 if (ModelState.IsValid)
                 {
-                    obj = (ClassRoomVM)Session[sskCrtdObj];
+                    obj = (PhysicalClassRoomVM)Session[sskCrtdObj];
                     vm.Id = Math.Min(obj.Subjects.Select(x => x.Id).MinOrDefault(), 0) - 1;
                     vm.SubjectName = db.Subjects.Find(vm.SubjectId).Code;
                     var sm = db.StaffMembers.Find(vm.StaffId);
@@ -298,7 +301,7 @@ namespace StudentInformationSystem.Areas.Academic
             catch (Exception ex)
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
-            obj = (ClassRoomVM)Session[sskCrtdObj];
+            obj = (PhysicalClassRoomVM)Session[sskCrtdObj];
 
             return PartialView("_SubjectCreate", vm);
         }
@@ -312,7 +315,7 @@ namespace StudentInformationSystem.Areas.Academic
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                var entity = db.ClassRooms.Find(id);
+                var entity = db.PhysicalClassRooms.Find(id);
 
                 if (entity == null)
                 {
@@ -320,24 +323,24 @@ namespace StudentInformationSystem.Areas.Academic
                 }
             }
 
-            var vm = new CR_MonitorVM() { CR_Id = id.Value, FromDate = new DateTime(DateTime.Now.Year, 1, 1), ToDate = new DateTime(DateTime.Now.Year, 12, 31) };
+            var vm = new PCR_MonitorVM() { CR_Id = id.Value, FromDate = new DateTime(DateTime.Now.Year, 1, 1), ToDate = new DateTime(DateTime.Now.Year, 12, 31) };
             return PartialView("_MonitorCreate", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult MonitorCreate(CR_MonitorVM vm)
+        public ActionResult MonitorCreate(PCR_MonitorVM vm)
         {
-            ClassRoomVM obj;
+            PhysicalClassRoomVM obj;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    obj = (ClassRoomVM)Session[sskCrtdObj];
+                    obj = (PhysicalClassRoomVM)Session[sskCrtdObj];
                     vm.Id = Math.Min(obj.Monitors.Select(x => x.Id).MinOrDefault(), 0) - 1;
                     var stud = db.Students.Find(vm.StudentId);
-                    vm.StudentIndex = stud.IndexNo;
+                    vm.StudentIndex = stud.AdmissionNo;
                     vm.StudentName = stud.FullName;
                     obj.Monitors.Add(vm);
 
@@ -352,7 +355,7 @@ namespace StudentInformationSystem.Areas.Academic
             catch (Exception ex)
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
-            obj = (ClassRoomVM)Session[sskCrtdObj];
+            obj = (PhysicalClassRoomVM)Session[sskCrtdObj];
 
             return PartialView("_MonitorCreate", vm);
         }
@@ -366,7 +369,7 @@ namespace StudentInformationSystem.Areas.Academic
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                var entity = db.ClassRooms.Find(id);
+                var entity = db.PhysicalClassRooms.Find(id);
 
                 if (entity == null)
                 {
@@ -374,25 +377,25 @@ namespace StudentInformationSystem.Areas.Academic
                 }
             }
 
-            var vm = new CR_StudentVM() { CR_Id = id.Value };
+            var vm = new PCR_StudentVM() { CR_Id = id.Value };
             return PartialView("_StudentCreate", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public ActionResult StudentCreate(CR_StudentVM vm)
+        public ActionResult StudentCreate(PCR_StudentVM vm)
         {
-            ClassRoomVM obj;
+            PhysicalClassRoomVM obj;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    obj = (ClassRoomVM)Session[sskCrtdObj];
+                    obj = (PhysicalClassRoomVM)Session[sskCrtdObj];
                     vm.Id = Math.Min(obj.Students.Select(x => x.Id).MinOrDefault(), 0) - 1;
-                    var cr = db.ClassRooms.Find(vm.CR_Id);
+                    var cr = db.PhysicalClassRooms.Find(vm.CR_Id);
                     var stud = db.Students.Find(vm.StudentId);
-                    vm.StudentIndex = stud.IndexNo;
+                    vm.StudentIndex = stud.AdmissionNo;
                     vm.StudentName = stud.FullName;
                     vm.BasketSubjects = stud.StudentBasketSubjects.Where(y => y.Subject.SectionId == cr.GradeClass.Grade.SectionId).Select(y => y.Subject.Code).Aggregate((y, z) => y + "," + z);
                     obj.Students.Add(vm);
@@ -408,7 +411,7 @@ namespace StudentInformationSystem.Areas.Academic
             catch (Exception ex)
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
-            obj = (ClassRoomVM)Session[sskCrtdObj];
+            obj = (PhysicalClassRoomVM)Session[sskCrtdObj];
 
             return PartialView("_StudentCreate", vm);
         }
@@ -419,29 +422,29 @@ namespace StudentInformationSystem.Areas.Academic
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var entity = db.ClassRooms.Find(id);
+            var entity = db.PhysicalClassRooms.Find(id);
             if (entity == null)
             {
                 return HttpNotFound();
             }
 
-            var obj = new ClassRoomVM(entity);
+            var obj = new PhysicalClassRoomVM(entity);
             Session[sskCrtdObj] = obj;
             return View(obj);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ClassRoomVM vm)
+        public ActionResult Edit(PhysicalClassRoomVM vm)
         {
             byte[] curRowVersion = null;
             try
             {
-                var svm = (ClassRoomVM)Session[sskCrtdObj];
+                var svm = (PhysicalClassRoomVM)Session[sskCrtdObj];
 
                 if (ModelState.IsValid)
                 {
-                    var obj = db.ClassRooms.Find(vm.Id);
+                    var obj = db.PhysicalClassRooms.Find(vm.Id);
                     if (obj == null)
                     { throw new DbUpdateConcurrencyException(); }
 
@@ -454,12 +457,12 @@ namespace StudentInformationSystem.Areas.Academic
 
                     db.Entry(obj).OriginalValues["RowVersion"] = vm.RowVersion;
 
-                    db.CR_Teachers.RemoveRange(obj.ClassTeachers.Where(x =>
+                    db.PCR_Teachers.RemoveRange(obj.ClassTeachers.Where(x =>
                         !svm.Teachers.Select(y => y.Id).ToList().Contains(x.Id)));
 
                     foreach (var det in svm.Teachers)
                     {
-                        var objDet = db.CR_Teachers.Find(det.Id);
+                        var objDet = db.PCR_Teachers.Find(det.Id);
                         if (objDet == null)
                         {
                             det.CreatedBy = this.GetCurrUser();
@@ -476,12 +479,12 @@ namespace StudentInformationSystem.Areas.Academic
                         }
                     }
 
-                    db.CR_Subjects.RemoveRange(obj.ClassSubjects.Where(x =>
+                    db.PCR_Subjects.RemoveRange(obj.ClassSubjects.Where(x =>
                         !svm.Subjects.Select(y => y.Id).ToList().Contains(x.Id)));
 
                     foreach (var det in svm.Subjects)
                     {
-                        var objDet = db.CR_Subjects.Find(det.Id);
+                        var objDet = db.PCR_Subjects.Find(det.Id);
                         if (objDet == null)
                         {
                             det.CreatedBy = this.GetCurrUser();
@@ -490,12 +493,12 @@ namespace StudentInformationSystem.Areas.Academic
                         }
                     }
 
-                    db.CR_Monitors.RemoveRange(obj.ClassMonitors.Where(x =>
+                    db.PCR_Monitors.RemoveRange(obj.ClassMonitors.Where(x =>
                         !svm.Monitors.Select(y => y.Id).ToList().Contains(x.Id)));
 
                     foreach (var det in svm.Monitors)
                     {
-                        var objDet = db.CR_Monitors.Find(det.Id);
+                        var objDet = db.PCR_Monitors.Find(det.Id);
                         if (objDet == null)
                         {
                             det.CreatedBy = this.GetCurrUser();
@@ -512,12 +515,12 @@ namespace StudentInformationSystem.Areas.Academic
                         }
                     }
 
-                    db.CR_Students.RemoveRange(obj.ClassStudents.Where(x =>
+                    db.PCR_Students.RemoveRange(obj.ClassStudents.Where(x =>
                         !svm.Students.Select(y => y.Id).ToList().Contains(x.Id)));
 
                     foreach (var det in svm.Students)
                     {
-                        var objDet = db.CR_Students.Find(det.Id);
+                        var objDet = db.PCR_Students.Find(det.Id);
                         if (objDet == null)
                         {
                             det.CreatedBy = this.GetCurrUser();
@@ -551,7 +554,7 @@ namespace StudentInformationSystem.Areas.Academic
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var vm = ((ClassRoomVM)Session[sskCrtdObj]).Subjects.FirstOrDefault(x => x.Id == id);
+            var vm = ((PhysicalClassRoomVM)Session[sskCrtdObj]).Subjects.FirstOrDefault(x => x.Id == id);
             if (vm == null)
             {
                 return HttpNotFound();
@@ -561,13 +564,13 @@ namespace StudentInformationSystem.Areas.Academic
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SubjectEdit(CR_SubjectVM vm)
+        public ActionResult SubjectEdit(PCR_SubjectVM vm)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var obj = ((ClassRoomVM)Session[sskCrtdObj]).Subjects.FirstOrDefault(x => x.Id == vm.Id);
+                    var obj = ((PhysicalClassRoomVM)Session[sskCrtdObj]).Subjects.FirstOrDefault(x => x.Id == vm.Id);
                     vm.CopyContent(obj, "SubjectId,StaffId");
                     obj.SubjectName = db.Subjects.Find(vm.SubjectId).Code;
                     var sm = db.StaffMembers.Find(vm.StaffId);
@@ -587,11 +590,11 @@ namespace StudentInformationSystem.Areas.Academic
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(ClassRoomVM vm)
+        public ActionResult DeleteConfirmed(PhysicalClassRoomVM vm)
         {
             try
             {
-                var obj = db.ClassRooms.Find(vm.Id);
+                var obj = db.PhysicalClassRooms.Find(vm.Id);
                 if (obj == null)
                 { throw new DbUpdateConcurrencyException(""); }
 
@@ -599,16 +602,16 @@ namespace StudentInformationSystem.Areas.Academic
                 entry.State = EntityState.Unchanged;
 
                 entry.Collection(x => x.ClassTeachers).Load();
-                db.CR_Teachers.RemoveRange(entry.Entity.ClassTeachers);
+                db.PCR_Teachers.RemoveRange(entry.Entity.ClassTeachers);
 
                 entry.Collection(x => x.ClassSubjects).Load();
-                db.CR_Subjects.RemoveRange(entry.Entity.ClassSubjects);
+                db.PCR_Subjects.RemoveRange(entry.Entity.ClassSubjects);
 
                 entry.Collection(x => x.ClassStudents).Load();
-                db.CR_Monitors.RemoveRange(entry.Entity.ClassMonitors);
+                db.PCR_Monitors.RemoveRange(entry.Entity.ClassMonitors);
 
                 entry.Collection(x => x.ClassStudents).Load();
-                db.CR_Students.RemoveRange(entry.Entity.ClassStudents);
+                db.PCR_Students.RemoveRange(entry.Entity.ClassStudents);
 
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
@@ -636,7 +639,7 @@ namespace StudentInformationSystem.Areas.Academic
             string msg = string.Empty;
             try
             {
-                var lst = ((ClassRoomVM)Session[sskCrtdObj]).Teachers;
+                var lst = ((PhysicalClassRoomVM)Session[sskCrtdObj]).Teachers;
                 var obj = lst.FirstOrDefault(x => x.Id == id);
                 lst.Remove(obj);
 
@@ -660,7 +663,7 @@ namespace StudentInformationSystem.Areas.Academic
             string msg = string.Empty;
             try
             {
-                var lst = ((ClassRoomVM)Session[sskCrtdObj]).Subjects;
+                var lst = ((PhysicalClassRoomVM)Session[sskCrtdObj]).Subjects;
                 var obj = lst.FirstOrDefault(x => x.Id == id);
                 lst.Remove(obj);
 
@@ -684,7 +687,7 @@ namespace StudentInformationSystem.Areas.Academic
             string msg = string.Empty;
             try
             {
-                var lst = ((ClassRoomVM)Session[sskCrtdObj]).Monitors;
+                var lst = ((PhysicalClassRoomVM)Session[sskCrtdObj]).Monitors;
                 var obj = lst.FirstOrDefault(x => x.Id == id);
                 lst.Remove(obj);
 
@@ -708,7 +711,7 @@ namespace StudentInformationSystem.Areas.Academic
             string msg = string.Empty;
             try
             {
-                var lst = ((ClassRoomVM)Session[sskCrtdObj]).Students;
+                var lst = ((PhysicalClassRoomVM)Session[sskCrtdObj]).Students;
                 var obj = lst.FirstOrDefault(x => x.Id == id);
                 lst.Remove(obj);
 

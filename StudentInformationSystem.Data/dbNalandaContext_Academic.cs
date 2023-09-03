@@ -5,13 +5,13 @@ namespace StudentInformationSystem.Data
 {
     public partial class dbNalandaContext : DbContext
     {
-        public virtual DbSet<ClassRoom> ClassRooms { get; set; }
-        public virtual DbSet<CR_Monitor> CR_Monitors { get; set; }
-        public virtual DbSet<CR_Student> CR_Students { get; set; }
-        public virtual DbSet<CR_StudentSubject> CR_StudentSubjects { get; set; }
-        public virtual DbSet<CR_StudentSubjectMark> CR_StudentSubjectMarks { get; set; }
-        public virtual DbSet<CR_Subject> CR_Subjects { get; set; }
-        public virtual DbSet<CR_Teacher> CR_Teachers { get; set; }
+        public virtual DbSet<PhysicalClassRoom> PhysicalClassRooms { get; set; }
+        public virtual DbSet<PCR_Monitor> PCR_Monitors { get; set; }
+        public virtual DbSet<PCR_Student> PCR_Students { get; set; }
+        public virtual DbSet<PCR_StudentSubject> PCR_StudentSubjects { get; set; }
+        public virtual DbSet<PCR_StudentSubjectMark> PCR_StudentSubjectMarks { get; set; }
+        public virtual DbSet<PCR_Subject> PCR_Subjects { get; set; }
+        public virtual DbSet<PCR_Teacher> PCR_Teachers { get; set; }
         public virtual DbSet<GradeClass> GradeClasses { get; set; }
         public virtual DbSet<GradeClassSubject> GradeClassSubjects { get; set; }
         public virtual DbSet<GradeSubject> GradeSubjects { get; set; }
@@ -20,7 +20,7 @@ namespace StudentInformationSystem.Data
 
         partial void OnModelCreatingPartial_Academic(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ClassRoom>(entity =>
+            modelBuilder.Entity<PhysicalClassRoom>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -38,7 +38,7 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_GradeClass_Classes");
             });
 
-            modelBuilder.Entity<CR_Monitor>(entity =>
+            modelBuilder.Entity<PCR_Monitor>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -53,7 +53,7 @@ namespace StudentInformationSystem.Data
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
-                entity.HasOne(d => d.ClassRoom)
+                entity.HasOne(d => d.PhysicalClassRoom)
                     .WithMany(p => p.ClassMonitors)
                     .HasForeignKey(d => d.CR_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -66,7 +66,7 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_Student_ClassMonitors");
             });
 
-            modelBuilder.Entity<CR_Student>(entity =>
+            modelBuilder.Entity<PCR_Student>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -77,7 +77,7 @@ namespace StudentInformationSystem.Data
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
-                entity.HasOne(d => d.ClassRoom)
+                entity.HasOne(d => d.PhysicalClassRoom)
                     .WithMany(p => p.ClassStudents)
                     .HasForeignKey(d => d.CR_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -90,7 +90,7 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_Student_ClassStudents");
             });
 
-            modelBuilder.Entity<CR_StudentSubject>(entity =>
+            modelBuilder.Entity<PCR_StudentSubject>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -114,7 +114,7 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_Subject_StudentSubjects");
             });
 
-            modelBuilder.Entity<CR_StudentSubjectMark>(entity =>
+            modelBuilder.Entity<PCR_StudentSubjectMark>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -132,7 +132,7 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_ClassStudentSubject_ClassStudentSubjectMarks");
             });
 
-            modelBuilder.Entity<CR_Subject>(entity =>
+            modelBuilder.Entity<PCR_Subject>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -143,7 +143,7 @@ namespace StudentInformationSystem.Data
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
-                entity.HasOne(d => d.ClassRoom)
+                entity.HasOne(d => d.PhysicalClassRoom)
                     .WithMany(p => p.ClassSubjects)
                     .HasForeignKey(d => d.CR_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -164,7 +164,7 @@ namespace StudentInformationSystem.Data
                 entity.Property(e => e.StaffId).IsRequired(false);
             });
 
-            modelBuilder.Entity<CR_Teacher>(entity =>
+            modelBuilder.Entity<PCR_Teacher>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -179,7 +179,7 @@ namespace StudentInformationSystem.Data
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
-                entity.HasOne(d => d.ClassRoom)
+                entity.HasOne(d => d.PhysicalClassRoom)
                     .WithMany(p => p.ClassTeachers)
                     .HasForeignKey(d => d.CR_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)

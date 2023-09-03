@@ -59,9 +59,9 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 if (exStaffNo != null)
                 { ModelState.AddModelError("StaffNumber", "Staff Number Already Exists."); }
 
-                var exSchoolEmail = db.StaffMembers.Where(e => e.SchoolEmail == staff.SchoolEmail).FirstOrDefault();
-                if (exSchoolEmail != null)
-                { ModelState.AddModelError("SchoolEmail", $"Email Already Assinged to - {exSchoolEmail.StaffNumber}."); }
+                var exSchoolEmail_MS = db.StaffMembers.Where(e => e.SchoolEmail_MS == staff.SchoolEmail_MS).FirstOrDefault();
+                if (exSchoolEmail_MS != null)
+                { ModelState.AddModelError("SchoolEmail_MS", $"Email Already Assinged to - {exSchoolEmail_MS.StaffNumber}."); }
 
                 if (staff.IsTeacher && staff.TeacherSectionId == null)
                     ModelState.AddModelError("TeacherSectionId", "Teacher section is required.");
@@ -136,9 +136,9 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 if (exStaffNo != null)
                 { ModelState.AddModelError("StaffNumber", "Staff Number Already Exists."); }
 
-                var exSchoolEmail = db.StaffMembers.Where(e => e.Id != staff.Id && !string.IsNullOrEmpty(e.SchoolEmail) && e.SchoolEmail == staff.SchoolEmail).FirstOrDefault();
-                if (exSchoolEmail != null)
-                { ModelState.AddModelError("SchoolEmail", $"Email Already Assinged to - {exSchoolEmail.StaffNumber}."); }
+                var exSchoolEmail_MS = db.StaffMembers.Where(e => e.Id != staff.Id && !string.IsNullOrEmpty(e.SchoolEmail_MS) && e.SchoolEmail_MS == staff.SchoolEmail_MS).FirstOrDefault();
+                if (exSchoolEmail_MS != null)
+                { ModelState.AddModelError("SchoolEmail", $"Email Already Assinged to - {exSchoolEmail_MS.StaffNumber}."); }
 
                 if (staff.IsTeacher && staff.TeacherSectionId == null)
                     ModelState.AddModelError("TeacherSectionId", "Teacher section is required.");
@@ -153,7 +153,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = staff.GetEntity();
-                    modObj.CopyContent(obj, "StaffNumber,Gender,Title,FullName,Initials,LastName,Address1,Address2,City,MobileNo,SchoolEmail,Nicno,TelHome,ImmeContactName,ImmeContactNo,Status,ImagePath,JoinedDate,RetiredDate,IsTeacher,TeacherSectionId");
+                    modObj.CopyContent(obj, "StaffNumber,Gender,Title,FullName,Initials,LastName,Address1,Address2,City,MobileNo,SchoolEmail_MS,Nicno,TelHome,ImmeContactName,ImmeContactNo,Status,ImagePath,JoinedDate,RetiredDate,IsTeacher,TeacherSectionId");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;

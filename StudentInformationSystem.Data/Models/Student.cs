@@ -9,10 +9,10 @@ namespace StudentInformationSystem.Data.Models
     {
         public Student()
         {
-            ClassStudents = new HashSet<CR_Student>();
+            ClassStudents = new HashSet<PCR_Student>();
             StudentFamilies = new HashSet<StudentFamily>();
             StudentSiblings = new HashSet<StudentSibling>();
-            ClassMonitors = new HashSet<CR_Monitor>();
+            ClassMonitors = new HashSet<PCR_Monitor>();
             StudentBasketSubjects = new HashSet<StudentBasketSubject>();
             StudentTransfers = new HashSet<StudentTransfer>();
 
@@ -23,7 +23,7 @@ namespace StudentInformationSystem.Data.Models
         }
 
         [DisplayName("Admission No")]
-        public int IndexNo { get; set; }
+        public int AdmissionNo { get; set; }
         [DisplayName("Date of Birth"), Required]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DOB { get; set; }
@@ -33,8 +33,10 @@ namespace StudentInformationSystem.Data.Models
         public string Initials { get; set; }
         [DisplayName("Last Name"), Required]
         public string LastName { get; set; }
-        [DisplayName("School Email")]
-        public string SchoolEmail { get; set; }
+        [DisplayName("School Email - Google")]
+        public string SchoolEmail_Google { get; set; }
+        [DisplayName("School Email - Microsoft")]
+        public string SchoolEmail_MS { get; set; }
         [DisplayName("Address")]
         [Required]
         public string Address1 { get; set; }
@@ -64,13 +66,33 @@ namespace StudentInformationSystem.Data.Models
         [Required]
         [DisplayName("Admitted Grade")]
         public int? AdmittedGradeId { get; set; }
+        [DisplayName("Admitted Class")]
+        public int? AdmittedClassId { get; set; }
+
+        public BloodGroup BloodGroup { get; set; }
+        public decimal HomeLatitude { get; set; }
+        public decimal HomeLongitude { get; set; }
+        public MaritalStatus ParentsMaritalStatus { get; set; }
+        public ParentsDeceased ParentsDeceasedStatus { get; set; }
+        public TransportMode TransportMode { get; set; }
+        public string DriverDetails { get; set; }
+        [DisplayName("Known Illnesses or Allergies")]
+        public string KnownIllnesses { get; set; }
+        public string BC_FrontImagePath { get; set; }
+        public string BC_BackImagePath { get; set; }
+        public DivisionalSecretariat CurrentDivSecretariat { get; set; }
+        public string CurrentGramaDiv { get; set; }
+        public DivisionalSecretariat BirthDivSecretariat { get; set; }
+        public string BirthGramaDiv { get; set; }
+        public string BirthPlace { get; set; }
 
         public virtual Grade AdmittedGrade { get; set; }
-        public virtual ClassRoom LastClass { get; set; }
-        public virtual ICollection<CR_Student> ClassStudents { get; set; }
+        public virtual PhysicalClassRoom LastClass { get; set; }
+        public virtual PhysicalClassRoom AdmittedClass { get; set; }
+        public virtual ICollection<PCR_Student> ClassStudents { get; set; }
         public virtual ICollection<StudentFamily> StudentFamilies { get; set; }
         public virtual ICollection<StudentSibling> StudentSiblings { get; set; }
-        public virtual ICollection<CR_Monitor> ClassMonitors { get; set; }
+        public virtual ICollection<PCR_Monitor> ClassMonitors { get; set; }
         public virtual ICollection<StudentBasketSubject> StudentBasketSubjects { get; set; }
         public virtual ICollection<StudentTransfer> StudentTransfers { get; set; }
 

@@ -25,10 +25,10 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             if (year == null || cr_Id == null || subjectId == null || term == null)
                 return PartialView("_StudentMarksIndex", new List<CR_StudentSubjectMarkVM>());
 
-            var lst = (from c in db.ClassRooms.Where(x => x.Year == year && x.Id == cr_Id)
-                       from s in db.CR_Students.Where(x => x.CR_Id == c.Id)
-                       from ss in db.CR_StudentSubjects.Where(x => x.CR_StudentId == s.Id && x.SubjectId == subjectId).DefaultIfEmpty()
-                       from ssm in db.CR_StudentSubjectMarks.Where(x => x.CR_StudentSubjectId == ss.Id && x.Term == term).DefaultIfEmpty()
+            var lst = (from c in db.PhysicalClassRooms.Where(x => x.Year == year && x.Id == cr_Id)
+                       from s in db.PCR_Students.Where(x => x.CR_Id == c.Id)
+                       from ss in db.PCR_StudentSubjects.Where(x => x.CR_StudentId == s.Id && x.SubjectId == subjectId).DefaultIfEmpty()
+                       from ssm in db.PCR_StudentSubjectMarks.Where(x => x.CR_StudentSubjectId == ss.Id && x.Term == term).DefaultIfEmpty()
                        from gc in db.GradeClasses.Where(x => x.Id == c.GradeClassId)
                        from gs in db.GradeSubjects.Where(x => x.GradeId == gc.GradeId && x.SubjectId == subjectId).DefaultIfEmpty()
                        from gcs in db.GradeClassSubjects.Where(x => x.GradeClassId == gc.Id && x.SubjectId == subjectId).DefaultIfEmpty()
@@ -37,7 +37,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                        {
                            ssm.Id,
                            s.StudentId,
-                           s.Student.IndexNo,
+                           s.Student.AdmissionNo,
                            s.Student.FullName,
                            ssm.CR_StudentSubjectId,
                            Term = term.Value,
@@ -53,7 +53,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                       {
                           Id = x.MaxOrDefault(y => y.Id),
                           StudentId = x.Key,
-                          IndexNo = x.MaxOrDefault(y => y.IndexNo),
+                          AdmissionNo = x.MaxOrDefault(y => y.AdmissionNo),
                           StudentName = x.MaxOrDefault(y => y.FullName),
                           CR_StudentSubjectId = x.MaxOrDefault(y => y.CR_StudentSubjectId),
                           Term = term.Value,
@@ -79,12 +79,12 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
 
-                    var crStud = db.ClassRooms.Find(cr_Id).ClassStudents.Where(x => x.StudentId == studentId).FirstOrDefault();
+                    var crStud = db.PhysicalClassRooms.Find(cr_Id).ClassStudents.Where(x => x.StudentId == studentId).FirstOrDefault();
                     var csStudSub = crStud.StudentSubjects.Where(x => x.SubjectId == subjectId).FirstOrDefault();
 
                     if (csStudSub == null)
                     {
-                        csStudSub = new Data.Models.CR_StudentSubject() { SubjectId = subjectId.Value, CreatedBy = GetCurrUser(), CreatedDate = DateTime.Now };
+                        csStudSub = new Data.Models.PCR_StudentSubject() { SubjectId = subjectId.Value, CreatedBy = GetCurrUser(), CreatedDate = DateTime.Now };
                         crStud.StudentSubjects.Add(csStudSub);
                     }
 
@@ -92,7 +92,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
                     if (csStudSubMark == null)
                     {
-                        csStudSubMark = new Data.Models.CR_StudentSubjectMark() { Term = term.Value, Marks = marks.Value, CreatedBy = GetCurrUser(), CreatedDate = DateTime.Now };
+                        csStudSubMark = new Data.Models.PCR_StudentSubjectMark() { Term = term.Value, Marks = marks.Value, CreatedBy = GetCurrUser(), CreatedDate = DateTime.Now };
                         csStudSub.ClassStudentSubjectMarks.Add(csStudSubMark);
                     }
                     else

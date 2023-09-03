@@ -11,11 +11,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var stud in Model.OrderBy(x => x.IndexNo))
+            @foreach (var stud in Model.OrderBy(x => x.AdmissionNo))
             {
 
                 <tr>
-                    <td class="align-middle">@stud.IndexNo</td>
+                    <td class="align-middle">@stud.AdmissionNo</td>
                     <td class="align-middle">@stud.StudentName</td>
                     <td class="align-middle">@Html.EditorFor(x => stud.Marks, new { htmlAttributes = new { @class = "marks form-control", data_db_val = stud.Marks, data_stud_id = stud.StudentId } })</td>
                 </tr>

@@ -111,6 +111,12 @@ namespace StudentInformationSystem.Data
                     .HasForeignKey(d => d.StudentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_StudentStudFamily");
+
+                entity.HasOne(d => d.Parent)
+                    .WithMany(p => p.FamilyStudents)
+                    .HasForeignKey(d => d.ParentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ParentStudFamily");
             });
 
             modelBuilder.Entity<StudentSibling>(entity =>
@@ -161,6 +167,12 @@ namespace StudentInformationSystem.Data
                     .HasForeignKey(d => d.LastClassId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LastClass_LastClassStudents");
+
+                entity.HasOne(d => d.AdmittedClass)
+                    .WithMany(p => p.AdmittedClassStudents)
+                    .HasForeignKey(d => d.AdmittedClassId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AdmittedClass_AdmittedClassStudents");
 
                 entity.Property(e => e.DOB).IsRequired(false);
                 entity.Property(e => e.Address1).IsRequired(false);

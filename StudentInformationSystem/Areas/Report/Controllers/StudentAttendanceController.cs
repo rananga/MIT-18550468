@@ -62,15 +62,15 @@ namespace StudentInformationSystem.Areas.Report.Controllers
             var qry1 = from ocr in db.OnlineClassRooms
                        from oc in ocqry.Where(x => x.OCR_Id == ocr.Id)
                        from pcr in db.OCR_ClassRooms.Where(x => x.OCR_Id == ocr.Id)
-                       from cr in db.ClassRooms.Where(x => x.Id == pcr.CR_Id)
-                       from crs in db.CR_Students.Where(x => x.CR_Id == pcr.CR_Id)
+                       from cr in db.PhysicalClassRooms.Where(x => x.Id == pcr.CR_Id)
+                       from crs in db.PCR_Students.Where(x => x.CR_Id == pcr.CR_Id)
                        from s in db.Students.Where(x => x.Id == crs.StudentId)
                        select new
                        {
                            oc.Id,
                            oc.Date,
                            StudentId = s.Id,
-                           s.IndexNo,
+                           s.AdmissionNo,
                            s.FullName,
                            oc.Subject,
                            StudentClass = cr.GradeClass.Code
@@ -125,7 +125,7 @@ namespace StudentInformationSystem.Areas.Report.Controllers
                       {
                           q1.Id,
                           q1.Date,
-                          q1.IndexNo,
+                          q1.AdmissionNo,
                           q1.FullName,
                           q2.Duration,
                           q1.Subject,
@@ -137,7 +137,7 @@ namespace StudentInformationSystem.Areas.Report.Controllers
             {
                 OC_Id = x.Id,
                 MeetingDate = x.Date,
-                AdmissionNo = x.IndexNo,
+                AdmissionNo = x.AdmissionNo,
                 StudentName = x.FullName,
                 Duration = x.cmid == 0 ? "" : para.ByDuration ? getDuration(x.Duration) : x.Duration == 0 ? "X" : "C",
                 Subject = x.Subject,

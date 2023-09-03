@@ -164,12 +164,12 @@ namespace StudentInformationSystem.Sync
             var fromTime = cls.Date.Add(cls.FromTime).AddMinutes(-120);
             var toTime = cls.Date.Add(cls.ToTime).AddMinutes(120);
 
-            var filteredAudit = db.AuditTemp.Where(x => x.MeetingDate >= fromTime && x.MeetingDate <= toTime && x.ParticipantEmail == cls.OCR_Teacher.StaffMember.SchoolEmail);
+            var filteredAudit = db.AuditTemp.Where(x => x.MeetingDate >= fromTime && x.MeetingDate <= toTime && x.ParticipantEmail == cls.OCR_Teacher.StaffMember.SchoolEmail_Google);
             var meetings = filteredAudit.Select(x => x.MeetingCode).Distinct().ToList();
 
             if (meetings.Count == 0)
             {
-                var teacherEmails = cls.OnlineClassRoom.ClassTeachers.Select(x => x.StaffMember.SchoolEmail).ToList();
+                var teacherEmails = cls.OnlineClassRoom.ClassTeachers.Select(x => x.StaffMember.SchoolEmail_Google).ToList();
                 filteredAudit = db.AuditTemp.Where(x => x.MeetingDate >= fromTime && x.MeetingDate <= toTime && teacherEmails.Contains(x.ParticipantEmail));
                 meetings = filteredAudit.Select(x => x.MeetingCode).Distinct().ToList();
             }
@@ -181,12 +181,12 @@ namespace StudentInformationSystem.Sync
 
                 var filteredAuditMeet = db.AuditTemp.Where(x => x.MeetingDate >= fromTime && x.MeetingDate <= toTime && x.MeetingCode == meet);
 
-                var studs = cls.OnlineClassRoom.PhysicalClassRooms.SelectMany(x => x.ClassRoom.ClassStudents).ToList();
+                var studs = cls.OnlineClassRoom.PhysicalClassRooms.SelectMany(x => x.PhysicalClassRoom.ClassStudents).ToList();
                 if (cls.OnlineClassRoom.Subject.SubjectCategory.IsBasket)
                     studs = studs.Where(x => x.Student.StudentBasketSubjects.Any(y => y.SubjectId == cls.OnlineClassRoom.Subject.Id)).ToList();
 
                 var newMeetAttendees = studs
-                    .Join(filteredAuditMeet, x => x.Student.SchoolEmail, x => x.ParticipantEmail, (x, y) => new { x.StudentId, y.MeetingCode, y.Duration })
+                    .Join(filteredAuditMeet, x => x.Student.SchoolEmail_Google, x => x.ParticipantEmail, (x, y) => new { x.StudentId, y.MeetingCode, y.Duration })
                     .GroupBy(x => new { x.MeetingCode, x.StudentId })
                     .Select(x => new OC_MeetingAttendee()
                     {
@@ -214,8 +214,7 @@ namespace StudentInformationSystem.Sync
                 if (isNew)
                     cls.OC_Meetings.Add(newMeet);
 
-                if (log != null)
-                    Common.LogIt(log, db, LogSevierity.Info, $"Online class meeting synced \"{newMeet.MeetingCode}\".");
+                Common.LogIt(log, db, LogSevierity.Info, $"Online class meeting synced \"{newMeet.MeetingCode}\".");
                 db.SaveChanges();
             }
         }

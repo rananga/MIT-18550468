@@ -468,6 +468,7 @@
                                   <Value>=Fields!MarksTerm1.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>0;(0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -503,6 +504,7 @@
                                   <Value>=Fields!MarksTerm2.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>0;(0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -538,6 +540,7 @@
                                   <Value>=Fields!MarksTerm3.Value</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>0;(0)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -573,6 +576,7 @@
                                   <Value>=(Fields!MarksTerm1.Value + Fields!MarksTerm2.Value + Fields!MarksTerm3.Value) / 3</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
+                                    <Format>0.00;(0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -953,8 +957,132 @@ IIF (Parameters!OrderBy.Value = 3, "Term 3 Marks", "Average Marks")))</Value>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!PassCount.Value</Value>
+                    <Style>
+                      <Format>0;(0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.57985in</Top>
+            <Left>1.10063in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!FailCount.Value</Value>
+                    <Style>
+                      <Format>0;(0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox4</rd:DefaultName>
+            <Top>1.8993in</Top>
+            <Left>1.10063in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Pass count :</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>1.57985in</Top>
+            <Left>0.16313in</Left>
+            <Height>0.25in</Height>
+            <Width>0.83333in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Fail count :</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>1.8993in</Top>
+            <Left>0.16313in</Left>
+            <Height>0.25in</Height>
+            <Width>0.83333in</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>1.62499in</Height>
+        <Height>2.27082in</Height>
         <Style />
       </Body>
       <Width>7.71793in</Width>
@@ -1100,7 +1228,7 @@ IIF (Parameters!OrderBy.Value = 3, "Term 3 Marks", "Average Marks")))</Value>
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>0.72918in</Height>
+          <Height>0.79168in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1141,7 +1269,7 @@ IIF (Parameters!OrderBy.Value = 3, "Term 3 Marks", "Average Marks")))</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox7</rd:DefaultName>
-              <Top>0.32292in</Top>
+              <Top>0.36458in</Top>
               <Left>0.16313in</Left>
               <Height>0.40626in</Height>
               <Width>7.38479in</Width>
@@ -1175,7 +1303,7 @@ IIF (Parameters!OrderBy.Value = 3, "Term 3 Marks", "Average Marks")))</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
-              <Top>0.02778in</Top>
+              <Top>0.06944in</Top>
               <Left>6.54792in</Left>
               <Height>0.22569in</Height>
               <Width>1in</Width>
@@ -1220,6 +1348,14 @@ IIF (Parameters!OrderBy.Value = 3, "Term 3 Marks", "Average Marks")))</Value>
       <DataType>Integer</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="PassCount">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="FailCount">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -1240,6 +1376,16 @@ IIF (Parameters!OrderBy.Value = 3, "Term 3 Marks", "Average Marks")))</Value>
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>OrderBy</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>PassCount</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>FailCount</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

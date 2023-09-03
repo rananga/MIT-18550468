@@ -10,7 +10,7 @@ namespace StudentInformationSystem.Data.Models
         public GradeClass()
         {
             GradeClassSubjects = new HashSet<GradeClassSubject>();
-            Classes = new HashSet<ClassRoom>();
+            Classes = new HashSet<PhysicalClassRoom>();
         }
 
         [DisplayName("Grade")]
@@ -25,6 +25,6 @@ namespace StudentInformationSystem.Data.Models
 
         public virtual Grade Grade { get; set; }
         public virtual ICollection<GradeClassSubject> GradeClassSubjects { get; set; }
-        public virtual ICollection<ClassRoom> Classes { get; set; }
+        public virtual ICollection<PhysicalClassRoom> Classes { get; set; }
     }
 }

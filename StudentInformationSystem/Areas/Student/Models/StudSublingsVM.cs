@@ -15,7 +15,7 @@ namespace StudentInformationSystem.Areas.Student.Models
             mappings = new ObjMappings<StudentSibling, StudSiblingsVM>();
 
             mappings.Add(x => x.SiblingStudent.Initials + " " + x.SiblingStudent.LastName, x => x.StudWithInit);
-            mappings.Add(x => x.SiblingStudent.IndexNo, x => x.IndexNo);
+            mappings.Add(x => x.SiblingStudent.AdmissionNo, x => x.AdmissionNo);
         }
 
         public StudSiblingsVM(StudentSibling obj) : this()
@@ -28,6 +28,6 @@ namespace StudentInformationSystem.Areas.Student.Models
         [DisplayName("Name with initials")]
         public string StudWithInit { get; set; }
         [DisplayName("Admission No")]
-        public int IndexNo { get; set; }
+        public int AdmissionNo { get; set; }
     }
 }

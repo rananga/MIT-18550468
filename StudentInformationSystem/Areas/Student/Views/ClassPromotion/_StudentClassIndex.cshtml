@@ -23,10 +23,10 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var stud in Model.OrderBy(x => x.IndexNo))
+        @foreach (var stud in Model.OrderBy(x => x.AdmissionNo))
         {
             <tr>
-                <td class="align-middle">@stud.IndexNo</td>
+                <td class="align-middle">@stud.AdmissionNo</td>
                 <td class="align-middle">@stud.StudentName</td>
                 <td class="align-middle">@stud.StudentMedium.ToEnumChar()</td>
                 <td class="align-middle">@stud.FromClassName</td>

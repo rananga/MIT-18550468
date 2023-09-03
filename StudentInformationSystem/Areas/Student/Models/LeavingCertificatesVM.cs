@@ -13,7 +13,7 @@ namespace StudentInformationSystem.Areas.Student.Models
         public LeavingCertificatesVM()
         {
             mappings = new ObjMappings<LeavingCertificate, LeavingCertificatesVM>();
-            mappings.Add(x => x.Student.IndexNo, x => x.AdmissionNo);
+            mappings.Add(x => x.Student.AdmissionNo, x => x.AdmissionNo);
             mappings.Add(x => x.Student.Initials + " " + x.Student.LastName, x => x.StudentName);
         }
 

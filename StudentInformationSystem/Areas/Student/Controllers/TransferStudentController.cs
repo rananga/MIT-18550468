@@ -14,7 +14,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
     {
         public ActionResult Index(BaseViewModel<StudentTransferVM> vm)
         {
-            vm.SetList(db.StudentTransfers.AsQueryable(), "IndexNo");
+            vm.SetList(db.StudentTransfers.AsQueryable(), "AdmissionNo");
             return View(vm);
         }
 

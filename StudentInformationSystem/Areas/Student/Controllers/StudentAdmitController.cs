@@ -25,19 +25,19 @@ namespace StudentInformationSystem.Areas.Student.Controllers
         public ActionResult StudentClassIndex(int? year, int? gradeId)
         {
             if (year == null || gradeId == null)
-                return PartialView("_StudentClassIndex", new List<CR_StudentVM>());
+                return PartialView("_StudentClassIndex", new List<PCR_StudentVM>());
 
             var lst = db.Students.Where(x => x.AdmittedGradeId == gradeId && x.LastClassId == null)
-                .Select(x => new CR_StudentVM
+                .Select(x => new PCR_StudentVM
                 {
                     StudentId = x.Id,
-                    StudentIndex = x.IndexNo,
+                    StudentIndex = x.AdmissionNo,
                     StudentName = x.FullName,
                     StudentMedium = x.Medium
                 }).ToList();
 
-            var classes = db.ClassRooms.Where(x => x.Year == year && x.GradeClass.GradeId == gradeId)
-                .Select(x => new ClassRoomVM
+            var classes = db.PhysicalClassRooms.Where(x => x.Year == year && x.GradeClass.GradeId == gradeId)
+                .Select(x => new PhysicalClassRoomVM
                 {
                     Id = x.Id,
                     ClassName = x.GradeClass.Name,
@@ -55,9 +55,9 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                 cls.StudentCount += 1;
             }
 
-            ViewBag.smClasses = db.ClassRooms.Where(x => x.Year == year && x.GradeClass.GradeId == gradeId && x.Medium == Medium.Sinhala)
+            ViewBag.smClasses = db.PhysicalClassRooms.Where(x => x.Year == year && x.GradeClass.GradeId == gradeId && x.Medium == Medium.Sinhala)
                 .Select(x => new KeyValuePair<int, string>(x.Id, x.GradeClass.Code)).ToList();
-            ViewBag.emClasses = db.ClassRooms.Where(x => x.Year == year && x.GradeClass.GradeId == gradeId && x.Medium == Medium.English)
+            ViewBag.emClasses = db.PhysicalClassRooms.Where(x => x.Year == year && x.GradeClass.GradeId == gradeId && x.Medium == Medium.English)
                 .Select(x => new KeyValuePair<int, string>(x.Id, x.GradeClass.Code)).ToList();
 
             return PartialView("_StudentClassIndex", lst);
@@ -68,7 +68,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
         {
             try
             {
-                var cr = db.ClassRooms.Find(CR_Id);
+                var cr = db.PhysicalClassRooms.Find(CR_Id);
                 var stud = db.Students.Find(studentId);
 
                 if (cr == null || stud == null)
@@ -81,7 +81,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                     stud.ModifiedBy = this.GetCurrUser();
                     stud.ModifiedDate = DateTime.Now;
 
-                    cr.ClassStudents.Add(new CR_Student()
+                    cr.ClassStudents.Add(new PCR_Student()
                     {
                         CR_Id = cr.Id,
                         StudentId = stud.Id,
@@ -111,7 +111,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                 var data = info.DeserializeToDynamic();
                 foreach (dynamic item in data)
                 {
-                    var cr = db.ClassRooms.Find(int.Parse(item.CR_Id.ToString()));
+                    var cr = db.PhysicalClassRooms.Find(int.Parse(item.CR_Id.ToString()));
                     var stud = db.Students.Find(int.Parse(item.studentId.ToString()));
 
                     if (cr == null || stud == null)
@@ -122,7 +122,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                         stud.ModifiedBy = this.GetCurrUser();
                         stud.ModifiedDate = DateTime.Now;
 
-                        cr.ClassStudents.Add(new CR_Student()
+                        cr.ClassStudents.Add(new PCR_Student()
                         {
                             CR_Id = cr.Id,
                             StudentId = stud.Id,

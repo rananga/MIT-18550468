@@ -105,7 +105,7 @@ namespace StudentInformationSystem.Data
                     .IsConcurrencyToken();
 
                 entity.HasOne(d => d.Teacher)
-                    .WithMany(p => p.TeacherPreferedSubjects)
+                    .WithMany(p => p.TeacherPreferredSubjects)
                     .HasForeignKey(d => d.TeacherId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Teacher_TeacherPreferedSubjects");

@@ -147,7 +147,7 @@ namespace StudentInformationSystem.Areas.Base
                     x => new
                     {
                         x.Id,
-                        NIC_No = x.Nicno,
+                        NIC_No = x.NicNo,
                         Full_Name = x.FullName
                     });
             }
@@ -255,7 +255,8 @@ namespace StudentInformationSystem.Areas.Base
 
                 if (!filter.IsBlank())
                 {
-                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.StaffMember.Title.ToString() + (x.StaffMember.Initials + x.StaffMember.LastName).ToString()).ToLower().Contains(filter.ToLower()));
+                    var lowFilter = filter.ToLower();
+                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.StaffMember.Initials.Contains(lowFilter) || x.StaffMember.LastName.Contains(lowFilter)));
                 }
 
                 int rowCount = qry.Count();
@@ -273,14 +274,14 @@ namespace StudentInformationSystem.Areas.Base
 
                 var lstSortColMap = new Dictionary<string, string>()
                 {
-                    { "Id", "Id" } ,
+                    { "Id", "StaffMember.Id" } ,
                     { "Teacher_Name", "StaffMember.LastName" }
                 };
 
                 return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
                     x => new
                     {
-                        x.Id,
+                        Id = x.StaffMember.Id,
                         Teacher_Name = x.StaffMember.Title + ". " + x.StaffMember.Initials + " " + x.StaffMember.LastName
                     });
             }
@@ -299,7 +300,7 @@ namespace StudentInformationSystem.Areas.Base
 
                 if (!filter.IsBlank())
                 {
-                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.IndexNo + (x.Initials + x.LastName).ToString()).ToLower().Contains(filter.ToLower()));
+                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.AdmissionNo.ToString().Contains(filter.ToLower()) || x.Initials.Contains(filter.ToLower()) || x.LastName.Contains(filter.ToLower())));
                 }
 
                 int rowCount = qry.Count();
@@ -318,7 +319,7 @@ namespace StudentInformationSystem.Areas.Base
                 var lstSortColMap = new Dictionary<string, string>()
                 {
                     { "StudID", "StudID" } ,
-                    { "Admission_No", "IndexNo" } ,
+                    { "Admission_No", "AdmissionNo" } ,
                     { "Student", "Student" }
                 };
 
@@ -326,7 +327,7 @@ namespace StudentInformationSystem.Areas.Base
                     x => new
                     {
                         x.Id,
-                        Admission_No = x.IndexNo,
+                        Admission_No = x.AdmissionNo,
                         Student = x.Initials + " " + x.LastName
                     });
             }
@@ -336,7 +337,7 @@ namespace StudentInformationSystem.Areas.Base
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
-                var qry = dbctx.ClassRooms.AsQueryable();
+                var qry = dbctx.PhysicalClassRooms.AsQueryable();
 
                 if (year != null)
                 {
@@ -391,7 +392,7 @@ namespace StudentInformationSystem.Areas.Base
 
                 if (!filter.IsBlank())
                 {
-                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Year + x.PhysicalClassRooms.Select(y => y.ClassRoom.GradeClass.Code).Aggregate((y, z) => y + ", " + z)).Contains(filter.ToLower()));
+                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Year + x.PhysicalClassRooms.Select(y => y.PhysicalClassRoom.GradeClass.Code).Aggregate((y, z) => y + ", " + z)).Contains(filter.ToLower()));
                 }
 
                 int rowCount = qry.Count();
@@ -417,7 +418,7 @@ namespace StudentInformationSystem.Areas.Base
                     {
                         x.Id,
                         x.Year,
-                        Class = x.PhysicalClassRooms.Select(y => y.ClassRoom.GradeClass.Code).Aggregate((y, z) => y + ", " + z),
+                        Class = x.PhysicalClassRooms.Select(y => y.PhysicalClassRoom.GradeClass.Code).Aggregate((y, z) => y + ", " + z),
                         Class_Teacher = x.ClassTeachers.Where(y => y.IsOwner).FirstOrDefault()?.StaffMember?.FullName,
                         Class_Teacher_Id = x.ClassTeachers.Where(y => y.IsOwner).FirstOrDefault()?.Id
                     });
@@ -454,8 +455,8 @@ namespace StudentInformationSystem.Areas.Base
 
                 var lstSortColMap = new Dictionary<string, string>()
                 {
-                    { "Staff_Number", "ClassTeacher.StaffNumber" },
-                    { "Full_Name", "ClassTeacher.FullName" }
+                    { "Staff_Number", "StaffMember.StaffNumber" },
+                    { "Full_Name", "StaffMember.FullName" }
                 };
 
                 return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
@@ -595,10 +596,10 @@ namespace StudentInformationSystem.Areas.Base
 
         //        if (isLowerGrade)
         //        {
-        //            var clsStud = qry.Select(x => x.Student.IndexNo).ToList();
+        //            var clsStud = qry.Select(x => x.Student.AdmissionNo).ToList();
         //            //cls.Grade--;
         //            var lastYear = periodSetup.PeriodStartDate.AddYears(-1).Year;
-        //            //qry = dbctx.ClassStudents.Where(x => x.PromotionClass.Class.Grade == cls.Grade && x.PromotionClass.Class.ClassDesc != cls.Name && !clsStud.Contains(x.Student.IndexNo) && x.PromotionClass.PeriodSetup.PeriodStartDate.Year == lastYear && x.Student.Status == StudStatus.Active).AsQueryable();
+        //            //qry = dbctx.ClassStudents.Where(x => x.PromotionClass.Class.Grade == cls.Grade && x.PromotionClass.Class.ClassDesc != cls.Name && !clsStud.Contains(x.Student.AdmissionNo) && x.PromotionClass.PeriodSetup.PeriodStartDate.Year == lastYear && x.Student.Status == StudStatus.Active).AsQueryable();
         //        }
 
         //        if (isMediRep)
@@ -608,8 +609,8 @@ namespace StudentInformationSystem.Areas.Base
 
         //        if (!filter.IsBlank())
         //        {
-        //            //qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.StudId.ToString()+x.Student.FullName+x.Student.Initials+x.Student.Lname+x.Student.IndexNo+x.PromotionClass.Class.Grade+x.PromotionClass.Class.ClassDesc+ x.PromotionClass.PeriodSetup.PeriodStartDate.ToString() + x.PromotionClass.PeriodSetup.PeriodEndDate.ToString()).Contains(filter.ToLower()));
-        //            //qry = qry.Where(searchForKey ? "ClStudID.ToString().Contains(@0)" : "(StudID.ToString()+Student.FullName+Student.Initials+Student.LName+Student.IndexNo+PromotionClass.Class.Grade+PromotionClass.Class.ClassDesc).Contains(@0)", filter.ToLower());
+        //            //qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.StudId.ToString()+x.Student.FullName+x.Student.Initials+x.Student.Lname+x.Student.AdmissionNo+x.PromotionClass.Class.Grade+x.PromotionClass.Class.ClassDesc+ x.PromotionClass.PeriodSetup.PeriodStartDate.ToString() + x.PromotionClass.PeriodSetup.PeriodEndDate.ToString()).Contains(filter.ToLower()));
+        //            //qry = qry.Where(searchForKey ? "ClStudID.ToString().Contains(@0)" : "(StudID.ToString()+Student.FullName+Student.Initials+Student.LName+Student.AdmissionNo+PromotionClass.Class.Grade+PromotionClass.Class.ClassDesc).Contains(@0)", filter.ToLower());
         //        }
 
         //        int rowCount = qry.Count();
@@ -630,7 +631,7 @@ namespace StudentInformationSystem.Areas.Base
         //            {"ClStudID", "ClStudID" },
         //            {"StudID", "StudID" },
         //            { "Student", "Student.Initials+Student.LName" },
-        //            { "Admission_No", "Student.IndexNo" },
+        //            { "Admission_No", "Student.AdmissionNo" },
         //            { "Class", "PromotionClass.Class.Grade+PromotionClass.Class.ClassDesc" },
         //            { "Period", "PromotionClass.PeriodSetup.PeriodStartDate.ToString('yyyy-MM-dd')+PromotionClass.PeriodSetup.PeriodEndDate.ToString('yyyy-MM-dd')" }
         //        };
@@ -641,7 +642,7 @@ namespace StudentInformationSystem.Areas.Base
         //            x.Id,
         //            x.StudentId,
         //            Student = x.Student.Title + ". " + x.Student.Initials + " " + x.Student.Lname,
-        //            Admission_No = x.Student.IndexNo//,
+        //            Admission_No = x.Student.AdmissionNo//,
         //            //Class = x.PromotionClass.Class.Grade.ToEnumChar() + " - " + x.PromotionClass.Class.ClassDesc,
         //            //Period = x.PromotionClass.PeriodSetup.PeriodStartDate.ToString("yyyy-MM-dd") + " - " + x.PromotionClass.PeriodSetup.PeriodEndDate.ToString("yyyy-MM-dd")
         //        });

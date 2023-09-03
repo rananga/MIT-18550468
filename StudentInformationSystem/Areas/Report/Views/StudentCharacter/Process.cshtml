@@ -2,7 +2,7 @@
 @model StudentInformationSystem.Areas.Report.Models.ReportParameterVM
 
 @{
-    ViewBag.Title = "Student Character";
+    ViewBag.Title = "Student Informations";
 }
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmReport" }))
@@ -12,7 +12,7 @@
         <br />
         <p>
             @Html.SubmitToDifferentAction("Generate PDF", new { @class = "btn btn-primary", style = "min-width:75px" }, "Pdf")
-            @Html.SubmitToDifferentAction("Generate Excel Sheet", new { @class = "btn btn-success", style = "min-width:75px" }, "Excel")
+            @*@Html.SubmitToDifferentAction("Generate Excel Sheet", new { @class = "btn btn-success", style = "min-width:75px" }, "Excel")*@
         </p>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

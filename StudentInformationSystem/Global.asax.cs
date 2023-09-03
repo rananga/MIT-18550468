@@ -46,45 +46,45 @@ namespace StudentInformationSystem
 
         protected void Application_Error(Object sender, EventArgs e)
         {
-            bool isAjaxCall = string.Equals("XMLHttpRequest", Context.Request.Headers["x-requested-with"], StringComparison.OrdinalIgnoreCase);
-            if (isAjaxCall)
-            { return; }
+            //bool isAjaxCall = string.Equals("XMLHttpRequest", Context.Request.Headers["x-requested-with"], StringComparison.OrdinalIgnoreCase);
+            //if (isAjaxCall)
+            //{ return; }
 
-            Exception lastExcp = Server.GetLastError();
-            int? errCode = null;
+            //Exception lastExcp = Server.GetLastError();
+            //int? errCode = null;
 
-            Exception excp = lastExcp.GetBaseException();
+            //Exception excp = lastExcp.GetBaseException();
 
-            string stackEntryDelimiter = " at ";
-            string topStackEntry = String.Empty;
-            string stackTrace = excp.StackTrace;
-            try
-            {
-                int nextStackEntry = stackTrace.IndexOf(stackEntryDelimiter, stackEntryDelimiter.Length);
-                if (nextStackEntry > 0)
-                {
-                    topStackEntry = stackTrace.Substring(0, nextStackEntry);
-                }
-                else
-                {
-                    topStackEntry = stackTrace;
-                }
-            }
-            catch (Exception) { }
+            //string stackEntryDelimiter = " at ";
+            //string topStackEntry = String.Empty;
+            //string stackTrace = excp.StackTrace;
+            //try
+            //{
+            //    int nextStackEntry = stackTrace.IndexOf(stackEntryDelimiter, stackEntryDelimiter.Length);
+            //    if (nextStackEntry > 0)
+            //    {
+            //        topStackEntry = stackTrace.Substring(0, nextStackEntry);
+            //    }
+            //    else
+            //    {
+            //        topStackEntry = stackTrace;
+            //    }
+            //}
+            //catch (Exception) { }
 
-            try
-            {
-                string eventLogFormat = "Error in {0} User: {1} Error Message: {2} Line: {3}";
-                string[] eventLogArgs = { Request.Url.ToString(), Context.User.Identity.Name, excp.Message, topStackEntry };
-                string logMessage = String.Format(eventLogFormat, eventLogArgs);
+            //try
+            //{
+            //    string eventLogFormat = "Error in {0} User: {1} Error Message: {2} Line: {3}";
+            //    string[] eventLogArgs = { Request.Url.ToString(), Context.User.Identity.Name, excp.Message, topStackEntry };
+            //    string logMessage = String.Format(eventLogFormat, eventLogArgs);
 
-                log4net.ILog logger = log4net.LogManager.GetLogger(this.GetType());
-                logger.Error(logMessage);
-            }
-            catch (Exception) { }
+            //    log4net.ILog logger = log4net.LogManager.GetLogger(this.GetType());
+            //    logger.Error(logMessage);
+            //}
+            //catch (Exception) { }
 
-            Server.ClearError();
-            Server.TransferRequest("~/Base/Home/Error/" + errCode, true);
+            //Server.ClearError();
+            //Server.TransferRequest("~/Base/Home/Error/" + errCode, true);
         }
 
         protected void Session_Start(object sender, EventArgs e)

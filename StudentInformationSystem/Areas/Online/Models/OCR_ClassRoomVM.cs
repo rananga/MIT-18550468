@@ -12,7 +12,7 @@ namespace StudentInformationSystem.Areas.Online.Models
         {
             mappings = new ObjMappings<OCR_ClassRoom, OCR_ClassRoomVM>();
 
-            mappings.Add(x => x.ClassRoom.GradeClass.Code, x => x.ClassCode);
+            mappings.Add(x => x.PhysicalClassRoom.GradeClass.Code, x => x.ClassCode);
         }
 
         public OCR_ClassRoomVM(OCR_ClassRoom obj) : this()

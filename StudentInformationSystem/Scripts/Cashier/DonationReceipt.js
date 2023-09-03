@@ -1,6 +1,6 @@
 ﻿$.ajaxSetup({ cache: false });
 var objDonationID = $("#DonationID");
-var objStdentIndexNo = $("#IndexNo");
+var objStdentAdmissionNo = $("#AdmissionNo");
 var objStdentName = $("#StudentName");
 var objAmount = $("#Amount");
 
@@ -9,7 +9,7 @@ $(function () {
 
         $.getJSON(AppRoot + "Cashier/DonationReceipt/GetStudentDetails", { DonationID: Number(objDonationID.val()) }, function (jsn) {
             objStdentName.val(jsn.StName);
-            objStdentIndexNo.val(jsn.StIndexNo);
+            objStdentAdmissionNo.val(jsn.StAdmissionNo);
             objAmount.val(jsn.amount.toFixed(2));
         }).error(function (data, status, jqXHR) {
             if (IsJson(data.responseText)) { AlertIt("ERROR: " + JSON.parse(data.responseText).Message); }

@@ -55,13 +55,13 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             var dbTrans = db.Database.BeginTransaction();
             try
             {
-                var existObj = db.Visitors.Where(e => e.Nicno == vm.Nicno).FirstOrDefault();
+                var existObj = db.Visitors.Where(e => e.NicNo == vm.NicNo).FirstOrDefault();
                 if (existObj != null)
                 { ModelState.AddModelError("Nicno", "NIC already assigned."); }
 
-                var exSchoolEmail = db.Visitors.Where(e => e.SchoolEmail == vm.SchoolEmail).FirstOrDefault();
-                if (exSchoolEmail != null)
-                { ModelState.AddModelError("SchoolEmail", $"Email Already Assinged to - {exSchoolEmail.FullName}."); }
+                var exSchoolEmail_MS = db.Visitors.Where(e => e.SchoolEmail_MS == vm.SchoolEmail_MS).FirstOrDefault();
+                if (exSchoolEmail_MS != null)
+                { ModelState.AddModelError("SchoolEmail_MS", $"Email Already Assinged to - {exSchoolEmail_MS.FullName}."); }
 
                 var svm = (VisitorVM)Session[sskCrtdObj];
 
@@ -126,13 +126,13 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             byte[] curRowVersion = null;
             try
             {
-                var existObj = db.Visitors.Where(e => e.Id != vm.Id && e.Nicno == vm.Nicno).FirstOrDefault();
+                var existObj = db.Visitors.Where(e => e.Id != vm.Id && e.NicNo == vm.NicNo).FirstOrDefault();
                 if (existObj != null)
                 { ModelState.AddModelError("Nicno", "NIC already assigned."); }
 
-                var exSchoolEmail = db.Visitors.Where(e => e.Id != vm.Id && !string.IsNullOrEmpty(e.SchoolEmail) && e.SchoolEmail == vm.SchoolEmail).FirstOrDefault();
-                if (exSchoolEmail != null)
-                { ModelState.AddModelError("SchoolEmail", $"Email Already Assinged to - {exSchoolEmail.FullName}."); }
+                var exSchoolEmail_MS = db.Visitors.Where(e => e.Id != vm.Id && !string.IsNullOrEmpty(e.SchoolEmail_MS) && e.SchoolEmail_MS == vm.SchoolEmail_MS).FirstOrDefault();
+                if (exSchoolEmail_MS != null)
+                { ModelState.AddModelError("SchoolEmail_MS", $"Email Already Assinged to - {exSchoolEmail_MS.FullName}."); }
 
                 var svm = (VisitorVM)Session[sskCrtdObj];
 
@@ -144,7 +144,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = vm.GetEntity();
-                    modObj.CopyContent(obj, "Gender,Title,FullName,Initials,LastName,Address1,Address2,City,MobileNo,SchoolEmail,Nicno,ImagePath");
+                    modObj.CopyContent(obj, "Gender,Title,FullName,Initials,LastName,Address1,Address2,City,MobileNo,SchoolEmail_MS,Nicno,ImagePath");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;

@@ -18,6 +18,9 @@ namespace StudentInformationSystem.Data
         public virtual DbSet<OCR_Teacher> OCR_Teachers { get; set; }
         public virtual DbSet<OnlineClassRoom> OnlineClassRooms { get; set; }
         public virtual DbSet<OnlineClass> OnlineClasses { get; set; }
+        public virtual DbSet<SyncLog> SyncLogs { get; set; }
+        public virtual DbSet<SyncQueue> SyncQueue { get; set; }
+        public virtual DbSet<GradeEmail> GradeEmails { get; set; }
 
         partial void OnModelCreatingPartial_Online(ModelBuilder modelBuilder)
         {
@@ -27,17 +30,17 @@ namespace StudentInformationSystem.Data
 
                 entity.Property(e => e.MeetingDate).HasColumnType("datetime");
 
-                entity.Property(e => e.ParticipantEmail).HasMaxLength(30);
+                entity.Property(e => e.ParticipantEmail).HasMaxLength(100);
 
-                entity.Property(e => e.CalendarEventId).HasMaxLength(50);
+                entity.Property(e => e.CalendarEventId).HasMaxLength(100);
 
                 entity.Property(e => e.ConferenceId)
                     .HasColumnName("ConferenceID")
-                    .HasMaxLength(50);
+                    .HasMaxLength(100);
 
-                entity.Property(e => e.MeetingCode).HasMaxLength(30);
+                entity.Property(e => e.MeetingCode).HasMaxLength(100);
 
-                entity.Property(e => e.OrganizerEmail).HasMaxLength(30);
+                entity.Property(e => e.OrganizerEmail).HasMaxLength(100);
             });
 
             modelBuilder.Entity<OC_Meeting>(entity =>
@@ -76,7 +79,7 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_OC_Meeting_OC_MeetingAttendees");
             });
 
-            modelBuilder.Entity<OCR_ClassRoom>((Action<Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<OCR_ClassRoom>>)(entity =>
+            modelBuilder.Entity<OCR_ClassRoom>(entity =>
             {
                 entity.HasKey(e => e.Id);
 
@@ -88,17 +91,17 @@ namespace StudentInformationSystem.Data
                     .IsConcurrencyToken();
 
                 entity.HasOne(d => d.OnlineClassRoom)
-                    .WithMany((System.Linq.Expressions.Expression<Func<OnlineClassRoom, IEnumerable<OCR_ClassRoom>>>)(p => (IEnumerable<OCR_ClassRoom>)p.PhysicalClassRooms))
+                    .WithMany(p => p.PhysicalClassRooms)
                     .HasForeignKey(d => d.OCR_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OnlineClassRoom_OCR_ClassRooms");
 
-                entity.HasOne(d => d.ClassRoom)
+                entity.HasOne(d => d.PhysicalClassRoom)
                     .WithMany(p => p.OCR_ClassRooms)
                     .HasForeignKey(d => d.CR_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ClassRoom_OCR_ClassRooms");
-            }));
+            });
 
             modelBuilder.Entity<OCR_Teacher>(entity =>
             {
@@ -170,6 +173,29 @@ namespace StudentInformationSystem.Data
                     .HasForeignKey(d => d.OCR_TeacherId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OCR_Teacher_OnlineClasses");
+            });
+
+            modelBuilder.Entity<SyncLog>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.LogDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Message).HasColumnType("nvarchar(MAX)");
+            });
+
+            modelBuilder.Entity<SyncQueue>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.QueuedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.JsonData).HasColumnType("nvarchar(MAX)");
+            });
+
+            modelBuilder.Entity<GradeEmail>(entity =>
+            {
+                entity.HasKey(e => new { e.Year, e.Grade });
             });
         }
     }

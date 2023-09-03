@@ -1146,7 +1146,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Title.Value, "dsStudent")+" "+First(Fields!Initials.Value, "dsStudent")+" "+First(Fields!LastName.Value, "dsStudent")</Value>
+                <Value>=First(Fields!Initials.Value, "dsStudent")+" "+First(Fields!LastName.Value, "dsStudent")</Value>
                 <Style>
                   <FontFamily>Calibri</FontFamily>
                 </Style>

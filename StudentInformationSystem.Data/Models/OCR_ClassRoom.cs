@@ -14,6 +14,6 @@ namespace StudentInformationSystem.Data.Models
         public int CR_Id { get; set; }
 
         public virtual OnlineClassRoom OnlineClassRoom { get; set; }
-        public virtual ClassRoom ClassRoom { get; set; }
+        public virtual PhysicalClassRoom PhysicalClassRoom { get; set; }
     }
 }

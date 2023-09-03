@@ -12,6 +12,7 @@ namespace StudentInformationSystem.Data
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<GradeHead> GradeHeads { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<Parent> Parents { get; set; }
         public virtual DbSet<PermissionGradeAccess> PermissionGradeAccesses { get; set; }
         public virtual DbSet<PermissionMenuAccess> PermissionMenuAccesses { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
@@ -154,6 +155,20 @@ namespace StudentInformationSystem.Data
                     .WithMany(p => p.InverseParentMenu)
                     .HasForeignKey(d => d.ParentMenuId)
                     .HasConstraintName("FK_MenuMenu");
+            });
+
+            modelBuilder.Entity<Parent>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+
+                entity.HasOne(b => b.User).WithOne(p => p.Parent).HasForeignKey<User>(b => b.ParentId);
             });
 
             modelBuilder.Entity<PermissionGradeAccess>(entity =>

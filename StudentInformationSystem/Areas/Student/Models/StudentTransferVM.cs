@@ -10,7 +10,7 @@ namespace StudentInformationSystem.Areas.Student.Models
         public StudentTransferVM()
         {
             mappings = new ObjMappings<StudentTransfer, StudentTransferVM>();
-            mappings.Add(x => x.Student.IndexNo, x => x.IndexNo);
+            mappings.Add(x => x.Student.AdmissionNo, x => x.AdmissionNo);
             mappings.Add(x => x.Student.FullName, x => x.StudentName);
             mappings.Add(x => x.FromClass.GradeClass.Code, x => x.FromClassName);
             mappings.Add(x => x.ToClass.GradeClass.Code, x => x.ToClassName);
@@ -23,7 +23,7 @@ namespace StudentInformationSystem.Areas.Student.Models
         public ObjMappings<StudentTransfer, StudentTransferVM> mappings { get; set; }
 
         [DisplayName("Admission No")]
-        public int IndexNo { get; set; }
+        public int AdmissionNo { get; set; }
         [DisplayName("Student")]
         public string StudentName { get; set; }
         [DisplayName("From Class")]

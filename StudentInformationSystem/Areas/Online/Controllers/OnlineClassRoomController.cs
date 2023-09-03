@@ -3,6 +3,7 @@ using StudentInformationSystem.Areas.Base;
 using StudentInformationSystem.Areas.Online.Models;
 using StudentInformationSystem.Common;
 using StudentInformationSystem.Data;
+using StudentInformationSystem.Data.Models;
 using System;
 using System.Linq;
 using System.Net;
@@ -80,21 +81,26 @@ namespace StudentInformationSystem.Areas.Online.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(OnlineClassRoomVM grade)
+        public ActionResult Create(OnlineClassRoomVM vm)
         {
+            var dbTrans = db.Database.BeginTransaction();
             try
             {
-                //var exClass = db.OnlineClassRooms.Where(e => e.GradeId == grade.GradeId && e.Name == grade.Name).FirstOrDefault();
-                //if (exClass != null)
-                //{ ModelState.AddModelError("", "Class already exists for the grade."); }
-
                 var svm = (OnlineClassRoomVM)Session[sskCrtdObj];
+
+                //var aggClasses = svm.ClassRooms.Select(x => db.PhysicalClassRooms.Find(x.CR_Id).GradeClass.Code).Aggregate((x, y) => x + "," + y);
+                //var exClass = db.OnlineClassRooms.Where(e => e.GradeId == vm.GradeId &&
+                //    e.SubjectId == vm.SubjectId &&
+                //    e.ClassTeachers.FirstOrDefault(x => x.IsOwner).StaffId == svm.Teachers.FirstOrDefault(x => x.IsOwner).StaffId &&
+                //    e.PhysicalClassRooms.Select(x => x.PhysicalClassRoom.GradeClass.Code).Aggregate((x, y) => x + "," + y) == aggClasses).FirstOrDefault();
+                //if (exClass != null)
+                //{ ModelState.AddModelError("", "Class already exists for the selected grade, physical classrooms, subject & teacher."); }
 
                 if (ModelState.IsValid)
                 {
-                    grade.CreatedBy = this.GetCurrUser();
-                    grade.CreatedDate = DateTime.Now;
-                    var obj = db.OnlineClassRooms.Add(grade.GetEntity()).Entity;
+                    vm.CreatedBy = this.GetCurrUser();
+                    vm.CreatedDate = DateTime.Now;
+                    var obj = db.OnlineClassRooms.Add(vm.GetEntity()).Entity;
 
                     foreach (var det in svm.ClassRooms)
                     {
@@ -109,19 +115,30 @@ namespace StudentInformationSystem.Areas.Online.Controllers
                         det.CreatedDate = DateTime.Now;
                         obj.ClassTeachers.Add(det.GetEntity());
                     }
+                    db.SaveChanges();
+
+                    var jsData = new { OCR_Id = obj.Id };
+                    db.SyncQueue.Add(new SyncQueue() { QueuedDate = DateTime.Now, SyncType = SyncType.CreateCourse, JsonData = jsData.SerializeToJson() });
 
                     db.SaveChanges();
+                    dbTrans.Commit();
 
                     AddAlert(AlertStyles.success, "Online classroom created successfully.");
                     return RedirectToAction("Index");
                 }
             }
             catch (DbEntityValidationException dbEx)
-            { this.ShowEntityErrors(dbEx); }
+            {
+                dbTrans.Rollback();
+                this.ShowEntityErrors(dbEx);
+            }
             catch (Exception ex)
-            { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
+            {
+                dbTrans.Rollback();
+                AddAlert(AlertStyles.danger, ex.GetInnerException().Message);
+            }
 
-            return View(grade);
+            return View(vm);
         }
 
         [AllowAnonymous]
@@ -157,7 +174,7 @@ namespace StudentInformationSystem.Areas.Online.Controllers
                 {
                     obj = (OnlineClassRoomVM)Session[sskCrtdObj];
                     vm.Id = Math.Min(obj.ClassRooms.Select(x => x.Id).MinOrDefault(), 0) - 1;
-                    var objCR = db.ClassRooms.Find(vm.CR_Id);
+                    var objCR = db.PhysicalClassRooms.Find(vm.CR_Id);
                     vm.ClassCode = objCR.GradeClass.Code;
                     obj.ClassRooms.Add(vm);
 
@@ -264,7 +281,7 @@ namespace StudentInformationSystem.Areas.Online.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(OnlineClassRoomVM grade)
+        public ActionResult Edit(OnlineClassRoomVM vm)
         {
             byte[] curRowVersion = null;
             try
@@ -273,18 +290,18 @@ namespace StudentInformationSystem.Areas.Online.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var obj = db.OnlineClassRooms.Find(grade.Id);
+                    var obj = db.OnlineClassRooms.Find(vm.Id);
                     if (obj == null)
                     { throw new DbUpdateConcurrencyException(); }
 
                     curRowVersion = obj.RowVersion;
-                    var modObj = grade.GetEntity();
+                    var modObj = vm.GetEntity();
                     modObj.CopyContent(obj, "Code,Medium,MaxStudentCount");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;
 
-                    db.Entry(obj).OriginalValues["RowVersion"] = grade.RowVersion;
+                    db.Entry(obj).OriginalValues["RowVersion"] = vm.RowVersion;
 
                     db.OCR_ClassRooms.RemoveRange(obj.PhysicalClassRooms.Where(x =>
                         !svm.ClassRooms.Select(y => y.Id).ToList().Contains(x.Id)));
@@ -314,6 +331,9 @@ namespace StudentInformationSystem.Areas.Online.Controllers
                         }
                     }
 
+                    var jsData = new { OCR_Id = obj.Id };
+                    db.SyncQueue.Add(new SyncQueue() { QueuedDate = DateTime.Now, SyncType = SyncType.UpdateCourse, JsonData = jsData.SerializeToJson() });
+
                     db.SaveChanges();
 
                     AddAlert(AlertStyles.success, "Online classroom modified successfully.");
@@ -323,23 +343,23 @@ namespace StudentInformationSystem.Areas.Online.Controllers
             catch (DbUpdateConcurrencyException ex)
             {
                 this.ShowConcurrencyErrors(ex);
-                grade.RowVersion = curRowVersion;
+                vm.RowVersion = curRowVersion;
             }
             catch (DbEntityValidationException dbEx)
             { this.ShowEntityErrors(dbEx); }
             catch (Exception ex)
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
-            return View(grade);
+            return View(vm);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(OnlineClassRoomVM grade)
+        public ActionResult DeleteConfirmed(OnlineClassRoomVM vm)
         {
             try
             {
-                var obj = db.OnlineClassRooms.Find(grade.Id);
+                var obj = db.OnlineClassRooms.Find(vm.Id);
                 if (obj == null)
                 { throw new DbUpdateConcurrencyException(""); }
 
@@ -350,6 +370,10 @@ namespace StudentInformationSystem.Areas.Online.Controllers
                 entry.Collection(x => x.ClassTeachers).Load();
                 db.OCR_Teachers.RemoveRange(entry.Entity.ClassTeachers);
                 entry.State = EntityState.Deleted;
+
+                var jsData = new { GoogleCourseId = obj.GoogleClassRoomId, obj.Year, obj.GradeId };
+                db.SyncQueue.Add(new SyncQueue() { QueuedDate = DateTime.Now, SyncType = SyncType.DeleteCourse, JsonData = jsData.SerializeToJson() });
+
                 db.SaveChanges();
 
                 AddAlert(AlertStyles.success, "Online classroom deleted successfully.");
@@ -365,7 +389,7 @@ namespace StudentInformationSystem.Areas.Online.Controllers
             {
                 AddAlert(AlertStyles.danger, ex.GetInnerException().Message);
             }
-            return RedirectToAction("Details", new { id = grade.Id });
+            return RedirectToAction("Details", new { id = vm.Id });
         }
 
         [HttpPost, ActionName("PhysicalClassDelete")]

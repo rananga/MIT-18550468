@@ -1,4 +1,4 @@
-﻿@model StudentInformationSystem.Areas.Academic.Models.ClassRoomVM
+﻿@model StudentInformationSystem.Areas.Academic.Models.PhysicalClassRoomVM
 
 @{
     ViewBag.Title = "Edit Class Information";
@@ -53,7 +53,7 @@
 </div>
 
 <div class="ChildContent">
-    @{ Html.RenderAction("StudentIndex", new { id = Model.Id, isToEdit = true }); }
+    @{ Html.RenderAction("StudentIndex", new { id = Model.Id, isToEdit = false }); }
 </div>
 
 <br />

@@ -19,544 +19,47 @@ namespace StudentInformationSystem.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_Monitor", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.AuditTemp", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CR_Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnName("CreatedDate")
+                    b.Property<DateTime>("MeetingDate")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FromDate")
-                        .HasColumnType("date");
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ParticipantEmail")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnName("ModifiedDate")
-                        .HasColumnType("datetime");
+                    b.Property<long>("UniqueQualifier")
+                        .HasColumnType("bigint");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
+                    b.Property<string>("CalendarEventId")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
+                    b.Property<string>("ConferenceId")
+                        .HasColumnName("ConferenceID")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
-                    b.Property<DateTime>("ToDate")
-                        .HasColumnType("date");
+                    b.Property<long?>("Duration")
+                        .HasColumnType("bigint");
 
-                    b.HasKey("Id");
+                    b.Property<bool>("IsOutSide")
+                        .HasColumnType("bit");
 
-                    b.HasIndex("CR_Id");
+                    b.Property<string>("MeetingCode")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
-                    b.HasIndex("StudentId");
+                    b.Property<string>("OrganizerEmail")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
-                    b.ToTable("CR_Monitors");
-                });
+                    b.HasKey("MeetingDate", "CustomerId", "ParticipantEmail", "UniqueQualifier");
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_Student", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CR_Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnName("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnName("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CR_Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("CR_Students");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 6
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 7
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 8
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 9
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 10
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 11
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 12
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 13
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 14
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 15
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 16
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 17
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 18
-                        },
-                        new
-                        {
-                            Id = 19,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 19
-                        },
-                        new
-                        {
-                            Id = 20,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 20
-                        },
-                        new
-                        {
-                            Id = 21,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 21
-                        },
-                        new
-                        {
-                            Id = 22,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 22
-                        },
-                        new
-                        {
-                            Id = 23,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 23
-                        },
-                        new
-                        {
-                            Id = 24,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 24
-                        },
-                        new
-                        {
-                            Id = 25,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 25
-                        },
-                        new
-                        {
-                            Id = 26,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 26
-                        },
-                        new
-                        {
-                            Id = 27,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 27
-                        },
-                        new
-                        {
-                            Id = 28,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 28
-                        },
-                        new
-                        {
-                            Id = 29,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 29
-                        },
-                        new
-                        {
-                            Id = 30,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 30
-                        },
-                        new
-                        {
-                            Id = 31,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 31
-                        },
-                        new
-                        {
-                            Id = 32,
-                            CR_Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = 32
-                        });
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_StudentSubject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CR_StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnName("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnName("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CR_StudentId");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("CR_StudentSubjects");
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_StudentSubjectMark", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CR_StudentSubjectId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnName("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<decimal>("Marks")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnName("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("Term")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CR_StudentSubjectId");
-
-                    b.ToTable("CR_StudentSubjectMarks");
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_Subject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CR_Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnName("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnName("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int?>("StaffId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CR_Id");
-
-                    b.HasIndex("StaffId");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("CR_Subjects");
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_Teacher", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CR_Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnName("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("FromDate")
-                        .HasColumnType("date");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnName("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("StaffId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ToDate")
-                        .HasColumnType("date");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CR_Id");
-
-                    b.HasIndex("StaffId");
-
-                    b.ToTable("CR_Teachers");
+                    b.ToTable("AuditTemp");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassPromotion", b =>
@@ -659,67 +162,6 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasIndex("ToClassId");
 
                     b.ToTable("ClassPromotionDetails");
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassRoom", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnName("CreatedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("GradeClassId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Medium")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnName("ModifiedDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int?>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GradeClassId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("ClassRooms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GradeClassId = 1,
-                            Medium = 0,
-                            Year = 2021
-                        });
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ExtraActivity", b =>
@@ -1116,6 +558,126 @@ namespace StudentInformationSystem.Data.Migrations
                             GradeId = 1,
                             Medium = 0,
                             Name = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "1.B",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 1,
+                            Medium = 0,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "1.C",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 1,
+                            Medium = 0,
+                            Name = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "1.D",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 1,
+                            Medium = 0,
+                            Name = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "9.A",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 9,
+                            Medium = 1,
+                            Name = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Code = "9.B",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 9,
+                            Medium = 1,
+                            Name = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Code = "9.C",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 9,
+                            Medium = 0,
+                            Name = 3
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Code = "9.D",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 9,
+                            Medium = 0,
+                            Name = 4
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Code = "9.E",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 9,
+                            Medium = 0,
+                            Name = 5
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Code = "9.F",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 9,
+                            Medium = 0,
+                            Name = 6
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Code = "9.G",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 9,
+                            Medium = 0,
+                            Name = 7
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Code = "9.H",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 9,
+                            Medium = 0,
+                            Name = 8
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Code = "9.I",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeId = 9,
+                            Medium = 0,
+                            Name = 9
                         });
                 });
 
@@ -1161,6 +723,90 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("GradeClassSubjects");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.GradeEmail", b =>
+                {
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Year", "Grade");
+
+                    b.ToTable("GradeEmails");
+
+                    b.HasData(
+                        new
+                        {
+                            Year = 2021,
+                            Grade = 1,
+                            EmailAddress = "grade1-2021@nalandacollege.info"
+                        },
+                        new
+                        {
+                            Year = 2021,
+                            Grade = 2,
+                            EmailAddress = "grade2-2021@nalandacollege.info"
+                        },
+                        new
+                        {
+                            Year = 2021,
+                            Grade = 3,
+                            EmailAddress = "grade3-2021@nalandacollege.info"
+                        },
+                        new
+                        {
+                            Year = 2021,
+                            Grade = 4,
+                            EmailAddress = "grade4-2021@nalandacollege.info"
+                        },
+                        new
+                        {
+                            Year = 2021,
+                            Grade = 5,
+                            EmailAddress = "grade5-2021@nalandacollege.info"
+                        },
+                        new
+                        {
+                            Year = 2021,
+                            Grade = 6,
+                            EmailAddress = "grade6-2021@nalandacollege.info"
+                        },
+                        new
+                        {
+                            Year = 2021,
+                            Grade = 7,
+                            EmailAddress = "grade7-2021@nalandacollege.info"
+                        },
+                        new
+                        {
+                            Year = 2021,
+                            Grade = 8,
+                            EmailAddress = "grade8-2021@nalandacollege.info"
+                        },
+                        new
+                        {
+                            Year = 2021,
+                            Grade = 9,
+                            EmailAddress = "grade9-2021@nalandacollege.info"
+                        },
+                        new
+                        {
+                            Year = 2021,
+                            Grade = 10,
+                            EmailAddress = "grade10-2021@nalandacollege.info"
+                        },
+                        new
+                        {
+                            Year = 2021,
+                            Grade = 11,
+                            EmailAddress = "grade11-2021@nalandacollege.info"
+                        });
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.GradeHead", b =>
@@ -2294,6 +1940,788 @@ namespace StudentInformationSystem.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_Monitor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CR_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CR_Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("PCR_Monitors");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CR_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("RegisterNo")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CR_Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("PCR_Students");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 10
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 11
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 12
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 13
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 14
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 15
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 16
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 17
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 18
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 19
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 20
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 21
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 22
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 23
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 24
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 25
+                        },
+                        new
+                        {
+                            Id = 26,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 26
+                        },
+                        new
+                        {
+                            Id = 27,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 27
+                        },
+                        new
+                        {
+                            Id = 28,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 28
+                        },
+                        new
+                        {
+                            Id = 29,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 29
+                        },
+                        new
+                        {
+                            Id = 30,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 30
+                        },
+                        new
+                        {
+                            Id = 31,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 31
+                        },
+                        new
+                        {
+                            Id = 32,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 32
+                        },
+                        new
+                        {
+                            Id = 33,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 33
+                        },
+                        new
+                        {
+                            Id = 34,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 34
+                        },
+                        new
+                        {
+                            Id = 35,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 35
+                        },
+                        new
+                        {
+                            Id = 36,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 36
+                        },
+                        new
+                        {
+                            Id = 37,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 37
+                        },
+                        new
+                        {
+                            Id = 38,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 38
+                        },
+                        new
+                        {
+                            Id = 39,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 39
+                        },
+                        new
+                        {
+                            Id = 40,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 40
+                        },
+                        new
+                        {
+                            Id = 41,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 41
+                        },
+                        new
+                        {
+                            Id = 42,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 42
+                        },
+                        new
+                        {
+                            Id = 43,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 43
+                        },
+                        new
+                        {
+                            Id = 44,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 44
+                        },
+                        new
+                        {
+                            Id = 45,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 45
+                        },
+                        new
+                        {
+                            Id = 46,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 46
+                        },
+                        new
+                        {
+                            Id = 47,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 47
+                        },
+                        new
+                        {
+                            Id = 48,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 48
+                        },
+                        new
+                        {
+                            Id = 49,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 49
+                        },
+                        new
+                        {
+                            Id = 50,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 50
+                        },
+                        new
+                        {
+                            Id = 51,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 51
+                        },
+                        new
+                        {
+                            Id = 52,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 52
+                        },
+                        new
+                        {
+                            Id = 53,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 53
+                        },
+                        new
+                        {
+                            Id = 54,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 54
+                        },
+                        new
+                        {
+                            Id = 55,
+                            CR_Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
+                            StudentId = 55
+                        });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_StudentSubject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CR_StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CR_StudentId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("PCR_StudentSubjects");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_StudentSubjectMark", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CR_StudentSubjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<decimal>("Marks")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("Term")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CR_StudentSubjectId");
+
+                    b.ToTable("PCR_StudentSubjectMarks");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_Subject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CR_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int?>("StaffId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CR_Id");
+
+                    b.HasIndex("StaffId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("PCR_Subjects");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_Teacher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CR_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int>("StaffId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CR_Id");
+
+                    b.HasIndex("StaffId");
+
+                    b.ToTable("PCR_Teachers");
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Permission", b =>
                 {
                     b.Property<int>("PermissionId")
@@ -2384,6 +2812,175 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             MenuId = 1,
                             PermissionId = 1
+                        });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PhysicalClassRoom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("GradeClassId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Medium")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GradeClassId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("PhysicalClassRooms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 1,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 2,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 3,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 4,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 5,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 6,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 7,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 8,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 9,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 10,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 11,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 12,
+                            Medium = 0,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GradeClassId = 13,
+                            Medium = 0,
+                            Year = 2021
                         });
                 });
 
@@ -2610,7 +3207,10 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<string>("SchoolEmail")
+                    b.Property<string>("SchoolEmail_Google")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SchoolEmail_MS")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("StaffNumber")
@@ -2641,42 +3241,296 @@ namespace StudentInformationSystem.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Address1 = "24/3, Udyana Avenue",
-                            Address2 = "Pepiliyana Road",
-                            City = "Nugegoda",
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "Piumali Manorika Suraweera",
+                            FullName = "Diana Sladen",
                             Gender = 1,
-                            ImmeContactName = "Malith",
-                            ImmeContactNo = "0773411392",
-                            Initials = "P M",
-                            LastName = "Suraweera",
-                            MobileNo = "0714479648",
-                            Nicno = "880272580V",
-                            StaffNumber = 123,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Diana",
+                            LastName = "Sladen",
+                            MobileNo = "0712345678",
+                            Nicno = "888888001V",
+                            SchoolEmail_Google = "dainas@nalandacollege.info",
+                            StaffNumber = 101,
                             Status = 0,
                             Title = 5
                         },
                         new
                         {
                             Id = 2,
-                            Address1 = "45C, School Avenue",
-                            Address2 = "Raththanapitiya",
-                            City = "Boralesgamuwa",
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "Udara Rathnayaka",
-                            Gender = 0,
-                            ImmeContactName = "Umandya",
-                            ImmeContactNo = "0773412392",
-                            Initials = "U",
-                            LastName = "Rathnayaka",
-                            MobileNo = "0716669648",
-                            Nicno = "900272580V",
-                            StaffNumber = 456,
+                            FullName = "Ayomi Dilhani",
+                            Gender = 1,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Ayomi",
+                            LastName = "Dilhani",
+                            MobileNo = "0712345678",
+                            Nicno = "888888002V",
+                            SchoolEmail_Google = "ayomik@nalandacollege.info",
+                            StaffNumber = 102,
                             Status = 0,
                             Title = 5
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Apsara Vithan",
+                            Gender = 1,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Apsara",
+                            LastName = "Vithan",
+                            MobileNo = "0712345678",
+                            Nicno = "888888003V",
+                            SchoolEmail_Google = "apsarae@nalandacollege.info",
+                            StaffNumber = 103,
+                            Status = 0,
+                            Title = 5
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Malsha Mallawaarachchi",
+                            Gender = 1,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Malsha",
+                            LastName = "Mallawaarachchi",
+                            MobileNo = "0712345678",
+                            Nicno = "888888004V",
+                            SchoolEmail_Google = "malsham@nalandacollege.info",
+                            StaffNumber = 104,
+                            Status = 0,
+                            Title = 5
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Gammanpila Dayananda",
+                            Gender = 0,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Gammanpila",
+                            LastName = "Dayananda",
+                            MobileNo = "0712345678",
+                            Nicno = "888888005V",
+                            SchoolEmail_Google = "dayanandag@nalandacollege.info",
+                            StaffNumber = 105,
+                            Status = 0,
+                            Title = 4
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "D.S.Chethana",
+                            Gender = 1,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "D.S.",
+                            LastName = "Chethana",
+                            MobileNo = "0712345678",
+                            Nicno = "888888006V",
+                            SchoolEmail_Google = "chethanac@nalandacollege.info",
+                            StaffNumber = 106,
+                            Status = 0,
+                            Title = 5
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Himali Nanayakkara",
+                            Gender = 1,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Himali",
+                            LastName = "Nanayakkara",
+                            MobileNo = "0712345678",
+                            Nicno = "888888007V",
+                            SchoolEmail_Google = "himalin@nalandacollege.info",
+                            StaffNumber = 107,
+                            Status = 0,
+                            Title = 5
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Thilini Cooray",
+                            Gender = 1,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Thilini",
+                            LastName = "Cooray",
+                            MobileNo = "0712345678",
+                            Nicno = "888888008V",
+                            SchoolEmail_Google = "thilinic@nalandacollege.info",
+                            StaffNumber = 108,
+                            Status = 0,
+                            Title = 5
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Prabha Hiroshine",
+                            Gender = 1,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Prabha",
+                            LastName = "Hiroshine",
+                            MobileNo = "0712345678",
+                            Nicno = "888888009V",
+                            SchoolEmail_Google = "prabhah@nalandacollege.info",
+                            StaffNumber = 109,
+                            Status = 0,
+                            Title = 5
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Vijini Herath",
+                            Gender = 1,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Vijini",
+                            LastName = "Herath",
+                            MobileNo = "0712345678",
+                            Nicno = "888888010V",
+                            SchoolEmail_Google = "vijinih@nalandacollege.info",
+                            StaffNumber = 110,
+                            Status = 0,
+                            Title = 5
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "බැද්දේවෙල ධම්මකිත්ති හිමි",
+                            Gender = 0,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "බැද්දේවෙල",
+                            LastName = "ධම්මකිත්ති හිමි",
+                            MobileNo = "0712345678",
+                            Nicno = "888888011V",
+                            SchoolEmail_Google = "bdhammakiththi@nalandacollege.info",
+                            StaffNumber = 111,
+                            Status = 0,
+                            Title = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Kalpa Udayappriya",
+                            Gender = 0,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Kalpa",
+                            LastName = "Udayappriya",
+                            MobileNo = "0712345678",
+                            Nicno = "888888012V",
+                            SchoolEmail_Google = "kalpau@nalandacollege.info",
+                            StaffNumber = 112,
+                            Status = 0,
+                            Title = 4
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Dilani Nilanga",
+                            Gender = 1,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Dilani",
+                            LastName = "Nilanga",
+                            MobileNo = "0712345678",
+                            Nicno = "888888013V",
+                            SchoolEmail_Google = "dilinin@nalandacollege.info",
+                            StaffNumber = 113,
+                            Status = 0,
+                            Title = 5
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Address1 = "TestEntry",
+                            Address2 = "TestEntry",
+                            City = "Colombo",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Dinithi Fernando",
+                            Gender = 1,
+                            ImmeContactName = "TestEntry",
+                            ImmeContactNo = "0712345678",
+                            Initials = "Dinithi",
+                            LastName = "Fernando",
+                            MobileNo = "0712345678",
+                            Nicno = "888888014V",
+                            SchoolEmail_Google = "dinithif@nalandacollege.info",
+                            StaffNumber = 114,
+                            Status = 0,
+                            Title = 6
                         });
                 });
 
@@ -2697,7 +3551,31 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<DateTime>("AdmissionDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("AdmissionNo")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AdmittedClassId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("AdmittedGradeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BC_BackImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BC_FrontImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BirthDivSecretariat")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BirthGramaDiv")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BirthPlace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BloodGroup")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -2711,8 +3589,17 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("CreatedDate")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("CurrentDivSecretariat")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CurrentGramaDiv")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("DOB")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("DriverDetails")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmergContactName")
                         .HasColumnType("nvarchar(max)");
@@ -2724,11 +3611,14 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("HomeLatitude")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("HomeLongitude")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IndexNo")
-                        .HasColumnType("int");
 
                     b.Property<string>("Initials")
                         .IsRequired()
@@ -2736,6 +3626,9 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.Property<bool>("IsLeavingIssued")
                         .HasColumnType("bit");
+
+                    b.Property<string>("KnownIllnesses")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("LastClassId")
                         .HasColumnType("int");
@@ -2757,19 +3650,33 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("ParentsDeceasedStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ParentsMaritalStatus")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<string>("SchoolEmail")
+                    b.Property<string>("SchoolEmail_Google")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SchoolEmail_MS")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<int>("TransportMode")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AdmittedClassId");
 
                     b.HasIndex("AdmittedGradeId");
 
@@ -2782,481 +3689,1266 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 1,
                             AdmissionDate = new DateTime(2021, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25130,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "A J M T A Jayasundara",
-                            IndexNo = 29013,
-                            Initials = "A J M T A",
+                            CurrentDivSecretariat = 0,
+                            FullName = "Anuk Gunasekara",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Anuk",
                             IsLeavingIssued = false,
-                            LastName = "Jayasundara",
-                            Medium = 0,
-                            SchoolEmail = "29013@nalandacollege.info",
-                            Status = 0
+                            LastName = "Gunasekara",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25130@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 2,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24695,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "A U N De Silva",
-                            IndexNo = 28953,
-                            Initials = "A U N De",
+                            CurrentDivSecretariat = 0,
+                            FullName = "B.A.Inuka A. Abeysekara",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "B.A.Inuka A.",
                             IsLeavingIssued = false,
-                            LastName = "Silva",
-                            Medium = 0,
-                            SchoolEmail = "28953@nalandacollege.info",
-                            Status = 0
+                            LastName = "Abeysekara",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24695@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 3,
                             AdmissionDate = new DateTime(2021, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24747,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "B L R Abedeera",
-                            IndexNo = 28948,
-                            Initials = "B L R",
+                            CurrentDivSecretariat = 0,
+                            FullName = "B.A.Thavidu T. Wimalasena",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "B.A.Thavidu T.",
                             IsLeavingIssued = false,
-                            LastName = "Abedeera",
-                            Medium = 0,
-                            SchoolEmail = "28948@nalandacollege.info",
-                            Status = 0
+                            LastName = "Wimalasena",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24747@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 4,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25445,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "B M T Silva",
-                            IndexNo = 29043,
-                            Initials = "B M T",
+                            CurrentDivSecretariat = 0,
+                            FullName = "Bihandu A.Bethmage",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Bihandu A.",
                             IsLeavingIssued = false,
-                            LastName = "Silva",
-                            Medium = 0,
-                            SchoolEmail = "29043@nalandacollege.info",
-                            Status = 0
+                            LastName = "Bethmage",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25445@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 5,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24735,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "B W K M Peeris",
-                            IndexNo = 29028,
-                            Initials = "B W K M",
+                            CurrentDivSecretariat = 0,
+                            FullName = "Chanuka S.Wijerathna",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Chanuka S.",
                             IsLeavingIssued = false,
-                            LastName = "Peeris",
-                            Medium = 0,
-                            SchoolEmail = "29028@nalandacollege.info",
-                            Status = 0
+                            LastName = "Wijerathna",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24735@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 6,
                             AdmissionDate = new DateTime(2021, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24701,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "Chenuk Manthila P S",
-                            IndexNo = 29049,
-                            Initials = "Chenuk",
+                            CurrentDivSecretariat = 0,
+                            FullName = "D.T.K.Nethun Sanketh",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "D.T.K.Nethun",
                             IsLeavingIssued = false,
-                            LastName = "Manthila P S",
-                            Medium = 0,
-                            SchoolEmail = "29049@nalandacollege.info",
-                            Status = 0
+                            LastName = "Sanketh",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24701@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 7,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27403,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "D C A Dias",
-                            IndexNo = 29023,
-                            Initials = "D C A",
+                            CurrentDivSecretariat = 0,
+                            FullName = "D.W.Iran V.S.Wickramanayake",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "D.W.Iran V.S.",
                             IsLeavingIssued = false,
-                            LastName = "Dias",
-                            Medium = 0,
-                            SchoolEmail = "29023@nalandacollege.info",
-                            Status = 0
+                            LastName = "Wickramanayake",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27403@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 8,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24750,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "D J M K N Serasingha",
-                            IndexNo = 28988,
-                            Initials = "D J M K N",
+                            CurrentDivSecretariat = 0,
+                            FullName = "Dimath B Kahatapitiya",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Dimath B",
                             IsLeavingIssued = false,
-                            LastName = "Serasingha",
-                            Medium = 0,
-                            SchoolEmail = "28988@nalandacollege.info",
-                            Status = 0
+                            LastName = "Kahatapitiya",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24750@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 9,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24706,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "D M K S Liyanage",
-                            IndexNo = 28941,
-                            Initials = "D M K S",
+                            CurrentDivSecretariat = 0,
+                            FullName = "Dulain S. Jayawardhana",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Dulain S.",
                             IsLeavingIssued = false,
-                            LastName = "Liyanage",
-                            Medium = 0,
-                            SchoolEmail = "28941@nalandacollege.info",
-                            Status = 0
+                            LastName = "Jayawardhana",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24706@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 10,
                             AdmissionDate = new DateTime(2021, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25145,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "D M L Dasanayake",
-                            IndexNo = 28926,
-                            Initials = "D M L",
+                            CurrentDivSecretariat = 0,
+                            FullName = "Dulina S.Gunathilake",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Dulina S.",
                             IsLeavingIssued = false,
-                            LastName = "Dasanayake",
-                            Medium = 0,
-                            SchoolEmail = "28926@nalandacollege.info",
-                            Status = 0
+                            LastName = "Gunathilake",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25145@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 11,
                             AdmissionDate = new DateTime(2021, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24785,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "D N Gunasena",
-                            IndexNo = 28963,
-                            Initials = "D N",
+                            CurrentDivSecretariat = 0,
+                            FullName = "G.Nuran C. Perera",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "G.Nuran C.",
                             IsLeavingIssued = false,
-                            LastName = "Gunasena",
-                            Medium = 0,
-                            SchoolEmail = "28963@nalandacollege.info",
-                            Status = 0
+                            LastName = "Perera",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24785@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 12,
                             AdmissionDate = new DateTime(2021, 6, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24685,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "D W O D De Silva",
-                            IndexNo = 28983,
-                            Initials = "D W O D De",
+                            CurrentDivSecretariat = 0,
+                            FullName = "G.A.D.Daham C. Siriwardane",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "G.A.D.Daham C.",
                             IsLeavingIssued = false,
-                            LastName = "Silva",
-                            Medium = 0,
-                            SchoolEmail = "28983@nalandacollege.info",
-                            Status = 0
+                            LastName = "Siriwardane",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24685@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 13,
                             AdmissionDate = new DateTime(2021, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27390,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "E H H Nethsara",
-                            IndexNo = 28921,
-                            Initials = "E H H",
+                            CurrentDivSecretariat = 0,
+                            FullName = "G.P.Dimath Senhiru",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "G.P.Dimath",
                             IsLeavingIssued = false,
-                            LastName = "Nethsara",
-                            Medium = 0,
-                            SchoolEmail = "28921@nalandacollege.info",
-                            Status = 0
+                            LastName = "Senhiru",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27390@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 14,
                             AdmissionDate = new DateTime(2021, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24786,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "H A S Asmitha",
-                            IndexNo = 28896,
-                            Initials = "H A S",
+                            CurrentDivSecretariat = 0,
+                            FullName = "G.V.Himasha R Peiris",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "G.V.Himasha R",
                             IsLeavingIssued = false,
-                            LastName = "Asmitha",
-                            Medium = 0,
-                            SchoolEmail = "28896@nalandacollege.info",
-                            Status = 0
+                            LastName = "Peiris",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24786@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 15,
                             AdmissionDate = new DateTime(2021, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24712,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "H L S Dulsara",
-                            IndexNo = 28911,
-                            Initials = "H L S",
+                            CurrentDivSecretariat = 0,
+                            FullName = "H.A.Hirun S. Samaranayake",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "H.A.Hirun S.",
                             IsLeavingIssued = false,
-                            LastName = "Dulsara",
-                            Medium = 0,
-                            SchoolEmail = "28911@nalandacollege.info",
-                            Status = 0
+                            LastName = "Samaranayake",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24712@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 16,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24758,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "I U Roopasingha",
-                            IndexNo = 29018,
-                            Initials = "I U",
+                            CurrentDivSecretariat = 0,
+                            FullName = "H.A.Ositha J. Wijayarathna",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "H.A.Ositha J.",
                             IsLeavingIssued = false,
-                            LastName = "Roopasingha",
-                            Medium = 0,
-                            SchoolEmail = "29018@nalandacollege.info",
-                            Status = 0
+                            LastName = "Wijayarathna",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24758@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 17,
                             AdmissionDate = new DateTime(2021, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27326,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "K A D Sanketh",
-                            IndexNo = 28998,
-                            Initials = "K A D",
+                            CurrentDivSecretariat = 0,
+                            FullName = "H.M.Dinuka D.B.Rajaguru",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "H.M.Dinuka D.B.",
                             IsLeavingIssued = false,
-                            LastName = "Sanketh",
-                            Medium = 0,
-                            SchoolEmail = "28998@nalandacollege.info",
-                            Status = 0
+                            LastName = "Rajaguru",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27326@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 18,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24972,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "K A M Menath",
-                            IndexNo = 28916,
-                            Initials = "K A M",
+                            CurrentDivSecretariat = 0,
+                            FullName = "H.M.Thimath S. Herath",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "H.M.Thimath S.",
                             IsLeavingIssued = false,
-                            LastName = "Menath",
-                            Medium = 0,
-                            SchoolEmail = "28916@nalandacollege.info",
-                            Status = 0
+                            LastName = "Herath",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24972@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 19,
                             AdmissionDate = new DateTime(2021, 6, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24687,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "L G T S Samarasingha",
-                            IndexNo = 28891,
-                            Initials = "L G T S",
+                            CurrentDivSecretariat = 0,
+                            FullName = "I.A.Daniru Vinijith",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "I.A.Daniru",
                             IsLeavingIssued = false,
-                            LastName = "Samarasingha",
-                            Medium = 0,
-                            SchoolEmail = "28891@nalandacollege.info",
-                            Status = 0
+                            LastName = "Vinijith",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24687@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 20,
                             AdmissionDate = new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24717,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "M K G Darmasiri",
-                            IndexNo = 29033,
-                            Initials = "M K G",
+                            CurrentDivSecretariat = 0,
+                            FullName = "J.K.Tharul M. Perera",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "J.K.Tharul M.",
                             IsLeavingIssued = false,
-                            LastName = "Darmasiri",
-                            Medium = 0,
-                            SchoolEmail = "29033@nalandacollege.info",
-                            Status = 0
+                            LastName = "Perera",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24717@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 21,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24749,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "N H E De Silava",
-                            IndexNo = 29038,
-                            Initials = "N H E De",
+                            CurrentDivSecretariat = 0,
+                            FullName = "J.M.M.Raadawa Jayasundara",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "J.M.M.Raadawa",
                             IsLeavingIssued = false,
-                            LastName = "Silava",
-                            Medium = 0,
-                            SchoolEmail = "29038@nalandacollege.info",
-                            Status = 0
+                            LastName = "Jayasundara",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24749@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 22,
                             AdmissionDate = new DateTime(2021, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 28051,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "R V D R R Perera",
-                            IndexNo = 28901,
-                            Initials = "R V D R R",
+                            CurrentDivSecretariat = 0,
+                            FullName = "K.Dasindu Dulwan",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "K.Dasindu",
                             IsLeavingIssued = false,
-                            LastName = "Perera",
-                            Medium = 0,
-                            SchoolEmail = "28901@nalandacollege.info",
-                            Status = 0
+                            LastName = "Dulwan",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "28051@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 23,
                             AdmissionDate = new DateTime(2021, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25425,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "S A J Pathirana",
-                            IndexNo = 29008,
-                            Initials = "S A J",
+                            CurrentDivSecretariat = 0,
+                            FullName = "K.Mithuru M. Perera",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "K.Mithuru M.",
                             IsLeavingIssued = false,
-                            LastName = "Pathirana",
-                            Medium = 0,
-                            SchoolEmail = "29008@nalandacollege.info",
-                            Status = 0
+                            LastName = "Perera",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25425@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 24,
                             AdmissionDate = new DateTime(2021, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24755,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "S H V Sanith",
-                            IndexNo = 29003,
-                            Initials = "S H V",
+                            CurrentDivSecretariat = 0,
+                            FullName = "K.S.Vikum M. Kariyawasam",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "K.S.Vikum M.",
                             IsLeavingIssued = false,
-                            LastName = "Sanith",
-                            Medium = 0,
-                            SchoolEmail = "29003@nalandacollege.info",
-                            Status = 0
+                            LastName = "Kariyawasam",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24755@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 25,
                             AdmissionDate = new DateTime(2021, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24781,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "S I Kiriwandeniya",
-                            IndexNo = 28973,
-                            Initials = "S I",
+                            CurrentDivSecretariat = 0,
+                            FullName = "Kuvidu H.Amarasinghe",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Kuvidu H.",
                             IsLeavingIssued = false,
-                            LastName = "Kiriwandeniya",
-                            Medium = 0,
-                            SchoolEmail = "28973@nalandacollege.info",
-                            Status = 0
+                            LastName = "Amarasinghe",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24781@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 26,
                             AdmissionDate = new DateTime(2021, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 29091,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "S L D Karunathilaka",
-                            IndexNo = 28931,
-                            Initials = "S L D",
+                            CurrentDivSecretariat = 0,
+                            FullName = "L.K.A.Y.Dissanayake",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "L.K.A.Y.",
                             IsLeavingIssued = false,
-                            LastName = "Karunathilaka",
-                            Medium = 0,
-                            SchoolEmail = "28931@nalandacollege.info",
-                            Status = 0
+                            LastName = "Dissanayake",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "29091@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 27,
                             AdmissionDate = new DateTime(2021, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24680,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "S O Leelarathna",
-                            IndexNo = 28958,
-                            Initials = "S O",
+                            CurrentDivSecretariat = 0,
+                            FullName = "Luvya V.Seelanatha",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Luvya V.",
                             IsLeavingIssued = false,
-                            LastName = "Leelarathna",
-                            Medium = 0,
-                            SchoolEmail = "28958@nalandacollege.info",
-                            Status = 0
+                            LastName = "Seelanatha",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24680@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 28,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24746,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "S T Ranwala",
-                            IndexNo = 28968,
-                            Initials = "S T",
+                            CurrentDivSecretariat = 0,
+                            FullName = "M.A.Chathura P. Karunasekara",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "M.A.Chathura P.",
                             IsLeavingIssued = false,
-                            LastName = "Ranwala",
-                            Medium = 0,
-                            SchoolEmail = "28968@nalandacollege.info",
-                            Status = 0
+                            LastName = "Karunasekara",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24746@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 29,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27289,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "T D A Gunawardana",
-                            IndexNo = 28978,
-                            Initials = "T D A",
+                            CurrentDivSecretariat = 0,
+                            FullName = "M.D.Savith P. Binuditha",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "M.D.Savith P.",
                             IsLeavingIssued = false,
-                            LastName = "Gunawardana",
-                            Medium = 0,
-                            SchoolEmail = "28978@nalandacollege.info",
-                            Status = 0
+                            LastName = "Binuditha",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27289@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 30,
                             AdmissionDate = new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27287,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "V A D Dilsara",
-                            IndexNo = 28993,
-                            Initials = "V A D",
+                            CurrentDivSecretariat = 0,
+                            FullName = "M.G.Shashen R. Bandara",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "M.G.Shashen R.",
                             IsLeavingIssued = false,
-                            LastName = "Dilsara",
-                            Medium = 0,
-                            SchoolEmail = "28993@nalandacollege.info",
-                            Status = 0
+                            LastName = "Bandara",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27287@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 31,
-                            AdmissionDate = new DateTime(2021, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 28647,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "V K Almeda",
-                            IndexNo = 28906,
-                            Initials = "V K",
+                            CurrentDivSecretariat = 0,
+                            FullName = "Mihisara Kaveesha Hettiarachchi",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Mihisara Kaveesha",
                             IsLeavingIssued = false,
-                            LastName = "Almeda",
-                            Medium = 0,
-                            SchoolEmail = "28906@nalandacollege.info",
-                            Status = 0
+                            LastName = "Hettiarachchi",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "28647@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 32,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25039,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FullName = "W G T M Gamage",
-                            IndexNo = 28936,
-                            Initials = "W G T M",
+                            CurrentDivSecretariat = 0,
+                            FullName = "Minul Demith Peladagama",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Minul Demith",
                             IsLeavingIssued = false,
-                            LastName = "Gamage",
-                            Medium = 0,
-                            SchoolEmail = "28936@nalandacollege.info",
-                            Status = 0
+                            LastName = "Peladagama",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25039@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 33,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24779,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "P.M.G.Onitha O. Gunathilake",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "P.M.G.Onitha O.",
+                            IsLeavingIssued = false,
+                            LastName = "Gunathilake",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24779@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 34,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 28052,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "R.M.Thisath Dewwin Bandara",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "R.M.Thisath Dewwin",
+                            IsLeavingIssued = false,
+                            LastName = "Bandara",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "28052@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 35,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24812,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "R.G.Ravishka Sathsindu",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "R.G.Ravishka",
+                            IsLeavingIssued = false,
+                            LastName = "Sathsindu",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24812@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 36,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25640,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "R.M.Sashmitha N. B.Kotu",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "R.M.Sashmitha N. B.",
+                            IsLeavingIssued = false,
+                            LastName = "Kotu",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25640@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 37,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27364,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "S.M.Pavanindu N. Egodagedara",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "S.M.Pavanindu N.",
+                            IsLeavingIssued = false,
+                            LastName = "Egodagedara",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27364@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 38,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25032,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "Sanuka N.Wanniarachchi",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Sanuka N.",
+                            IsLeavingIssued = false,
+                            LastName = "Wanniarachchi",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25032@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 39,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27385,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "Sanuth I.E.Liyanage",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Sanuth I.",
+                            IsLeavingIssued = false,
+                            LastName = "E.Liyanage",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27385@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 40,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25656,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "Seniru M.Weerasinghe",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Seniru",
+                            IsLeavingIssued = false,
+                            LastName = "M.Weerasinghe",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25656@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 41,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24775,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "Senuja M.Gunasekara",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Senuja M.",
+                            IsLeavingIssued = false,
+                            LastName = "Gunasekara",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24775@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 42,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27327,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "Sithum K.S.Rajapaksha",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Sithum K.S.",
+                            IsLeavingIssued = false,
+                            LastName = "Rajapaksha",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27327@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 43,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24757,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "T.Thulnith I. Vithana",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "T.Thulnith I.",
+                            IsLeavingIssued = false,
+                            LastName = "Vithana",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24757@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 44,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27396,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "T.N.Hansaka Walpola",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "T.N.Hansaka",
+                            IsLeavingIssued = false,
+                            LastName = "Walpola",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27396@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 45,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24718,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "Tharul B. Dharmasena",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Tharul B.",
+                            IsLeavingIssued = false,
+                            LastName = "Dharmasena",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24718@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 46,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24710,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "Tharusha V.Kalubowila",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Tharusha V.",
+                            IsLeavingIssued = false,
+                            LastName = "Kalubowila",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24710@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 47,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24770,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "The min S. Wijayawardana",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "The min S.",
+                            IsLeavingIssued = false,
+                            LastName = "Wijayawardana",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24770@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 48,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27347,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "W.Sachintha Akalanka",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "W.Sachintha",
+                            IsLeavingIssued = false,
+                            LastName = "Akalanka",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27347@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 49,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24790,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "W.A.Dinushka R Perera",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "W.A.Dinushka R",
+                            IsLeavingIssued = false,
+                            LastName = "Perera",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24790@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 50,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24754,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "W.A.H.Nethru Weerasooriya",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "W.A.H.Nethru",
+                            IsLeavingIssued = false,
+                            LastName = "Weerasooriya",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24754@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 51,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27483,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "W.A.Nushan Wijeweera",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "W.A.Nushan",
+                            IsLeavingIssued = false,
+                            LastName = "Wijeweera",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27483@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 52,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27482,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "W.F.Tenura T. Perera",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "W.F.Tenura T.",
+                            IsLeavingIssued = false,
+                            LastName = "Perera",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27482@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 53,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25430,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "W.M.A.Rivinaka Eragoda",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "W.M.A.Rivinaka",
+                            IsLeavingIssued = false,
+                            LastName = "Eragoda",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25430@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 54,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 28054,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "Yonal B. Galagedara",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Yonal B.",
+                            IsLeavingIssued = false,
+                            LastName = "Galagedara",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "28054@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
+                        },
+                        new
+                        {
+                            Id = 55,
+                            AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24714,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
+                            FullName = "Yumeth M.Dewapura",
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
+                            Initials = "Yumeth M.",
+                            IsLeavingIssued = false,
+                            LastName = "Dewapura",
+                            Medium = 1,
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24714@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         });
                 });
 
@@ -3433,12 +5125,21 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsEmergencyContact")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("NIC_BackImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NIC_FrontImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -3640,7 +5341,7 @@ namespace StudentInformationSystem.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Code = "Sinhala",
+                            Code = "බුද්ධධර්මය",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Medium = 0,
@@ -3650,7 +5351,7 @@ namespace StudentInformationSystem.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Code = "English",
+                            Code = "සිංහල",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Medium = 0,
@@ -3660,6 +5361,56 @@ namespace StudentInformationSystem.Data.Migrations
                         new
                         {
                             Id = 3,
+                            Code = "English",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "Mathematics",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "Science",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Code = "History",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Code = "Tamil",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
                             Code = "Geography",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -3669,8 +5420,18 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = 4,
-                            Code = "Dancing",
+                            Id = 9,
+                            Code = "Civic Education",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 2
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Code = "Eastern Music",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Medium = 0,
@@ -3679,7 +5440,47 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 11,
+                            Code = "Drama",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Code = "Western Music",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Code = "PTS",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 4
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Code = "Health",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Medium = 0,
+                            SectionId = 3,
+                            SubjectCategoryId = 4
+                        },
+                        new
+                        {
+                            Id = 15,
                             Code = "ICT",
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -3765,6 +5566,48 @@ namespace StudentInformationSystem.Data.Migrations
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsBasket = true
                         });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.SyncLog", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("LogDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.Property<int>("Sevierity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SyncLogs");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.SyncQueue", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("JsonData")
+                        .HasColumnType("nvarchar(MAX)");
+
+                    b.Property<DateTime>("QueuedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("SyncType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SyncQueue");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Teacher", b =>
@@ -4063,7 +5906,8 @@ namespace StudentInformationSystem.Data.Migrations
                             CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Password = "1",
                             Status = 1,
-                            UserName = "rananga"
+                            UserName = "rananga",
+                            VisitorId = 1
                         });
                 });
 
@@ -4159,7 +6003,10 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<string>("SchoolEmail")
+                    b.Property<string>("SchoolEmail_Google")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SchoolEmail_MS")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Title")
@@ -4168,95 +6015,22 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Visitors");
-                });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_Monitor", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "ClassRoom")
-                        .WithMany("ClassMonitors")
-                        .HasForeignKey("CR_Id")
-                        .HasConstraintName("FK_Class_ClassMonitors")
-                        .IsRequired();
-
-                    b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
-                        .WithMany("ClassMonitors")
-                        .HasForeignKey("StudentId")
-                        .HasConstraintName("FK_Student_ClassMonitors")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_Student", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "ClassRoom")
-                        .WithMany("ClassStudents")
-                        .HasForeignKey("CR_Id")
-                        .HasConstraintName("FK_Class_ClassStudents")
-                        .IsRequired();
-
-                    b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
-                        .WithMany("ClassStudents")
-                        .HasForeignKey("StudentId")
-                        .HasConstraintName("FK_Student_ClassStudents")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_StudentSubject", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.CR_Student", "CR_Student")
-                        .WithMany("StudentSubjects")
-                        .HasForeignKey("CR_StudentId")
-                        .HasConstraintName("FK_ClassStudent_StudentSubjects")
-                        .IsRequired();
-
-                    b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
-                        .WithMany("StudentSubjects")
-                        .HasForeignKey("SubjectId")
-                        .HasConstraintName("FK_Subject_StudentSubjects")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_StudentSubjectMark", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.CR_StudentSubject", "CR_StudentSubject")
-                        .WithMany("ClassStudentSubjectMarks")
-                        .HasForeignKey("CR_StudentSubjectId")
-                        .HasConstraintName("FK_ClassStudentSubject_ClassStudentSubjectMarks")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_Subject", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "ClassRoom")
-                        .WithMany("ClassSubjects")
-                        .HasForeignKey("CR_Id")
-                        .HasConstraintName("FK_Class_ClassSubjects")
-                        .IsRequired();
-
-                    b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
-                        .WithMany("ClassSubjects")
-                        .HasForeignKey("StaffId")
-                        .HasConstraintName("FK_StaffMember_ClassSubjects");
-
-                    b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
-                        .WithMany("ClassSubjects")
-                        .HasForeignKey("SubjectId")
-                        .HasConstraintName("FK_Subject_ClassSubjects")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.CR_Teacher", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "ClassRoom")
-                        .WithMany("ClassTeachers")
-                        .HasForeignKey("CR_Id")
-                        .HasConstraintName("FK_Class_ClassTeachers")
-                        .IsRequired();
-
-                    b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
-                        .WithMany("ClassTeachers")
-                        .HasForeignKey("StaffId")
-                        .HasConstraintName("FK_StaffMember_ClassTeachers")
-                        .IsRequired();
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FullName = "Rananga Lakshitha Suraweera",
+                            Gender = 0,
+                            Initials = "R L",
+                            LastName = "Suraweera",
+                            MobileNo = "0713522384",
+                            Nicno = "860272580V",
+                            SchoolEmail_Google = "rananga@nalandacollege.info",
+                            Title = 4
+                        });
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassPromotion", b =>
@@ -4270,14 +6044,14 @@ namespace StudentInformationSystem.Data.Migrations
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassPromotionDetail", b =>
                 {
-                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "FromClass")
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "FromClass")
                         .WithMany("FromClassPromotionDetails")
                         .HasForeignKey("FromClassId")
                         .HasConstraintName("FK_FromClass_FromClassPromotionDetails")
                         .IsRequired();
 
                     b.HasOne("StudentInformationSystem.Data.Models.ClassPromotion", "ClassPromotion")
-                        .WithMany("PromotionDetails")
+                        .WithMany("ClassPromotionDetails")
                         .HasForeignKey("PromotionId")
                         .HasConstraintName("FK_ClassPromotion_PromotionDetails")
                         .IsRequired();
@@ -4288,23 +6062,10 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasConstraintName("FK_Student_ClassPromotionDetails")
                         .IsRequired();
 
-                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "ToClass")
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "ToClass")
                         .WithMany("ToClassPromotionDetails")
                         .HasForeignKey("ToClassId")
                         .HasConstraintName("FK_ToClass_ToClassPromotionDetails");
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.ClassRoom", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.GradeClass", "GradeClass")
-                        .WithMany("Classes")
-                        .HasForeignKey("GradeClassId")
-                        .HasConstraintName("FK_GradeClass_Classes")
-                        .IsRequired();
-
-                    b.HasOne("StudentInformationSystem.Data.Models.Teacher", null)
-                        .WithMany("ClassTeachers")
-                        .HasForeignKey("TeacherId");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ExtraActivityAcheivement", b =>
@@ -4426,7 +6187,7 @@ namespace StudentInformationSystem.Data.Migrations
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.OCR_ClassRoom", b =>
                 {
-                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "ClassRoom")
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "PhysicalClassRoom")
                         .WithMany("OCR_ClassRooms")
                         .HasForeignKey("CR_Id")
                         .HasConstraintName("FK_ClassRoom_OCR_ClassRooms")
@@ -4447,7 +6208,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasConstraintName("FK_OnlineClassRoom_ClassTeachers")
                         .IsRequired();
 
-                    b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "ClassTeacher")
+                    b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
                         .WithMany("OCR_Teachers")
                         .HasForeignKey("StaffId")
                         .HasConstraintName("FK_ClassTeacher_OCR_Teachers")
@@ -4502,6 +6263,95 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_Monitor", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "PhysicalClassRoom")
+                        .WithMany("ClassMonitors")
+                        .HasForeignKey("CR_Id")
+                        .HasConstraintName("FK_Class_ClassMonitors")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
+                        .WithMany("ClassMonitors")
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("FK_Student_ClassMonitors")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_Student", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "PhysicalClassRoom")
+                        .WithMany("ClassStudents")
+                        .HasForeignKey("CR_Id")
+                        .HasConstraintName("FK_Class_ClassStudents")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
+                        .WithMany("ClassStudents")
+                        .HasForeignKey("StudentId")
+                        .HasConstraintName("FK_Student_ClassStudents")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_StudentSubject", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.PCR_Student", "CR_Student")
+                        .WithMany("StudentSubjects")
+                        .HasForeignKey("CR_StudentId")
+                        .HasConstraintName("FK_ClassStudent_StudentSubjects")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
+                        .WithMany("StudentSubjects")
+                        .HasForeignKey("SubjectId")
+                        .HasConstraintName("FK_Subject_StudentSubjects")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_StudentSubjectMark", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.PCR_StudentSubject", "CR_StudentSubject")
+                        .WithMany("ClassStudentSubjectMarks")
+                        .HasForeignKey("CR_StudentSubjectId")
+                        .HasConstraintName("FK_ClassStudentSubject_ClassStudentSubjectMarks")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_Subject", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "PhysicalClassRoom")
+                        .WithMany("ClassSubjects")
+                        .HasForeignKey("CR_Id")
+                        .HasConstraintName("FK_Class_ClassSubjects")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
+                        .WithMany("ClassSubjects")
+                        .HasForeignKey("StaffId")
+                        .HasConstraintName("FK_StaffMember_ClassSubjects");
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Subject", "Subject")
+                        .WithMany("ClassSubjects")
+                        .HasForeignKey("SubjectId")
+                        .HasConstraintName("FK_Subject_ClassSubjects")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PCR_Teacher", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "PhysicalClassRoom")
+                        .WithMany("ClassTeachers")
+                        .HasForeignKey("CR_Id")
+                        .HasConstraintName("FK_Class_ClassTeachers")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
+                        .WithMany("ClassTeachers")
+                        .HasForeignKey("StaffId")
+                        .HasConstraintName("FK_StaffMember_ClassTeachers")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.PermissionGradeAccess", b =>
                 {
                     b.HasOne("StudentInformationSystem.Data.Models.Grade", "Grade")
@@ -4532,6 +6382,19 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.PhysicalClassRoom", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.GradeClass", "GradeClass")
+                        .WithMany("Classes")
+                        .HasForeignKey("GradeClassId")
+                        .HasConstraintName("FK_GradeClass_Classes")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Teacher", null)
+                        .WithMany("ClassTeachers")
+                        .HasForeignKey("TeacherId");
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.SectionHead", b =>
                 {
                     b.HasOne("StudentInformationSystem.Data.Models.Section", "Section")
@@ -4556,12 +6419,17 @@ namespace StudentInformationSystem.Data.Migrations
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Student", b =>
                 {
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "AdmittedClass")
+                        .WithMany("AdmittedClassStudents")
+                        .HasForeignKey("AdmittedClassId")
+                        .HasConstraintName("FK_AdmittedClass_AdmittedClassStudents");
+
                     b.HasOne("StudentInformationSystem.Data.Models.Grade", "AdmittedGrade")
                         .WithMany("GradeAdmissions")
                         .HasForeignKey("AdmittedGradeId")
                         .HasConstraintName("FK_AdmittedGrade_GradeAdmissions");
 
-                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "LastClass")
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "LastClass")
                         .WithMany("LastClassStudents")
                         .HasForeignKey("LastClassId")
                         .HasConstraintName("FK_LastClass_LastClassStudents");
@@ -4632,7 +6500,7 @@ namespace StudentInformationSystem.Data.Migrations
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentTransfer", b =>
                 {
-                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "FromClass")
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "FromClass")
                         .WithMany("FromTransfers")
                         .HasForeignKey("FromCR_Id")
                         .HasConstraintName("FK_FromClass_FromTransfers")
@@ -4644,7 +6512,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasConstraintName("FK_Student_StudentTransfers")
                         .IsRequired();
 
-                    b.HasOne("StudentInformationSystem.Data.Models.ClassRoom", "ToClass")
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "ToClass")
                         .WithMany("ToTransfers")
                         .HasForeignKey("ToCR_Id")
                         .HasConstraintName("FK_ToClass_ToTransfers")

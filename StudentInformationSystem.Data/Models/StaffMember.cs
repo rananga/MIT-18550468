@@ -11,8 +11,8 @@ namespace StudentInformationSystem.Data.Models
         {
             HeadingSections = new HashSet<SectionHead>();
             HeadingGrades = new HashSet<GradeHead>();
-            ClassTeachers = new HashSet<CR_Teacher>();
-            ClassSubjects = new HashSet<CR_Subject>();
+            ClassTeachers = new HashSet<PCR_Teacher>();
+            ClassSubjects = new HashSet<PCR_Subject>();
             OCR_Teachers = new HashSet<OCR_Teacher>();
             ExtraActivityIncharges = new HashSet<ExtraActivityIncharge>();
         }
@@ -37,9 +37,12 @@ namespace StudentInformationSystem.Data.Models
         [DisplayName("Mobile No"), Required]
         [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
         public string MobileNo { get; set; }
-        [DisplayName("School Email")]
+        [DisplayName("School Email - Google")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        public string SchoolEmail { get; set; }
+        public string SchoolEmail_Google { get; set; }
+        [DisplayName("School Email - Microsoft")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
+        public string SchoolEmail_MS { get; set; }
         [DisplayName("NIC No"), Required]
         public string Nicno { get; set; }
         [DisplayName("Home Contact No")]
@@ -63,8 +66,8 @@ namespace StudentInformationSystem.Data.Models
         public virtual Teacher Teacher { get; set; }
         public virtual ICollection<SectionHead> HeadingSections { get; set; }
         public virtual ICollection<GradeHead> HeadingGrades { get; set; }
-        public virtual ICollection<CR_Teacher> ClassTeachers { get; set; }
-        public virtual ICollection<CR_Subject> ClassSubjects { get; set; }
+        public virtual ICollection<PCR_Teacher> ClassTeachers { get; set; }
+        public virtual ICollection<PCR_Subject> ClassSubjects { get; set; }
         public virtual ICollection<OCR_Teacher> OCR_Teachers { get; set; }
         public virtual ICollection<ExtraActivityIncharge> ExtraActivityIncharges { get; set; }
     }

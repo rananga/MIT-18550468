@@ -66,7 +66,7 @@ namespace StudentInformationSystem.Areas.Teacher.Controllers
 
                     vm.CreatedBy = this.GetCurrUser();
                     vm.CreatedDate = DateTime.Now;
-                    obj.TeacherPreferedSubjects.Add(vm.GetEntity());
+                    obj.TeacherPreferredSubjects.Add(vm.GetEntity());
 
                     db.SaveChanges();
 

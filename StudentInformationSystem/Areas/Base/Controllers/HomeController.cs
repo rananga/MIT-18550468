@@ -126,9 +126,9 @@ namespace StudentInformationSystem.Areas.Base
             if (!string.IsNullOrEmpty(signInVM.AccessToken))
             {
                 Data.Models.Visitor visitor = null;
-                var staff = db.StaffMembers.Where(x => x.SchoolEmail.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
+                var staff = db.StaffMembers.Where(x => x.SchoolEmail_MS.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
                 if (staff == null)
-                    visitor = db.Visitors.Where(x => x.SchoolEmail.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
+                    visitor = db.Visitors.Where(x => x.SchoolEmail_MS.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
 
                 user = staff?.User ?? visitor?.User;
 
@@ -214,7 +214,7 @@ namespace StudentInformationSystem.Areas.Base
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword([Bind(Include = "UserID,PassWord,NewPassword,ConfirmPassword")] SignInVM signInVM)
+        public ActionResult ChangePassword([Bind(Include = "Id,PassWord,NewPassword,ConfirmPassword")] SignInVM signInVM)
         {
             var objUser = db.Users.Find(signInVM.Id);
 
@@ -224,6 +224,8 @@ namespace StudentInformationSystem.Areas.Base
             { ModelState.AddModelError("NewPassword", "New password is same as the current password."); }
             else if (signInVM.ConfirmPassword != signInVM.NewPassword)
             { ModelState.AddModelError("ConfirmPassword", "Confirm password should be equal to new password."); }
+
+            ModelState.Where(m => m.Key == "UserName").FirstOrDefault().Value.Errors.Clear();
 
             if (ModelState.IsValid)
             {

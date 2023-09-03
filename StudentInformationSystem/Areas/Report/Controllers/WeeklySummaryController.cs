@@ -52,19 +52,19 @@ namespace StudentInformationSystem.Areas.Report.Controllers
             return GetExcelStream(para);
         }
 
-        private List<WeeklySummary> GetWeeklySummary()
+        private List<WeeklySummary> GetWeeklySummary(ReportParameterVM para)
         {
             var lst = db.OnlineClasses
-                .Where(x => x.OnlineClassRoom.Year == 2021 && x.OnlineClassRoom.GradeId == 1).ToList()
+                .Where(x => x.OnlineClassRoom.Year == para.Year && x.OnlineClassRoom.GradeId == para.GradeId && x.Date >= para.FromDate && x.Date <= para.ToDate).ToList()
                 .Select(x => new WeeklySummary()
                 {
                     Date = x.Date,
                     Duration = $"{DateTime.Today.Add(x.FromTime).ToString("tt hh:mm")} - {DateTime.Today.Add(x.ToTime).ToString("tt hh:mm")}".Replace("AM", "පෙ.ව.").Replace("PM", "ප.ව."),
                     Subject = x.Subject,
-                    Class = x.OnlineClassRoom.PhysicalClassRooms.Select(y => y.ClassRoom.GradeClass.Code).Aggregate((y, z) => y + "," + z),
+                    Class = x.OnlineClassRoom.PhysicalClassRooms.Select(y => y.PhysicalClassRoom.GradeClass.Code).Aggregate((y, z) => y + "," + z),
                     Lesson = x.Lesson,
                     StudentCount = $"{x.OC_Meetings.SelectMany(y => y.OC_MeetingAttendees).Count()} / " +
-                    $"{(x.OnlineClassRoom.Subject.SubjectCategory.IsBasket ? x.OnlineClassRoom.PhysicalClassRooms.SelectMany(y => y.ClassRoom.ClassStudents).Where(y => y.Student.StudentBasketSubjects.Any(z => z.SubjectId == x.OnlineClassRoom.SubjectId)).Count() : x.OnlineClassRoom.PhysicalClassRooms.SelectMany(y => y.ClassRoom.ClassStudents).Count())}",
+                    $"{(x.OnlineClassRoom.Subject.SubjectCategory.IsBasket ? x.OnlineClassRoom.PhysicalClassRooms.SelectMany(y => y.PhysicalClassRoom.ClassStudents).Where(y => y.Student.StudentBasketSubjects.Any(z => z.SubjectId == x.OnlineClassRoom.SubjectId)).Count() : x.OnlineClassRoom.PhysicalClassRooms.SelectMany(y => y.PhysicalClassRoom.ClassStudents).Count())}",
                     Teacher = x.OCR_Teacher.StaffMember.FullName
                 }).ToList();
 
@@ -76,14 +76,14 @@ namespace StudentInformationSystem.Areas.Report.Controllers
             LocalReport report = new LocalReport();
             report.LoadReportDefinition(Shared.GetReportStream("WeeklySummary"));
 
-            report.SetParameters(new ReportParameter("Year", "2021"));
-            report.SetParameters(new ReportParameter("Grade", "1"));
-            report.SetParameters(new ReportParameter("FromDate", new DateTime(2021, 6, 1).ToString("yyyy-MM-dd")));
-            report.SetParameters(new ReportParameter("ToDate", new DateTime(2021, 6, 30).ToString("yyyy-MM-dd")));
+            report.SetParameters(new ReportParameter("Year", para.Year.ToString()));
+            report.SetParameters(new ReportParameter("Grade", para.GradeId.ToString()));
+            report.SetParameters(new ReportParameter("FromDate", para.FromDate.ToString("yyyy-MM-dd")));
+            report.SetParameters(new ReportParameter("ToDate", para.ToDate.ToString("yyyy-MM-dd")));
 
             ReportDataSource rds = new ReportDataSource();
             rds.Name = "WeeklySummary";
-            rds.Value = GetWeeklySummary();
+            rds.Value = GetWeeklySummary(para);
             report.DataSources.Add(rds);
 
             byte[] mybytes = report.Render("PDF");

@@ -1533,3 +1533,7 @@
   
 2021-09-21 23:58:15,758 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Report/StudentCharacter/Process User: rananga Error Message: The controller for path '/Report/StudentCharacter/Process' was not found or does not implement IController. Line:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
   
+2021-09-25 16:11:57,643 [6] ERROR ASP.global_asax - Error in https://localhost:44380/Academic/ClassRoom User: rananga Error Message: C:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\vs\caa75af3\7886f8b0\App_Web_index.cshtml.1a47c395.3q5zpfga.0.cs(31): error CS0234: The type or namespace name 'ClassRoomVM' does not exist in the namespace 'StudentInformationSystem.Areas.Academic.Models' (are you missing an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  
+2021-09-26 08:37:15,729 [22] ERROR ASP.global_asax - Error in https://localhost:44380/Student/StudentAdmit User: rananga Error Message: C:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\vs\caa75af3\7886f8b0\App_Web__studentclassindex.cshtml.5e28749f.ebvyp7ep.0.cs(30): error CS0234: The type or namespace name 'CR_StudentVM' does not exist in the namespace 'StudentInformationSystem.Areas.Academic.Models' (are you missing an assembly reference?) Line:    at System.Web.Compilation.AssemblyBuilder.Compile()
+  

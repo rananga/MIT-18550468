@@ -20,7 +20,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
     {
         public ActionResult Index(BaseViewModel<StudentVM> vm)
         {
-            vm.SetList(db.Students.AsQueryable(), "IndexNo", SortDirection.Descending);
+            vm.SetList(db.Students.AsQueryable(), "AdmissionNo", SortDirection.Descending);
             return View(vm);
         }
 
@@ -148,19 +148,22 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
                 if (existingStudent != null)
                 { ModelState.AddModelError("FullName", "Student Already Exist"); }
+                if (student.DOB > DateTime.Now.AddYears(-5))
+                { ModelState.AddModelError("DOB", "Invalid DOB, student not old enough."); }
 
                 if (ModelState.IsValid)
                 {
                     student.CreatedBy = this.GetCurrUser();
                     student.CreatedDate = DateTime.Now;
 
-                    var lastStudIndex = db.Students.MaxOrDefault(x => x.IndexNo);
-                    student.IndexNo = Math.Max(lastStudIndex, 10000) + 1;
+                    var lastStudIndex = db.Students.MaxOrDefault(x => x.AdmissionNo);
+                    student.AdmissionNo = Math.Max(lastStudIndex, 10000) + 1;
 
                     var objStudent = db.Students.Add(student.GetEntity()).Entity;
                     db.SaveChanges();
 
-                    objStudent.SchoolEmail = $"{objStudent.IndexNo}@nalandacollge.info";
+                    objStudent.SchoolEmail_Google = $"{objStudent.AdmissionNo}@nalandacollge.info";
+                    objStudent.SchoolEmail_MS = $"{objStudent.AdmissionNo}@nalandacollge.lk";
 
                     var imgPath = SaveImage(objStudent.Id, student.ImagePath);
                     if (!imgPath.IsBlank())
@@ -242,7 +245,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                     studentSibling.Id = Math.Min(obj.Siblings.Select(x => x.Id).MinOrDefault(), 0) - 1;
                     var sibStud = db.Students.Find(studentSibling.SiblingStudentId);
                     studentSibling.StudWithInit = sibStud.Initials + " " + sibStud.LastName;
-                    studentSibling.IndexNo = sibStud.IndexNo;
+                    studentSibling.AdmissionNo = sibStud.AdmissionNo;
 
                     obj.Siblings.Add(studentSibling);
 
@@ -266,11 +269,11 @@ namespace StudentInformationSystem.Areas.Student.Controllers
         {
             var obj = db.Students.Find(studID);
 
-            var IndexNo = obj.IndexNo;
+            var AdmissionNo = obj.AdmissionNo;
             var InitName = obj.Initials + " " + obj.LastName;
             var Fullname = obj.FullName;
 
-            return Json(new { IndexNo, InitName, Fullname }, JsonRequestBehavior.AllowGet);
+            return Json(new { AdmissionNo, InitName, Fullname }, JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]
@@ -351,6 +354,9 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             {
                 var studvm = (StudentVM)Session[sskCrtdObj];
 
+                if (student.DOB > DateTime.Now.AddYears(-5))
+                { ModelState.AddModelError("DOB", "Invalid DOB, student not old enough."); }
+
                 if (ModelState.IsValid)
                 {
                     var obj = db.Students.Find(student.Id);
@@ -359,7 +365,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = student.GetEntity();
-                    modObj.CopyContent(obj, "Id,AdmissionDate,DOB,FullName,Initials,LastName,SchoolEmail,Address1,Address2,City,EmergContactName,EmergContactNo,Medium,AdmittedGradeId");
+                    modObj.CopyContent(obj, "Id,AdmissionDate,DOB,FullName,Initials,LastName,SchoolEmail_Google,SchoolEmail_MS,Address1,Address2,City,EmergContactName,EmergContactNo,Medium,AdmittedGradeId");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;
@@ -447,7 +453,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                 if (ModelState.IsValid)
                 {
                     var obj = ((StudentVM)Session[sskCrtdObj]).Siblings.FirstOrDefault(x => x.Id == studSiblingsVM.Id);
-                    studSiblingsVM.CopyContent(obj, "SudID,SiblingStudID,Relationship,StudWithInit,IndexNo,Title,FullName,Initials,LName");
+                    studSiblingsVM.CopyContent(obj, "SudID,SiblingStudID,Relationship,StudWithInit,AdmissionNo,Title,FullName,Initials,LName");
                     AddAlert(AlertStyles.success, "Siblings Modified Successfully.");
                     string url = Url.Action("ChildIndex", new { id = studSiblingsVM.Id, isToEdit = true });
                     return Json(new { success = true, url = url });
@@ -678,7 +684,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             var lstHdr = db.Students.Where(x => x.Id == id).Select(x => new
             {
                 x.Id,
-                AdmissionNo = x.IndexNo,
+                AdmissionNo = x.AdmissionNo,
                 FullName = x.FullName,
                 Initials = x.Initials,
                 LastName = x.LastName,
@@ -700,15 +706,15 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
             var lstFamDet = db.Students.Where(x => x.Id == id).SelectMany(x => x.StudentFamilies).Select(x => new
             {
-                Name = x.Name,
+                Name = x.Parent.Name,
                 Relationship = x.Relationship == Relationship.Father ? "Father" : (x.Relationship == Relationship.Mother ? "Mother" : "Guardian"),
-                Occupation = x.Occupation,
-                WorkingAdd = x.WorkingAdd,
-                OfficeContact = x.OfficeTel,
-                HomeContact = x.ContactHome,
-                MobileContact = x.ContactMob,
-                EmailAdd = x.Email,
-                NICno = x.Nicno
+                Occupation = x.Parent.Occupation,
+                WorkingAdd = x.Parent.WorkingAdd,
+                OfficeContact = x.Parent.OfficeTel,
+                HomeContact = x.Parent.ContactHome,
+                MobileContact = x.Parent.ContactMob,
+                EmailAdd = x.Parent.Email,
+                NICno = x.Parent.NicNo
             }).ToList();
 
             if (lstHdr.Count == 0)

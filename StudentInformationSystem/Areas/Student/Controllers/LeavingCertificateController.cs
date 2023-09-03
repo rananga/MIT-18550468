@@ -151,9 +151,9 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                     StudentName = x.Student.FullName,
                     DOB = x.Student.DOB.Value.ToString("dd-MM-yyyy"),
                     Address = x.Student.Address1 + " " + x.Student.Address2 + " " + x.Student.City,
-                    EmergencyConName = x.Student.StudentFamilies.Select(y => y.Name + " " + "(" + y.Relationship.ToEnumChar() + ")").FirstOrDefault(),
+                    EmergencyConName = x.Student.StudentFamilies.Select(y => y.Parent.Name + " " + "(" + y.Relationship.ToEnumChar() + ")").FirstOrDefault(),
                     DateOfAdmission = x.Student.CreatedDate.ToString("dd-MM-yyyy"),
-                    AdmissionNo = x.Student.IndexNo,
+                    AdmissionNo = x.Student.AdmissionNo,
                     DateLeaving = x.DateLeaving.ToString("dd-MM-yyyy"),
                     x.Reason,
                     Conduct = x.Conduct.ToEnumChar(),
@@ -179,11 +179,11 @@ namespace StudentInformationSystem.Areas.Student.Controllers
         {
             var obj = db.Students.Find(studID);
 
-            var IndexNo = obj.IndexNo;
+            var AdmissionNo = obj.AdmissionNo;
             var InitName = obj.Initials + " " + obj.LastName;
             var Fullname = obj.FullName;
 
-            return Json(new { IndexNo, InitName, Fullname, }, JsonRequestBehavior.AllowGet);
+            return Json(new { AdmissionNo, InitName, Fullname, }, JsonRequestBehavior.AllowGet);
         }
     }
 }
