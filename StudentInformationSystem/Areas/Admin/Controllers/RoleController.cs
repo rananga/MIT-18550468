@@ -14,12 +14,12 @@ using System.Web.Mvc;
 
 namespace StudentInformationSystem.Areas.Admin.Controllers
 {
-    [ExtendedAuthorize(Roles = PermissionConstants.AdminUser)]
-    public class UserPermissionController : BaseController
+    [ExtendedAuthorize(Roles = RoleConstants.AdminUser)]
+    public class RoleController : BaseController
     {
-        public ActionResult Index(BaseViewModel<PermissionVM> vm)
+        public ActionResult Index(BaseViewModel<RoleVM> vm)
         {
-            vm.SetList(db.Permissions.AsQueryable(), "Name");
+            vm.SetList(db.Roles.AsQueryable(), "Name");
             return View(vm);
         }
 
@@ -29,55 +29,55 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Permission permission = db.Permissions.Find(id);
-            if (permission == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            return View(new PermissionVM(permission));
+            return View(new RoleVM(role));
         }
 
         public ActionResult Create()
         {
-            var vm = new PermissionVM();
+            var vm = new RoleVM();
             Session[sskCrtdObj] = vm;
             return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PermissionVM permission)
+        public ActionResult Create(RoleVM role)
         {
             try
             {
-                if (permission.Name == null )
+                if (role.Name == null)
                 { ModelState.AddModelError("Name", "Name field is required"); }
-                if (permission.Code == null)
+                if (role.Code == null)
                 { ModelState.AddModelError("Code", "Code field is required"); }
 
                 if (ModelState.IsValid)
                 {
-                    permission.CreatedBy = this.GetCurrUser();
-                    permission.CreatedDate = DateTime.Now;
-                    var obj = db.Permissions.Add(permission.GetEntity()).Entity;
+                    role.CreatedBy = this.GetCurrUser();
+                    role.CreatedDate = DateTime.Now;
+                    var obj = db.Roles.Add(role.GetEntity()).Entity;
 
-                    var mnuLst = permission.MenusJson.DeserializeJson<List<int>>();
+                    var mnuLst = role.MenusJson.DeserializeJson<List<MenusJsonItem>>();
 
-                    foreach (var det in mnuLst)
+                    foreach (var itm in mnuLst)
                     {
-                        obj.PermissionMenuAccesses.Add(new PermissionMenuAccess() { PermissionId = obj.PermissionId, MenuId = det });
+                        obj.RoleMenuAccesses.Add(new RoleMenuAccess() { RoleId = obj.RoleId, MenuId = itm.MenuId, ActionId = itm.ActionId });
                     }
 
-                    var grdLst = permission.GradesJson.DeserializeJson<List<int>>();
+                    var grdLst = role.GradesJson.DeserializeJson<List<int>>();
 
                     foreach (var det in grdLst)
                     {
-                        obj.PermissionGradeAccesses.Add(new PermissionGradeAccess() { PermissionId = obj.PermissionId, GradeId = det });
+                        obj.RoleGradeAccesses.Add(new RoleGradeAccess() { RoleId = obj.RoleId, GradeId = det });
                     }
 
                     db.SaveChanges();
 
-                    AddAlert(AlertStyles.success, "User permission created successfully.");
+                    AddAlert(AlertStyles.success, "User role created successfully.");
                     return RedirectToAction("Index");
                 }
             }
@@ -86,7 +86,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             catch (Exception ex)
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
-            return View(permission);
+            return View(role);
         }
 
         public ActionResult Edit(int? id)
@@ -95,99 +95,99 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Permission permission = db.Permissions.Find(id);
-            if (permission == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            var obj = new PermissionVM(permission);
+            var obj = new RoleVM(role);
             Session[sskCrtdObj] = obj;
             return View(obj);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(PermissionVM permission)
+        public ActionResult Edit(RoleVM role)
         {
             byte[] curRowVersion = null;
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var svm = (PermissionVM)Session[sskCrtdObj];
+                    var svm = (RoleVM)Session[sskCrtdObj];
 
-                    var obj = db.Permissions.Find(permission.PermissionId);
+                    var obj = db.Roles.Find(role.RoleId);
                     if (obj == null)
                     { throw new DbUpdateConcurrencyException(); }
 
                     curRowVersion = obj.RowVersion;
-                    var modObj = permission.GetEntity();
+                    var modObj = role.GetEntity();
                     var props = "Name";
                     modObj.CopyContent(obj, props);
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;
 
-                    db.Entry(obj).OriginalValues["RowVersion"] = permission.RowVersion;
+                    db.Entry(obj).OriginalValues["RowVersion"] = role.RowVersion;
 
-                    var mnuLst = permission.MenusJson.DeserializeJson<List<int>>();
+                    var mnuLst = role.MenusJson.DeserializeJson<List<MenusJsonItem>>();
 
-                    db.PermissionMenuAccesses.RemoveRange(obj.PermissionMenuAccesses.Where(x => !mnuLst.Contains(x.MenuId)));
-                    mnuLst = mnuLst.Except(obj.PermissionMenuAccesses.Select(x => x.MenuId)).ToList();
-                    foreach (var det in mnuLst)
+                    db.RoleMenuAccesses.RemoveRange(obj.RoleMenuAccesses.Where(x => !mnuLst.Any(y => y.MenuId == x.MenuId && y.ActionId == x.ActionId)));
+                    mnuLst = mnuLst.Where(x=> !obj.RoleMenuAccesses.Any(y=> y.MenuId == x.MenuId && y.ActionId == x.ActionId)).ToList();
+                    foreach (var itm in mnuLst)
                     {
-                        obj.PermissionMenuAccesses.Add(new PermissionMenuAccess() { PermissionId = obj.PermissionId, MenuId = det });
+                        obj.RoleMenuAccesses.Add(new RoleMenuAccess() { RoleId = obj.RoleId, MenuId = itm.MenuId, ActionId = itm.ActionId });
                     }
 
-                    var grdLst = permission.GradesJson.DeserializeJson<List<int>>();
+                    var grdLst = role.GradesJson.DeserializeJson<List<int>>();
 
-                    db.PermissionGradeAccesses.RemoveRange(obj.PermissionGradeAccesses.Where(x => !grdLst.Contains(x.GradeId)));
-                    grdLst = grdLst.Except(obj.PermissionGradeAccesses.Select(x => x.GradeId)).ToList();
+                    db.RoleGradeAccesses.RemoveRange(obj.RoleGradeAccesses.Where(x => !grdLst.Contains(x.GradeId)));
+                    grdLst = grdLst.Except(obj.RoleGradeAccesses.Select(x => x.GradeId)).ToList();
                     foreach (var det in grdLst)
                     {
-                        obj.PermissionGradeAccesses.Add(new PermissionGradeAccess() { PermissionId = obj.PermissionId, GradeId = det });
+                        obj.RoleGradeAccesses.Add(new RoleGradeAccess() { RoleId = obj.RoleId, GradeId = det });
                     }
 
                     db.SaveChanges();
 
-                    AddAlert(AlertStyles.success, "User Permission modified successfully.");
+                    AddAlert(AlertStyles.success, "User role modified successfully.");
                     return RedirectToAction("Index");
                 }
             }
             catch (DbUpdateConcurrencyException ex)
             {
                 this.ShowConcurrencyErrors(ex);
-                permission.RowVersion = curRowVersion;
+                role.RowVersion = curRowVersion;
             }
             catch (DbEntityValidationException dbEx)
             { this.ShowEntityErrors(dbEx); }
             catch (Exception ex)
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
-            return View(permission);
+            return View(role);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(PermissionVM permission)
+        public ActionResult DeleteConfirmed(RoleVM role)
         {
             try
             {
-                var obj = db.Permissions.Find(permission.PermissionId);
+                var obj = db.Roles.Find(role.RoleId);
                 if (obj == null)
                 { throw new DbUpdateConcurrencyException(""); }
                 db.Detach(obj);
-                
-                var entry = db.Entry(permission.GetEntity());
+
+                var entry = db.Entry(role.GetEntity());
                 entry.State = EntityState.Unchanged;
-                entry.Collection(x => x.PermissionMenuAccesses).Load();
-                db.PermissionMenuAccesses.RemoveRange(entry.Entity.PermissionMenuAccesses);
-                entry.Collection(x => x.PermissionGradeAccesses).Load();
-                db.PermissionGradeAccesses.RemoveRange(entry.Entity.PermissionGradeAccesses);
+                entry.Collection(x => x.RoleMenuAccesses).Load();
+                db.RoleMenuAccesses.RemoveRange(entry.Entity.RoleMenuAccesses);
+                entry.Collection(x => x.RoleGradeAccesses).Load();
+                db.RoleGradeAccesses.RemoveRange(entry.Entity.RoleGradeAccesses);
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
-                AddAlert(AlertStyles.success, "User Permission deleted successfully.");
+                AddAlert(AlertStyles.success, "User role deleted successfully.");
                 return RedirectToAction("Index");
             }
             catch (DbUpdateConcurrencyException ex)
@@ -200,57 +200,57 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             {
                 AddAlert(AlertStyles.danger, ex.GetInnerException().Message);
             }
-            return RedirectToAction("Details", new { id = permission.PermissionId });
+            return RedirectToAction("Details", new { id = role.RoleId });
         }
 
         public ActionResult ChildIndex(int? id, bool isToEdit = false)
         {
-            PermissionVM obj;
+            RoleVM obj;
 
-            if (isToEdit && Session[sskCrtdObj] is PermissionVM)
-            { obj = (PermissionVM)Session[sskCrtdObj]; }
+            if (isToEdit && Session[sskCrtdObj] is RoleVM)
+            { obj = (RoleVM)Session[sskCrtdObj]; }
             else
             {
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                Permission permission = db.Permissions.Where(x => x.PermissionId == id).FirstOrDefault();
-                if (permission == null)
+                Role role = db.Roles.Where(x => x.RoleId == id).FirstOrDefault();
+                if (role == null)
                 {
                     return HttpNotFound();
                 }
-                obj = new PermissionVM(permission);
+                obj = new RoleVM(role);
             }
 
             ViewBag.IsToEdit = isToEdit;
-            ViewBag.PermissionID = obj.PermissionId;
+            ViewBag.RoleID = obj.RoleId;
             return PartialView("_ChildIndex", obj.MenusList);
         }
 
         public ActionResult GradeIndex(int? id, bool isToEdit = false)
         {
-            PermissionVM obj;
+            RoleVM obj;
 
-            if (isToEdit && Session[sskCrtdObj] is PermissionVM)
-            { obj = (PermissionVM)Session[sskCrtdObj]; }
+            if (isToEdit && Session[sskCrtdObj] is RoleVM)
+            { obj = (RoleVM)Session[sskCrtdObj]; }
             else
             {
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                Permission permission = db.Permissions.Where(x => x.PermissionId == id).FirstOrDefault();
-                if (permission == null)
+                Role role = db.Roles.Where(x => x.RoleId == id).FirstOrDefault();
+                if (role == null)
                 {
                     return HttpNotFound();
                 }
-                obj = new PermissionVM(permission);
+                obj = new RoleVM(role);
             }
             var gradesList = db.Grades.ToList();
 
             ViewBag.IsToEdit = isToEdit;
-            ViewBag.PermissionID = obj.PermissionId;
+            ViewBag.RoleID = obj.RoleId;
             return PartialView("_GradeIndex", gradesList);
         }
     }

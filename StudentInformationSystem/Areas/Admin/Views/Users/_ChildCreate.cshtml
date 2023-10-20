@@ -1,4 +1,4 @@
-﻿@model StudentInformationSystem.Areas.Admin.Models.UserPermissionVM
+﻿@model StudentInformationSystem.Areas.Admin.Models.UserRoleVM
 
 @{ Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml"); }
 
@@ -10,13 +10,13 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.UserId)
-        @Html.HiddenFor(model => model.PermissionName)
+        @Html.HiddenFor(model => model.RoleName)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PermissionId, htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                @Html.PopUpSelectorFor(model => model.PermissionId, "Base", "Data", "GetUserPermissions", new { @class = "form-control" }, "Please select a User Permission", new { idsToExcluede = ViewBag.UserPermissions }, dspFormat: "{1}", hiddenIndices: "0")
-                @Html.ValidationMessageFor(model => model.PermissionId, "", new { @class = "text-danger" })
+                @Html.PopUpSelectorFor(model => model.RoleId, "Base", "Data", "GetRoles", new { @class = "form-control" }, "Please select a Role", new { idsToExcluede = ViewBag.UserRoles }, dspFormat: "{1}", hiddenIndices: "0")
+                @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
             </div>
         </div>
         <hr />

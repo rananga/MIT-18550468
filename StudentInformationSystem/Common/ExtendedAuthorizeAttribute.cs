@@ -28,8 +28,8 @@ namespace StudentInformationSystem.Common
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            if (!Roles.IsBlank() && !Roles.Split(',').Contains(PermissionConstants.Admin))
-            { Roles = Roles + "," + PermissionConstants.Admin; }
+            if (!Roles.IsBlank() && !Roles.Split(',').Contains(RoleConstants.Admin))
+            { Roles = Roles + "," + RoleConstants.Admin; }
             bool isUserAuthorized = base.AuthorizeCore(httpContext);
             return isUserAuthorized;
         }

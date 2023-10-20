@@ -1,9 +1,12 @@
-﻿using StudentInformationSystem.Data;
-using StudentInformationSystem.Data.Models;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
 using StudentInformationSystem.Areas.Base;
 using StudentInformationSystem.Common;
+using StudentInformationSystem.Data;
+using StudentInformationSystem.Data.Models;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
 using System.Globalization;
@@ -12,14 +15,12 @@ using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Script.Serialization;
 using System.Web.WebPages;
-using System.Security.Claims;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
 
 namespace System.Web
 {
@@ -165,6 +166,36 @@ namespace System.Web
             }
         }
 
+        public static void ResetMappings<Tentity, Tmodel>(this IModel<Tentity, Tmodel> mapper)
+        {
+            if (mapper is Tmodel obj)
+            {
+                foreach (var map in mapper.mappings)
+                {
+                    var member = ((dynamic)map).modelProperty.Body as MemberExpression;
+                    if (member == null)
+                    {
+                        var unary = ((dynamic)map).modelProperty.Body as UnaryExpression;
+                        if (unary != null)
+                        { member = unary.Operand as MemberExpression; }
+                    }
+                    if (member == null)
+                    { continue; }
+
+                    var propInfo = member.Member as PropertyInfo;
+                    if (propInfo == null)
+                    { continue; }
+
+                    object valObj = null;
+                    try { valObj = ((dynamic)map).entityProperty.Compile().Invoke(obj); }
+                    catch { }
+
+                    if (IsAssignable(valObj, propInfo))
+                    { propInfo.SetValue(mapper, valObj); }
+                }
+            }
+        }
+
         public static string GetAreaName(this RouteBase route)
         {
             var irwa = route as IRouteWithArea;
@@ -229,7 +260,7 @@ namespace System.Web.Mvc.Html
         public static List<Menu> GetAllMenus(this HtmlHelper htmlHelper)
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
-            { return dbctx.Menus.ToList(); }
+            { return dbctx.Menus.Include(x => x.MenuActions).ToList(); }
         }
 
         public static List<Menu> GetAccessibleMenus(this HtmlHelper htmlHelper)
@@ -239,13 +270,13 @@ namespace System.Web.Mvc.Html
             {
                 var usrId = (int)htmlHelper.ViewContext.HttpContext.Session[BaseController.sskCurUsrID];
 
-                var permissions = dbctx.Users.Where(x => x.Id == usrId).SelectMany(x => x.UserPermissions).Select(x => x.Permission.Code);
-                if (permissions.Where(x => x == PermissionConstants.Admin).Any())
+                var roles = dbctx.Users.Where(x => x.Id == usrId).SelectMany(x => x.UserRoles).Select(x => x.Role.Code);
+                if (roles.Where(x => x == RoleConstants.Admin).Any())
                     return dbctx.Menus.Include(x => x.InverseParentMenu).ToList();
 
-                lst = dbctx.Menus.Include(x=> x.InverseParentMenu)
-                    .Where(x => x.PermissionMenuAccesses
-                    .Where(y => y.Permission.UserPermissions
+                lst = dbctx.Menus.Include(x => x.InverseParentMenu)
+                    .Where(x => x.RoleMenuAccesses
+                    .Where(y => y.Role.UserRoles
                     .Where(z => z.UserId == usrId).Count() > 0).Count() > 0).ToList();
             }
 
@@ -671,6 +702,22 @@ namespace System.Web.Mvc.Html
             UrlHelper urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
 
             return controller == null ? urlHelper.Action(action, routeValues) : urlHelper.Action(action, controller, routeValues);
+        }
+
+        public static string GetUserName(this HtmlHelper htmlHelper)
+        {
+            var curUsrId = HttpContext.Current.Session[BaseController.sskCurUsrID].ConvertTo<int>();
+
+            if (curUsrId == 0)
+                return string.Empty;
+
+            using (dbNalandaContext dbctx = new dbNalandaContext())
+            {
+                var usr = dbctx.Users.Find(curUsrId);
+                return usr.StaffMember != null ? (usr.StaffMember.Initials + usr.StaffMember.LastName) :
+                    usr.Parent != null ? (usr.Parent.Initials + usr.Parent.LastName) :
+                    usr.Visitor != null ? (usr.Visitor.Initials + usr.Visitor.LastName) : usr.UserName;
+            }
         }
 
         public static MvcHtmlString WrappedHtmlString(this HtmlHelper htmlHelper, string text, string seperator = ",", object htmlAttributes = null)
@@ -1193,6 +1240,38 @@ namespace System.Web.Helpers
         private static bool ModeEnabled(WebGridPagerModes mode, WebGridPagerModes modeCheck)
         {
             return (mode & modeCheck) == modeCheck;
+        }
+    }
+}
+
+namespace System.Data
+{
+    public static class DbContextHelpers
+    {
+        public static IQueryable<Parent> ParentsQuery(this dbNalandaContext db)
+        {
+            var user = db.Users.Find(HttpContext.Current.Session[BaseController.sskCurUsrID]);
+
+            if (user.UserRoles.Any(x => x.Role.Code == RoleConstants.Admin))
+                return db.Parents;
+
+            if (user.Parent != null)
+                return db.Parents.Where(x => x.Id == user.ParentId);
+
+            return db.Parents;
+        }
+
+        public static IQueryable<Student> StudentsQuery(this dbNalandaContext db)
+        {
+            var user = db.Users.Find(HttpContext.Current.Session[BaseController.sskCurUsrID]);
+
+            if (user.UserRoles.Any(x => x.Role.Code == RoleConstants.Admin))
+                return db.Students;
+
+            if (user.Parent != null)
+                return db.Students.Where(x => x.StudentFamilies.Any(y => y.ParentId == user.ParentId));
+
+            return db.Students;
         }
     }
 }

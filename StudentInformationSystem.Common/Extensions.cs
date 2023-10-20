@@ -749,7 +749,7 @@ namespace System.Data
                     var hdrCellStyle = workbook.CreateCellStyle();
                     var hdrFont = workbook.CreateFont();
                     hdrFont.FontHeightInPoints = 14;
-                    hdrFont.Boldweight = (short)FontBoldWeight.Bold;
+                    hdrFont.IsBold = true;
                     hdrCellStyle.SetFont(hdrFont);
                     hdrCellStyle.Alignment = HorizontalAlignment.Center;
 
@@ -773,7 +773,7 @@ namespace System.Data
                     var subHdrCellStyle = workbook.CreateCellStyle();
                     var subHdrFont = workbook.CreateFont();
                     subHdrFont.FontHeightInPoints = 11;
-                    subHdrFont.Boldweight = (short)FontBoldWeight.Bold;
+                    subHdrFont.IsBold = true;
                     subHdrCellStyle.SetFont(subHdrFont);
 
                     row = sheet.CreateRow(rowIndex);
@@ -790,7 +790,7 @@ namespace System.Data
                 var titleCellStyle = workbook.CreateCellStyle();
                 var titleFont = workbook.CreateFont();
                 titleFont.FontHeightInPoints = 10;
-                titleFont.Boldweight = (short)FontBoldWeight.Bold;
+                titleFont.IsBold = true;
                 titleFont.Underline = FontUnderlineType.Single;
                 titleCellStyle.SetFont(titleFont);
 

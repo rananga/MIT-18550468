@@ -14,6 +14,7 @@ using System.Configuration;
 
 namespace StudentInformationSystem.Areas.Admin.Controllers
 {
+    [ExtendedAuthorize(Roles = RoleConstants.AdminUser)]
     public class StaffMemberController : BaseController
     {
         public ActionResult Index(BaseViewModel<StaffMemberVM> vm)
@@ -85,6 +86,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                         objStaff.Teacher = new Data.Models.Teacher() { StaffId = objStaff.Id, SectionId = staff.TeacherSectionId.Value, CreatedBy = objStaff.CreatedBy, CreatedDate = DateTime.Now };
 
                     db.SaveChanges();
+                    //TODO Create MS account
                     dbTrans.Commit();
 
                     AddAlert(AlertStyles.success, "Staff Member Created Successfully.");
@@ -153,7 +155,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = staff.GetEntity();
-                    modObj.CopyContent(obj, "StaffNumber,Gender,Title,FullName,Initials,LastName,Address1,Address2,City,MobileNo,SchoolEmail_MS,Nicno,TelHome,ImmeContactName,ImmeContactNo,Status,ImagePath,JoinedDate,RetiredDate,IsTeacher,TeacherSectionId");
+                    modObj.CopyContent(obj, "StaffNumber,Gender,Title,FullName,Initials,LastName,Address1,Address2,City,MobileNo,SchoolEmail_MS,NicNo,TelHome,ImmeContactName,ImmeContactNo,Status,ImagePath,JoinedDate,RetiredDate,IsTeacher,TeacherSectionId");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;

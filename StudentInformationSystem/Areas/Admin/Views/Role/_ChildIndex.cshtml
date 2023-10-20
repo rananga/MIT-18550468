@@ -31,7 +31,7 @@
 </style>
 
 <hr />
-<h3>Menus</h3>
+<h3>Menus & Actions</h3>
 
 <p>
     <div class="btn-toolbar">
@@ -51,28 +51,42 @@
 
 @helper IterateMenus(List<StudentInformationSystem.Data.Models.Menu> FullList, int? menuID)
 {
-var lst = FullList.Where(x => x.ParentMenuId == menuID).OrderBy(x => x.DisplaySeq).ToList();
+    var lst = FullList.Where(x => x.ParentMenuId == menuID).OrderBy(x => x.DisplaySeq).ToList();
 
-foreach (var item in lst)
-{
-    if (item.Type == "I")
+    foreach (var item in lst)
     {
-            <li data-menu-id="@item.MenuId"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span> @item.Text</li>
-    }
-    else if (item.Type == "D")
-    {
-            <li data-menu-id="@item.MenuId"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span> ----- Divider -----</li>
-    }
-    else if (item.Type == "M")
-    {
-            <li data-menu-id="@item.MenuId">
+        if (item.Type == "I")
+        {
+            if (item.MenuActions.Where(x=> x.ActionId != 0).Count() > 0)
+            {
+                <li data-menu-id="@item.MenuId" data-menu-action-id="0">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span> @item.Text
+                    <ul style="display:none">
+                        @foreach (var ma in item.MenuActions)
+                        {
+                            if (ma.ActionId != 0)
+                            {
+                                <li data-menu-id="@item.MenuId" data-menu-action-id="@ma.ActionId"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span> @ma.Text</li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+            else
+            {
+                <li data-menu-id="@item.MenuId" data-menu-action-id="0"><span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span> @item.Text</li>
+            }
+        }
+        else if (item.Type == "M")
+        {
+            <li data-menu-id="@item.MenuId" data-menu-action-id="0">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span> @item.Text
                 <ul style="display:none">
                     @IterateMenus(FullList, item.MenuId)
                 </ul>
             </li>
+        }
     }
-}
 }
 
 <div>

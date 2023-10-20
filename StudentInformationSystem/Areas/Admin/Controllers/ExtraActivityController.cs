@@ -383,12 +383,12 @@ namespace StudentInformationSystem.Areas.Admin
 
                     db.Entry(obj).OriginalValues["RowVersion"] = activity.RowVersion;
 
-                    db.ExtraActivityAcheivements.RemoveRange(obj.Acheivements.Where(x =>
+                    db.ExtraActivityAchievements.RemoveRange(obj.Acheivements.Where(x =>
                         !svm.vmAcheivements.Select(y => y.Id).ToList().Contains(x.Id)));
 
                     foreach (var det in svm.vmAcheivements)
                     {
-                        var objDet = db.ExtraActivityAcheivements.Find(det.Id);
+                        var objDet = db.ExtraActivityAchievements.Find(det.Id);
                         if (objDet == null)
                         {
                             det.CreatedBy = this.GetCurrUser();
@@ -519,7 +519,7 @@ namespace StudentInformationSystem.Areas.Admin
                 var entry = db.Entry(activity.GetEntity());
                 entry.State = EntityState.Unchanged;
                 entry.Collection(x => x.Acheivements).Load();
-                db.ExtraActivityAcheivements.RemoveRange(entry.Entity.Acheivements);
+                db.ExtraActivityAchievements.RemoveRange(entry.Entity.Acheivements);
                 entry.Collection(x => x.Positions).Load();
                 db.ExtraActivityPositions.RemoveRange(entry.Entity.Positions);
                 entry.State = EntityState.Deleted;

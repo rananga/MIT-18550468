@@ -1,3 +1,29 @@
+function hideSideBar() {
+    jQuery('#main-content').css({
+        'margin-left': '0px'
+    });
+    jQuery('#sidebar').css({
+        'margin-left': '-' + SideMenuWidth
+    });
+    $('#sidebar').removeClass("show-sidebar-menu").addClass("hide-sidebar-menu");
+    jQuery("#container").addClass("sidebar-closed");
+    jQuery("#container").addClass("sidebar-hidden");
+    SetFooterPosition();
+}
+
+function showSideBar() {
+    jQuery('#main-content').css({
+        'margin-left': SideMenuWidth
+    });
+    $('#sidebar').removeClass("hide-sidebar-menu").addClass("show-sidebar-menu");
+    jQuery('#sidebar').css({
+        'margin-left': '0'
+    });
+    jQuery("#container").removeClass("sidebar-closed");
+    jQuery("#container").removeClass("sidebar-hidden");
+    SetFooterPosition();
+}
+
 function initializeJS() {
 
     //tool tips
@@ -129,30 +155,22 @@ function initializeJS() {
 
     jQuery('.toggle-nav').click(function () {
         if (jQuery('#sidebar > ul').is(":visible") === true) {
-            jQuery('#main-content').css({
-                'margin-left': '0px'
-            });
-            jQuery('#sidebar').css({
-                'margin-left': '-' + SideMenuWidth
-            });
-            $('#sidebar').removeClass("show-sidebar-menu").addClass("hide-sidebar-menu");
-            jQuery("#container").addClass("sidebar-closed");
-            jQuery("#container").addClass("sidebar-hidden");
+            localStorage.setItem("StickMenu", "false");
+            hideSideBar();
         } else {
-            jQuery('#main-content').css({
-                'margin-left': SideMenuWidth
-            });
-            $('#sidebar').removeClass("hide-sidebar-menu").addClass("show-sidebar-menu");
-            jQuery('#sidebar').css({
-                'margin-left': '0'
-            });
-            jQuery("#container").removeClass("sidebar-closed");
-            jQuery("#container").removeClass("sidebar-hidden");
+            localStorage.setItem("StickMenu", "true");
+            showSideBar();
         }
-        SetFooterPosition();
     });
 }
 
 jQuery(document).ready(function () {
     initializeJS();
 });
+
+
+var stickMenu = localStorage.getItem("StickMenu");
+if (stickMenu == 'true')
+    showSideBar();
+else
+    hideSideBar();

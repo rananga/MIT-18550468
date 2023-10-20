@@ -1,10 +1,8 @@
-﻿using StudentInformationSystem.Data;
+﻿using StudentInformationSystem.Common;
 using StudentInformationSystem.Data.Models;
-using StudentInformationSystem.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -14,11 +12,12 @@ namespace StudentInformationSystem.Areas.Admin.Models
     {
         public UserVM()
         {
-            DetailsList = new List<UserPermissionVM>();
+            DetailsList = new List<UserRoleVM>();
             mappings = new ObjMappings<User, UserVM>();
-            mappings.Add(x => x.StaffMember == null ? "" : $"{x.StaffMember.Title.ToEnumChar("")}. {x.StaffMember.Initials.Trim()} {x.StaffMember.LastName}", x => x.SatffName);
+            mappings.Add(x => x.StaffMember == null ? "" : $"{x.StaffMember.Title.ToEnumChar("")}. {x.StaffMember.Initials.Trim()} {x.StaffMember.LastName}", x => x.StaffName);
+            mappings.Add(x => x.Parent == null ? "" : $"{x.Parent.Title.ToEnumChar("")}. {x.Parent.FullName.Trim()}", x => x.ParentName);
             mappings.Add(x => x.Visitor == null ? "" : $"{x.Visitor.Title.ToEnumChar("")}. {x.Visitor.Initials.Trim()} {x.Visitor.LastName}", x => x.VisitorName);
-            mappings.Add(x => x.UserPermissions.Select(y => new UserPermissionVM(y)).ToList(), x => x.DetailsList);
+            mappings.Add(x => x.UserRoles.Select(y => new UserRoleVM(y)).ToList(), x => x.DetailsList);
         }
         public UserVM(User obj)
             : this()
@@ -30,11 +29,14 @@ namespace StudentInformationSystem.Areas.Admin.Models
 
 
         [DisplayName("Staff Member")]
-        public string SatffName { get; set; }
+        public string StaffName { get; set; }
+
+        [DisplayName("Parent")]
+        public string ParentName { get; set; }
 
         [DisplayName("Visitor")]
         public string VisitorName { get; set; }
 
-        public virtual ICollection<UserPermissionVM> DetailsList { get; set; }
+        public virtual ICollection<UserRoleVM> DetailsList { get; set; }
     }
 }

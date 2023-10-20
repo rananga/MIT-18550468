@@ -1,6 +1,8 @@
 ﻿using Microsoft.Reporting.WebForms;
 using StudentInformationSystem.Areas.Base;
 using StudentInformationSystem.Areas.Report.Models;
+using StudentInformationSystem.Common;
+using StudentInformationSystem.Data;
 using StudentInformationSystem.Reporting.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ using System.Web.Mvc;
 
 namespace StudentInformationSystem.Areas.Report.Controllers
 {
+    [ExtendedAuthorize(Roles = RoleConstants.AdminUser)]
     public class WeeklySummaryController : BaseController
     {
         public ActionResult Process()

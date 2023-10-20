@@ -151,7 +151,7 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                     StudentName = x.Student.FullName,
                     DOB = x.Student.DOB.Value.ToString("dd-MM-yyyy"),
                     Address = x.Student.Address1 + " " + x.Student.Address2 + " " + x.Student.City,
-                    EmergencyConName = x.Student.StudentFamilies.Select(y => y.Parent.Name + " " + "(" + y.Relationship.ToEnumChar() + ")").FirstOrDefault(),
+                    EmergencyConName = x.Student.StudentFamilies.Select(y => y.Parent.FullName + " " + "(" + y.Relationship.ToEnumChar() + ")").FirstOrDefault(),
                     DateOfAdmission = x.Student.CreatedDate.ToString("dd-MM-yyyy"),
                     AdmissionNo = x.Student.AdmissionNo,
                     DateLeaving = x.DateLeaving.ToString("dd-MM-yyyy"),

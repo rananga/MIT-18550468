@@ -1,6 +1,7 @@
 ﻿using StudentInformationSystem.Data;
 using StudentInformationSystem.Data.Models;
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -35,18 +36,18 @@ namespace StudentInformationSystem.Areas.Base
             return Json(obj);
         }
 
-        public ActionResult GetUserPermissions(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, List<int> idsToExcluede = null)
+        public ActionResult GetRoles(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false, List<int> idsToExcluede = null)
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
-                var qry = dbctx.Permissions.AsQueryable();
+                var qry = dbctx.Roles.AsQueryable();
 
                 if (!filter.IsBlank())
-                { qry = qry.Where(searchForKey ? "PermissionID.ToString().Contains(@0)" : "Name.Contains(@0)", filter.ToLower()); }
+                { qry = qry.Where(searchForKey ? "RoleID.ToString().Contains(@0)" : "Name.Contains(@0)", filter.ToLower()); }
                 if (idsToExcluede != null)
                 {
                     foreach (var id in idsToExcluede)
-                    { qry = qry.Where("PermissionID != @0", id); }
+                    { qry = qry.Where("RoleID != @0", id); }
                 }
 
                 int rowCount = qry.Count();
@@ -64,15 +65,15 @@ namespace StudentInformationSystem.Areas.Base
 
                 var lstSortColMap = new Dictionary<string, string>()
                 {
-                    { "Permission_ID", "PermissionID" },
-                    { "Permission_Name", "Name" }
+                    { "Role_ID", "RoleID" },
+                    { "Role_Name", "Name" }
                 };
 
                 return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
                     x => new
                     {
-                        Permission_ID = x.PermissionId,
-                        Permission_Name = x.Name
+                        Role_ID = x.RoleId,
+                        Role_Name = x.Name
                     });
             }
         }
@@ -115,14 +116,14 @@ namespace StudentInformationSystem.Areas.Base
             }
         }
 
-        public ActionResult GetVisitors(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false)
+        public ActionResult GetParents(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false)
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
-                var qry = dbctx.Visitors.AsQueryable();
+                var qry = dbctx.Parents.AsQueryable();
 
                 if (!filter.IsBlank())
-                { qry = qry.Where(searchForKey ? "Id.ToString().Contains(@0)" : "FullName.ToLower().Contains(@0) || Nicno.ToString().ToLower().Contains(@0)", filter.ToLower()); }
+                { qry = qry.Where(searchForKey ? "Id.ToString().Contains(@0)" : "Name.ToLower().Contains(@0) || NicNo.ToString().ToLower().Contains(@0)", filter.ToLower()); }
 
                 int rowCount = qry.Count();
                 if (pageSize <= 0)
@@ -139,7 +140,45 @@ namespace StudentInformationSystem.Areas.Base
 
                 var lstSortColMap = new Dictionary<string, string>()
                 {
-                    { "NIC_No", "Nicno" },
+                    { "NIC_No", "NicNo" },
+                    { "Full_Name", "FullName" }
+                };
+
+                return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
+                    x => new
+                    {
+                        x.Id,
+                        NIC_No = x.NicNo,
+                        Full_Name = x.FullName
+                    });
+            }
+        }
+
+        public ActionResult GetVisitors(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false)
+        {
+            using (dbNalandaContext dbctx = new dbNalandaContext())
+            {
+                var qry = dbctx.Visitors.AsQueryable();
+
+                if (!filter.IsBlank())
+                { qry = qry.Where(searchForKey ? "Id.ToString().Contains(@0)" : "FullName.ToLower().Contains(@0) || NicNo.ToString().ToLower().Contains(@0)", filter.ToLower()); }
+
+                int rowCount = qry.Count();
+                if (pageSize <= 0)
+                {
+                    pageSize = 10;
+                    startIndex = 0;
+                }
+
+                if (startIndex > rowCount)
+                { startIndex = 0; }
+
+                if (sortBy.IsBlank())
+                { sortBy = "Full_Name"; }
+
+                var lstSortColMap = new Dictionary<string, string>()
+                {
+                    { "NIC_No", "NicNo" },
                     { "Full_Name", "FullName" }
                 };
 
@@ -291,11 +330,11 @@ namespace StudentInformationSystem.Areas.Base
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
-                var qry = dbctx.Students.Where(x => x.Status == StudStatus.Active || x.Status == StudStatus.OnLeave).AsQueryable();
+                var qry = dbctx.StudentsQuery().Where(x => x.Status == StudStatus.Active || x.Status == StudStatus.OnLeave).AsQueryable();
 
                 if (allStudents == true)
                 {
-                    qry = dbctx.Students.AsQueryable();
+                    qry = dbctx.StudentsQuery().AsQueryable();
                 }
 
                 if (!filter.IsBlank())
@@ -524,7 +563,7 @@ namespace StudentInformationSystem.Areas.Base
 
                 if (!filter.IsBlank())
                 {
-                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.StaffMember.Title.ToString() + x.StaffMember.Gender.ToString() + x.StaffMember.FullName + x.StaffMember.Initials + x.StaffMember.LastName + x.StaffMember.Nicno.ToString()).Contains(filter.ToLower()));
+                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.StaffMember.Title.ToString() + x.StaffMember.Gender.ToString() + x.StaffMember.FullName + x.StaffMember.Initials + x.StaffMember.LastName + x.StaffMember.NicNo.ToString()).Contains(filter.ToLower()));
                     //qry = qry.Where(searchForKey ? "TeachID.ToString().Contains(@0)" : "(Title.ToString()+Gender.ToString()+FullName+Initials+LName).Contains(@0)", filter.ToLower());
                 }
 
@@ -552,7 +591,7 @@ namespace StudentInformationSystem.Areas.Base
                     {
                         x.Id,
                         Teacher_Name = x.StaffMember.Title + ". " + x.StaffMember.Initials + " " + x.StaffMember.LastName,
-                        NIC_No = x.StaffMember.Nicno
+                        NIC_No = x.StaffMember.NicNo
                     });
             }
         }
@@ -744,7 +783,7 @@ namespace StudentInformationSystem.Areas.Base
         {
             using (dbNalandaContext dbctx = new dbNalandaContext())
             {
-                var qry = dbctx.ExtraActivityAcheivements.AsQueryable();
+                var qry = dbctx.ExtraActivityAchievements.AsQueryable();
 
                 if (!filter.IsBlank())
                 {

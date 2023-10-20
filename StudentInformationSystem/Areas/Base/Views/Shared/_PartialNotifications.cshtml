@@ -11,7 +11,7 @@
                     <span class="profile-ava">
                         <img alt="" src="@Url.Action("GetMyProfilePicture","Home", new { area = "Base" })" style="height:35px" />
                     </span>
-                    <span class="username">Rananga Suraweera</span>
+                    <span class="username">@Html.GetUserName()</span>
                     <b class="caret"></b>
                 </a>
                 <ul class="collapse dropdown-menu extended logout" id="collapseID2" style="margin-top:10px">

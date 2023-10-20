@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInformationSystem.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInformationSystem.Reporting", "StudentInformationSystem.Reporting\StudentInformationSystem.Reporting.csproj", "{BAC4584A-7569-432B-B408-ADF4CBB65C53}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInformationSystem.Sync.Test", "StudentInformationSystem.Sync.Test\StudentInformationSystem.Sync.Test.csproj", "{1CAD80F9-639E-43AB-9456-0B80D1E118C8}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentInformationSystem.Common", "StudentInformationSystem.Common\StudentInformationSystem.Common.csproj", "{1332F1F7-012E-417C-AB30-F9BB6AD7ED8B}"
 EndProject
 Global
@@ -39,12 +37,6 @@ Global
 		{BAC4584A-7569-432B-B408-ADF4CBB65C53}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BAC4584A-7569-432B-B408-ADF4CBB65C53}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
 		{BAC4584A-7569-432B-B408-ADF4CBB65C53}.Staging|Any CPU.Build.0 = Staging|Any CPU
-		{1CAD80F9-639E-43AB-9456-0B80D1E118C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CAD80F9-639E-43AB-9456-0B80D1E118C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CAD80F9-639E-43AB-9456-0B80D1E118C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CAD80F9-639E-43AB-9456-0B80D1E118C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CAD80F9-639E-43AB-9456-0B80D1E118C8}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
-		{1CAD80F9-639E-43AB-9456-0B80D1E118C8}.Staging|Any CPU.Build.0 = Staging|Any CPU
 		{1332F1F7-012E-417C-AB30-F9BB6AD7ED8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1332F1F7-012E-417C-AB30-F9BB6AD7ED8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1332F1F7-012E-417C-AB30-F9BB6AD7ED8B}.Release|Any CPU.ActiveCfg = Release|Any CPU

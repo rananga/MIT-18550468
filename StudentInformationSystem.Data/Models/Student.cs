@@ -86,6 +86,7 @@ namespace StudentInformationSystem.Data.Models
         public string BirthGramaDiv { get; set; }
         public string BirthPlace { get; set; }
 
+        public virtual User User { get; set; }
         public virtual Grade AdmittedGrade { get; set; }
         public virtual PhysicalClassRoom LastClass { get; set; }
         public virtual PhysicalClassRoom AdmittedClass { get; set; }

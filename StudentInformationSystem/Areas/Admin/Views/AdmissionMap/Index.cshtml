@@ -1,0 +1,35 @@
+﻿@model StudentInformationSystem.Areas.Admin.Models.AdmissionMapVM
+
+@{
+    ViewBag.Title = "Admission Map Data";
+}
+
+<div>
+    <hr />
+    <p>
+        <div class="btn-toolbar">
+            @Html.ActionLink("Edit", "Edit", null, new { @class = "btn btn-primary", style = "min-width:75px" })
+            @Html.ActionLink("Draw Circle", "Circle", null, new { @class = "btn btn-warning", style = "min-width:75px" })
+        </div>
+    </p>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.SchoolLocationLatitude, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DetailsViewFor(model => model.SchoolLocationLatitude)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SchoolLocationLongitude, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DetailsViewFor(model => model.SchoolLocationLongitude)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ChildContent">
+    @{ Html.RenderAction("ChildIndex"); }
+</div>

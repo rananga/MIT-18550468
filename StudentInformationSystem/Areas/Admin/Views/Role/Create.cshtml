@@ -1,7 +1,7 @@
-﻿@model StudentInformationSystem.Areas.Admin.Models.PermissionVM
+﻿@model StudentInformationSystem.Areas.Admin.Models.RoleVM
 
 @{
-    ViewBag.Title = "Create User Permission";
+    ViewBag.Title = "Create Role";
 }
 
 @using (Html.BeginForm())
@@ -36,10 +36,10 @@
 
 <div class="row">
     <div class="ChildContent col-md-6">
-        @{ Html.RenderAction("ChildIndex", new { id = Model.PermissionId, isToEdit = true }); }
+        @{ Html.RenderAction("ChildIndex", new { id = Model.RoleId, isToEdit = true }); }
     </div>
     <div class="ChildContent col-md-6">
-        @{ Html.RenderAction("GradeIndex", new { id = Model.PermissionId, isToEdit = true }); }
+        @{ Html.RenderAction("GradeIndex", new { id = Model.RoleId, isToEdit = true }); }
     </div>
 </div>
 
@@ -49,5 +49,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/admin/userpermission")
+    @Scripts.Render("~/bundles/admin/role")
 }

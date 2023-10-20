@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace StudentInformationSystem.Areas.Academic
 {
+    [ExtendedAuthorize(Roles = RoleConstants.AdminUser)]
     public class ClassRoomController : BaseController
     {
         public ActionResult Index(BaseViewModel<PhysicalClassRoomVM> vm)

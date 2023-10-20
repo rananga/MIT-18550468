@@ -126,11 +126,18 @@ namespace StudentInformationSystem.Areas.Base
             if (!string.IsNullOrEmpty(signInVM.AccessToken))
             {
                 Data.Models.Visitor visitor = null;
+                Data.Models.Student student = null;
                 var staff = db.StaffMembers.Where(x => x.SchoolEmail_MS.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
                 if (staff == null)
+                {
                     visitor = db.Visitors.Where(x => x.SchoolEmail_MS.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
 
-                user = staff?.User ?? visitor?.User;
+                    if (visitor == null)
+                        student = db.Students.Where(x=> x.SchoolEmail_MS.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
+                }
+                
+
+                user = staff?.User ?? visitor?.User ?? student?.User;
 
                 if (user == null)
                 {
@@ -163,7 +170,7 @@ namespace StudentInformationSystem.Areas.Base
             }
 
             var jser = new JavaScriptSerializer();
-            var lstPermissions = db.UserPermissions.Include(x => x.Permission).Where(x => x.UserId == user.Id).Select(x => x.Permission.Code).ToList();
+            var lstRoles = db.UserRoles.Include(x => x.Role).Where(x => x.UserId == user.Id).Select(x => x.Role.Code).ToList();
 
             var authTicket = new FormsAuthenticationTicket(
                 1,
@@ -171,7 +178,7 @@ namespace StudentInformationSystem.Areas.Base
                 DateTime.Now,
                 DateTime.Now.AddMinutes(20),
                 signInVM.RememberMe,
-                jser.Serialize(new { userName = user.UserName, permissions = lstPermissions }));
+                jser.Serialize(new { userName = user.UserName, roles = lstRoles }));
 
             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
 

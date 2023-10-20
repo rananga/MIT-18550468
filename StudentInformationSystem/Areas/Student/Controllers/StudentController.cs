@@ -1,26 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Reporting.WebForms;
-using StudentInformationSystem.Data;
 using StudentInformationSystem.Areas.Base;
 using StudentInformationSystem.Areas.Student.Models;
 using StudentInformationSystem.Common;
+using StudentInformationSystem.Data;
+using StudentInformationSystem.Reporting.Models;
 using System;
 using System.Configuration;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
-using StudentInformationSystem.Reporting.Models;
 
 namespace StudentInformationSystem.Areas.Student.Controllers
 {
+    [ExtendedAuthorize(Roles = RoleConstants.AdminUser)]
     public class StudentController : BaseController
     {
         public ActionResult Index(BaseViewModel<StudentVM> vm)
         {
-            vm.SetList(db.Students.AsQueryable(), "AdmissionNo", SortDirection.Descending);
+            vm.SetList(db.StudentsQuery().AsQueryable(), "AdmissionNo", SortDirection.Descending);
             return View(vm);
         }
 
@@ -106,23 +108,6 @@ namespace StudentInformationSystem.Areas.Student.Controllers
                 return HttpNotFound();
             }
             return PartialView("_ChildDetails", studSiblings);
-        }
-
-        [AllowAnonymous]
-        public ActionResult FamilyDetails(int? id)
-        {
-            if (id == null)
-            {
-
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            StudentVM obj = (StudentVM)Session[sskCrtdObj];
-            StudFamilyVM studFamilyVM = obj.FamilyMembers.Where(x => x.Id == id.Value).FirstOrDefault();
-            if (studFamilyVM == null)
-            {
-                return HttpNotFound();
-            }
-            return PartialView("_FamilyDetails", studFamilyVM);
         }
 
         public ActionResult Create()
@@ -293,6 +278,8 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             }
             var obj = (StudentVM)Session[sskCrtdObj];
 
+            ViewBag.StdentParents = obj.FamilyMembers.Select(x => x.ParentId).ToList();
+
             var studFamilyVM = new StudFamilyVM() { StudentId = studID.Value };
             return PartialView("_FamilyCreate", studFamilyVM);
         }
@@ -307,6 +294,10 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    studFamilyVM.Parent = db.Parents.Find(studFamilyVM.ParentId);
+                    studFamilyVM.ResetMappings();
+                    studFamilyVM.Parent = null;
+
                     obj = (StudentVM)Session[sskCrtdObj];
                     studFamilyVM.Id = Math.Min(obj.FamilyMembers.Select(x => x.Id).MinOrDefault(), 0) - 1;
                     obj.FamilyMembers.Add(studFamilyVM);
@@ -465,43 +456,6 @@ namespace StudentInformationSystem.Areas.Student.Controllers
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
             return PartialView("_ChildEdit", studSiblingsVM);
-        }
-
-        public ActionResult FamilyEdit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            StudFamilyVM studFamilyvm = ((StudentVM)Session[sskCrtdObj]).FamilyMembers.FirstOrDefault(x => x.Id == id);
-            if (studFamilyvm == null)
-            {
-                return HttpNotFound();
-            }
-            return PartialView("_FamilyEdit", studFamilyvm);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult FamilyEdit(StudFamilyVM studFamilyvm)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    var obj = ((StudentVM)Session[sskCrtdObj]).FamilyMembers.FirstOrDefault(x => x.Id == studFamilyvm.Id);
-                    studFamilyvm.CopyContent(obj, "Name,Relationship,Occupation,WorkingAdd,OfficeTel,ContactMob,ContactHome,Email,NICNo,Title");
-                    AddAlert(AlertStyles.success, "Family Member Modified Successfully.");
-                    string url = Url.Action("FamilyIndex", new { id = studFamilyvm.Id, isToEdit = true });
-                    return Json(new { success = true, url });
-                }
-            }
-            catch (DbEntityValidationException dbEx)
-            { this.ShowEntityErrors(dbEx); }
-            catch (Exception ex)
-            { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
-
-            return PartialView("_FamilyEdit", studFamilyvm);
         }
 
 
@@ -706,13 +660,13 @@ namespace StudentInformationSystem.Areas.Student.Controllers
 
             var lstFamDet = db.Students.Where(x => x.Id == id).SelectMany(x => x.StudentFamilies).Select(x => new
             {
-                Name = x.Parent.Name,
+                Name = x.Parent.FullName,
                 Relationship = x.Relationship == Relationship.Father ? "Father" : (x.Relationship == Relationship.Mother ? "Mother" : "Guardian"),
                 Occupation = x.Parent.Occupation,
-                WorkingAdd = x.Parent.WorkingAdd,
-                OfficeContact = x.Parent.OfficeTel,
-                HomeContact = x.Parent.ContactHome,
-                MobileContact = x.Parent.ContactMob,
+                WorkingAdd = x.Parent.WorkingAddress,
+                OfficeContact = x.Parent.OfficePhoneNo,
+                HomeContact = x.Parent.HomePhoneNo,
+                MobileContact = x.Parent.MobileNo,
                 EmailAdd = x.Parent.Email,
                 NICno = x.Parent.NicNo
             }).ToList();

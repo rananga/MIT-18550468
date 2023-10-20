@@ -57,11 +57,11 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             {
                 var existObj = db.Visitors.Where(e => e.NicNo == vm.NicNo).FirstOrDefault();
                 if (existObj != null)
-                { ModelState.AddModelError("Nicno", "NIC already assigned."); }
+                { ModelState.AddModelError("NicNo", "NIC already assigned."); }
 
                 var exSchoolEmail_MS = db.Visitors.Where(e => e.SchoolEmail_MS == vm.SchoolEmail_MS).FirstOrDefault();
                 if (exSchoolEmail_MS != null)
-                { ModelState.AddModelError("SchoolEmail_MS", $"Email Already Assinged to - {exSchoolEmail_MS.FullName}."); }
+                { ModelState.AddModelError("SchoolEmail_MS", $"Email Already Assigned to - {exSchoolEmail_MS.FullName}."); }
 
                 var svm = (VisitorVM)Session[sskCrtdObj];
 
@@ -79,6 +79,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                     }
 
                     db.SaveChanges();
+                    //TODO Create MS account
                     dbTrans.Commit();
 
                     AddAlert(AlertStyles.success, "Visitor Created Successfully.");
@@ -128,7 +129,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             {
                 var existObj = db.Visitors.Where(e => e.Id != vm.Id && e.NicNo == vm.NicNo).FirstOrDefault();
                 if (existObj != null)
-                { ModelState.AddModelError("Nicno", "NIC already assigned."); }
+                { ModelState.AddModelError("NicNo", "NIC already assigned."); }
 
                 var exSchoolEmail_MS = db.Visitors.Where(e => e.Id != vm.Id && !string.IsNullOrEmpty(e.SchoolEmail_MS) && e.SchoolEmail_MS == vm.SchoolEmail_MS).FirstOrDefault();
                 if (exSchoolEmail_MS != null)
@@ -144,7 +145,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = vm.GetEntity();
-                    modObj.CopyContent(obj, "Gender,Title,FullName,Initials,LastName,Address1,Address2,City,MobileNo,SchoolEmail_MS,Nicno,ImagePath");
+                    modObj.CopyContent(obj, "Gender,Title,FullName,Initials,LastName,Address1,Address2,City,MobileNo,SchoolEmail_MS,NicNo,ImagePath");
 
                     obj.ModifiedBy = this.GetCurrUser();
                     obj.ModifiedDate = DateTime.Now;

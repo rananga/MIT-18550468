@@ -22,7 +22,7 @@ namespace StudentInformationSystem.Areas.Teacher.Models
 
             mappings.Add(x => x.StaffMember.Title + ". " + x.StaffMember.FullName, x => x.TeacherName);
             mappings.Add(x => x.StaffMember.StaffNumber, x => x.StaffNumber);
-            mappings.Add(x => x.StaffMember.Nicno, x => x.NICNo);
+            mappings.Add(x => x.StaffMember.NicNo, x => x.NICNo);
             mappings.Add(x => x.TeacherPreferredSubjects.Select(y=> new TeacherPreferedSubjectVM(y)).ToList(), x => x.PreferedSubjects);
             mappings.Add(x => x.TeacherOffTimes.Select(y => new TeacherOffTimeVM(y)).ToList(), x => x.OffTimes);
             mappings.Add(x => x.TeacherQualifications.Select(y => new TeacherQualificationVM(y)).ToList(), x => x.Qualifications);

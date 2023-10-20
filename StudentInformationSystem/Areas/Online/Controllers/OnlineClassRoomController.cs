@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace StudentInformationSystem.Areas.Online.Controllers
 {
+    [ExtendedAuthorize(Roles = RoleConstants.AdminUser)]
     public class OnlineClassRoomController : BaseController
     {
         public ActionResult Index(BaseViewModel<OnlineClassRoomVM> vm)

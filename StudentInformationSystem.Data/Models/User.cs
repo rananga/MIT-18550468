@@ -9,7 +9,7 @@ namespace StudentInformationSystem.Data.Models
     {
         public User()
         {
-            UserPermissions = new HashSet<UserPermission>();
+            UserRoles = new HashSet<UserRole>();
         }
 
         [Required]
@@ -24,10 +24,13 @@ namespace StudentInformationSystem.Data.Models
         public int? VisitorId { get; set; }
         [DisplayName("Parent")]
         public int? ParentId { get; set; }
+        [DisplayName("Student")]
+        public int? StudentId { get; set; }
 
         public virtual StaffMember StaffMember { get; set; }
         public virtual Visitor Visitor { get; set; }
         public virtual Parent Parent { get; set; }
-        public virtual ICollection<UserPermission> UserPermissions { get; set; }
+        public virtual Student Student { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

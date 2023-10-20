@@ -1,0 +1,86 @@
+﻿@model IEnumerable<StudentInformationSystem.Areas.Admin.Models.NearbySchoolVM>
+
+<hr />
+<h3>Nearby Schools</h3>
+
+<table class="mGrid">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisplayName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitude)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            @{
+                if (ViewBag.IsToEdit)
+                {
+                    <th class="btn-1">
+                        @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus' style='color:white'></span>", "Add", "ChildCreate", routeValues: null, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-primary pull-right btn-xs", data_title = "Add Nearby School" })
+                    </th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SchoolName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Latitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Longitude)
+                </td>
+                <td style="text-align:center">
+                    @{
+                        if (ViewBag.IsToEdit)
+                        {
+                            <input class="form-checkbox check-box" name="IsActive" type="checkbox" value="" data-db-val="@item.IsActive" data-school-id="@item.Id" @(item.IsActive ? "checked" : "")>
+                        }
+                        else
+                        {
+                            <span style="font-size:18px;color:@(item.IsActive ? "green" : "red")"> @(item.IsActive ? "✔" : "✘") </span>
+                        }
+                    }
+                </td>
+                @{
+                    if (ViewBag.IsToEdit)
+                    {
+                        <td class="btn-2">
+                            <div class="btn-toolbar pull-right">
+                                @using (Html.BeginForm("ChildDelete", "AdmissionMap", new { id = item.Id }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-search'></span>", "Details", "ChildDetails", routeValues: new { id = item.Id }, htmlAttributes: new { data_popup_editor = "", @class = "btn btn-default btn-xs", data_title = "Nearby School Details" })
+                                    @Html.ConfirmSubmitButton("<span class='glyphicon glyphicon-trash'></span>", "Are you sure you want to delete?", "Confirm Nearby School deletion",
+                                        "<span class='glyphicon glyphicon-trash'></span> Delete", new { data_popup_delete = "", @class = "btn btn-danger btn-xs" })
+                                }
+                            </div>
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (ViewBag.IsToEdit)
+{
+    Html.RenderPartial("~/Areas/Base/Views/Shared/_PartialAlert.cshtml");
+}

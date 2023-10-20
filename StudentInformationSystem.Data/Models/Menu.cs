@@ -12,7 +12,8 @@ namespace StudentInformationSystem.Data.Models
         public Menu()
         {
             InverseParentMenu = new HashSet<Menu>();
-            PermissionMenuAccesses = new HashSet<PermissionMenuAccess>();
+            MenuActions = new HashSet<MenuAction>();
+            RoleMenuAccesses = new HashSet<RoleMenuAccess>();
         }
 
         public int MenuId { get; set; }
@@ -28,6 +29,7 @@ namespace StudentInformationSystem.Data.Models
 
         public virtual Menu ParentMenu { get; set; }
         public virtual ICollection<Menu> InverseParentMenu { get; set; }
-        public virtual ICollection<PermissionMenuAccess> PermissionMenuAccesses { get; set; }
+        public virtual ICollection<MenuAction> MenuActions { get; set; }
+        public virtual ICollection<RoleMenuAccess> RoleMenuAccesses { get; set; }
     }
 }

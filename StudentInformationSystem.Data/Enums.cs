@@ -6,7 +6,13 @@ using System.Web;
 
 namespace StudentInformationSystem.Data
 {
-    public static class PermissionConstants
+    public static class ParameterConstants
+    {
+        public const string SchoolLocationLatitude = "SchoolLocationLatitude";
+        public const string SchoolLocationLongitude = "SchoolLocationLongitude";
+    }
+
+    public static class RoleConstants
     {
         public const string Admin = "Admin";
         public const string AdminUser = "AdminUser";
@@ -58,10 +64,14 @@ namespace StudentInformationSystem.Data
         Father = 0,
         [Description("Mother")]
         Mother = 1,
-        [Description("Guardian")]
-        Guardian = 2,
-        [Description("Other")]
-        Other = 4
+        [Description("GrandParent")]
+        GrandParent = 2,
+        [Description("Uncle")]
+        Uncle = 3,
+        [Description("Aunty")]
+        Aunty = 4,
+        [Description("FamilyFriend")]
+        FamilyFriend = 5
     }
     public enum SibRelationship
     {

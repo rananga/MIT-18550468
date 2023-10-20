@@ -6,20 +6,23 @@ namespace StudentInformationSystem.Data
     public partial class dbNalandaContext : DbContext
     {
         public virtual DbSet<ExtraActivity> ExtraActivities { get; set; }
-        public virtual DbSet<ExtraActivityAcheivement> ExtraActivityAcheivements { get; set; }
+        public virtual DbSet<ExtraActivityAcheivement> ExtraActivityAchievements { get; set; }
         public virtual DbSet<ExtraActivityIncharge> ExtraActivityIncharges { get; set; }
         public virtual DbSet<ExtraActivityPosition> ExtraActivityPositions { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<GradeHead> GradeHeads { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<MenuAction> MenuActions { get; set; }
+        public virtual DbSet<NearbySchool> NearbySchools { get; set; }
         public virtual DbSet<Parent> Parents { get; set; }
-        public virtual DbSet<PermissionGradeAccess> PermissionGradeAccesses { get; set; }
-        public virtual DbSet<PermissionMenuAccess> PermissionMenuAccesses { get; set; }
-        public virtual DbSet<Permission> Permissions { get; set; }
+        public virtual DbSet<RoleGradeAccess> RoleGradeAccesses { get; set; }
+        public virtual DbSet<RoleMenuAccess> RoleMenuAccesses { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Section> Sections { get; set; }
         public virtual DbSet<SectionHead> SectionHeads { get; set; }
         public virtual DbSet<StaffMember> StaffMembers { get; set; }
-        public virtual DbSet<UserPermission> UserPermissions { get; set; }
+        public virtual DbSet<SystemParameter> SystemParameters { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Visitor> Visitors { get; set; }
 
@@ -52,7 +55,7 @@ namespace StudentInformationSystem.Data
                     .WithMany(p => p.Acheivements)
                     .HasForeignKey(d => d.ActivityId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Activity_Acheivements");
+                    .HasConstraintName("FK_Activity_Achievements");
             });
 
             modelBuilder.Entity<ExtraActivityIncharge>(entity =>
@@ -157,6 +160,30 @@ namespace StudentInformationSystem.Data
                     .HasConstraintName("FK_MenuMenu");
             });
 
+            modelBuilder.Entity<MenuAction>(entity =>
+            {
+                entity.HasKey(e => new { e.MenuId, e.ActionId });
+
+                entity.Property(e => e.Text).IsRequired();
+
+                entity.HasOne(d => d.Menu)
+                    .WithMany(p => p.MenuActions)
+                    .HasForeignKey(d => d.MenuId)
+                    .HasConstraintName("FK_MenuActionMenu");
+            });
+
+            modelBuilder.Entity<NearbySchool>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+            });
+
             modelBuilder.Entity<Parent>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -171,43 +198,49 @@ namespace StudentInformationSystem.Data
                 entity.HasOne(b => b.User).WithOne(p => p.Parent).HasForeignKey<User>(b => b.ParentId);
             });
 
-            modelBuilder.Entity<PermissionGradeAccess>(entity =>
+            modelBuilder.Entity<RoleGradeAccess>(entity =>
             {
-                entity.HasKey(e => new { e.GradeId, e.PermissionId });
+                entity.HasKey(e => new { e.RoleId, e.GradeId });
 
                 entity.HasOne(d => d.Grade)
-                    .WithMany(p => p.PermissionGradeAccesses)
+                    .WithMany(p => p.RoleGradeAccesses)
                     .HasForeignKey(d => d.GradeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Grade_PermissionGradeAccesses");
+                    .HasConstraintName("FK_Grade_RoleGradeAccesses");
 
-                entity.HasOne(d => d.Permission)
-                    .WithMany(p => p.PermissionGradeAccesses)
-                    .HasForeignKey(d => d.PermissionId)
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.RoleGradeAccesses)
+                    .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Permission_PermissionGradeAccesses");
+                    .HasConstraintName("FK_Role_RoleGradeAccesses");
             });
 
-            modelBuilder.Entity<PermissionMenuAccess>(entity =>
+            modelBuilder.Entity<RoleMenuAccess>(entity =>
             {
-                entity.HasKey(e => new { e.MenuId, e.PermissionId });
+                entity.HasKey(e => e.Id);
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.RoleMenuAccesses)
+                    .HasForeignKey(d => d.RoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Role_RoleMenuAccesses");
 
                 entity.HasOne(d => d.Menu)
-                    .WithMany(p => p.PermissionMenuAccesses)
+                    .WithMany(p => p.RoleMenuAccesses)
                     .HasForeignKey(d => d.MenuId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Menu_PermissionMenuAccesses");
+                    .HasConstraintName("FK_Menu_RoleMenuAccesses");
 
-                entity.HasOne(d => d.Permission)
-                    .WithMany(p => p.PermissionMenuAccesses)
-                    .HasForeignKey(d => d.PermissionId)
+                entity.HasOne(d => d.MenuAction)
+                    .WithMany(p => p.RoleMenuAccesses)
+                    .HasForeignKey(d => new { d.MenuId, d.ActionId })
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Permission_PermissionMenuAccesses");
+                    .HasConstraintName("FK_MenuAction_RoleMenuAccesses");
             });
 
-            modelBuilder.Entity<Permission>(entity =>
+            modelBuilder.Entity<Role>(entity =>
             {
-                entity.HasKey(e => e.PermissionId);
+                entity.HasKey(e => e.RoleId);
 
                 entity.Property(e => e.CreatedBy).IsRequired();
 
@@ -277,21 +310,26 @@ namespace StudentInformationSystem.Data
                 entity.HasOne(b => b.User).WithOne(p => p.StaffMember).HasForeignKey<User>(b => b.StaffId);
             });
 
-            modelBuilder.Entity<UserPermission>(entity =>
+            modelBuilder.Entity<SystemParameter>(entity =>
             {
-                entity.HasKey(e => e.UserPermissionId);
+                entity.HasKey(e => e.Key);
+            });
 
-                entity.HasOne(d => d.Permission)
-                    .WithMany(p => p.UserPermissions)
-                    .HasForeignKey(d => d.PermissionId)
+            modelBuilder.Entity<UserRole>(entity =>
+            {
+                entity.HasKey(e => e.UserRoleId);
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.UserRoles)
+                    .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Permission_UserPermissions");
+                    .HasConstraintName("FK_Role_UserRoles");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserPermissions)
+                    .WithMany(p => p.UserRoles)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_User_UserPermissions");
+                    .HasConstraintName("FK_User_UserRoles");
             });
 
             modelBuilder.Entity<User>(entity =>

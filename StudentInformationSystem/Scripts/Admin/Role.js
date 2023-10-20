@@ -17,7 +17,9 @@
         var grades = [];
 
         $('.glyphicon-check,.glyphicon-expand', ulTreeMenu).each(function () {
-            menus.push($(this).parent('li').data('menu-id'));
+            var $li = $(this).parent('li');
+            var itm = { MenuId: $li.data('menu-id'), ActionId: $li.data('menu-action-id') };
+            menus.push(itm);
         });
         menusJson.val(JSON.stringify(menus));
 
@@ -52,7 +54,7 @@
     });
 
     btnExpAll.click(function () {
-        ulTreeMenu.children('li').each(function () { exapndNode($(this)) });
+        ulTreeMenu.children('li').each(function () { exapndNode($(this), true) });
     });
 
     btnColapsAll.click(function () {
@@ -75,7 +77,7 @@
         ulTreeGrade.children('li').each(function () { uncheckNode($(this)) });
     });
 
-    function exapndNode(node) {
+    function exapndNode(node, all) {
         var liSpans = node.children('span');
         if (liSpans.length > 1) {
             liSpans.eq(0).removeClass();
@@ -83,7 +85,9 @@
         }
         var ul = node.children('ul');
         ul.show();
-        ul.children('li').each(function () { exapndNode($(this)) });
+
+        if (all)
+            ul.children('li').each(function () { exapndNode($(this)) });
     }
 
     function collapseNode(node) {
@@ -105,8 +109,7 @@
 
         node.children('ul').children('li').each(function () { checkNode($(this)) });
 
-        if (setInd)
-        { setIndeterminate(node); }
+        if (setInd) { setIndeterminate(node); }
     }
 
     function uncheckNode(node, setInd) {
@@ -117,8 +120,7 @@
 
         node.children('ul').children('li').each(function () { uncheckNode($(this)) });
 
-        if (setInd)
-        { setIndeterminate(node); }
+        if (setInd) { setIndeterminate(node); }
     }
 
     function setIndeterminate(node) {
@@ -133,19 +135,24 @@
 
         var lis = ulPrnt.children('li');
         var chkCnt = 0;
+        var idmntCnt = 0;
 
         lis.each(function () {
             var liChkd = $(this).children('span').eq(-1).is(".glyphicon-check");
+            var liIdmnt = $(this).children('span').eq(-1).is(".glyphicon-expand");
 
             if (liChkd) {
                 chkCnt++;
+            }
+            if (liIdmnt) {
+                idmntCnt++;
             }
         });
 
         var liSpans = prnt.children('span');
         liSpans.eq(-1).removeClass();
 
-        if (chkCnt == 0) {
+        if (chkCnt == 0 && idmntCnt == 0) {
             liSpans.eq(-1).addClass("glyphicon glyphicon-unchecked");
         }
         else if (lis.length == chkCnt) {
@@ -169,13 +176,10 @@
 
         $('li[data-menu-id]', ulTreeMenu).each(function () {
             var li = $(this);
-            if (li.children('ul').length > 0)
-            { return;}
+            if (li.children('ul').length > 0) { return; }
 
-            if ($.inArray(li.data('menu-id'), jsn) >= 0)
-            { checkNode(li); }
-            else
-            { uncheckNode(li); }
+            if (jsn.find(x => x.MenuId == li.data('menu-id') && x.ActionId == li.data('menu-action-id'))) { checkNode(li); }
+            else { uncheckNode(li); }
         });
 
         $('ul > li:first-child', ulTreeMenu).each(function () { setIndeterminate($(this)) });

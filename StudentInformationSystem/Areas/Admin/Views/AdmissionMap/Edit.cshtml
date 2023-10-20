@@ -1,0 +1,48 @@
+﻿@model StudentInformationSystem.Areas.Admin.Models.AdmissionMapVM
+
+@{
+    ViewBag.Title = "Edit Admission Map Details";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <p>
+            <input type="submit" value="Save" class="btn btn-primary" style="min-width:75px" />
+        </p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ActivityChangesJson);
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SchoolLocationLatitude, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SchoolLocationLatitude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SchoolLocationLatitude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SchoolLocationLongitude, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SchoolLocationLongitude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SchoolLocationLongitude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+<div class="ChildContent">
+    @{ Html.RenderAction("ChildIndex", new { isToEdit = true }); }
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/admin/admissionmap")
+}

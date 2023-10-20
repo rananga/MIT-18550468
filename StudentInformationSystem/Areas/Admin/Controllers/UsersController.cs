@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace StudentInformationSystem.Areas.Admin.Controllers
 {
-    [ExtendedAuthorize(Roles = PermissionConstants.AdminUser)]
+    [ExtendedAuthorize(Roles = RoleConstants.AdminUser)]
     public class UsersController : BaseController
     {
         public ActionResult Index(BaseViewModel<UserVM> vm)
@@ -43,12 +43,12 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             UserVM obj = (UserVM)Session[sskCrtdObj];
-            UserPermissionVM userPermission = obj.DetailsList.Where(x => x.UserPermissionId == id.Value).FirstOrDefault();
-            if (userPermission == null)
+            UserRoleVM userRole = obj.DetailsList.Where(x => x.UserRoleId == id.Value).FirstOrDefault();
+            if (userRole == null)
             {
                 return HttpNotFound();
             }
-            return PartialView("_ChildDetails", userPermission);
+            return PartialView("_ChildDetails", userRole);
         }
 
         public ActionResult Create()
@@ -60,6 +60,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ExtendedAuthorize(Roles = RoleConstants.AdminUser)]
         public ActionResult Create(UserVM user)
         {
             try
@@ -71,8 +72,9 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 { ModelState.AddModelError("UserName", "User Name Already Exists."); }
                 if (user.Password == null)
                 { ModelState.AddModelError("Password", "Enter Password."); }
-                if (user.StaffId != null && user.VisitorId != null)
-                { ModelState.AddModelError("", "Cannot assign both staff member and visitor to the same user."); }
+                var accCount = (user.StaffId == null ? 0 : 1) + (user.VisitorId == null ? 0 : 1) + (user.ParentId == null ? 0 : 1) + (user.StudentId == null ? 0 : 1);
+                if (accCount > 1)
+                { ModelState.AddModelError("", "Only one can be selected from Staff Member, Visitor, Parent & Student."); }
 
                 if (ModelState.IsValid)
                 {
@@ -83,7 +85,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     foreach (var det in user.DetailsList)
                     {
-                        newObj.UserPermissions.Add(det.GetEntity());
+                        newObj.UserRoles.Add(det.GetEntity());
                     }
                     db.SaveChanges();
 
@@ -115,15 +117,15 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             }
 
             var obj = (UserVM)Session[sskCrtdObj];
-            ViewBag.UserPermissions = obj.DetailsList.Select(x => x.PermissionId).ToList();
+            ViewBag.UserRoles = obj.DetailsList.Select(x => x.RoleId).ToList();
 
-            var vm = new UserPermissionVM() { UserId = userID.Value };
+            var vm = new UserRoleVM() { UserId = userID.Value };
             return PartialView("_ChildCreate", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChildCreate(UserPermissionVM vm)
+        public ActionResult ChildCreate(UserRoleVM vm)
         {
             UserVM obj;
             try
@@ -131,12 +133,12 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     obj = (UserVM)Session[sskCrtdObj];
-                    var permission = db.Permissions.Find(vm.PermissionId);
-                    vm.PermissionName = permission.Name;
-                    vm.UserPermissionId = Math.Min(obj.DetailsList.Select(x => x.UserPermissionId).MinOrDefault(), 0) - 1;
+                    var role = db.Roles.Find(vm.RoleId);
+                    vm.RoleName = role.Name;
+                    vm.UserRoleId = Math.Min(obj.DetailsList.Select(x => x.UserRoleId).MinOrDefault(), 0) - 1;
                     obj.DetailsList.Add(vm);
 
-                    AddAlert(AlertStyles.success, "User Permission added successfully.");
+                    AddAlert(AlertStyles.success, "User role added successfully.");
                     string url = Url.Action("ChildIndex", new { id = vm.UserId, isToEdit = true });
                     return Json(new { success = true, url = url });
                 }
@@ -147,7 +149,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
 
             obj = (UserVM)Session[sskCrtdObj];
-            ViewBag.UserPermissions = obj.DetailsList.Select(x => x.PermissionId).ToList();
+            ViewBag.UserRoles = obj.DetailsList.Select(x => x.RoleId).ToList();
 
             return PartialView("_ChildCreate", vm);
         }
@@ -175,8 +177,9 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             byte[] curRowVersion = null;
             try
             {
-                if (user.StaffId != null && user.VisitorId != null)
-                { ModelState.AddModelError("", "Cannot assign both staff member and visitor to the same user."); }
+                var accCount = (user.StaffId == null ? 0 : 1) + (user.VisitorId == null ? 0 : 1) + (user.ParentId == null ? 0 : 1) + (user.StudentId == null ? 0 : 1);
+                if (accCount > 1)
+                { ModelState.AddModelError("", "Only one can be selected from Staff Member, Visitor, Parent & Student."); }
 
                 if (ModelState.IsValid)
                 {
@@ -188,7 +191,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     curRowVersion = obj.RowVersion;
                     var modObj = user.GetEntity();
-                    var props = "UserName,Status,StaffId,VisitorId";
+                    var props = "UserName,Status,StaffId,VisitorId,ParentId,StudentId";
                     if (!user.Password.IsBlank())
                     { props += ",Password"; }
                     modObj.CopyContent(obj, props);
@@ -198,15 +201,15 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                     db.Entry(obj).OriginalValues["RowVersion"] = user.RowVersion;
 
-                    db.UserPermissions.RemoveRange(obj.UserPermissions.Where(x =>
-                        !sUser.DetailsList.Select(y => y.UserPermissionId).ToList().Contains(x.UserPermissionId)));
+                    db.UserRoles.RemoveRange(obj.UserRoles.Where(x =>
+                        !sUser.DetailsList.Select(y => y.UserRoleId).ToList().Contains(x.UserRoleId)));
 
                     foreach (var det in sUser.DetailsList)
                     {
-                        var objDet = db.UserPermissions.Find(det.UserPermissionId);
+                        var objDet = db.UserRoles.Find(det.UserRoleId);
                         if (objDet == null)
                         {
-                            db.UserPermissions.Add(det.GetEntity());
+                            db.UserRoles.Add(det.GetEntity());
                         }
                     }
                     db.SaveChanges();
@@ -241,8 +244,8 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
                 var entry = db.Entry(user.GetEntity());
                 entry.State = EntityState.Unchanged;
-                entry.Collection(x => x.UserPermissions).Load();
-                db.UserPermissions.RemoveRange(entry.Entity.UserPermissions);
+                entry.Collection(x => x.UserRoles).Load();
+                db.UserRoles.RemoveRange(entry.Entity.UserRoles);
                 entry.State = EntityState.Deleted;
                 db.SaveChanges();
 
@@ -270,10 +273,10 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
             try
             {
                 var lst = ((UserVM)Session[sskCrtdObj]).DetailsList;
-                var obj = lst.FirstOrDefault(x => x.UserPermissionId == id);
+                var obj = lst.FirstOrDefault(x => x.UserRoleId == id);
                 lst.Remove(obj);
 
-                AddAlert(AlertStyles.success, "User Permission removed successfully.");
+                AddAlert(AlertStyles.success, "User role removed successfully.");
             }
             catch (Exception ex)
             {
@@ -308,7 +311,7 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
 
             ViewBag.IsToEdit = isToEdit;
             ViewBag.UserID = obj.Id;
-            return PartialView("_ChildIndex", obj.DetailsList.OrderBy(x => x.PermissionName));
+            return PartialView("_ChildIndex", obj.DetailsList.OrderBy(x => x.RoleName));
         }
     }
 }

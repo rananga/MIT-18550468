@@ -156,6 +156,8 @@ namespace StudentInformationSystem.Data
                     .IsRowVersion()
                     .IsConcurrencyToken();
 
+                entity.HasOne(b => b.User).WithOne(p => p.Student).HasForeignKey<User>(b => b.StudentId);
+
                 entity.HasOne(d => d.AdmittedGrade)
                     .WithMany(p => p.GradeAdmissions)
                     .HasForeignKey(d => d.AdmittedGradeId)

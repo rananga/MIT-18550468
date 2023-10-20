@@ -44,7 +44,7 @@ namespace StudentInformationSystem.Data.Models
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string SchoolEmail_MS { get; set; }
         [DisplayName("NIC No"), Required]
-        public string Nicno { get; set; }
+        public string NicNo { get; set; }
         [DisplayName("Home Contact No")]
         [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
         public string TelHome { get; set; }

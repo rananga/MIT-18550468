@@ -1,7 +1,7 @@
-﻿@model StudentInformationSystem.Areas.Admin.Models.PermissionVM
+﻿@model StudentInformationSystem.Areas.Admin.Models.RoleVM
 
 @{
-    ViewBag.Title = "Edit User Permission";
+    ViewBag.Title = "Edit Role";
 }
 
 @using (Html.BeginForm())
@@ -14,7 +14,7 @@
             <input id="btnSave" type="submit" value="Save" class="btn btn-primary" style="min-width:75px" />
         </p>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.PermissionId)
+        @Html.HiddenFor(model => model.RoleId)
         @Html.HiddenFor(model => model.RowVersion)
         @Html.HiddenFor(model => model.MenusJson)
         @Html.HiddenFor(model => model.GradesJson)
@@ -37,10 +37,10 @@
 
 <div class="row">
     <div class="ChildContent col-md-6">
-        @{ Html.RenderAction("ChildIndex", new { id = Model.PermissionId, isToEdit = true }); }
+        @{ Html.RenderAction("ChildIndex", new { id = Model.RoleId, isToEdit = true }); }
     </div>
     <div class="ChildContent col-md-6">
-        @{ Html.RenderAction("GradeIndex", new { id = Model.PermissionId, isToEdit = true }); }
+        @{ Html.RenderAction("GradeIndex", new { id = Model.RoleId, isToEdit = true }); }
     </div>
 </div>
 
@@ -50,5 +50,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/admin/userpermission")
+    @Scripts.Render("~/bundles/admin/role")
 }

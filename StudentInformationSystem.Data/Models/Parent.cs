@@ -12,29 +12,39 @@ namespace StudentInformationSystem.Data.Models
         }
 
         [Required]
-        public TitleStaff Title { get; set; }
+        public Gender Gender { get; set; }
         [Required]
-        public string Name { get; set; }
+        public TitleStaff Title { get; set; }
+        [DisplayName("Full Name"), DataType(DataType.MultilineText), Required]
+        public string FullName { get; set; }
+        [Required]
+        public string Initials { get; set; }
+        [DisplayName("Last Name"), DataType(DataType.MultilineText)]
+        public string LastName { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string City { get; set; }
         [Required]
         public string Occupation { get; set; }
         [DisplayName("Working Address"), DataType(DataType.MultilineText)]
-        public string WorkingAdd { get; set; }
+        public string WorkingAddress { get; set; }
         [DisplayName("Office Telephone")]
         [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
-        public string OfficeTel { get; set; }
+        public string OfficePhoneNo { get; set; }
         [Required]
-        [DisplayName("Contact Mobile")]
+        [DisplayName("Mobile No")]
         [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
-        public string ContactMob { get; set; }
-        [DisplayName("Contact Home")]
+        public string MobileNo { get; set; }
+        [DisplayName("Home Phone No")]
         [RegularExpression(@"^(0\d{9})$", ErrorMessage = "Invalid Number")]
-        public string ContactHome { get; set; }
+        public string HomePhoneNo { get; set; }
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
         [DisplayName("NIC No"), Required]
         public string NicNo { get; set; }
         public string NIC_FrontImagePath { get; set; }
         public string NIC_BackImagePath { get; set; }
+        public string ImagePath { get; set; }
 
         public virtual User User { get; set; }
         public virtual ICollection<StudentFamily> FamilyStudents { get; set; }

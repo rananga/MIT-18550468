@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace StudentInformationSystem.Areas.Online.Controllers
 {
+    [ExtendedAuthorize(Roles = RoleConstants.AdminUser)]
     public class OnlineTimeTableController : BaseController
     {
         public ActionResult Index(DateTime? fromDate, DateTime? toDate, int? gradeId, int? staffId)

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace StudentInformationSystem.Data.Models
 {
-    public partial class PermissionGradeAccess
+    public partial class RoleGradeAccess
     {
         public int GradeId { get; set; }
-        public int PermissionId { get; set; }
+        public int RoleId { get; set; }
 
         public virtual Grade Grade { get; set; }
-        public virtual Permission Permission { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

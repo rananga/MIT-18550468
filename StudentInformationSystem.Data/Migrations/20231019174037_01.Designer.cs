@@ -10,8 +10,8 @@ using StudentInformationSystem.Data;
 namespace StudentInformationSystem.Data.Migrations
 {
     [DbContext(typeof(dbNalandaContext))]
-    [Migration("20210925201053_02")]
-    partial class _02
+    [Migration("20231019174037_01")]
+    partial class _01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -250,7 +250,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("ActivityId");
 
-                    b.ToTable("ExtraActivityAcheivements");
+                    b.ToTable("ExtraActivityAchievements");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ExtraActivityIncharge", b =>
@@ -1092,11 +1092,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 10,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "Visitor",
+                            Controller = "Parent",
                             DisplaySeq = 40,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Visitors",
+                            Text = "Parents",
                             Type = "I"
                         },
                         new
@@ -1104,11 +1104,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 11,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "UserPermission",
+                            Controller = "Visitor",
                             DisplaySeq = 50,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "User Permissions",
+                            Text = "Visitors",
                             Type = "I"
                         },
                         new
@@ -1116,11 +1116,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 12,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "Users",
+                            Controller = "Role",
                             DisplaySeq = 60,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Users",
+                            Text = "Roles",
                             Type = "I"
                         },
                         new
@@ -1128,11 +1128,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 13,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "SectionHead",
+                            Controller = "Users",
                             DisplaySeq = 70,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Section Heads",
+                            Text = "Users",
                             Type = "I"
                         },
                         new
@@ -1140,11 +1140,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 14,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "GradeHead",
+                            Controller = "SectionHead",
                             DisplaySeq = 80,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Grade Heads",
+                            Text = "Section Heads",
                             Type = "I"
                         },
                         new
@@ -1152,8 +1152,20 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 15,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "ExtraActivity",
+                            Controller = "GradeHead",
                             DisplaySeq = 90,
+                            IsHidden = false,
+                            ParentMenuId = 1,
+                            Text = "Grade Heads",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 16,
+                            Action = "Index",
+                            Area = "Admin",
+                            Controller = "ExtraActivity",
+                            DisplaySeq = 100,
                             IsHidden = false,
                             ParentMenuId = 1,
                             Text = "Extra Activities",
@@ -1161,7 +1173,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 16,
+                            MenuId = 17,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "SubjectCategory",
@@ -1173,7 +1185,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 17,
+                            MenuId = 18,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "Subject",
@@ -1185,7 +1197,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 18,
+                            MenuId = 19,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "GradeSubject",
@@ -1197,7 +1209,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 19,
+                            MenuId = 20,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "GradeClass",
@@ -1209,7 +1221,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 20,
+                            MenuId = 21,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "ClassRoom",
@@ -1221,7 +1233,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 21,
+                            MenuId = 22,
                             Action = "Index",
                             Area = "Teacher",
                             Controller = "Teacher",
@@ -1233,7 +1245,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 22,
+                            MenuId = 23,
                             Action = "Index",
                             Area = "Teacher",
                             Controller = "TeacherQualification",
@@ -1245,7 +1257,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 23,
+                            MenuId = 24,
                             Action = "Index",
                             Area = "Teacher",
                             Controller = "TeacherOffTime",
@@ -1257,7 +1269,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 24,
+                            MenuId = 25,
                             Action = "Index",
                             Area = "Student",
                             Controller = "Student",
@@ -1269,7 +1281,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 25,
+                            MenuId = 26,
                             Action = "Index",
                             Area = "Student",
                             Controller = "BasketSubject",
@@ -1281,7 +1293,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 26,
+                            MenuId = 27,
                             Action = "Index",
                             Area = "Student",
                             Controller = "StudentAdmit",
@@ -1293,7 +1305,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 27,
+                            MenuId = 28,
                             Action = "Index",
                             Area = "Student",
                             Controller = "StudentMark",
@@ -1305,7 +1317,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 28,
+                            MenuId = 29,
                             Action = "Index",
                             Area = "Student",
                             Controller = "TransferStudent",
@@ -1317,7 +1329,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 29,
+                            MenuId = 30,
                             Action = "Index",
                             Area = "Student",
                             Controller = "ClassPromotion",
@@ -1329,7 +1341,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 30,
+                            MenuId = 31,
                             Action = "Index",
                             Area = "Student",
                             Controller = "StudentExtraActivities",
@@ -1341,7 +1353,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 31,
+                            MenuId = 32,
                             Action = "Index",
                             Area = "Online",
                             Controller = "OnlineClassRoom",
@@ -1353,7 +1365,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 32,
+                            MenuId = 33,
                             Action = "Index",
                             Area = "Online",
                             Controller = "OnlineTimeTable",
@@ -1365,7 +1377,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 33,
+                            MenuId = 34,
                             Action = "Process",
                             Area = "Report",
                             Controller = "StudentCharacter",
@@ -1377,7 +1389,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 34,
+                            MenuId = 35,
                             Action = "Process",
                             Area = "Report",
                             Controller = "StudentAttendance",
@@ -1389,7 +1401,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 35,
+                            MenuId = 36,
                             Action = "Process",
                             Area = "Report",
                             Controller = "StudentMarks",
@@ -1401,7 +1413,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 36,
+                            MenuId = 37,
                             Action = "Process",
                             Area = "Report",
                             Controller = "OnlineSessionsSummary",
@@ -1413,7 +1425,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 37,
+                            MenuId = 38,
                             Action = "Process",
                             Area = "Report",
                             Controller = "WeeklySummary",
@@ -1422,6 +1434,955 @@ namespace StudentInformationSystem.Data.Migrations
                             ParentMenuId = 6,
                             Text = "Weekly Summary",
                             Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 39,
+                            Action = "Index",
+                            Area = "Admin",
+                            Controller = "AdmissionMap",
+                            DisplaySeq = 110,
+                            IsHidden = false,
+                            ParentMenuId = 1,
+                            Text = "Admission Map",
+                            Type = "I"
+                        });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.MenuAction", b =>
+                {
+                    b.Property<int>("MenuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ActionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MenuId", "ActionId");
+
+                    b.ToTable("MenuActions");
+
+                    b.HasData(
+                        new
+                        {
+                            MenuId = 1,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 2,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 3,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 4,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 5,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 6,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 7,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 8,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 9,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 10,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 11,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 12,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 13,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 14,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 15,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 16,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 17,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 18,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 19,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 20,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 21,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 22,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 23,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 24,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 25,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 26,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 27,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 28,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 29,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 30,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 31,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 32,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 33,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 34,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 35,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 36,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 37,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 38,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 39,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 7,
+                            ActionId = 1,
+                            Text = "View"
+                        },
+                        new
+                        {
+                            MenuId = 7,
+                            ActionId = 2,
+                            Text = "Create"
+                        },
+                        new
+                        {
+                            MenuId = 7,
+                            ActionId = 3,
+                            Text = "Edit"
+                        },
+                        new
+                        {
+                            MenuId = 7,
+                            ActionId = 4,
+                            Text = "Delete"
+                        },
+                        new
+                        {
+                            MenuId = 8,
+                            ActionId = 1,
+                            Text = "View"
+                        },
+                        new
+                        {
+                            MenuId = 8,
+                            ActionId = 2,
+                            Text = "Create"
+                        },
+                        new
+                        {
+                            MenuId = 8,
+                            ActionId = 3,
+                            Text = "Edit"
+                        },
+                        new
+                        {
+                            MenuId = 8,
+                            ActionId = 4,
+                            Text = "Delete"
+                        });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.NearbySchool", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Latitude")
+                        .HasColumnType("decimal(18,15)");
+
+                    b.Property<decimal>("Longitude")
+                        .HasColumnType("decimal(18,15)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("SchoolName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NearbySchools");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 114001,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "De La Salle College",
+                            IsActive = true,
+                            Latitude = 6.9624076530508m,
+                            Longitude = 79.8623517832771m,
+                            SchoolName = "De La Salle College"
+                        },
+                        new
+                        {
+                            Id = 114004,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kumara V.",
+                            IsActive = true,
+                            Latitude = 6.95182372168983m,
+                            Longitude = 79.8621572137206m,
+                            SchoolName = "Kumara V."
+                        },
+                        new
+                        {
+                            Id = 114005,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mattakkuliya St.John's M.V",
+                            IsActive = true,
+                            Latitude = 6.97180453273626m,
+                            Longitude = 79.8747070955073m,
+                            SchoolName = "Mattakkuliya St.John's M.V"
+                        },
+                        new
+                        {
+                            Id = 114006,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St.Lucia's College",
+                            IsActive = true,
+                            Latitude = 6.94866282745492m,
+                            Longitude = 79.8651722806743m,
+                            SchoolName = "St.Lucia's College"
+                        },
+                        new
+                        {
+                            Id = 114007,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Cathedral Boys V.",
+                            IsActive = true,
+                            Latitude = 6.94965882132773m,
+                            Longitude = 79.8628181135681m,
+                            SchoolName = "Cathedral Boys V."
+                        },
+                        new
+                        {
+                            Id = 114008,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kotahen President College",
+                            IsActive = true,
+                            Latitude = 6.9539568314876m,
+                            Longitude = 79.8628940764598m,
+                            SchoolName = "Kotahen President College"
+                        },
+                        new
+                        {
+                            Id = 114010,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Modara Sri Medhananda V.",
+                            IsActive = true,
+                            Latitude = 6.96386229638963m,
+                            Longitude = 79.8661038591823m,
+                            SchoolName = "Modara Sri Medhananda V."
+                        },
+                        new
+                        {
+                            Id = 114011,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St. John's V.",
+                            IsActive = true,
+                            Latitude = 6.96807460444064m,
+                            Longitude = 79.8707203229669m,
+                            SchoolName = "St. John's V."
+                        },
+                        new
+                        {
+                            Id = 114012,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Ave Maria V.",
+                            IsActive = true,
+                            Latitude = 6.97046526369563m,
+                            Longitude = 79.8777616239614m,
+                            SchoolName = "Ave Maria V."
+                        },
+                        new
+                        {
+                            Id = 114013,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Sri Sandhabodhi M.V",
+                            IsActive = true,
+                            Latitude = 6.95928851871108m,
+                            Longitude = 79.875067000701m,
+                            SchoolName = "Sri Sandhabodhi M.V"
+                        },
+                        new
+                        {
+                            Id = 114014,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Bloemendhal Sin V.",
+                            IsActive = true,
+                            Latitude = 6.94758922654641m,
+                            Longitude = 79.8706516488501m,
+                            SchoolName = "Bloemendhal Sin V."
+                        },
+                        new
+                        {
+                            Id = 114016,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Gunananda V.",
+                            IsActive = true,
+                            Latitude = 6.95061590587215m,
+                            Longitude = 79.8627627408217m,
+                            SchoolName = "Gunananda V."
+                        },
+                        new
+                        {
+                            Id = 114017,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mahawatta St. Anthony's Sin V.",
+                            IsActive = true,
+                            Latitude = 6.96088519266493m,
+                            Longitude = 79.8721699600927m,
+                            SchoolName = "Mahawatta St. Anthony's Sin V."
+                        },
+                        new
+                        {
+                            Id = 114021,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Agamethi V.",
+                            IsActive = true,
+                            Latitude = 6.95787369604128m,
+                            Longitude = 79.8682984536483m,
+                            SchoolName = "Agamethi V."
+                        },
+                        new
+                        {
+                            Id = 114022,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Thotawatta Methodist V.",
+                            IsActive = true,
+                            Latitude = 6.97296440908802m,
+                            Longitude = 79.8783044922579m,
+                            SchoolName = "Thotawatta Methodist V."
+                        },
+                        new
+                        {
+                            Id = 114023,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Sri Razik Fareed Mus.B.V",
+                            IsActive = true,
+                            Latitude = 6.97181212638058m,
+                            Longitude = 79.876175699137m,
+                            SchoolName = "Sri Razik Fareed Mus.B.V"
+                        },
+                        new
+                        {
+                            Id = 114024,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Hamza Mus.V",
+                            IsActive = true,
+                            Latitude = 6.96283221937901m,
+                            Longitude = 79.8641742184885m,
+                            SchoolName = "Hamza Mus.V"
+                        },
+                        new
+                        {
+                            Id = 114025,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kalaimagal T.V",
+                            IsActive = true,
+                            Latitude = 6.94789012392999m,
+                            Longitude = 79.8708483425539m,
+                            SchoolName = "Kalaimagal T.V"
+                        },
+                        new
+                        {
+                            Id = 114026,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mahawatta St. Anthony's T.M.V.",
+                            IsActive = true,
+                            Latitude = 6.96084765909503m,
+                            Longitude = 79.8720793877036m,
+                            SchoolName = "Mahawatta St. Anthony's T.M.V."
+                        },
+                        new
+                        {
+                            Id = 114028,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mutwal Hindu College",
+                            IsActive = true,
+                            Latitude = 6.96395928948056m,
+                            Longitude = 79.8652081486035m,
+                            SchoolName = "Mutwal Hindu College"
+                        },
+                        new
+                        {
+                            Id = 114029,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kotahena Methodist T.V.",
+                            IsActive = true,
+                            Latitude = 6.94940427037171m,
+                            Longitude = 79.8617483147323m,
+                            SchoolName = "Kotahena Methodist T.V."
+                        },
+                        new
+                        {
+                            Id = 114030,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Ananda P.V",
+                            IsActive = true,
+                            Latitude = 6.96573942090777m,
+                            Longitude = 79.8720745765604m,
+                            SchoolName = "Ananda P.V"
+                        },
+                        new
+                        {
+                            Id = 115002,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Sri Sangaraja M.M.V.",
+                            IsActive = true,
+                            Latitude = 6.93289879900923m,
+                            Longitude = 79.8631677264176m,
+                            SchoolName = "Sri Sangaraja M.M.V."
+                        },
+                        new
+                        {
+                            Id = 115003,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mahabodhi V.",
+                            IsActive = true,
+                            Latitude = 6.91885672009994m,
+                            Longitude = 79.8638850854589m,
+                            SchoolName = "Mahabodhi V."
+                        },
+                        new
+                        {
+                            Id = 115004,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Rajasinghe M.V",
+                            IsActive = true,
+                            Latitude = 6.94143773542513m,
+                            Longitude = 79.8777827908829m,
+                            SchoolName = "Rajasinghe M.V"
+                        },
+                        new
+                        {
+                            Id = 115005,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mihindu Mawatha Sin.M.V.",
+                            IsActive = true,
+                            Latitude = 6.93385104871877m,
+                            Longitude = 79.8581615197802m,
+                            SchoolName = "Mihindu Mawatha Sin.M.V."
+                        },
+                        new
+                        {
+                            Id = 115006,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Siri Saripuththa M.V",
+                            IsActive = true,
+                            Latitude = 6.92094822733301m,
+                            Longitude = 79.8521389643082m,
+                            SchoolName = "Siri Saripuththa M.V"
+                        },
+                        new
+                        {
+                            Id = 115007,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Vijayaba M.V.",
+                            IsActive = true,
+                            Latitude = 6.94634510785179m,
+                            Longitude = 79.8722101810619m,
+                            SchoolName = "Vijayaba M.V."
+                        },
+                        new
+                        {
+                            Id = 115009,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St.Joseph's Boy's V.",
+                            IsActive = true,
+                            Latitude = 6.94780458943722m,
+                            Longitude = 79.8749083843293m,
+                            SchoolName = "St.Joseph's Boy's V."
+                        },
+                        new
+                        {
+                            Id = 116014,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mahanama College",
+                            IsActive = true,
+                            Latitude = 6.90620308999949m,
+                            Longitude = 79.8547672049854m,
+                            SchoolName = "Mahanama College"
+                        },
+                        new
+                        {
+                            Id = 116023,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St. Michael's College",
+                            IsActive = true,
+                            Latitude = 6.91384878057086m,
+                            Longitude = 79.8531340450347m,
+                            SchoolName = "St. Michael's College"
+                        },
+                        new
+                        {
+                            Id = 116025,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St. Mary's Sin Mix.V.",
+                            IsActive = true,
+                            Latitude = 6.89479125981432m,
+                            Longitude = 79.8573468392987m,
+                            SchoolName = "St. Mary's Sin Mix.V."
+                        },
+                        new
+                        {
+                            Id = 116029,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kumarauthayam T.V.",
+                            IsActive = true,
+                            Latitude = 6.87831555443556m,
+                            Longitude = 79.8772783925747m,
+                            SchoolName = "Kumarauthayam T.V."
+                        },
+                        new
+                        {
+                            Id = 116030,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Ramakrishna V.",
+                            IsActive = true,
+                            Latitude = 6.87583362021072m,
+                            Longitude = 79.8699789316635m,
+                            SchoolName = "Ramakrishna V."
+                        },
+                        new
+                        {
+                            Id = 116032,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Hindu College",
+                            IsActive = true,
+                            Latitude = 6.88349697834477m,
+                            Longitude = 79.8619339966584m,
+                            SchoolName = "Hindu College"
+                        },
+                        new
+                        {
+                            Id = 116033,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Al Ameen V.",
+                            IsActive = true,
+                            Latitude = 6.92258269984139m,
+                            Longitude = 79.8482175387863m,
+                            SchoolName = "Al Ameen V."
+                        },
+                        new
+                        {
+                            Id = 116034,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St Mary's T.M.V.",
+                            IsActive = true,
+                            Latitude = 6.89464775385252m,
+                            Longitude = 79.8574150456686m,
+                            SchoolName = "St Mary's T.M.V."
+                        },
+                        new
+                        {
+                            Id = 116035,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kollupitiya Methodist G.T.V",
+                            IsActive = true,
+                            Latitude = 6.91562439494181m,
+                            Longitude = 79.8523067866256m,
+                            SchoolName = "Kollupitiya Methodist G.T.V"
+                        },
+                        new
+                        {
+                            Id = 116037,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Defence Services College",
+                            IsActive = true,
+                            Latitude = 6.92647087644207m,
+                            Longitude = 79.8508302182672m,
+                            SchoolName = "Defence Services College"
+                        },
+                        new
+                        {
+                            Id = 117001,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Royal College",
+                            IsActive = true,
+                            Latitude = 6.90486623339689m,
+                            Longitude = 79.8611705523619m,
+                            SchoolName = "Royal College"
+                        },
+                        new
+                        {
+                            Id = 117002,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Ananda College",
+                            IsActive = true,
+                            Latitude = 6.92488224479492m,
+                            Longitude = 79.8703862625047m,
+                            SchoolName = "Ananda College"
+                        },
+                        new
+                        {
+                            Id = 117004,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Thurstan College",
+                            IsActive = true,
+                            Latitude = 6.90374676774611m,
+                            Longitude = 79.8595843379469m,
+                            SchoolName = "Thurstan College"
+                        },
+                        new
+                        {
+                            Id = 117005,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St. Mattews V.",
+                            IsActive = true,
+                            Latitude = 6.92997975397401m,
+                            Longitude = 79.877753654739m,
+                            SchoolName = "St. Mattews V."
+                        },
+                        new
+                        {
+                            Id = 117008,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St. John College",
+                            IsActive = true,
+                            Latitude = 6.9308515604204m,
+                            Longitude = 79.8738018045953m,
+                            SchoolName = "St. John College"
+                        },
+                        new
+                        {
+                            Id = 117009,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Seevali M.M.V.",
+                            IsActive = true,
+                            Latitude = 6.92329693001139m,
+                            Longitude = 79.881352849713m,
+                            SchoolName = "Seevali M.M.V."
+                        },
+                        new
+                        {
+                            Id = 117010,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Susamayawardhana M.V.",
+                            IsActive = true,
+                            Latitude = 6.91330656245148m,
+                            Longitude = 79.876344346508m,
+                            SchoolName = "Susamayawardhana M.V."
+                        },
+                        new
+                        {
+                            Id = 117012,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mahinda V.",
+                            IsActive = true,
+                            Latitude = 6.92657117025952m,
+                            Longitude = 79.8729657170195m,
+                            SchoolName = "Mahinda V."
+                        },
+                        new
+                        {
+                            Id = 117016,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "D.S.Senanayake V.",
+                            IsActive = true,
+                            Latitude = 6.90882715454139m,
+                            Longitude = 79.8751636102563m,
+                            SchoolName = "D.S.Senanayake V."
+                        },
+                        new
+                        {
+                            Id = 117018,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Veluwana College",
+                            IsActive = true,
+                            Latitude = 6.92637548005991m,
+                            Longitude = 79.8802618229489m,
+                            SchoolName = "Veluwana College"
+                        },
+                        new
+                        {
+                            Id = 117020,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Asoka V.",
+                            IsActive = true,
+                            Latitude = 6.92279671224949m,
+                            Longitude = 79.8673272027865m,
+                            SchoolName = "Asoka V."
+                        },
+                        new
+                        {
+                            Id = 117021,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "C.W.W.Kannangara V.",
+                            IsActive = true,
+                            Latitude = 6.91900252199834m,
+                            Longitude = 79.8771018645321m,
+                            SchoolName = "C.W.W.Kannangara V."
+                        },
+                        new
+                        {
+                            Id = 117023,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Al Hijra Mus V.",
+                            IsActive = true,
+                            Latitude = 6.92900442280817m,
+                            Longitude = 79.8750126513407m,
+                            SchoolName = "Al Hijra Mus V."
+                        },
+                        new
+                        {
+                            Id = 117024,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Thaninayagam T.V",
+                            IsActive = true,
+                            Latitude = 6.91905894900137m,
+                            Longitude = 79.8852901977569m,
+                            SchoolName = "Thaninayagam T.V"
                         });
                 });
 
@@ -2018,6 +2979,9 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("RegisterNo")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -2042,6 +3006,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 1
                         },
                         new
@@ -2050,6 +3015,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 2
                         },
                         new
@@ -2058,6 +3024,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 3
                         },
                         new
@@ -2066,6 +3033,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 4
                         },
                         new
@@ -2074,6 +3042,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 5
                         },
                         new
@@ -2082,6 +3051,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 6
                         },
                         new
@@ -2090,6 +3060,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 7
                         },
                         new
@@ -2098,6 +3069,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 8
                         },
                         new
@@ -2106,6 +3078,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 9
                         },
                         new
@@ -2114,6 +3087,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 10
                         },
                         new
@@ -2122,6 +3096,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 11
                         },
                         new
@@ -2130,6 +3105,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 12
                         },
                         new
@@ -2138,6 +3114,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 13
                         },
                         new
@@ -2146,6 +3123,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 14
                         },
                         new
@@ -2154,6 +3132,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 15
                         },
                         new
@@ -2162,6 +3141,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 16
                         },
                         new
@@ -2170,6 +3150,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 17
                         },
                         new
@@ -2178,6 +3159,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 18
                         },
                         new
@@ -2186,6 +3168,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 19
                         },
                         new
@@ -2194,6 +3177,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 20
                         },
                         new
@@ -2202,6 +3186,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 21
                         },
                         new
@@ -2210,6 +3195,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 22
                         },
                         new
@@ -2218,6 +3204,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 23
                         },
                         new
@@ -2226,6 +3213,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 24
                         },
                         new
@@ -2234,6 +3222,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 25
                         },
                         new
@@ -2242,6 +3231,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 26
                         },
                         new
@@ -2250,6 +3240,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 27
                         },
                         new
@@ -2258,6 +3249,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 28
                         },
                         new
@@ -2266,6 +3258,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 29
                         },
                         new
@@ -2274,6 +3267,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 30
                         },
                         new
@@ -2282,6 +3276,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 31
                         },
                         new
@@ -2290,6 +3285,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 32
                         },
                         new
@@ -2298,6 +3294,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 33
                         },
                         new
@@ -2306,6 +3303,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 34
                         },
                         new
@@ -2314,6 +3312,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 35
                         },
                         new
@@ -2322,6 +3321,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 36
                         },
                         new
@@ -2330,6 +3330,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 37
                         },
                         new
@@ -2338,6 +3339,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 38
                         },
                         new
@@ -2346,6 +3348,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 39
                         },
                         new
@@ -2354,6 +3357,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 40
                         },
                         new
@@ -2362,6 +3366,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 41
                         },
                         new
@@ -2370,6 +3375,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 42
                         },
                         new
@@ -2378,6 +3384,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 43
                         },
                         new
@@ -2386,6 +3393,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 44
                         },
                         new
@@ -2394,6 +3402,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 45
                         },
                         new
@@ -2402,6 +3411,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 46
                         },
                         new
@@ -2410,6 +3420,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 47
                         },
                         new
@@ -2418,6 +3429,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 48
                         },
                         new
@@ -2426,6 +3438,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 49
                         },
                         new
@@ -2434,6 +3447,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 50
                         },
                         new
@@ -2442,6 +3456,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 51
                         },
                         new
@@ -2450,6 +3465,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 52
                         },
                         new
@@ -2458,6 +3474,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 53
                         },
                         new
@@ -2466,6 +3483,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 54
                         },
                         new
@@ -2474,6 +3492,7 @@ namespace StudentInformationSystem.Data.Migrations
                             CR_Id = 5,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RegisterNo = 0,
                             StudentId = 55
                         });
                 });
@@ -2666,14 +3685,21 @@ namespace StudentInformationSystem.Data.Migrations
                     b.ToTable("PCR_Teachers");
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.Permission", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.Parent", b =>
                 {
-                    b.Property<int>("PermissionId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Code")
+                    b.Property<string>("Address1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
@@ -2681,16 +3707,58 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HomePhoneNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Initials")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NIC_BackImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NIC_FrontImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NicNo")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Occupation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OfficePhoneNo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
@@ -2699,64 +3767,15 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.HasKey("PermissionId");
-
-                    b.ToTable("Permissions");
-
-                    b.HasData(
-                        new
-                        {
-                            PermissionId = 1,
-                            Code = "Admin",
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Administrator"
-                        },
-                        new
-                        {
-                            PermissionId = 2,
-                            Code = "AdminUser",
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Admin Department User"
-                        });
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.PermissionGradeAccess", b =>
-                {
-                    b.Property<int>("GradeId")
+                    b.Property<int>("Title")
                         .HasColumnType("int");
 
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
+                    b.Property<string>("WorkingAddress")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("GradeId", "PermissionId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("PermissionGradeAccesses");
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.PermissionMenuAccess", b =>
-                {
-                    b.Property<int>("MenuId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MenuId", "PermissionId");
-
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("PermissionMenuAccesses");
-
-                    b.HasData(
-                        new
-                        {
-                            MenuId = 1,
-                            PermissionId = 1
-                        });
+                    b.ToTable("Parents");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.PhysicalClassRoom", b =>
@@ -2926,6 +3945,110 @@ namespace StudentInformationSystem.Data.Migrations
                             Medium = 0,
                             Year = 2021
                         });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            Code = "Admin",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Administrator"
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            Code = "AdminUser",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Admin Department User"
+                        },
+                        new
+                        {
+                            RoleId = 3,
+                            Code = "Parent",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Parent"
+                        });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.RoleGradeAccess", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RoleId", "GradeId");
+
+                    b.HasIndex("GradeId");
+
+                    b.ToTable("RoleGradeAccesses");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.RoleMenuAccess", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ActionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MenuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("MenuId", "ActionId");
+
+                    b.ToTable("RoleMenuAccesses");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Section", b =>
@@ -3138,7 +4261,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Nicno")
+                    b.Property<string>("NicNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -3151,7 +4274,10 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<string>("SchoolEmail")
+                    b.Property<string>("SchoolEmail_Google")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SchoolEmail_MS")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("StaffNumber")
@@ -3194,8 +4320,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Diana",
                             LastName = "Sladen",
                             MobileNo = "0712345678",
-                            Nicno = "888888001V",
-                            SchoolEmail = "dainas@nalandacollege.info",
+                            NicNo = "888888001V",
+                            SchoolEmail_Google = "dainas@nalandacollege.info",
                             StaffNumber = 101,
                             Status = 0,
                             Title = 5
@@ -3215,8 +4341,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Ayomi",
                             LastName = "Dilhani",
                             MobileNo = "0712345678",
-                            Nicno = "888888002V",
-                            SchoolEmail = "ayomik@nalandacollege.info",
+                            NicNo = "888888002V",
+                            SchoolEmail_Google = "ayomik@nalandacollege.info",
                             StaffNumber = 102,
                             Status = 0,
                             Title = 5
@@ -3236,8 +4362,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Apsara",
                             LastName = "Vithan",
                             MobileNo = "0712345678",
-                            Nicno = "888888003V",
-                            SchoolEmail = "apsarae@nalandacollege.info",
+                            NicNo = "888888003V",
+                            SchoolEmail_Google = "apsarae@nalandacollege.info",
                             StaffNumber = 103,
                             Status = 0,
                             Title = 5
@@ -3257,8 +4383,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Malsha",
                             LastName = "Mallawaarachchi",
                             MobileNo = "0712345678",
-                            Nicno = "888888004V",
-                            SchoolEmail = "malsham@nalandacollege.info",
+                            NicNo = "888888004V",
+                            SchoolEmail_Google = "malsham@nalandacollege.info",
                             StaffNumber = 104,
                             Status = 0,
                             Title = 5
@@ -3278,8 +4404,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Gammanpila",
                             LastName = "Dayananda",
                             MobileNo = "0712345678",
-                            Nicno = "888888005V",
-                            SchoolEmail = "dayanandag@nalandacollege.info",
+                            NicNo = "888888005V",
+                            SchoolEmail_Google = "dayanandag@nalandacollege.info",
                             StaffNumber = 105,
                             Status = 0,
                             Title = 4
@@ -3299,8 +4425,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "D.S.",
                             LastName = "Chethana",
                             MobileNo = "0712345678",
-                            Nicno = "888888006V",
-                            SchoolEmail = "chethanac@nalandacollege.info",
+                            NicNo = "888888006V",
+                            SchoolEmail_Google = "chethanac@nalandacollege.info",
                             StaffNumber = 106,
                             Status = 0,
                             Title = 5
@@ -3320,8 +4446,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Himali",
                             LastName = "Nanayakkara",
                             MobileNo = "0712345678",
-                            Nicno = "888888007V",
-                            SchoolEmail = "himalin@nalandacollege.info",
+                            NicNo = "888888007V",
+                            SchoolEmail_Google = "himalin@nalandacollege.info",
                             StaffNumber = 107,
                             Status = 0,
                             Title = 5
@@ -3341,8 +4467,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Thilini",
                             LastName = "Cooray",
                             MobileNo = "0712345678",
-                            Nicno = "888888008V",
-                            SchoolEmail = "thilinic@nalandacollege.info",
+                            NicNo = "888888008V",
+                            SchoolEmail_Google = "thilinic@nalandacollege.info",
                             StaffNumber = 108,
                             Status = 0,
                             Title = 5
@@ -3362,8 +4488,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Prabha",
                             LastName = "Hiroshine",
                             MobileNo = "0712345678",
-                            Nicno = "888888009V",
-                            SchoolEmail = "prabhah@nalandacollege.info",
+                            NicNo = "888888009V",
+                            SchoolEmail_Google = "prabhah@nalandacollege.info",
                             StaffNumber = 109,
                             Status = 0,
                             Title = 5
@@ -3383,8 +4509,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Vijini",
                             LastName = "Herath",
                             MobileNo = "0712345678",
-                            Nicno = "888888010V",
-                            SchoolEmail = "vijinih@nalandacollege.info",
+                            NicNo = "888888010V",
+                            SchoolEmail_Google = "vijinih@nalandacollege.info",
                             StaffNumber = 110,
                             Status = 0,
                             Title = 5
@@ -3404,8 +4530,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "බැද්දේවෙල",
                             LastName = "ධම්මකිත්ති හිමි",
                             MobileNo = "0712345678",
-                            Nicno = "888888011V",
-                            SchoolEmail = "bdhammakiththi@nalandacollege.info",
+                            NicNo = "888888011V",
+                            SchoolEmail_Google = "bdhammakiththi@nalandacollege.info",
                             StaffNumber = 111,
                             Status = 0,
                             Title = 1
@@ -3425,8 +4551,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Kalpa",
                             LastName = "Udayappriya",
                             MobileNo = "0712345678",
-                            Nicno = "888888012V",
-                            SchoolEmail = "kalpau@nalandacollege.info",
+                            NicNo = "888888012V",
+                            SchoolEmail_Google = "kalpau@nalandacollege.info",
                             StaffNumber = 112,
                             Status = 0,
                             Title = 4
@@ -3446,8 +4572,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Dilani",
                             LastName = "Nilanga",
                             MobileNo = "0712345678",
-                            Nicno = "888888013V",
-                            SchoolEmail = "dilinin@nalandacollege.info",
+                            NicNo = "888888013V",
+                            SchoolEmail_Google = "dilinin@nalandacollege.info",
                             StaffNumber = 113,
                             Status = 0,
                             Title = 5
@@ -3467,8 +4593,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Dinithi",
                             LastName = "Fernando",
                             MobileNo = "0712345678",
-                            Nicno = "888888014V",
-                            SchoolEmail = "dinithif@nalandacollege.info",
+                            NicNo = "888888014V",
+                            SchoolEmail_Google = "dinithif@nalandacollege.info",
                             StaffNumber = 114,
                             Status = 0,
                             Title = 6
@@ -3492,7 +4618,31 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<DateTime>("AdmissionDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("AdmissionNo")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AdmittedClassId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("AdmittedGradeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BC_BackImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BC_FrontImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BirthDivSecretariat")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BirthGramaDiv")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BirthPlace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BloodGroup")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -3506,8 +4656,17 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("CreatedDate")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("CurrentDivSecretariat")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CurrentGramaDiv")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("DOB")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("DriverDetails")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmergContactName")
                         .HasColumnType("nvarchar(max)");
@@ -3519,11 +4678,14 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("HomeLatitude")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("HomeLongitude")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IndexNo")
-                        .HasColumnType("int");
 
                     b.Property<string>("Initials")
                         .IsRequired()
@@ -3531,6 +4693,9 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.Property<bool>("IsLeavingIssued")
                         .HasColumnType("bit");
+
+                    b.Property<string>("KnownIllnesses")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("LastClassId")
                         .HasColumnType("int");
@@ -3552,19 +4717,33 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("ParentsDeceasedStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ParentsMaritalStatus")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .IsRequired()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<string>("SchoolEmail")
+                    b.Property<string>("SchoolEmail_Google")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SchoolEmail_MS")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<int>("TransportMode")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AdmittedClassId");
 
                     b.HasIndex("AdmittedGradeId");
 
@@ -3577,826 +4756,1266 @@ namespace StudentInformationSystem.Data.Migrations
                         {
                             Id = 1,
                             AdmissionDate = new DateTime(2021, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25130,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Anuk Gunasekara",
-                            IndexNo = 25130,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Anuk",
                             IsLeavingIssued = false,
                             LastName = "Gunasekara",
                             Medium = 1,
-                            SchoolEmail = "25130@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25130@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 2,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24695,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "B.A.Inuka A. Abeysekara",
-                            IndexNo = 24695,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "B.A.Inuka A.",
                             IsLeavingIssued = false,
                             LastName = "Abeysekara",
                             Medium = 1,
-                            SchoolEmail = "24695@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24695@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 3,
                             AdmissionDate = new DateTime(2021, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24747,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "B.A.Thavidu T. Wimalasena",
-                            IndexNo = 24747,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "B.A.Thavidu T.",
                             IsLeavingIssued = false,
                             LastName = "Wimalasena",
                             Medium = 1,
-                            SchoolEmail = "24747@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24747@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 4,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25445,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Bihandu A.Bethmage",
-                            IndexNo = 25445,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Bihandu A.",
                             IsLeavingIssued = false,
                             LastName = "Bethmage",
                             Medium = 1,
-                            SchoolEmail = "25445@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25445@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 5,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24735,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Chanuka S.Wijerathna",
-                            IndexNo = 24735,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Chanuka S.",
                             IsLeavingIssued = false,
                             LastName = "Wijerathna",
                             Medium = 1,
-                            SchoolEmail = "24735@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24735@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 6,
                             AdmissionDate = new DateTime(2021, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24701,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "D.T.K.Nethun Sanketh",
-                            IndexNo = 24701,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "D.T.K.Nethun",
                             IsLeavingIssued = false,
                             LastName = "Sanketh",
                             Medium = 1,
-                            SchoolEmail = "24701@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24701@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 7,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27403,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "D.W.Iran V.S.Wickramanayake",
-                            IndexNo = 27403,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "D.W.Iran V.S.",
                             IsLeavingIssued = false,
                             LastName = "Wickramanayake",
                             Medium = 1,
-                            SchoolEmail = "27403@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27403@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 8,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24750,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Dimath B Kahatapitiya",
-                            IndexNo = 24750,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Dimath B",
                             IsLeavingIssued = false,
                             LastName = "Kahatapitiya",
                             Medium = 1,
-                            SchoolEmail = "24750@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24750@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 9,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24706,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Dulain S. Jayawardhana",
-                            IndexNo = 24706,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Dulain S.",
                             IsLeavingIssued = false,
                             LastName = "Jayawardhana",
                             Medium = 1,
-                            SchoolEmail = "24706@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24706@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 10,
                             AdmissionDate = new DateTime(2021, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25145,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Dulina S.Gunathilake",
-                            IndexNo = 25145,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Dulina S.",
                             IsLeavingIssued = false,
                             LastName = "Gunathilake",
                             Medium = 1,
-                            SchoolEmail = "25145@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25145@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 11,
                             AdmissionDate = new DateTime(2021, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24785,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "G.Nuran C. Perera",
-                            IndexNo = 24785,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "G.Nuran C.",
                             IsLeavingIssued = false,
                             LastName = "Perera",
                             Medium = 1,
-                            SchoolEmail = "24785@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24785@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 12,
                             AdmissionDate = new DateTime(2021, 6, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24685,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "G.A.D.Daham C. Siriwardane",
-                            IndexNo = 24685,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "G.A.D.Daham C.",
                             IsLeavingIssued = false,
                             LastName = "Siriwardane",
                             Medium = 1,
-                            SchoolEmail = "24685@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24685@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 13,
                             AdmissionDate = new DateTime(2021, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27390,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "G.P.Dimath Senhiru",
-                            IndexNo = 27390,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "G.P.Dimath",
                             IsLeavingIssued = false,
                             LastName = "Senhiru",
                             Medium = 1,
-                            SchoolEmail = "27390@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27390@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 14,
                             AdmissionDate = new DateTime(2021, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24786,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "G.V.Himasha R Peiris",
-                            IndexNo = 24786,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "G.V.Himasha R",
                             IsLeavingIssued = false,
                             LastName = "Peiris",
                             Medium = 1,
-                            SchoolEmail = "24786@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24786@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 15,
                             AdmissionDate = new DateTime(2021, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24712,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "H.A.Hirun S. Samaranayake",
-                            IndexNo = 24712,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "H.A.Hirun S.",
                             IsLeavingIssued = false,
                             LastName = "Samaranayake",
                             Medium = 1,
-                            SchoolEmail = "24712@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24712@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 16,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24758,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "H.A.Ositha J. Wijayarathna",
-                            IndexNo = 24758,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "H.A.Ositha J.",
                             IsLeavingIssued = false,
                             LastName = "Wijayarathna",
                             Medium = 1,
-                            SchoolEmail = "24758@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24758@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 17,
                             AdmissionDate = new DateTime(2021, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27326,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "H.M.Dinuka D.B.Rajaguru",
-                            IndexNo = 27326,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "H.M.Dinuka D.B.",
                             IsLeavingIssued = false,
                             LastName = "Rajaguru",
                             Medium = 1,
-                            SchoolEmail = "27326@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27326@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 18,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24972,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "H.M.Thimath S. Herath",
-                            IndexNo = 24972,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "H.M.Thimath S.",
                             IsLeavingIssued = false,
                             LastName = "Herath",
                             Medium = 1,
-                            SchoolEmail = "24972@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24972@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 19,
                             AdmissionDate = new DateTime(2021, 6, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24687,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "I.A.Daniru Vinijith",
-                            IndexNo = 24687,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "I.A.Daniru",
                             IsLeavingIssued = false,
                             LastName = "Vinijith",
                             Medium = 1,
-                            SchoolEmail = "24687@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24687@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 20,
                             AdmissionDate = new DateTime(2021, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24717,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "J.K.Tharul M. Perera",
-                            IndexNo = 24717,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "J.K.Tharul M.",
                             IsLeavingIssued = false,
                             LastName = "Perera",
                             Medium = 1,
-                            SchoolEmail = "24717@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24717@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 21,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24749,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "J.M.M.Raadawa Jayasundara",
-                            IndexNo = 24749,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "J.M.M.Raadawa",
                             IsLeavingIssued = false,
                             LastName = "Jayasundara",
                             Medium = 1,
-                            SchoolEmail = "24749@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24749@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 22,
                             AdmissionDate = new DateTime(2021, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 28051,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "K.Dasindu Dulwan",
-                            IndexNo = 28051,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "K.Dasindu",
                             IsLeavingIssued = false,
                             LastName = "Dulwan",
                             Medium = 1,
-                            SchoolEmail = "28051@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "28051@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 23,
                             AdmissionDate = new DateTime(2021, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25425,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "K.Mithuru M. Perera",
-                            IndexNo = 25425,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "K.Mithuru M.",
                             IsLeavingIssued = false,
                             LastName = "Perera",
                             Medium = 1,
-                            SchoolEmail = "25425@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25425@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 24,
                             AdmissionDate = new DateTime(2021, 6, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24755,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "K.S.Vikum M. Kariyawasam",
-                            IndexNo = 24755,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "K.S.Vikum M.",
                             IsLeavingIssued = false,
                             LastName = "Kariyawasam",
                             Medium = 1,
-                            SchoolEmail = "24755@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24755@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 25,
                             AdmissionDate = new DateTime(2021, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24781,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Kuvidu H.Amarasinghe",
-                            IndexNo = 24781,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Kuvidu H.",
                             IsLeavingIssued = false,
                             LastName = "Amarasinghe",
                             Medium = 1,
-                            SchoolEmail = "24781@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24781@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 26,
                             AdmissionDate = new DateTime(2021, 6, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 29091,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "L.K.A.Y.Dissanayake",
-                            IndexNo = 29091,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "L.K.A.Y.",
                             IsLeavingIssued = false,
                             LastName = "Dissanayake",
                             Medium = 1,
-                            SchoolEmail = "29091@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "29091@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 27,
                             AdmissionDate = new DateTime(2021, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24680,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Luvya V.Seelanatha",
-                            IndexNo = 24680,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Luvya V.",
                             IsLeavingIssued = false,
                             LastName = "Seelanatha",
                             Medium = 1,
-                            SchoolEmail = "24680@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24680@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 28,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24746,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "M.A.Chathura P. Karunasekara",
-                            IndexNo = 24746,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "M.A.Chathura P.",
                             IsLeavingIssued = false,
                             LastName = "Karunasekara",
                             Medium = 1,
-                            SchoolEmail = "24746@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24746@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 29,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27289,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "M.D.Savith P. Binuditha",
-                            IndexNo = 27289,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "M.D.Savith P.",
                             IsLeavingIssued = false,
                             LastName = "Binuditha",
                             Medium = 1,
-                            SchoolEmail = "27289@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27289@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 30,
                             AdmissionDate = new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27287,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "M.G.Shashen R. Bandara",
-                            IndexNo = 27287,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "M.G.Shashen R.",
                             IsLeavingIssued = false,
                             LastName = "Bandara",
                             Medium = 1,
-                            SchoolEmail = "27287@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27287@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 31,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 28647,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Mihisara Kaveesha Hettiarachchi",
-                            IndexNo = 28647,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Mihisara Kaveesha",
                             IsLeavingIssued = false,
                             LastName = "Hettiarachchi",
                             Medium = 1,
-                            SchoolEmail = "28647@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "28647@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 32,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25039,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Minul Demith Peladagama",
-                            IndexNo = 25039,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Minul Demith",
                             IsLeavingIssued = false,
                             LastName = "Peladagama",
                             Medium = 1,
-                            SchoolEmail = "25039@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25039@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 33,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24779,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "P.M.G.Onitha O. Gunathilake",
-                            IndexNo = 24779,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "P.M.G.Onitha O.",
                             IsLeavingIssued = false,
                             LastName = "Gunathilake",
                             Medium = 1,
-                            SchoolEmail = "24779@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24779@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 34,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 28052,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "R.M.Thisath Dewwin Bandara",
-                            IndexNo = 28052,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "R.M.Thisath Dewwin",
                             IsLeavingIssued = false,
                             LastName = "Bandara",
                             Medium = 1,
-                            SchoolEmail = "28052@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "28052@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 35,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24812,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "R.G.Ravishka Sathsindu",
-                            IndexNo = 24812,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "R.G.Ravishka",
                             IsLeavingIssued = false,
                             LastName = "Sathsindu",
                             Medium = 1,
-                            SchoolEmail = "24812@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24812@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 36,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25640,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "R.M.Sashmitha N. B.Kotu",
-                            IndexNo = 25640,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "R.M.Sashmitha N. B.",
                             IsLeavingIssued = false,
                             LastName = "Kotu",
                             Medium = 1,
-                            SchoolEmail = "25640@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25640@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 37,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27364,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "S.M.Pavanindu N. Egodagedara",
-                            IndexNo = 27364,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "S.M.Pavanindu N.",
                             IsLeavingIssued = false,
                             LastName = "Egodagedara",
                             Medium = 1,
-                            SchoolEmail = "27364@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27364@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 38,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25032,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Sanuka N.Wanniarachchi",
-                            IndexNo = 25032,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Sanuka N.",
                             IsLeavingIssued = false,
                             LastName = "Wanniarachchi",
                             Medium = 1,
-                            SchoolEmail = "25032@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25032@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 39,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27385,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Sanuth I.E.Liyanage",
-                            IndexNo = 27385,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Sanuth I.",
                             IsLeavingIssued = false,
                             LastName = "E.Liyanage",
                             Medium = 1,
-                            SchoolEmail = "27385@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27385@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 40,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25656,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Seniru M.Weerasinghe",
-                            IndexNo = 25656,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Seniru",
                             IsLeavingIssued = false,
                             LastName = "M.Weerasinghe",
                             Medium = 1,
-                            SchoolEmail = "25656@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25656@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 41,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24775,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Senuja M.Gunasekara",
-                            IndexNo = 24775,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Senuja M.",
                             IsLeavingIssued = false,
                             LastName = "Gunasekara",
                             Medium = 1,
-                            SchoolEmail = "24775@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24775@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 42,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27327,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Sithum K.S.Rajapaksha",
-                            IndexNo = 27327,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Sithum K.S.",
                             IsLeavingIssued = false,
                             LastName = "Rajapaksha",
                             Medium = 1,
-                            SchoolEmail = "27327@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27327@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 43,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24757,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "T.Thulnith I. Vithana",
-                            IndexNo = 24757,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "T.Thulnith I.",
                             IsLeavingIssued = false,
                             LastName = "Vithana",
                             Medium = 1,
-                            SchoolEmail = "24757@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24757@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 44,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27396,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "T.N.Hansaka Walpola",
-                            IndexNo = 27396,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "T.N.Hansaka",
                             IsLeavingIssued = false,
                             LastName = "Walpola",
                             Medium = 1,
-                            SchoolEmail = "27396@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27396@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 45,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24718,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Tharul B. Dharmasena",
-                            IndexNo = 24718,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Tharul B.",
                             IsLeavingIssued = false,
                             LastName = "Dharmasena",
                             Medium = 1,
-                            SchoolEmail = "24718@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24718@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 46,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24710,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Tharusha V.Kalubowila",
-                            IndexNo = 24710,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Tharusha V.",
                             IsLeavingIssued = false,
                             LastName = "Kalubowila",
                             Medium = 1,
-                            SchoolEmail = "24710@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24710@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 47,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24770,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "The min S. Wijayawardana",
-                            IndexNo = 24770,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "The min S.",
                             IsLeavingIssued = false,
                             LastName = "Wijayawardana",
                             Medium = 1,
-                            SchoolEmail = "24770@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24770@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 48,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27347,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "W.Sachintha Akalanka",
-                            IndexNo = 27347,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "W.Sachintha",
                             IsLeavingIssued = false,
                             LastName = "Akalanka",
                             Medium = 1,
-                            SchoolEmail = "27347@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27347@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 49,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24790,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "W.A.Dinushka R Perera",
-                            IndexNo = 24790,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "W.A.Dinushka R",
                             IsLeavingIssued = false,
                             LastName = "Perera",
                             Medium = 1,
-                            SchoolEmail = "24790@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24790@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 50,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24754,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "W.A.H.Nethru Weerasooriya",
-                            IndexNo = 24754,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "W.A.H.Nethru",
                             IsLeavingIssued = false,
                             LastName = "Weerasooriya",
                             Medium = 1,
-                            SchoolEmail = "24754@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24754@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 51,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27483,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "W.A.Nushan Wijeweera",
-                            IndexNo = 27483,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "W.A.Nushan",
                             IsLeavingIssued = false,
                             LastName = "Wijeweera",
                             Medium = 1,
-                            SchoolEmail = "27483@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27483@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 52,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 27482,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "W.F.Tenura T. Perera",
-                            IndexNo = 27482,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "W.F.Tenura T.",
                             IsLeavingIssued = false,
                             LastName = "Perera",
                             Medium = 1,
-                            SchoolEmail = "27482@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "27482@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 53,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 25430,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "W.M.A.Rivinaka Eragoda",
-                            IndexNo = 25430,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "W.M.A.Rivinaka",
                             IsLeavingIssued = false,
                             LastName = "Eragoda",
                             Medium = 1,
-                            SchoolEmail = "25430@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "25430@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 54,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 28054,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Yonal B. Galagedara",
-                            IndexNo = 28054,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Yonal B.",
                             IsLeavingIssued = false,
                             LastName = "Galagedara",
                             Medium = 1,
-                            SchoolEmail = "28054@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "28054@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         },
                         new
                         {
                             Id = 55,
                             AdmissionDate = new DateTime(2021, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AdmissionNo = 24714,
+                            BirthDivSecretariat = 0,
+                            BloodGroup = 0,
                             CreatedBy = "System",
                             CreatedDate = new DateTime(2021, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CurrentDivSecretariat = 0,
                             FullName = "Yumeth M.Dewapura",
-                            IndexNo = 24714,
+                            HomeLatitude = 0m,
+                            HomeLongitude = 0m,
                             Initials = "Yumeth M.",
                             IsLeavingIssued = false,
                             LastName = "Dewapura",
                             Medium = 1,
-                            SchoolEmail = "24714@nalandacollege.info",
-                            Status = 0
+                            ParentsDeceasedStatus = 0,
+                            ParentsMaritalStatus = 0,
+                            SchoolEmail_Google = "24714@nalandacollege.info",
+                            Status = 0,
+                            TransportMode = 0
                         });
                 });
 
@@ -4555,13 +6174,6 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ContactHome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactMob")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -4570,8 +6182,8 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("CreatedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsEmergencyContact")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
@@ -4580,20 +6192,8 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nicno")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Occupation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OfficeTel")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ParentId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Relationship")
                         .HasColumnType("int");
@@ -4607,13 +6207,9 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Title")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WorkingAdd")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
 
                     b.HasIndex("StudentId");
 
@@ -5049,6 +6645,31 @@ namespace StudentInformationSystem.Data.Migrations
                     b.ToTable("SyncQueue");
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.SystemParameter", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("SystemParameters");
+
+                    b.HasData(
+                        new
+                        {
+                            Key = "SchoolLocationLatitude",
+                            Value = "6.923965293049291"
+                        },
+                        new
+                        {
+                            Key = "SchoolLocationLongitude",
+                            Value = "79.87495688972923"
+                        });
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Teacher", b =>
                 {
                     b.Property<int>("Id")
@@ -5302,6 +6923,9 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
 
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -5318,6 +6942,9 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -5327,9 +6954,17 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentId")
+                        .IsUnique()
+                        .HasFilter("[ParentId] IS NOT NULL");
+
                     b.HasIndex("StaffId")
                         .IsUnique()
                         .HasFilter("[StaffId] IS NOT NULL");
+
+                    b.HasIndex("StudentId")
+                        .IsUnique()
+                        .HasFilter("[StudentId] IS NOT NULL");
 
                     b.HasIndex("VisitorId")
                         .IsUnique()
@@ -5350,32 +6985,32 @@ namespace StudentInformationSystem.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserPermission", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserRole", b =>
                 {
-                    b.Property<int>("UserPermissionId")
+                    b.Property<int>("UserRoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("PermissionId")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserPermissionId");
+                    b.HasKey("UserRoleId");
 
-                    b.HasIndex("PermissionId");
+                    b.HasIndex("RoleId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserPermissions");
+                    b.ToTable("UserRoles");
 
                     b.HasData(
                         new
                         {
-                            UserPermissionId = 1,
-                            PermissionId = 1,
+                            UserRoleId = 1,
+                            RoleId = 1,
                             UserId = 1
                         });
                 });
@@ -5433,7 +7068,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Nicno")
+                    b.Property<string>("NicNo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
@@ -5442,7 +7077,10 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<string>("SchoolEmail")
+                    b.Property<string>("SchoolEmail_Google")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SchoolEmail_MS")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Title")
@@ -5463,8 +7101,8 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "R L",
                             LastName = "Suraweera",
                             MobileNo = "0713522384",
-                            Nicno = "860272580V",
-                            SchoolEmail = "rananga@nalandacollege.info",
+                            NicNo = "860272580V",
+                            SchoolEmail_Google = "rananga@nalandacollege.info",
                             Title = 4
                         });
                 });
@@ -5509,7 +7147,7 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasOne("StudentInformationSystem.Data.Models.ExtraActivity", "Activity")
                         .WithMany("Acheivements")
                         .HasForeignKey("ActivityId")
-                        .HasConstraintName("FK_Activity_Acheivements")
+                        .HasConstraintName("FK_Activity_Achievements")
                         .IsRequired();
                 });
 
@@ -5619,6 +7257,16 @@ namespace StudentInformationSystem.Data.Migrations
                         .WithMany("InverseParentMenu")
                         .HasForeignKey("ParentMenuId")
                         .HasConstraintName("FK_MenuMenu");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.MenuAction", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Menu", "Menu")
+                        .WithMany("MenuActions")
+                        .HasForeignKey("MenuId")
+                        .HasConstraintName("FK_MenuActionMenu")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.OCR_ClassRoom", b =>
@@ -5788,36 +7436,6 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.PermissionGradeAccess", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.Grade", "Grade")
-                        .WithMany("PermissionGradeAccesses")
-                        .HasForeignKey("GradeId")
-                        .HasConstraintName("FK_Grade_PermissionGradeAccesses")
-                        .IsRequired();
-
-                    b.HasOne("StudentInformationSystem.Data.Models.Permission", "Permission")
-                        .WithMany("PermissionGradeAccesses")
-                        .HasForeignKey("PermissionId")
-                        .HasConstraintName("FK_Permission_PermissionGradeAccesses")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.PermissionMenuAccess", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.Menu", "Menu")
-                        .WithMany("PermissionMenuAccesses")
-                        .HasForeignKey("MenuId")
-                        .HasConstraintName("FK_Menu_PermissionMenuAccesses")
-                        .IsRequired();
-
-                    b.HasOne("StudentInformationSystem.Data.Models.Permission", "Permission")
-                        .WithMany("PermissionMenuAccesses")
-                        .HasForeignKey("PermissionId")
-                        .HasConstraintName("FK_Permission_PermissionMenuAccesses")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("StudentInformationSystem.Data.Models.PhysicalClassRoom", b =>
                 {
                     b.HasOne("StudentInformationSystem.Data.Models.GradeClass", "GradeClass")
@@ -5829,6 +7447,42 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasOne("StudentInformationSystem.Data.Models.Teacher", null)
                         .WithMany("ClassTeachers")
                         .HasForeignKey("TeacherId");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.RoleGradeAccess", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Grade", "Grade")
+                        .WithMany("RoleGradeAccesses")
+                        .HasForeignKey("GradeId")
+                        .HasConstraintName("FK_Grade_RoleGradeAccesses")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Role", "Role")
+                        .WithMany("RoleGradeAccesses")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("FK_Role_RoleGradeAccesses")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.RoleMenuAccess", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Menu", "Menu")
+                        .WithMany("RoleMenuAccesses")
+                        .HasForeignKey("MenuId")
+                        .HasConstraintName("FK_Menu_RoleMenuAccesses")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Role", "Role")
+                        .WithMany("RoleMenuAccesses")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("FK_Role_RoleMenuAccesses")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.MenuAction", "MenuAction")
+                        .WithMany("RoleMenuAccesses")
+                        .HasForeignKey("MenuId", "ActionId")
+                        .HasConstraintName("FK_MenuAction_RoleMenuAccesses")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.SectionHead", b =>
@@ -5855,6 +7509,11 @@ namespace StudentInformationSystem.Data.Migrations
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Student", b =>
                 {
+                    b.HasOne("StudentInformationSystem.Data.Models.PhysicalClassRoom", "AdmittedClass")
+                        .WithMany("AdmittedClassStudents")
+                        .HasForeignKey("AdmittedClassId")
+                        .HasConstraintName("FK_AdmittedClass_AdmittedClassStudents");
+
                     b.HasOne("StudentInformationSystem.Data.Models.Grade", "AdmittedGrade")
                         .WithMany("GradeAdmissions")
                         .HasForeignKey("AdmittedGradeId")
@@ -5913,6 +7572,12 @@ namespace StudentInformationSystem.Data.Migrations
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentFamily", b =>
                 {
+                    b.HasOne("StudentInformationSystem.Data.Models.Parent", "Parent")
+                        .WithMany("FamilyStudents")
+                        .HasForeignKey("ParentId")
+                        .HasConstraintName("FK_ParentStudFamily")
+                        .IsRequired();
+
                     b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
                         .WithMany("StudentFamilies")
                         .HasForeignKey("StudentId")
@@ -5992,7 +7657,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("StudentInformationSystem.Data.Models.Teacher", "Teacher")
-                        .WithMany("TeacherPreferedSubjects")
+                        .WithMany("TeacherPreferredSubjects")
                         .HasForeignKey("TeacherId")
                         .HasConstraintName("FK_Teacher_TeacherPreferedSubjects")
                         .IsRequired();
@@ -6024,27 +7689,35 @@ namespace StudentInformationSystem.Data.Migrations
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.User", b =>
                 {
+                    b.HasOne("StudentInformationSystem.Data.Models.Parent", "Parent")
+                        .WithOne("User")
+                        .HasForeignKey("StudentInformationSystem.Data.Models.User", "ParentId");
+
                     b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
                         .WithOne("User")
                         .HasForeignKey("StudentInformationSystem.Data.Models.User", "StaffId");
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
+                        .WithOne("User")
+                        .HasForeignKey("StudentInformationSystem.Data.Models.User", "StudentId");
 
                     b.HasOne("StudentInformationSystem.Data.Models.Visitor", "Visitor")
                         .WithOne("User")
                         .HasForeignKey("StudentInformationSystem.Data.Models.User", "VisitorId");
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserPermission", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserRole", b =>
                 {
-                    b.HasOne("StudentInformationSystem.Data.Models.Permission", "Permission")
-                        .WithMany("UserPermissions")
-                        .HasForeignKey("PermissionId")
-                        .HasConstraintName("FK_Permission_UserPermissions")
+                    b.HasOne("StudentInformationSystem.Data.Models.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("FK_Role_UserRoles")
                         .IsRequired();
 
                     b.HasOne("StudentInformationSystem.Data.Models.User", "User")
-                        .WithMany("UserPermissions")
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK_User_UserPermissions")
+                        .HasConstraintName("FK_User_UserRoles")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

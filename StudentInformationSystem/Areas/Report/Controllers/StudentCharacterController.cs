@@ -84,13 +84,13 @@ namespace StudentInformationSystem.Areas.Report.Controllers
 
             var lstFamDet = db.Students.Where(x => x.Id == para.StudentId).SelectMany(x => x.StudentFamilies).ToList().Select(x => new StudentFamily
             {
-                Name = x.Parent.Name,
+                Name = x.Parent.FullName,
                 Relationship = x.Relationship == Relationship.Father ? "Father" : (x.Relationship == Relationship.Mother ? "Mother" : "Guardian"),
                 Occupation = x.Parent.Occupation,
-                WorkingAdd = x.Parent.WorkingAdd,
-                OfficeTel = x.Parent.OfficeTel,
-                ContactHome = x.Parent.ContactHome,
-                ContactMob = x.Parent.ContactMob
+                WorkingAdd = x.Parent.WorkingAddress,
+                OfficeTel = x.Parent.OfficePhoneNo,
+                ContactHome = x.Parent.HomePhoneNo,
+                ContactMob = x.Parent.MobileNo
             }).ToList();
 
             var lstStudAcheive = db.Students.Where(x => x.Id == para.StudentId).SelectMany(x => x.ClassMonitors).ToList().Select(x => new StudentAcheivements

@@ -248,7 +248,7 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasIndex("ActivityId");
 
-                    b.ToTable("ExtraActivityAcheivements");
+                    b.ToTable("ExtraActivityAchievements");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.ExtraActivityIncharge", b =>
@@ -1090,11 +1090,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 10,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "Visitor",
+                            Controller = "Parent",
                             DisplaySeq = 40,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Visitors",
+                            Text = "Parents",
                             Type = "I"
                         },
                         new
@@ -1102,11 +1102,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 11,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "UserPermission",
+                            Controller = "Visitor",
                             DisplaySeq = 50,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "User Permissions",
+                            Text = "Visitors",
                             Type = "I"
                         },
                         new
@@ -1114,11 +1114,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 12,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "Users",
+                            Controller = "Role",
                             DisplaySeq = 60,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Users",
+                            Text = "Roles",
                             Type = "I"
                         },
                         new
@@ -1126,11 +1126,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 13,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "SectionHead",
+                            Controller = "Users",
                             DisplaySeq = 70,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Section Heads",
+                            Text = "Users",
                             Type = "I"
                         },
                         new
@@ -1138,11 +1138,11 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 14,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "GradeHead",
+                            Controller = "SectionHead",
                             DisplaySeq = 80,
                             IsHidden = false,
                             ParentMenuId = 1,
-                            Text = "Grade Heads",
+                            Text = "Section Heads",
                             Type = "I"
                         },
                         new
@@ -1150,8 +1150,20 @@ namespace StudentInformationSystem.Data.Migrations
                             MenuId = 15,
                             Action = "Index",
                             Area = "Admin",
-                            Controller = "ExtraActivity",
+                            Controller = "GradeHead",
                             DisplaySeq = 90,
+                            IsHidden = false,
+                            ParentMenuId = 1,
+                            Text = "Grade Heads",
+                            Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 16,
+                            Action = "Index",
+                            Area = "Admin",
+                            Controller = "ExtraActivity",
+                            DisplaySeq = 100,
                             IsHidden = false,
                             ParentMenuId = 1,
                             Text = "Extra Activities",
@@ -1159,7 +1171,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 16,
+                            MenuId = 17,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "SubjectCategory",
@@ -1171,7 +1183,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 17,
+                            MenuId = 18,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "Subject",
@@ -1183,7 +1195,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 18,
+                            MenuId = 19,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "GradeSubject",
@@ -1195,7 +1207,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 19,
+                            MenuId = 20,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "GradeClass",
@@ -1207,7 +1219,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 20,
+                            MenuId = 21,
                             Action = "Index",
                             Area = "Academic",
                             Controller = "ClassRoom",
@@ -1219,7 +1231,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 21,
+                            MenuId = 22,
                             Action = "Index",
                             Area = "Teacher",
                             Controller = "Teacher",
@@ -1231,7 +1243,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 22,
+                            MenuId = 23,
                             Action = "Index",
                             Area = "Teacher",
                             Controller = "TeacherQualification",
@@ -1243,7 +1255,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 23,
+                            MenuId = 24,
                             Action = "Index",
                             Area = "Teacher",
                             Controller = "TeacherOffTime",
@@ -1255,7 +1267,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 24,
+                            MenuId = 25,
                             Action = "Index",
                             Area = "Student",
                             Controller = "Student",
@@ -1267,7 +1279,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 25,
+                            MenuId = 26,
                             Action = "Index",
                             Area = "Student",
                             Controller = "BasketSubject",
@@ -1279,7 +1291,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 26,
+                            MenuId = 27,
                             Action = "Index",
                             Area = "Student",
                             Controller = "StudentAdmit",
@@ -1291,7 +1303,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 27,
+                            MenuId = 28,
                             Action = "Index",
                             Area = "Student",
                             Controller = "StudentMark",
@@ -1303,7 +1315,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 28,
+                            MenuId = 29,
                             Action = "Index",
                             Area = "Student",
                             Controller = "TransferStudent",
@@ -1315,7 +1327,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 29,
+                            MenuId = 30,
                             Action = "Index",
                             Area = "Student",
                             Controller = "ClassPromotion",
@@ -1327,7 +1339,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 30,
+                            MenuId = 31,
                             Action = "Index",
                             Area = "Student",
                             Controller = "StudentExtraActivities",
@@ -1339,7 +1351,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 31,
+                            MenuId = 32,
                             Action = "Index",
                             Area = "Online",
                             Controller = "OnlineClassRoom",
@@ -1351,7 +1363,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 32,
+                            MenuId = 33,
                             Action = "Index",
                             Area = "Online",
                             Controller = "OnlineTimeTable",
@@ -1363,7 +1375,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 33,
+                            MenuId = 34,
                             Action = "Process",
                             Area = "Report",
                             Controller = "StudentCharacter",
@@ -1375,7 +1387,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 34,
+                            MenuId = 35,
                             Action = "Process",
                             Area = "Report",
                             Controller = "StudentAttendance",
@@ -1387,7 +1399,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 35,
+                            MenuId = 36,
                             Action = "Process",
                             Area = "Report",
                             Controller = "StudentMarks",
@@ -1399,7 +1411,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 36,
+                            MenuId = 37,
                             Action = "Process",
                             Area = "Report",
                             Controller = "OnlineSessionsSummary",
@@ -1411,7 +1423,7 @@ namespace StudentInformationSystem.Data.Migrations
                         },
                         new
                         {
-                            MenuId = 37,
+                            MenuId = 38,
                             Action = "Process",
                             Area = "Report",
                             Controller = "WeeklySummary",
@@ -1420,6 +1432,955 @@ namespace StudentInformationSystem.Data.Migrations
                             ParentMenuId = 6,
                             Text = "Weekly Summary",
                             Type = "I"
+                        },
+                        new
+                        {
+                            MenuId = 39,
+                            Action = "Index",
+                            Area = "Admin",
+                            Controller = "AdmissionMap",
+                            DisplaySeq = 110,
+                            IsHidden = false,
+                            ParentMenuId = 1,
+                            Text = "Admission Map",
+                            Type = "I"
+                        });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.MenuAction", b =>
+                {
+                    b.Property<int>("MenuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ActionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MenuId", "ActionId");
+
+                    b.ToTable("MenuActions");
+
+                    b.HasData(
+                        new
+                        {
+                            MenuId = 1,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 2,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 3,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 4,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 5,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 6,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 7,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 8,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 9,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 10,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 11,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 12,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 13,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 14,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 15,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 16,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 17,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 18,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 19,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 20,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 21,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 22,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 23,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 24,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 25,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 26,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 27,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 28,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 29,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 30,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 31,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 32,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 33,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 34,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 35,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 36,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 37,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 38,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 39,
+                            ActionId = 0,
+                            Text = "All"
+                        },
+                        new
+                        {
+                            MenuId = 7,
+                            ActionId = 1,
+                            Text = "View"
+                        },
+                        new
+                        {
+                            MenuId = 7,
+                            ActionId = 2,
+                            Text = "Create"
+                        },
+                        new
+                        {
+                            MenuId = 7,
+                            ActionId = 3,
+                            Text = "Edit"
+                        },
+                        new
+                        {
+                            MenuId = 7,
+                            ActionId = 4,
+                            Text = "Delete"
+                        },
+                        new
+                        {
+                            MenuId = 8,
+                            ActionId = 1,
+                            Text = "View"
+                        },
+                        new
+                        {
+                            MenuId = 8,
+                            ActionId = 2,
+                            Text = "Create"
+                        },
+                        new
+                        {
+                            MenuId = 8,
+                            ActionId = 3,
+                            Text = "Edit"
+                        },
+                        new
+                        {
+                            MenuId = 8,
+                            ActionId = 4,
+                            Text = "Delete"
+                        });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.NearbySchool", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("DisplayName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Latitude")
+                        .HasColumnType("decimal(18,15)");
+
+                    b.Property<decimal>("Longitude")
+                        .HasColumnType("decimal(18,15)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("SchoolName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NearbySchools");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 114001,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "De La Salle College",
+                            IsActive = true,
+                            Latitude = 6.9624076530508m,
+                            Longitude = 79.8623517832771m,
+                            SchoolName = "De La Salle College"
+                        },
+                        new
+                        {
+                            Id = 114004,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kumara V.",
+                            IsActive = true,
+                            Latitude = 6.95182372168983m,
+                            Longitude = 79.8621572137206m,
+                            SchoolName = "Kumara V."
+                        },
+                        new
+                        {
+                            Id = 114005,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mattakkuliya St.John's M.V",
+                            IsActive = true,
+                            Latitude = 6.97180453273626m,
+                            Longitude = 79.8747070955073m,
+                            SchoolName = "Mattakkuliya St.John's M.V"
+                        },
+                        new
+                        {
+                            Id = 114006,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St.Lucia's College",
+                            IsActive = true,
+                            Latitude = 6.94866282745492m,
+                            Longitude = 79.8651722806743m,
+                            SchoolName = "St.Lucia's College"
+                        },
+                        new
+                        {
+                            Id = 114007,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Cathedral Boys V.",
+                            IsActive = true,
+                            Latitude = 6.94965882132773m,
+                            Longitude = 79.8628181135681m,
+                            SchoolName = "Cathedral Boys V."
+                        },
+                        new
+                        {
+                            Id = 114008,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kotahen President College",
+                            IsActive = true,
+                            Latitude = 6.9539568314876m,
+                            Longitude = 79.8628940764598m,
+                            SchoolName = "Kotahen President College"
+                        },
+                        new
+                        {
+                            Id = 114010,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Modara Sri Medhananda V.",
+                            IsActive = true,
+                            Latitude = 6.96386229638963m,
+                            Longitude = 79.8661038591823m,
+                            SchoolName = "Modara Sri Medhananda V."
+                        },
+                        new
+                        {
+                            Id = 114011,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St. John's V.",
+                            IsActive = true,
+                            Latitude = 6.96807460444064m,
+                            Longitude = 79.8707203229669m,
+                            SchoolName = "St. John's V."
+                        },
+                        new
+                        {
+                            Id = 114012,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Ave Maria V.",
+                            IsActive = true,
+                            Latitude = 6.97046526369563m,
+                            Longitude = 79.8777616239614m,
+                            SchoolName = "Ave Maria V."
+                        },
+                        new
+                        {
+                            Id = 114013,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Sri Sandhabodhi M.V",
+                            IsActive = true,
+                            Latitude = 6.95928851871108m,
+                            Longitude = 79.875067000701m,
+                            SchoolName = "Sri Sandhabodhi M.V"
+                        },
+                        new
+                        {
+                            Id = 114014,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Bloemendhal Sin V.",
+                            IsActive = true,
+                            Latitude = 6.94758922654641m,
+                            Longitude = 79.8706516488501m,
+                            SchoolName = "Bloemendhal Sin V."
+                        },
+                        new
+                        {
+                            Id = 114016,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Gunananda V.",
+                            IsActive = true,
+                            Latitude = 6.95061590587215m,
+                            Longitude = 79.8627627408217m,
+                            SchoolName = "Gunananda V."
+                        },
+                        new
+                        {
+                            Id = 114017,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mahawatta St. Anthony's Sin V.",
+                            IsActive = true,
+                            Latitude = 6.96088519266493m,
+                            Longitude = 79.8721699600927m,
+                            SchoolName = "Mahawatta St. Anthony's Sin V."
+                        },
+                        new
+                        {
+                            Id = 114021,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Agamethi V.",
+                            IsActive = true,
+                            Latitude = 6.95787369604128m,
+                            Longitude = 79.8682984536483m,
+                            SchoolName = "Agamethi V."
+                        },
+                        new
+                        {
+                            Id = 114022,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Thotawatta Methodist V.",
+                            IsActive = true,
+                            Latitude = 6.97296440908802m,
+                            Longitude = 79.8783044922579m,
+                            SchoolName = "Thotawatta Methodist V."
+                        },
+                        new
+                        {
+                            Id = 114023,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Sri Razik Fareed Mus.B.V",
+                            IsActive = true,
+                            Latitude = 6.97181212638058m,
+                            Longitude = 79.876175699137m,
+                            SchoolName = "Sri Razik Fareed Mus.B.V"
+                        },
+                        new
+                        {
+                            Id = 114024,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Hamza Mus.V",
+                            IsActive = true,
+                            Latitude = 6.96283221937901m,
+                            Longitude = 79.8641742184885m,
+                            SchoolName = "Hamza Mus.V"
+                        },
+                        new
+                        {
+                            Id = 114025,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kalaimagal T.V",
+                            IsActive = true,
+                            Latitude = 6.94789012392999m,
+                            Longitude = 79.8708483425539m,
+                            SchoolName = "Kalaimagal T.V"
+                        },
+                        new
+                        {
+                            Id = 114026,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mahawatta St. Anthony's T.M.V.",
+                            IsActive = true,
+                            Latitude = 6.96084765909503m,
+                            Longitude = 79.8720793877036m,
+                            SchoolName = "Mahawatta St. Anthony's T.M.V."
+                        },
+                        new
+                        {
+                            Id = 114028,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mutwal Hindu College",
+                            IsActive = true,
+                            Latitude = 6.96395928948056m,
+                            Longitude = 79.8652081486035m,
+                            SchoolName = "Mutwal Hindu College"
+                        },
+                        new
+                        {
+                            Id = 114029,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kotahena Methodist T.V.",
+                            IsActive = true,
+                            Latitude = 6.94940427037171m,
+                            Longitude = 79.8617483147323m,
+                            SchoolName = "Kotahena Methodist T.V."
+                        },
+                        new
+                        {
+                            Id = 114030,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Ananda P.V",
+                            IsActive = true,
+                            Latitude = 6.96573942090777m,
+                            Longitude = 79.8720745765604m,
+                            SchoolName = "Ananda P.V"
+                        },
+                        new
+                        {
+                            Id = 115002,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Sri Sangaraja M.M.V.",
+                            IsActive = true,
+                            Latitude = 6.93289879900923m,
+                            Longitude = 79.8631677264176m,
+                            SchoolName = "Sri Sangaraja M.M.V."
+                        },
+                        new
+                        {
+                            Id = 115003,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mahabodhi V.",
+                            IsActive = true,
+                            Latitude = 6.91885672009994m,
+                            Longitude = 79.8638850854589m,
+                            SchoolName = "Mahabodhi V."
+                        },
+                        new
+                        {
+                            Id = 115004,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Rajasinghe M.V",
+                            IsActive = true,
+                            Latitude = 6.94143773542513m,
+                            Longitude = 79.8777827908829m,
+                            SchoolName = "Rajasinghe M.V"
+                        },
+                        new
+                        {
+                            Id = 115005,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mihindu Mawatha Sin.M.V.",
+                            IsActive = true,
+                            Latitude = 6.93385104871877m,
+                            Longitude = 79.8581615197802m,
+                            SchoolName = "Mihindu Mawatha Sin.M.V."
+                        },
+                        new
+                        {
+                            Id = 115006,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Siri Saripuththa M.V",
+                            IsActive = true,
+                            Latitude = 6.92094822733301m,
+                            Longitude = 79.8521389643082m,
+                            SchoolName = "Siri Saripuththa M.V"
+                        },
+                        new
+                        {
+                            Id = 115007,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Vijayaba M.V.",
+                            IsActive = true,
+                            Latitude = 6.94634510785179m,
+                            Longitude = 79.8722101810619m,
+                            SchoolName = "Vijayaba M.V."
+                        },
+                        new
+                        {
+                            Id = 115009,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St.Joseph's Boy's V.",
+                            IsActive = true,
+                            Latitude = 6.94780458943722m,
+                            Longitude = 79.8749083843293m,
+                            SchoolName = "St.Joseph's Boy's V."
+                        },
+                        new
+                        {
+                            Id = 116014,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mahanama College",
+                            IsActive = true,
+                            Latitude = 6.90620308999949m,
+                            Longitude = 79.8547672049854m,
+                            SchoolName = "Mahanama College"
+                        },
+                        new
+                        {
+                            Id = 116023,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St. Michael's College",
+                            IsActive = true,
+                            Latitude = 6.91384878057086m,
+                            Longitude = 79.8531340450347m,
+                            SchoolName = "St. Michael's College"
+                        },
+                        new
+                        {
+                            Id = 116025,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St. Mary's Sin Mix.V.",
+                            IsActive = true,
+                            Latitude = 6.89479125981432m,
+                            Longitude = 79.8573468392987m,
+                            SchoolName = "St. Mary's Sin Mix.V."
+                        },
+                        new
+                        {
+                            Id = 116029,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kumarauthayam T.V.",
+                            IsActive = true,
+                            Latitude = 6.87831555443556m,
+                            Longitude = 79.8772783925747m,
+                            SchoolName = "Kumarauthayam T.V."
+                        },
+                        new
+                        {
+                            Id = 116030,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Ramakrishna V.",
+                            IsActive = true,
+                            Latitude = 6.87583362021072m,
+                            Longitude = 79.8699789316635m,
+                            SchoolName = "Ramakrishna V."
+                        },
+                        new
+                        {
+                            Id = 116032,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Hindu College",
+                            IsActive = true,
+                            Latitude = 6.88349697834477m,
+                            Longitude = 79.8619339966584m,
+                            SchoolName = "Hindu College"
+                        },
+                        new
+                        {
+                            Id = 116033,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Al Ameen V.",
+                            IsActive = true,
+                            Latitude = 6.92258269984139m,
+                            Longitude = 79.8482175387863m,
+                            SchoolName = "Al Ameen V."
+                        },
+                        new
+                        {
+                            Id = 116034,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St Mary's T.M.V.",
+                            IsActive = true,
+                            Latitude = 6.89464775385252m,
+                            Longitude = 79.8574150456686m,
+                            SchoolName = "St Mary's T.M.V."
+                        },
+                        new
+                        {
+                            Id = 116035,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Kollupitiya Methodist G.T.V",
+                            IsActive = true,
+                            Latitude = 6.91562439494181m,
+                            Longitude = 79.8523067866256m,
+                            SchoolName = "Kollupitiya Methodist G.T.V"
+                        },
+                        new
+                        {
+                            Id = 116037,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Defence Services College",
+                            IsActive = true,
+                            Latitude = 6.92647087644207m,
+                            Longitude = 79.8508302182672m,
+                            SchoolName = "Defence Services College"
+                        },
+                        new
+                        {
+                            Id = 117001,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Royal College",
+                            IsActive = true,
+                            Latitude = 6.90486623339689m,
+                            Longitude = 79.8611705523619m,
+                            SchoolName = "Royal College"
+                        },
+                        new
+                        {
+                            Id = 117002,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Ananda College",
+                            IsActive = true,
+                            Latitude = 6.92488224479492m,
+                            Longitude = 79.8703862625047m,
+                            SchoolName = "Ananda College"
+                        },
+                        new
+                        {
+                            Id = 117004,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Thurstan College",
+                            IsActive = true,
+                            Latitude = 6.90374676774611m,
+                            Longitude = 79.8595843379469m,
+                            SchoolName = "Thurstan College"
+                        },
+                        new
+                        {
+                            Id = 117005,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St. Mattews V.",
+                            IsActive = true,
+                            Latitude = 6.92997975397401m,
+                            Longitude = 79.877753654739m,
+                            SchoolName = "St. Mattews V."
+                        },
+                        new
+                        {
+                            Id = 117008,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "St. John College",
+                            IsActive = true,
+                            Latitude = 6.9308515604204m,
+                            Longitude = 79.8738018045953m,
+                            SchoolName = "St. John College"
+                        },
+                        new
+                        {
+                            Id = 117009,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Seevali M.M.V.",
+                            IsActive = true,
+                            Latitude = 6.92329693001139m,
+                            Longitude = 79.881352849713m,
+                            SchoolName = "Seevali M.M.V."
+                        },
+                        new
+                        {
+                            Id = 117010,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Susamayawardhana M.V.",
+                            IsActive = true,
+                            Latitude = 6.91330656245148m,
+                            Longitude = 79.876344346508m,
+                            SchoolName = "Susamayawardhana M.V."
+                        },
+                        new
+                        {
+                            Id = 117012,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Mahinda V.",
+                            IsActive = true,
+                            Latitude = 6.92657117025952m,
+                            Longitude = 79.8729657170195m,
+                            SchoolName = "Mahinda V."
+                        },
+                        new
+                        {
+                            Id = 117016,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "D.S.Senanayake V.",
+                            IsActive = true,
+                            Latitude = 6.90882715454139m,
+                            Longitude = 79.8751636102563m,
+                            SchoolName = "D.S.Senanayake V."
+                        },
+                        new
+                        {
+                            Id = 117018,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Veluwana College",
+                            IsActive = true,
+                            Latitude = 6.92637548005991m,
+                            Longitude = 79.8802618229489m,
+                            SchoolName = "Veluwana College"
+                        },
+                        new
+                        {
+                            Id = 117020,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Asoka V.",
+                            IsActive = true,
+                            Latitude = 6.92279671224949m,
+                            Longitude = 79.8673272027865m,
+                            SchoolName = "Asoka V."
+                        },
+                        new
+                        {
+                            Id = 117021,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "C.W.W.Kannangara V.",
+                            IsActive = true,
+                            Latitude = 6.91900252199834m,
+                            Longitude = 79.8771018645321m,
+                            SchoolName = "C.W.W.Kannangara V."
+                        },
+                        new
+                        {
+                            Id = 117023,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Al Hijra Mus V.",
+                            IsActive = true,
+                            Latitude = 6.92900442280817m,
+                            Longitude = 79.8750126513407m,
+                            SchoolName = "Al Hijra Mus V."
+                        },
+                        new
+                        {
+                            Id = 117024,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DisplayName = "Thaninayagam T.V",
+                            IsActive = true,
+                            Latitude = 6.91905894900137m,
+                            Longitude = 79.8852901977569m,
+                            SchoolName = "Thaninayagam T.V"
                         });
                 });
 
@@ -2722,14 +3683,21 @@ namespace StudentInformationSystem.Data.Migrations
                     b.ToTable("PCR_Teachers");
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.Permission", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.Parent", b =>
                 {
-                    b.Property<int>("PermissionId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Code")
+                    b.Property<string>("Address1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
@@ -2737,16 +3705,58 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnName("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HomePhoneNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Initials")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnName("ModifiedDate")
+                        .HasColumnType("datetime");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("NIC_BackImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NIC_FrontImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NicNo")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Occupation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OfficePhoneNo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
@@ -2755,64 +3765,15 @@ namespace StudentInformationSystem.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.HasKey("PermissionId");
-
-                    b.ToTable("Permissions");
-
-                    b.HasData(
-                        new
-                        {
-                            PermissionId = 1,
-                            Code = "Admin",
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Administrator"
-                        },
-                        new
-                        {
-                            PermissionId = 2,
-                            Code = "AdminUser",
-                            CreatedBy = "System",
-                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Admin Department User"
-                        });
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.PermissionGradeAccess", b =>
-                {
-                    b.Property<int>("GradeId")
+                    b.Property<int>("Title")
                         .HasColumnType("int");
 
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
+                    b.Property<string>("WorkingAddress")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("GradeId", "PermissionId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("PermissionGradeAccesses");
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.PermissionMenuAccess", b =>
-                {
-                    b.Property<int>("MenuId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MenuId", "PermissionId");
-
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("PermissionMenuAccesses");
-
-                    b.HasData(
-                        new
-                        {
-                            MenuId = 1,
-                            PermissionId = 1
-                        });
+                    b.ToTable("Parents");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.PhysicalClassRoom", b =>
@@ -2982,6 +3943,110 @@ namespace StudentInformationSystem.Data.Migrations
                             Medium = 0,
                             Year = 2021
                         });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            Code = "Admin",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Administrator"
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            Code = "AdminUser",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Admin Department User"
+                        },
+                        new
+                        {
+                            RoleId = 3,
+                            Code = "Parent",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Parent"
+                        });
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.RoleGradeAccess", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GradeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RoleId", "GradeId");
+
+                    b.HasIndex("GradeId");
+
+                    b.ToTable("RoleGradeAccesses");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.RoleMenuAccess", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ActionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MenuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("MenuId", "ActionId");
+
+                    b.ToTable("RoleMenuAccesses");
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Section", b =>
@@ -3194,7 +4259,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Nicno")
+                    b.Property<string>("NicNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -3253,7 +4318,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Diana",
                             LastName = "Sladen",
                             MobileNo = "0712345678",
-                            Nicno = "888888001V",
+                            NicNo = "888888001V",
                             SchoolEmail_Google = "dainas@nalandacollege.info",
                             StaffNumber = 101,
                             Status = 0,
@@ -3274,7 +4339,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Ayomi",
                             LastName = "Dilhani",
                             MobileNo = "0712345678",
-                            Nicno = "888888002V",
+                            NicNo = "888888002V",
                             SchoolEmail_Google = "ayomik@nalandacollege.info",
                             StaffNumber = 102,
                             Status = 0,
@@ -3295,7 +4360,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Apsara",
                             LastName = "Vithan",
                             MobileNo = "0712345678",
-                            Nicno = "888888003V",
+                            NicNo = "888888003V",
                             SchoolEmail_Google = "apsarae@nalandacollege.info",
                             StaffNumber = 103,
                             Status = 0,
@@ -3316,7 +4381,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Malsha",
                             LastName = "Mallawaarachchi",
                             MobileNo = "0712345678",
-                            Nicno = "888888004V",
+                            NicNo = "888888004V",
                             SchoolEmail_Google = "malsham@nalandacollege.info",
                             StaffNumber = 104,
                             Status = 0,
@@ -3337,7 +4402,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Gammanpila",
                             LastName = "Dayananda",
                             MobileNo = "0712345678",
-                            Nicno = "888888005V",
+                            NicNo = "888888005V",
                             SchoolEmail_Google = "dayanandag@nalandacollege.info",
                             StaffNumber = 105,
                             Status = 0,
@@ -3358,7 +4423,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "D.S.",
                             LastName = "Chethana",
                             MobileNo = "0712345678",
-                            Nicno = "888888006V",
+                            NicNo = "888888006V",
                             SchoolEmail_Google = "chethanac@nalandacollege.info",
                             StaffNumber = 106,
                             Status = 0,
@@ -3379,7 +4444,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Himali",
                             LastName = "Nanayakkara",
                             MobileNo = "0712345678",
-                            Nicno = "888888007V",
+                            NicNo = "888888007V",
                             SchoolEmail_Google = "himalin@nalandacollege.info",
                             StaffNumber = 107,
                             Status = 0,
@@ -3400,7 +4465,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Thilini",
                             LastName = "Cooray",
                             MobileNo = "0712345678",
-                            Nicno = "888888008V",
+                            NicNo = "888888008V",
                             SchoolEmail_Google = "thilinic@nalandacollege.info",
                             StaffNumber = 108,
                             Status = 0,
@@ -3421,7 +4486,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Prabha",
                             LastName = "Hiroshine",
                             MobileNo = "0712345678",
-                            Nicno = "888888009V",
+                            NicNo = "888888009V",
                             SchoolEmail_Google = "prabhah@nalandacollege.info",
                             StaffNumber = 109,
                             Status = 0,
@@ -3442,7 +4507,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Vijini",
                             LastName = "Herath",
                             MobileNo = "0712345678",
-                            Nicno = "888888010V",
+                            NicNo = "888888010V",
                             SchoolEmail_Google = "vijinih@nalandacollege.info",
                             StaffNumber = 110,
                             Status = 0,
@@ -3463,7 +4528,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "බැද්දේවෙල",
                             LastName = "ධම්මකිත්ති හිමි",
                             MobileNo = "0712345678",
-                            Nicno = "888888011V",
+                            NicNo = "888888011V",
                             SchoolEmail_Google = "bdhammakiththi@nalandacollege.info",
                             StaffNumber = 111,
                             Status = 0,
@@ -3484,7 +4549,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Kalpa",
                             LastName = "Udayappriya",
                             MobileNo = "0712345678",
-                            Nicno = "888888012V",
+                            NicNo = "888888012V",
                             SchoolEmail_Google = "kalpau@nalandacollege.info",
                             StaffNumber = 112,
                             Status = 0,
@@ -3505,7 +4570,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Dilani",
                             LastName = "Nilanga",
                             MobileNo = "0712345678",
-                            Nicno = "888888013V",
+                            NicNo = "888888013V",
                             SchoolEmail_Google = "dilinin@nalandacollege.info",
                             StaffNumber = 113,
                             Status = 0,
@@ -3526,7 +4591,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "Dinithi",
                             LastName = "Fernando",
                             MobileNo = "0712345678",
-                            Nicno = "888888014V",
+                            NicNo = "888888014V",
                             SchoolEmail_Google = "dinithif@nalandacollege.info",
                             StaffNumber = 114,
                             Status = 0,
@@ -5107,13 +6172,6 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ContactHome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContactMob")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -5121,9 +6179,6 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnName("CreatedDate")
                         .HasColumnType("datetime");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsEmergencyContact")
                         .HasColumnType("bit");
@@ -5135,26 +6190,8 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("NIC_BackImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NIC_FrontImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nicno")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Occupation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OfficeTel")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ParentId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Relationship")
                         .HasColumnType("int");
@@ -5168,13 +6205,9 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Title")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WorkingAdd")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
 
                     b.HasIndex("StudentId");
 
@@ -5610,6 +6643,31 @@ namespace StudentInformationSystem.Data.Migrations
                     b.ToTable("SyncQueue");
                 });
 
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.SystemParameter", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("SystemParameters");
+
+                    b.HasData(
+                        new
+                        {
+                            Key = "SchoolLocationLatitude",
+                            Value = "6.923965293049291"
+                        },
+                        new
+                        {
+                            Key = "SchoolLocationLongitude",
+                            Value = "79.87495688972923"
+                        });
+                });
+
             modelBuilder.Entity("StudentInformationSystem.Data.Models.Teacher", b =>
                 {
                     b.Property<int>("Id")
@@ -5863,6 +6921,9 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
 
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -5879,6 +6940,9 @@ namespace StudentInformationSystem.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -5888,9 +6952,17 @@ namespace StudentInformationSystem.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentId")
+                        .IsUnique()
+                        .HasFilter("[ParentId] IS NOT NULL");
+
                     b.HasIndex("StaffId")
                         .IsUnique()
                         .HasFilter("[StaffId] IS NOT NULL");
+
+                    b.HasIndex("StudentId")
+                        .IsUnique()
+                        .HasFilter("[StudentId] IS NOT NULL");
 
                     b.HasIndex("VisitorId")
                         .IsUnique()
@@ -5911,32 +6983,32 @@ namespace StudentInformationSystem.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserPermission", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserRole", b =>
                 {
-                    b.Property<int>("UserPermissionId")
+                    b.Property<int>("UserRoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("PermissionId")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserPermissionId");
+                    b.HasKey("UserRoleId");
 
-                    b.HasIndex("PermissionId");
+                    b.HasIndex("RoleId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserPermissions");
+                    b.ToTable("UserRoles");
 
                     b.HasData(
                         new
                         {
-                            UserPermissionId = 1,
-                            PermissionId = 1,
+                            UserRoleId = 1,
+                            RoleId = 1,
                             UserId = 1
                         });
                 });
@@ -5994,7 +7066,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .HasColumnName("ModifiedDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Nicno")
+                    b.Property<string>("NicNo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("RowVersion")
@@ -6027,7 +7099,7 @@ namespace StudentInformationSystem.Data.Migrations
                             Initials = "R L",
                             LastName = "Suraweera",
                             MobileNo = "0713522384",
-                            Nicno = "860272580V",
+                            NicNo = "860272580V",
                             SchoolEmail_Google = "rananga@nalandacollege.info",
                             Title = 4
                         });
@@ -6073,7 +7145,7 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasOne("StudentInformationSystem.Data.Models.ExtraActivity", "Activity")
                         .WithMany("Acheivements")
                         .HasForeignKey("ActivityId")
-                        .HasConstraintName("FK_Activity_Acheivements")
+                        .HasConstraintName("FK_Activity_Achievements")
                         .IsRequired();
                 });
 
@@ -6183,6 +7255,16 @@ namespace StudentInformationSystem.Data.Migrations
                         .WithMany("InverseParentMenu")
                         .HasForeignKey("ParentMenuId")
                         .HasConstraintName("FK_MenuMenu");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.MenuAction", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Menu", "Menu")
+                        .WithMany("MenuActions")
+                        .HasForeignKey("MenuId")
+                        .HasConstraintName("FK_MenuActionMenu")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.OCR_ClassRoom", b =>
@@ -6352,36 +7434,6 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.PermissionGradeAccess", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.Grade", "Grade")
-                        .WithMany("PermissionGradeAccesses")
-                        .HasForeignKey("GradeId")
-                        .HasConstraintName("FK_Grade_PermissionGradeAccesses")
-                        .IsRequired();
-
-                    b.HasOne("StudentInformationSystem.Data.Models.Permission", "Permission")
-                        .WithMany("PermissionGradeAccesses")
-                        .HasForeignKey("PermissionId")
-                        .HasConstraintName("FK_Permission_PermissionGradeAccesses")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.PermissionMenuAccess", b =>
-                {
-                    b.HasOne("StudentInformationSystem.Data.Models.Menu", "Menu")
-                        .WithMany("PermissionMenuAccesses")
-                        .HasForeignKey("MenuId")
-                        .HasConstraintName("FK_Menu_PermissionMenuAccesses")
-                        .IsRequired();
-
-                    b.HasOne("StudentInformationSystem.Data.Models.Permission", "Permission")
-                        .WithMany("PermissionMenuAccesses")
-                        .HasForeignKey("PermissionId")
-                        .HasConstraintName("FK_Permission_PermissionMenuAccesses")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("StudentInformationSystem.Data.Models.PhysicalClassRoom", b =>
                 {
                     b.HasOne("StudentInformationSystem.Data.Models.GradeClass", "GradeClass")
@@ -6393,6 +7445,42 @@ namespace StudentInformationSystem.Data.Migrations
                     b.HasOne("StudentInformationSystem.Data.Models.Teacher", null)
                         .WithMany("ClassTeachers")
                         .HasForeignKey("TeacherId");
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.RoleGradeAccess", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Grade", "Grade")
+                        .WithMany("RoleGradeAccesses")
+                        .HasForeignKey("GradeId")
+                        .HasConstraintName("FK_Grade_RoleGradeAccesses")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Role", "Role")
+                        .WithMany("RoleGradeAccesses")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("FK_Role_RoleGradeAccesses")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.RoleMenuAccess", b =>
+                {
+                    b.HasOne("StudentInformationSystem.Data.Models.Menu", "Menu")
+                        .WithMany("RoleMenuAccesses")
+                        .HasForeignKey("MenuId")
+                        .HasConstraintName("FK_Menu_RoleMenuAccesses")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Role", "Role")
+                        .WithMany("RoleMenuAccesses")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("FK_Role_RoleMenuAccesses")
+                        .IsRequired();
+
+                    b.HasOne("StudentInformationSystem.Data.Models.MenuAction", "MenuAction")
+                        .WithMany("RoleMenuAccesses")
+                        .HasForeignKey("MenuId", "ActionId")
+                        .HasConstraintName("FK_MenuAction_RoleMenuAccesses")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.SectionHead", b =>
@@ -6482,6 +7570,12 @@ namespace StudentInformationSystem.Data.Migrations
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.StudentFamily", b =>
                 {
+                    b.HasOne("StudentInformationSystem.Data.Models.Parent", "Parent")
+                        .WithMany("FamilyStudents")
+                        .HasForeignKey("ParentId")
+                        .HasConstraintName("FK_ParentStudFamily")
+                        .IsRequired();
+
                     b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
                         .WithMany("StudentFamilies")
                         .HasForeignKey("StudentId")
@@ -6561,7 +7655,7 @@ namespace StudentInformationSystem.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("StudentInformationSystem.Data.Models.Teacher", "Teacher")
-                        .WithMany("TeacherPreferedSubjects")
+                        .WithMany("TeacherPreferredSubjects")
                         .HasForeignKey("TeacherId")
                         .HasConstraintName("FK_Teacher_TeacherPreferedSubjects")
                         .IsRequired();
@@ -6593,27 +7687,35 @@ namespace StudentInformationSystem.Data.Migrations
 
             modelBuilder.Entity("StudentInformationSystem.Data.Models.User", b =>
                 {
+                    b.HasOne("StudentInformationSystem.Data.Models.Parent", "Parent")
+                        .WithOne("User")
+                        .HasForeignKey("StudentInformationSystem.Data.Models.User", "ParentId");
+
                     b.HasOne("StudentInformationSystem.Data.Models.StaffMember", "StaffMember")
                         .WithOne("User")
                         .HasForeignKey("StudentInformationSystem.Data.Models.User", "StaffId");
+
+                    b.HasOne("StudentInformationSystem.Data.Models.Student", "Student")
+                        .WithOne("User")
+                        .HasForeignKey("StudentInformationSystem.Data.Models.User", "StudentId");
 
                     b.HasOne("StudentInformationSystem.Data.Models.Visitor", "Visitor")
                         .WithOne("User")
                         .HasForeignKey("StudentInformationSystem.Data.Models.User", "VisitorId");
                 });
 
-            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserPermission", b =>
+            modelBuilder.Entity("StudentInformationSystem.Data.Models.UserRole", b =>
                 {
-                    b.HasOne("StudentInformationSystem.Data.Models.Permission", "Permission")
-                        .WithMany("UserPermissions")
-                        .HasForeignKey("PermissionId")
-                        .HasConstraintName("FK_Permission_UserPermissions")
+                    b.HasOne("StudentInformationSystem.Data.Models.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("FK_Role_UserRoles")
                         .IsRequired();
 
                     b.HasOne("StudentInformationSystem.Data.Models.User", "User")
-                        .WithMany("UserPermissions")
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK_User_UserPermissions")
+                        .HasConstraintName("FK_User_UserRoles")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

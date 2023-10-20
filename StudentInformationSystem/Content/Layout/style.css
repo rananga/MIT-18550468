@@ -407,7 +407,7 @@ li > a.foc {
     color: #fff !important;*/
     background: silver;
     color: maroon !important;
-    font-weight:bolder !important;
+    font-weight: bolder !important;
 }
 
 li.cur > ul {
@@ -5378,6 +5378,7 @@ ul.amounts li {
 
 .control-label {
     line-height: 2.5;
+    text-align: right;
 }
 
 

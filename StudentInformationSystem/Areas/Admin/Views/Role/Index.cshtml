@@ -1,13 +1,13 @@
-﻿@model StudentInformationSystem.Common.BaseViewModel<StudentInformationSystem.Areas.Admin.Models.PermissionVM>
+﻿@model StudentInformationSystem.Common.BaseViewModel<StudentInformationSystem.Areas.Admin.Models.RoleVM>
 
 @{
-    ViewBag.Title = "User Permissions";
+    ViewBag.Title = "Roles";
     var grid = Model.GetGrid();
 }
 
 @{
     var srchOpts = new List<SelectListItem>();
-    srchOpts.Add(new SelectListItem { Text = "Permission Name", Value = "Name" });
+    srchOpts.Add(new SelectListItem { Text = "Role Name", Value = "Name" });
 }
 
 <p>
@@ -33,9 +33,9 @@
         tableStyle: "mGrid no-foot",
         mode: WebGridPagerModes.All,
         columns: grid.Columns(
-            grid.Column(null, null, format: (item) => Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open' style='color:black'></span>", "View Details", "Details", routeValues: new { id = item.PermissionID }, htmlAttributes: new { @class = "btn btn-warning btn-xs" }), style: "btn-1"),
-            grid.SortColumn(columnName: "Code", header: "Permission Code"),
-            grid.SortColumn(columnName: "Name", header: "Permission Name")))
+            grid.Column(null, null, format: (item) => Html.NoEncodeActionLink("<span class='glyphicon glyphicon-eye-open' style='color:black'></span>", "View Details", "Details", routeValues: new { id = item.RoleID }, htmlAttributes: new { @class = "btn btn-warning btn-xs" }), style: "btn-1"),
+            grid.SortColumn(columnName: "Code", header: "Role Code"),
+            grid.SortColumn(columnName: "Name", header: "Role Name")))
 
         <div id="content-footer">
             @grid.PagerList(WebGridPagerModes.All, Model.PageSize, Model.TotalRecords)

@@ -10,13 +10,20 @@
     Func<Menu, bool> IsCurrentItem = null;
     IsCurrentItem = (item) =>
     {
-        if (item.Area == curArea && item.Controller == curController)
-            return true;
+        try
+        {
+            if (item.Area == curArea && item.Controller == curController)
+                return true;
 
-        if (item.InverseParentMenu.Where(x => IsCurrentItem(x)).Any())
-            return true;
+            if (item.InverseParentMenu.Where(x => IsCurrentItem(x)).Any())
+                return true;
 
-        return false;
+            return false;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     };
 }
 
