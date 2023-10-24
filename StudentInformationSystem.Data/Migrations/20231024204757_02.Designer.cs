@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentInformationSystem.Data;
 
 namespace StudentInformationSystem.Data.Migrations
 {
     [DbContext(typeof(dbNalandaContext))]
-    partial class dbNalandaContextModelSnapshot : ModelSnapshot
+    [Migration("20231024204757_02")]
+    partial class _02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

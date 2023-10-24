@@ -445,6 +445,7 @@
     <Compile Include="Areas\Admin\Models\AdmissionMapVM.cs" />
     <Compile Include="Areas\Admin\Models\ExtraActivityInchargeVM.cs" />
     <Compile Include="Areas\Admin\Models\GradeHeadVM.cs" />
+    <Compile Include="Areas\Admin\Models\AdmissionMapPrintVM.cs" />
     <Compile Include="Areas\Admin\Models\NearbySchoolVM.cs" />
     <Compile Include="Areas\Admin\Models\SectionHeadVM.cs" />
     <Compile Include="Areas\Admin\Models\ParentVM.cs" />
@@ -681,6 +682,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\Academic\GradeSubject.js" />
     <Content Include="Scripts\Academic\GradeClass.js" />
+    <Content Include="Scripts\Admin\MapCircle.js" />
     <Content Include="Scripts\Admin\AdmissionMap.js" />
     <Content Include="Scripts\Admin\StaffMeetingAttendance.js" />
     <Content Include="Scripts\Admin\Parent.js" />
@@ -825,6 +827,8 @@
     <Content Include="Areas\Admin\Views\AdmissionMap\_ChildIndex.cshtml" />
     <Content Include="Areas\Admin\Views\AdmissionMap\_ChildCreate.cshtml" />
     <Content Include="Areas\Admin\Views\AdmissionMap\_ChildDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\AdmissionMap\_PrintMap.cshtml" />
+    <Content Include="Areas\Base\Views\Home\ForcePasswordChange.cshtml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\dev-nalanda-sis - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\dev-nalanda-sis - Web Deploy.pubxml" />

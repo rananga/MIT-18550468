@@ -25,7 +25,10 @@ namespace StudentInformationSystem.Areas.Base
 
             var qrySortBy = (lstSortColMap ?? new Dictionary<string, string>()).Where(x => x.Key == sortBy).Select(x => x.Value).FirstOrDefault() ?? sortBy;
 
-            qry = qry.OrderBy("(" + qrySortBy + ")" + (inReverse ? " DESC" : "")).Skip(startIndex);
+            if (qrySortBy.Contains(","))
+                qry = qry.OrderBy(qrySortBy).Skip(startIndex);
+            else
+                qry = qry.OrderBy("(" + qrySortBy + ")" + (inReverse ? " DESC" : "")).Skip(startIndex);
 
             if (pageSize > 0)
             { qry = qry.Take(pageSize); }
@@ -859,6 +862,57 @@ namespace StudentInformationSystem.Areas.Base
                         x.Id,
                         Activity = x.Activity.Name,
                         Position = x.Name
+                    });
+            }
+        }
+
+        public ActionResult GetAdmissionApplicants(string filter = null, string sortBy = null, bool inReverse = false, int startIndex = 0, int pageSize = 5, bool searchForKey = false)
+        {
+            using (dbNalandaContext dbctx = new dbNalandaContext())
+            {
+                var qry = dbctx.AdmissionApplicants.Where(x => x.IsActive).ToList().AsQueryable();
+
+                if (!filter.IsBlank())
+                {
+                    qry = qry.Where(x => searchForKey ? x.Id.ToString().Contains(filter.ToLower()) : (x.Category.ToString() + "/" + x.ReferenceNumber.ToString() + x.ChildName + x.ParentName + x.ParentNICNo).ToLower().Contains(filter.ToLower()));
+                }
+
+                int rowCount = qry.Count();
+                if (pageSize <= 0)
+                {
+                    pageSize = 10;
+                    startIndex = 0;
+                }
+
+                if (startIndex > rowCount)
+                { startIndex = 0; }
+
+                if (sortBy.IsBlank())
+                { sortBy = "Category,ReferenceNumber"; }
+
+                var lstSortColMap = new Dictionary<string, string>()
+                {
+                    { "Id", "Id" } ,
+                    { "Year", "Year" } ,
+                    { "Category", "Category" } ,
+                    { "RefNo", "ReferenceNumber" },
+                    { "Reference_Number", "Category.ToString()+ReferenceNumber.ToString()" } ,
+                    { "Child_Name", "ChildName" },
+                    { "Parent_Name", "ParentName" },
+                    { "Parent_NIC", "ParentNICNo" }
+                };
+
+                return GetDataPaginated(qry, sortBy, inReverse, startIndex, pageSize, lstSortColMap,
+                    x => new
+                    {
+                        x.Id,
+                        x.Year,
+                        Category = x.Category.ToString(),
+                        RefNo = x.ReferenceNumber,
+                        Reference_Number = x.Category.ToString() + "/" + x.ReferenceNumber.ToString(),
+                        Child_Name = x.ChildName,
+                        Parent_Name = x.ParentName,
+                        Parent_NIC = x.ParentNICNo
                     });
             }
         }

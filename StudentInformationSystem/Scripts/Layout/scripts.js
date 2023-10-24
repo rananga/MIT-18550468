@@ -1,3 +1,25 @@
+function SetFooterPosition() {
+    var $foot = $("footer");
+    var windowHeight = $(window).height();
+    var contHeight = $("#main-content").height();
+    var headerHeight = $("header").height();
+    var footHeight = $foot.height();
+    var testHeight = windowHeight - footHeight - headerHeight;
+
+    if (contHeight < testHeight) {
+        var footLeft = 0;
+        if (!$('#container').hasClass("sidebar-closed"))
+            footLeft = Math.round($('ul.sidebar-menu').width());
+
+        $foot.addClass("force-bottom");
+        $foot.css("left", footLeft + "px");
+    }
+    else {
+        $foot.removeClass("force-bottom");
+        $foot.css("left", "");
+    }
+}
+
 function hideSideBar() {
     jQuery('#main-content').css({
         'margin-left': '0px'

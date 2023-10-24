@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 
@@ -196,12 +197,99 @@ namespace StudentInformationSystem.Areas.Admin.Controllers
                 lng = decimal.Parse(db.SystemParameters.Where(x => x.Key == ParameterConstants.SchoolLocationLongitude).Select(x => x.Value).FirstOrDefault())
             };
 
-            var schools = db.NearbySchools.Where(x=> x.IsActive).Select(x => new { text = x.DisplayName, lat = x.Latitude, lng = x.Longitude }).ToList();
+            var schools = db.NearbySchools.Where(x => x.IsActive).Select(x => new { text = x.DisplayName, lat = x.Latitude, lng = x.Longitude }).ToList();
 
             ViewBag.SchoolLocationJson = schoolPos.SerializeToJson();
             ViewBag.NearbySchoolsJson = schools.SerializeToJson();
 
             return View();
+        }
+
+        public ActionResult PrintMap(decimal? homeLatitude, decimal? homeLongitude)
+        {
+            if (homeLatitude == null || homeLongitude == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var vm = new AdmissionMapPrintVM { HomeLatitude = homeLatitude.Value, HomeLongitude = homeLongitude.Value };
+            return PartialView("_PrintMap", vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PrintMap(AdmissionMapPrintVM vm)
+        {
+            try
+            {
+
+                if (!vm.IsAnonymous && vm.ApplicantId == null)
+                {
+                    ModelState.AddModelError("ApplicantId", "The Applicant ID field is required");
+                }
+
+                AdmissionApplicant obj = null;
+                if (!vm.IsAnonymous && vm.ApplicantId != null)
+                {
+                    obj = db.AdmissionApplicants.Find(vm.ApplicantId);
+                    if (obj == null)
+                    {
+                        ModelState.AddModelError("ApplicantId", "The Applicant ID is invalid");
+                    }
+                }
+
+                if (vm.IsAnonymous)
+                {
+                    return Json(new
+                    {
+                        success = true,
+                        data = new
+                        {
+                            CategoryName = "",
+                            ReferenceNumber = 0,
+                            ChildName = "",
+                            ParentName = "",
+                            Address1 = "",
+                            Address2 = "",
+                            vm.HomeLatitude,
+                            vm.HomeLongitude,
+                            ModifiedBy = this.GetCurrUser(),
+                            ModifiedDate = DateTime.Now
+                        }
+                    });
+                }
+
+                if (ModelState.IsValid)
+                {
+                    obj.ModifiedBy = this.GetCurrUser();
+                    obj.ModifiedDate = DateTime.Now;
+                    obj.HomeLatitude = vm.HomeLatitude;
+                    obj.HomeLongitude = vm.HomeLongitude;
+
+                    db.SaveChanges();
+                    return Json(new
+                    {
+                        success = true,
+                        data = new
+                        {
+                            CategoryName = obj.Category.ToString(),
+                            obj.ReferenceNumber,
+                            obj.ChildName,
+                            obj.ParentName,
+                            obj.Address1,
+                            obj.Address2,
+                            obj.HomeLatitude,
+                            obj.HomeLongitude,
+                            obj.ModifiedBy,
+                            obj.ModifiedDate
+                        }
+                    });
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            { this.ShowEntityErrors(dbEx); }
+            catch (Exception ex)
+            { AddAlert(AlertStyles.danger, ex.GetInnerException().Message); }
+
+            return PartialView("_PrintMap", vm);
         }
     }
 }

@@ -784,7 +784,7 @@ function PopupDocReadyFunc() {
         });
 
         function bindDlgEvents() {
-            $('input[type="submit"][value="Save"]', dlg).closest("form").submit(function () {
+            $('input[type="submit"][value="Save"], input[type="submit"][value="Print"]', dlg).closest("form").submit(function () {
                 $.ajax({
                     url: this.action,
                     type: this.method,
@@ -798,7 +798,7 @@ function PopupDocReadyFunc() {
 
                             var fnRefresh = window[$this.data('refresh-function')];
                             if (typeof fnRefresh === "function")
-                                fnRefresh();
+                                fnRefresh(result);
                             else {
                                 var $containerDiv = $this.closest('.ChildContent');
                                 $containerDiv.load(result.url, function (response, status, xhr) {
@@ -837,6 +837,11 @@ function PopupDocReadyFunc() {
 
         $this.off(".ChildPopUp");
         $this.on("click.ChildPopUp", function (e) {
+
+            var fnBefore = window[$this.data('before-function')];
+            if (typeof fnBefore === "function" && !fnBefore())
+                return;
+
             e.preventDefault();
             dlg.load(this.href, function (response, status, xhr) {
                 if (status == "error") {

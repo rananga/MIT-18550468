@@ -26,6 +26,7 @@ namespace StudentInformationSystem.Data.Models
         public int? ParentId { get; set; }
         [DisplayName("Student")]
         public int? StudentId { get; set; }
+        public bool? MustResetPassword { get; set; }
 
         public virtual StaffMember StaffMember { get; set; }
         public virtual Visitor Visitor { get; set; }

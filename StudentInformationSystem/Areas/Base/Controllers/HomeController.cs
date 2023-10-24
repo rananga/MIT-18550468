@@ -133,9 +133,9 @@ namespace StudentInformationSystem.Areas.Base
                     visitor = db.Visitors.Where(x => x.SchoolEmail_MS.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
 
                     if (visitor == null)
-                        student = db.Students.Where(x=> x.SchoolEmail_MS.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
+                        student = db.Students.Where(x => x.SchoolEmail_MS.Trim().ToLower() == signInVM.UserEmail.Trim().ToLower()).FirstOrDefault();
                 }
-                
+
 
                 user = staff?.User ?? visitor?.User ?? student?.User;
 
@@ -186,11 +186,46 @@ namespace StudentInformationSystem.Areas.Base
             Response.Cookies.Add(authCookie);
             Session[sskCurUsrID] = user.Id;
 
+            if (user.MustResetPassword == true)
+                return RedirectToAction("ForcePasswordChange");
+
             if (Url.IsLocalUrl(ReturnUrl) && ReturnUrl.Length > 1 && ReturnUrl.StartsWith("/")
                 && !ReturnUrl.StartsWith("//") && !ReturnUrl.StartsWith("/\\"))
             { return Redirect(ReturnUrl); }
             else
             { return RedirectToAction("Index", "Home"); }
+        }
+
+        public ActionResult ForcePasswordChange()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForcePasswordChange([Bind(Include = "NewPassword,ConfirmPassword")] SignInVM signInVM)
+        {
+            var objUser = db.Users.Find(Session[sskCurUsrID]);
+            var curPassword = objUser.Password.Decrypt();
+
+            if (string.IsNullOrEmpty(signInVM.NewPassword))
+            { AddAlert(AlertStyles.danger, "New password is required."); }
+            else if (curPassword == signInVM.NewPassword)
+            { AddAlert(AlertStyles.danger, "New password is same as the current password."); }
+            else if (signInVM.ConfirmPassword != signInVM.NewPassword)
+            { AddAlert(AlertStyles.danger, "Confirm password should be equal to new password."); }
+            else
+            {
+                objUser.Password = signInVM.NewPassword.Encrypt();
+                objUser.ModifiedBy = this.GetCurrUser();
+                objUser.ModifiedDate = DateTime.Now;
+                objUser.MustResetPassword = false;
+
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
         }
 
         [HttpPost]

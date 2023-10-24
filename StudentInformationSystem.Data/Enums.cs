@@ -617,4 +617,21 @@ namespace StudentInformationSystem.Data
         Yatinuwara = 330,
         Yatiyanthota = 331
     }
+
+    public enum AdmissionCategory
+    {
+        /// <summary>
+        /// Old Boys Category
+        /// </summary>
+        OB = 1,
+        /// <summary>
+        /// Brothers Category
+        /// </summary>
+        BR = 2,
+        /// <summary>
+        /// Chief Occupants Category
+        /// </summary>
+        CO = 3,
+        FS = 4
+    }
 }

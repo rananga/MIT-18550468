@@ -5,6 +5,7 @@ namespace StudentInformationSystem.Data
 {
     public partial class dbNalandaContext : DbContext
     {
+        public virtual DbSet<AdmissionApplicant> AdmissionApplicants { get; set; }
         public virtual DbSet<ExtraActivity> ExtraActivities { get; set; }
         public virtual DbSet<ExtraActivityAcheivement> ExtraActivityAchievements { get; set; }
         public virtual DbSet<ExtraActivityIncharge> ExtraActivityIncharges { get; set; }
@@ -28,6 +29,18 @@ namespace StudentInformationSystem.Data
 
         partial void OnModelCreatingPartial_Admin(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AdmissionApplicant>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CreatedBy).IsRequired();
+
+                entity.Property(e => e.RowVersion)
+                    .IsRequired()
+                    .IsRowVersion()
+                    .IsConcurrencyToken();
+            });
+
             modelBuilder.Entity<ExtraActivity>(entity =>
             {
                 entity.HasKey(e => e.Id);

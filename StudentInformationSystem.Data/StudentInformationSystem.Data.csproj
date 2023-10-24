@@ -6,31 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20210925102010_01.cs" />
-    <Compile Remove="Migrations\20210925102010_01.Designer.cs" />
-    <Compile Remove="Migrations\20230903145046_01.cs" />
-    <Compile Remove="Migrations\20230903145046_01.Designer.cs" />
-    <Compile Remove="Migrations\20230904063517_01.cs" />
-    <Compile Remove="Migrations\20230904063517_01.Designer.cs" />
-    <Compile Remove="Migrations\20230919055713_01.cs" />
-    <Compile Remove="Migrations\20230919055713_01.Designer.cs" />
-    <Compile Remove="Migrations\20230920085434_01.cs" />
-    <Compile Remove="Migrations\20230920085434_01.Designer.cs" />
-    <Compile Remove="Migrations\20230928082342_01.cs" />
-    <Compile Remove="Migrations\20230928082342_01.Designer.cs" />
-    <Compile Remove="Migrations\20231008055504_03.cs" />
-    <Compile Remove="Migrations\20231008055504_03.Designer.cs" />
-    <Compile Remove="Migrations\20231008060226_01.cs" />
-    <Compile Remove="Migrations\20231008060226_01.Designer.cs" />
-    <Compile Remove="Migrations\20231008060634_01.cs" />
-    <Compile Remove="Migrations\20231008060634_01.Designer.cs" />
-    <Compile Remove="Migrations\20231008111119_01.cs" />
-    <Compile Remove="Migrations\20231008111119_01.Designer.cs" />
-    <Compile Remove="Migrations\20231019173456_01.cs" />
-    <Compile Remove="Migrations\20231019173456_01.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="credentials.json" />
   </ItemGroup>
 

@@ -269,6 +269,7 @@ namespace StudentInformationSystem
             bundles.Add(new ScriptBundle("~/bundles/student/leavingcertificate").Include("~/Scripts/Student/LeavingCertificate.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/admin/admissionmap").Include("~/Scripts/Admin/AdmissionMap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/admin/mapcircle").Include("~/Scripts/Admin/MapCircle.js"));
 
             #region Styles
 
